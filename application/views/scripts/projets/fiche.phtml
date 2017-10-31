@@ -1,0 +1,362 @@
+<div id="alertTache" style="display: none;"></div>
+<div class="panel panel-primary" id="planTache">
+	<div class="panel-heading">
+		<h3 class="panel-title">Planifier une tache</h3>
+	</div>
+	<div class="panel-body">
+		<div class="table-responvive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Date</th>
+						<th>Nb heures</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<td>
+						<?= $this->formTache->getElement('id_user')?>
+						<?= $this->formTache->getElement('id_tache')?>
+					</td>
+					<td><?= $this->formTache->getElement('date')?></td>
+					<td><?= $this->formTache->getElement('nb_heures')?></td>
+					<td><?= $this->formTache->getElement('priority')?></td>
+					<td>
+						<?= $this->formTache->getElement('ajouter')?>
+					</td>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="panel panel-primary" id="validTache">
+	<div class="panel-heading">
+		<h3 class="panel-title">Planifier une tache</h3>
+	</div>
+	<div class="panel-body">
+		<div class="table-responvive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Commentaire</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<td>
+						<?= $this->noteTache->getElement('id_tache')?>
+					</td>
+					<td>
+						<?= $this->noteTache->getElement('commentaire')?>
+					</td>
+					<td>
+						<?= $this->noteTache->getElement('valider')?>
+					</td>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Fiche projet</h3>
+	</div>
+	<div class="panel-body">
+		<?php if($this->projet->cloture == 0):?>
+				<a href="/messages/new/dossier/<?= $this->projet->dossier?>" class="btn btn-info pull-right" style="margin-left: 5px;margin-right: 5px;">
+					<span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;Envoyer un message</span>
+				</a>
+			<a href="/projets/editer/id/<?= $this->projet->id_projet?>" class="btn btn-warning pull-right" style="margin-left: 5px;margin-right: 5px;">
+				<span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;Modifier le projet</span>
+			</a>
+		<?php endif;?>
+		<?php if($this->projet->cloture):?>
+		<?php list($a,$m,$j) = explode('-', $this->projet->date_cloture) ?>
+			<button type="button" class="btn btn-success pull-right" aria-label="Left Align" id="switch_projets_<?= $this->projet->id_projet ?>">
+			  	Livré le <?= $j.'/'.$m.'/'.$a ?>
+			</button>
+		<?php else:?>
+			<button type="button" class="btn btn-primary pull-right" aria-label="Left Align" id="switch_projets_<?= $this->projet->id_projet ?>">
+			  	<span class="glyphicon glyphicon-ok" aria-hidden="true">&nbsp;Marquer comme livré</span>
+			</button>
+		<?php endif;?>
+		<?php if($this->projet->devisarelancer==1):?>
+			<button type="button" class="btn btn-success pull-right btDevis" aria-label="Left Align" id="switchDr_projets_<?= $this->projet->id_projet ?>">
+			  	Marquer comme projet en cours
+			</button>
+		<?php else:?>
+			<button type="button" class="btn btn-danger pull-right btDevis" aria-label="Left Align" id="switchDr_projets_<?= $this->projet->id_projet ?>">
+			  	<span class="glyphicon glyphicon-ok" aria-hidden="true">&nbsp;Marquer comme Devis à relancer</span>
+			</button>
+		<?php endif;?>
+		<?php if($this->projet->devisarelancer == 2):?>
+			<button type="button" class="btn btn-success pull-right btDevis" aria-label="Left Align" id="switchEt_projets_<?= $this->projet->id_projet ?>">
+			  	Marquer comme projet en cours
+			</button>
+		<?php else:?>
+			<button type="button" class="btn btn-danger pull-right btDevis" aria-label="Left Align" id="switchEt_projets_<?= $this->projet->id_projet ?>">
+			  	<span class="glyphicon glyphicon-ok" aria-hidden="true">&nbsp;Marquer comme Dossier en attente</span>
+			</button>
+		<?php endif;?>
+		<div class="table-responvive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Date de cr&eacute;ation</th>
+						<th>Date de livraison</th>
+						<th>N° projet</th>
+						<th>N° client</th>
+						<th>Client</th>
+						<th>Projet</th>
+						<th>Devis</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<?= date('d/m/Y', strtotime($this->projet->date_creation)) ?>
+						</td>
+						<td>
+							<span style="color:<?= $this->GetFlagDate($this->projet->date_commande) ?>">&#x25A3;</span> 
+							<?= date('d/m/Y', strtotime($this->projet->date_commande)) ?>
+						</td>
+						<td>
+                            <span data-lienDossier="LienNumDossier" data-idProjet="<?= $this->projet->id_projet ?>" data-typeProjet="<?= $this->projet->devisarelancer ?>" class="lienNumDossier">
+                                <?= $this->projet->dossier ?>
+                            </span>
+						</td>
+						<td>
+							<?= $this->GetNumClientById($this->projet->id_client)?>
+						</td>
+						<td>
+							<p><?= $this->GetClientById($this->projet->id_client) ?></p>
+							<h5>Livraison : </h5>
+							<p><?= $this->projet->nomlivraison ?></p>
+							<p><?= $this->projet->adresselivraison ?></p>
+							<p><?= $this->projet->codepostal ?> <?= $this->projet->ville ?></p>
+						</td>
+						<td>
+							<?= $this->projet->titre ?>
+						</td>
+						<td>
+							<?= $this->GetDevisByRef($this->projet->dossier)?>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<?php $contacts = explode(",", $this->projet->contact_nom) ?>
+		<?php $tels = explode(",", $this->projet->contact_tel) ?>
+		<?php $emails = explode(",", $this->projet->contact_mail) ?>
+		<div class="table-responvive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Contacts</th>
+						<th>Téléphone</th>
+						<th>Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($contacts as $key=>$contact) :?>
+					<tr>
+						<td>
+							<?= $contact ?>
+						</td>
+						<td>
+							<?= $tels[$key] ?>
+						</td>
+						<td>
+							<a href="mailto:<?= $emails[$key] ?>"><?= $emails[$key] ?></a>
+						</td>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+			<?php if(count($this->devis)):?>
+				<table class="table">
+					<thead>
+					<tr>
+						<th colspan="5">Devis et factures liées au projet</th>
+					</tr>
+					<tr>
+						<th>Date</th>
+						<th>Date facturation</th>
+						<th>Intitulé</th>
+						<th>Montant H.T.</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+						<?php foreach($this->devis as $devis):?>
+						<tr>
+							<td>
+								<?= date('d/m/Y', strtotime($devis->date)) ?>
+							</td>
+							<td>
+								<?= date('d/m/Y', strtotime($devis->date_facture)) ?>
+							</td>
+							<td>
+								<?= $devis->titre ?>
+							</td>
+							<td style="text-align: right;">
+								<?= $this->GetSum($devis->id)?> &euro;
+							</td>
+							<td style="text-align:right;">
+								<button type="button" class="btn btn-primary" aria-label="Left Align" id="fiche_facturation_<?= $devis->id ?>">
+								  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+						<?php endforeach;?>
+					</tbody>
+				</table>
+			<?php endif;?>
+		</div>
+		<div>
+            <button class="btn btn-default" id="btAfficheTachesMasquees" data-mode="1">Afficher les taches masquées</button>
+        </div>
+		<div class="table-responvive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Tache</th>
+						<th>Utilisateur</th>
+						<th>Dur&eacute;e (h)</th>
+						<th>Etat</th>
+						<th>Planifiée le </th>
+						<th>Date de r&eacute;alisation</th>
+						<th>Commentaires</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($this->taches as $tache): ?>
+						<tr id="row_<?= $tache->id ?>" data-visible="<?= $tache->visible ?>" <?php if( $tache->visible == 0 ) { echo("class='tacheNoVisible'"); } ?> >
+							<td><?= $tache->tache ?></td>
+							<td>
+								<?= $this->GetUserById($tache->id_user1) ?>&nbsp;
+								<?= $this->GetUserById($tache->id_user2) ?>&nbsp;
+								<?= $this->GetUserById($tache->id_user3) ?>
+							</td>
+							<td id="nbh_<?= $tache->id ?>"><?= $tache->duree ?></td>
+							<td id="etat_<?= $tache->id ?>">
+								<?= $tache->fait?'<span style="color:green;">Fait</span>':'<span style="color:red;">&Agrave; faire</span>'; ?>
+							</td>
+							<td id="plan_<?= $tache->id ?>">
+								<?= $this->GetDateDone($tache->id) ?>
+							</td>
+							<td id="date_<?= $tache->id ?>">
+								<?php if((int)$tache->date_fait):?>
+									<?= date('d/m/Y', strtotime($tache->date_fait)) ?>
+								<?php endif; ?>
+							</td>
+							<td id="note_<?= $tache->id ?>">
+								<?= $tache->commentaire ?>
+							</td>
+							<td style="text-align:right;">
+								<button type="button" class="btn btn-warning" aria-label="Left Align" id="getCalendar_<?= $tache->id ?>_<?= $tache->id_user1 ?>">
+									<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-success" aria-label="Left Align" id="validEtape_<?= $tache->id ?>">
+								  <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-primary" aria-label="Left Align" id="maskEtape_<?= $tache->id ?>">
+								  <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+								</button>
+								<a href="/projets/deletetache/id/<?= $tache->id?>/id_projet/<?= $this->projet->id_projet?>" class="btn btn-danger sur" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</a>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+		</div>
+		<div class="table-responvive">
+			<table class="table table-hover table-condensed">
+				<thead>
+					<tr>
+						<th colspan="5">Messages concernant ce projet</th>
+					</tr>
+					<tr>
+						<th>Date</th>
+						<th>Dossier</th>
+						<th>Titre</th>
+						<th>Auteur</th>
+						<th>Destinataire</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php if(count($this->messages)):?>
+						<?php foreach($this->messages as $message): ?>
+							<tr>
+								<td><?= date('d/m/Y', strtotime($message->date)) ?></td>
+								<td><?= $message->dossier?></td>
+								<td>
+									<?= $message->titre ?>
+								</td>
+								<td><?= $this->GetUserById($message->id_user) ?></td>
+								<td>
+									<?php if ($message->id_destinataire != 0) :?>
+										<?= $this->GetUserById($message->id_destinataire) ?>
+									<?php else: ?>
+										Tout le monde
+									<?php endif;?>
+								</td>
+								<td style="text-align: right;">
+									<a href="/messages/view/id/<?= $message->id_message ?>" class="btn btn-primary">
+										<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+									</a>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+					<?php else: ?>
+						<tr>
+							<td colspan="6" style="text-align:center; font-weight: bold;">Aucun message pour ce projet</td>
+						</tr>
+					<?php endif;?>
+				</tbody>
+			</table>
+		</div>
+		<?= $this->noteForm ?>
+		<div class="table-responvive">
+			<table class="table table-hover table-condensed">
+				<thead>
+					<tr>
+						<th>Notes</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($this->notes as $note):?>
+					<tr>
+						<td>
+							<div class="pull-right">
+								<a href="/projets/editnote/id_note/<?= $note->id?>/id_projet/<?= $this->projet->id_projet?>" class="btn btn-xs btn-primary pull_right" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+								</a>
+								&nbsp;
+								<a href="/projets/deletenote/id_note/<?= $note->id?>/id_projet/<?= $this->projet->id_projet?>" class="btn btn-xs btn-danger sur pull_right" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</a>
+							</div>
+							<h5>
+								<?php if($note->date != null): ?>
+									<?= date('d/m/y', strtotime($note->date))?> - 
+								<?php endif;?>
+								<?= $this->GetUserById($note->id_user)?>	
+							</h5>
+							<p><?= $note->note ?></p>
+						</td>
+					</tr>
+					<?php endforeach;?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<input type="hidden" name="idPreviousProjet" id="idPreviousProjet" value="<?= $this->idPreviousProjet ?>">

@@ -1,0 +1,47 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			Message
+		</h3>
+	</div>
+	<div class="panel-body">
+		<div class="table-responvive">
+			<table class="table table-hover table-condensed">
+				<thead>
+					<tr>
+						<th colspan="6">
+							<a href="<?php echo $_SERVER[HTTP_REFERER]?>" class="btn btn-primary pull-right">Retour</a>
+							<a href="/messages/reponse/reponse/<?php echo $this->message->id_message ?>" class="btn btn-info">
+								<span class="glyphicon glyphicon-share" aria-hidden="true">&nbsp;Répondre</span>
+							</a>
+						</th>
+					</tr>
+					<tr>
+						<th>Date</th>
+						<th>Dossier</th>
+						<th>Titre</th>
+						<th>Auteur</th>
+						<th></th>
+					</tr>
+					<tr>
+						<th><?php echo date('d/m/Y', strtotime($this->message->date))?></th>
+						<th><?php echo $this->message->dossier?></th>
+						<th><?php echo $this->message->titre?></th>
+						<th><?php echo $this->GetUserById($this->message->id_user)?></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="6">
+							<h1><?php echo $this->message->titre ?></h1>
+							<div style="font-size: 20px;">
+								<?php echo $this->message->message ?>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,11 @@
+<ul class="pager pull-right">
+	<li>
+	<a href="<?php echo $this->url(array('page' => $this->previous)); ?>">Pr&eacute;c.</a>
+	</li>
+	<li>
+		<?php echo $this->current ?> sur <?php echo $this->pageCount ?>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array('page' => $this->next)); ?>">Suivante</a>
+	</li>
+</ul>

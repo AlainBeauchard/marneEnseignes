@@ -1,0 +1,14 @@
+<?php foreach($this->factures as $facture): ?>
+	<tr id="devis_<?php echo $facture->id ?>">
+		<td></td>
+		<td><?php echo date('d/m/Y', strtotime($facture->date)) ?></td>
+		<td><?php echo date('d/m/Y', strtotime($facture->date_validite)) ?></td>
+		<td><?php echo $facture->titre ?></td>
+		<td><?php echo $this->GetClientById($facture->id_client) ?></td>
+		<td style="text-align: right;">
+			<button type="button" class="btn btn-primary" aria-label="Left Align" id="fiche_facturation_<?php echo $facture->id ?>">
+			  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+			</button>
+		</td>
+	</tr>
+<?php endforeach; ?>

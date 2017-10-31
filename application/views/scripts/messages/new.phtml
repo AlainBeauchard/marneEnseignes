@@ -1,0 +1,21 @@
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea.rte",
+    theme: "modern",
+    plugins: [
+        "advlist autolink lists link charmap print hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime nonbreaking save table contextmenu directionality",
+        "paste textcolor colorpicker"
+    ],
+    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | print | forecolor backcolor emoticons",
+});
+</script>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Créer message</h3>
+	</div>
+	<div class="panel-body">
+		<?php echo $this->form ?>
+	</div>
+</div>

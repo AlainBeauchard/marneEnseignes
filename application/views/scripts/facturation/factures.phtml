@@ -1,0 +1,49 @@
+<div class="row-fluid">
+	<div class="col-lg-12">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Factures en attente de reglement</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-hover table-condensed tablesorter" id="sorter">
+					<thead>
+						<tr>
+							<th>Dossier</th>
+							<th>Date facture</th>
+							<th>Echéance</th>
+							<th>Client</th>
+							<th>Montant H.T.</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach($this->paginator as $dev): ?>
+							<tr id="devis_<?php echo $dev->id ?>">
+								<td><?php echo $dev->ref ?></td>
+								<td><?php echo date('d/m/Y', strtotime($dev->date_facture)) ?></td>
+								<td>
+									<span style="color:<?php echo $this->GetFlagDate($dev->date_paiement) ?>">&#x25A3;</span> &nbsp;&nbsp;
+									<?php echo date('d/m/Y', strtotime($dev->date_paiement)) ?>
+								</td>
+								<td><?php echo $this->GetClientById($dev->id_client) ?></td>
+								<td style="text-align:right;"><?php echo $this->GetSum($dev->id)?> &euro;</td>
+								<td style="text-align: right;">
+									<button type="button" class="btn btn-primary" aria-label="Left Align" id="fiche_facturation_<?php echo $dev->id ?>">
+									  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+									</button>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="8">
+								<?php echo $this->paginationControl($this->paginator); ?>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

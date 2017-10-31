@@ -1,0 +1,348 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Modifier un devis</h3>
+	</div>
+	<div class="panel-body">
+		<?php echo $this->form ?>
+	</div>
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Ajouter / modifier item</h3>
+	</div>
+	<div class="panel-body">
+		<div class="table-responvive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>
+							D&eacute;signation
+						</th>
+						<th>P.U.</th>
+						<th>Coef</th>
+						<th>Quantit&eacute;</th>
+						<th>Remise (%)</th>
+						<th>P.H.T.</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<?php echo $this->formItemDevis->getElement('id_devis'); ?>
+							<?php echo $this->formItemDevis->getElement('id_item'); ?>
+							<button type="button" class="btn btn-info" aria-label="Left Align" id="view_deplacement">
+							  <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-success" aria-label="Left Align" id="view_calc">
+							  <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-warning" aria-label="Left Align" id="view_catalogue">
+							  <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+							</button>
+						</td>
+						<td>
+							<?php echo $this->formItemDevis->getElement('designation'); ?>
+						</td>
+						<td>
+							<?php echo $this->formItemDevis->getElement('pu'); ?>
+						</td>
+						<td>
+							<?php echo $this->formItemDevis->getElement('coeff_marge'); ?>
+						</td>
+						<td>
+							<?php echo $this->formItemDevis->getElement('qte'); ?>
+						</td>
+						<td>
+							<?php echo $this->formItemDevis->getElement('remise'); ?>
+						</td>
+						<td>
+							<?php echo $this->formItemDevis->getElement('pht'); ?>
+						</td>
+						<td>
+							<?php echo $this->formItemDevis->getElement('ajouter'); ?>
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+</div>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Elements du devis</h3>
+	</div>
+	<div class="panel-body">
+		<div class="table-responvive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>D&eacute;signation</th>
+						<th>P.U.</th>
+						<th>Quantit&eacute;</th>
+						<th>Remise (%)</th>
+						<th>P.H.T.</th>
+						<th>Coef</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody id="liste_items_devis">
+					<?php foreach($this->items as $item): ?>
+						<tr id="item_<?php echo $item->id ?>">
+							<td></td>
+							<td>
+								<?php if((int) $item->id_item == 0):?>
+									<?php echo $item->item ?>
+								<?php else:?>
+									<?php echo $this->GetDesignationByIdItem($item->id_item) ?>
+								<?php endif;?>
+							</td>
+							<td><?php echo number_format($item->pu, 2) ?></td>
+							<td><?php echo number_format($item->qte, 2) ?></td>
+							<td><?php echo @number_format($item->remise, 2) ?></td>
+							<td class="totalligne"><?php echo number_format($item->pht, 2) ?></td>
+							<td><?php echo $item->marge ?></td>
+							<td>
+						<!-- 		<span class="glyphicon glyphicon-pencil" aria-hidden="true" id="edit_item_devis_<?php echo $this->id_item ?>"></span>&nbsp;&nbsp;&nbsp; -->
+								<span class="glyphicon glyphicon-trash" aria-hidden="true" id="delete_item_devis_<?php echo $item->id ?>" style="cursor:pointer;"></span>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td></td>
+						<td colspan="4" style="text-align: right;font-weight: bold;">TOTAL .H.T.</td>
+						<td style=";font-weight: bold;" id="totalHT">
+							<?php echo sprintf('%0.2f', $this->GetSum($this->devis->id)) ?>
+						</td>
+						<td style="text-align: left;"> &euro;</td>
+						<td></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">R&eacute;daction du devis</h3>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="btn-group btn-group-justified" role="group" aria-label="...">
+					<div class="btn-group" role="group">
+					    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="load_modele">
+					    	Charger un modèle
+						    <span class="caret"></span>
+						    <span class="sr-only">Charger un modèle</span>
+					    </button>
+					    <ul class="dropdown-menu" id="liste_nom_modeles">
+						    <?php foreach($this->modeles as $row):?>
+								<li id="modele_id_<?php echo $row->id ?>_redactionDevis"><?php echo $row->titre?></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+					<div class="btn-group" role="group">
+					    <button type="button" class="btn btn-default" id="save_modele">Sauvegarder ce texte</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php echo $this->formRedaction->getElement('redactionDevis') ?>
+		<?php echo $this->formRedaction->getElement('validerRedactionDevis') ?>
+	</div>
+</div>
+<p style="text-align:right;">
+	<button type="button" class="btn btn-success" aria-label="Left Align" id="preview_devis_<?php echo $this->devis->id?>">
+	  Imprimer le devis
+	</button>
+<!--
+	<button type="button" class="btn btn-success" aria-label="Left Align" id="preview_facture_<?php echo $this->devis->id?>">
+	  Imprimer la facture
+	</button>
+-->
+</p>
+<div id="liste_catalogue">
+	<div style="float: right; margin-bottom: 15px;">
+		<button type="button" class="btn btn-success btn-xs" aria-label="Left Align" id="close_catalogue">
+		  <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+		</button>
+	</div>
+	<div class="table-responvive">
+		<table class="table table-hover table-condensed tablesorter" id="sorter">
+			<thead>
+				<tr>
+					<th style="width:10%">
+						Référence ME
+					</th>
+					<th>Fournisseur</th>
+					<th>Type</th>
+					<th style="width:8%">Epaisseur</th>
+					<th style="width:10%">Format</th>
+					<th style="width:35%">D&eacute;signation</th>
+					<th style="width:6%">P.U.</th>
+					<th>Unité</th>
+					<th>Coef</th>
+					<th></th>
+				</tr>
+				<tr>
+					<td>
+						<?php echo $this->filtreForm->getElement('reference') ?>
+					</td>
+					<td>
+						<?php echo $this->filtreForm->getElement('fournisseur') ?>
+					</td>
+					<td><?php echo $this->filtreForm->getElement('type') ?></td>
+					<td><?php echo $this->filtreForm->getElement('epaisseur') ?></td>
+					<td></td>
+					<td>
+						<?php echo $this->filtreForm->getElement('produit') ?>
+					</td>
+					<td colspan="4" style="text-align:right;">
+						<img src="/images/load.gif" alt="loader" id="loader"/>
+						<?php echo $this->filtreForm->getElement('rechercher') ?>
+						<?php echo $this->filtreForm->getElement('resetCatalogue') ?>
+					</td>
+				</tr>
+			</thead>
+			<tbody id="liste_produits">
+				<?php foreach($this->catalogues as $catalogue):?>
+					<tr>
+						<td><?php echo $catalogue->code_me?></td>
+						<td><?php echo $catalogue->fournisseur?></td>
+						<td><?php echo $catalogue->type?></td>
+						<td><?php echo $catalogue->epaisseur?></td>
+						<td><?php echo $catalogue->format?></td>
+						<td><?php echo $catalogue->designation ?></td>
+						<td style="text-align:right;">
+							<?php if(!(int) $catalogue->unitaire):?>
+								<?php if($catalogue->prixM2 == null):?>
+									<?php echo $catalogue->prixML ?>
+								<?php else:?>
+									<?php echo $catalogue->prixM2 ?>
+								<?php endif;?>
+							<?php else:?>
+								<?php echo $catalogue->unitaire ?>
+							<?php endif;?>
+							&nbsp;&euro;
+						</td>
+						<td style="text-align:center;">
+							<?php if(!(int) $catalogue->unitaire):?>
+								<?php if($catalogue->prixM2 == null):?>
+									Ml
+								<?php else:?>
+									M2
+								<?php endif;?>
+							<?php else:?>
+								Unitaire
+							<?php endif;?>
+						</td>
+						<td style="text-align:right;"><?php echo $catalogue->coeff_marge?></td>
+						<td style="text-align:right;">
+							<button type="button" class="btn btn-warning" aria-label="Left Align" id="fill_form_<?php echo $catalogue->id_produit ?>">
+							  <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+							</button>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div id="calc">
+	<div style="float: right; margin-bottom: 15px;">
+		<button type="button" class="btn btn-success btn-xs" aria-label="Left Align" id="close_calc">
+		  <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+		</button>
+	</div>
+	<div class="table-responvive">
+		<table class="table table-hover table-condensed">
+			<thead>
+				<tr>
+					<th><?php echo $this->calc->getElement('longueur') ?></th>
+					<th><?php echo $this->calc->getElement('largeur') ?></th>
+					<th><?php echo $this->calc->getElement('qte_calc') ?></th>
+					<th><?php echo $this->calc->getElement('total_calc') ?></th>
+					<th><?php echo $this->calc->getElement('ajouter_calc') ?></th>
+				</tr>
+				<tr>
+					<th>Longueur</th>
+					<th>Largeur</th>
+					<th>Qté</th>
+					<th>Surface</th>
+					<th>Périmetre</th>
+				</tr>
+			</thead>
+			<tbody id="liste_dimensions">
+
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="3" style="text-align:right;">TOTAUX : </th>
+					<th id="calcTotal"></th>
+					<th id="calcTotalPeri"></th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>
+<div id="dialog_nom_modele">
+	<?php echo $this->formNomModele ?>
+</div>
+<div id="deplacement">
+	<div style="float: right; margin-bottom: 15px;">
+		<button type="button" class="btn btn-success btn-xs" aria-label="Left Align" id="close_depl">
+		  <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+		</button>
+	</div>
+	<div class="table-responvive">
+		<table class="table table-hover table-condensed">
+			<thead>
+				<tr>
+					<th>Déplacements</th>
+					<th>Qté</th>
+					<th>Coût unitaire</th>
+					<th>Coût jour</th>
+					<th>Nb jour(s)</th>
+					<th>Coût total</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Heures de route</td>
+					<td><input type="text" style="width: 70px;" id="qte_heure"/></td>
+					<td><input type="text" style="width: 70px;" id="cout_heure"/></td>
+					<td id="total_hRoute"></td>
+					<td><input type="text" style="width: 70px;" id="nb_jours_heure"/></td>
+					<td class="depl_total" id="gd_total_hRoute"></td>
+				</tr>
+				<tr>
+					<td>Kilomètres</td>
+					<td><input type="text" style="width: 70px;" id="qte_km"/></td>
+					<td><input type="text" style="width: 70px;" id="cout_km"/></td>
+					<td id="total_Km"></td>
+					<td><input type="text" style="width: 70px;" id="nb_jours_km"/></td>
+					<td class="depl_total" id="gd_total_Km"></td>
+				</tr>
+				<tr>
+					<td>Restaurant</td>
+					<td><input type="text" style="width: 70px;" id="qte_resto"/></td>
+					<td><input type="text" style="width: 70px;" id="cout_resto"/></td>
+					<td id="total_Resto"></td>
+					<td><input type="text" style="width: 70px;" id="nb_jours_resto"/></td>
+					<td class="depl_total" id="gd_total_Resto"></td>
+				</tr>
+				<tr>
+					<td colspan="5" style="text-align: right;">Total : </td>
+					<td id="gd_total_depl"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

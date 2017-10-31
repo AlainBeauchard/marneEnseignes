@@ -1,0 +1,158 @@
+/* tables */
+table.tablesorter {
+	font-family:arial;
+	background-color: #CDCDCD;
+	margin:10px 0pt 15px;
+/* 	font-size: 8pt; */
+	width: 100%;
+	text-align: left;
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+	background-color: #e6EEEE;
+	border: 1px solid #FFF;
+	font-size: 8pt;
+	padding: 4px;
+}
+table.tablesorter thead tr .header {
+	background-image: url(bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.tablesorter tbody td {
+	color: #3D3D3D;
+	padding: 4px;
+	background-color: #FDFCF9;
+	vertical-align: top;
+}
+
+table.tablesorter tbody tr.odd td {
+	background-color:#E3D6AA;
+}
+
+.pickColor td
+{
+	border : 1px solid;
+}
+
+.pickColor tr.green td
+{
+	border-color: green;
+}
+.pickColor tr.blue td
+{
+	border-color: blue;
+}
+.pickColor tr.orange td
+{
+	border-color: orange;
+}
+.pickColor tr.yellow td
+{
+	border-color: yellow;
+}
+.pickColor tr.red td
+{
+	border-color: red;
+}
+.pickColor tr.marron td
+{
+	border-color: #bf7f2c;
+}
+.pickColor tr.gray td
+{
+	border-color: #dddddd;
+}
+.pickColor tr.violet td
+{
+	border-color: #932793;
+}
+.pickColor tr.none td
+{
+	border-color: #F1F1F1;
+}
+
+table tbody tr.green td, table tbody tr.blue td, table tbody tr.orange td, table tbody tr.yellow td,
+table tbody tr.red td, table tbody tr.gray td, table tbody tr.violet td, table tbody tr.marron td,
+table tbody tr.none td
+{
+	min-height : 20px;
+}
+
+table tbody tr.green td{
+	background-color: #CAFFD8;
+}
+
+table tbody tr.blue td{
+	background-color: #99E0FF;
+}
+
+table tbody tr.orange td{
+	background-color: #ffc04c;
+}
+
+table tbody tr.yellow td{
+	background-color: #FFF9CE;
+}
+
+table tbody tr.red td{
+	background-color: #FFA4A4;
+}
+
+table tbody tr.gray td{
+	background-color: #cbcbcb;
+}
+
+table tbody tr.violet td{
+	background-color: #d82cd8;
+	color: #FFFFFF;
+}
+
+table tbody tr.marron td{
+	background-color: #ca892c;
+}
+
+table tbody tr.none{
+	background-color: #FFFFFF;
+}
+
+.pickColor
+{
+	width : 75px !important;
+	border: 0 ;
+	box-shadow: 5px 5px 5px #000;
+}
+
+.pickColor, table.pickColor tbody
+{
+	height : 186px;
+}
+
+div.pickColor
+{
+	min-height : 20px;
+}
+
+div.pickColor .green td, div.pickColor .blue td
+{
+	width : 150px;
+}
+
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+background-color: #8dbdd8;
+}
+
+.btDevis
+{
+	margin-right : 5px;
+}
+
+.lienNumDossier{
+	cursor: pointer;
+}

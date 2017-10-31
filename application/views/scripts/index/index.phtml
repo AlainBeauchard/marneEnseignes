@@ -1,0 +1,135 @@
+<div class="row-fluid">
+	<div class="col-lg-12">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Nouveaux messages</h3>
+			</div>
+			<div class="panel-body">
+				<div class="table-responvive">
+					<table class="table table-hover" >
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Titre</th>
+								<th>N° de dossier</th>
+								<th>Auteur</th>
+								<th>Date</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach($this->messages as $message): ?>
+							<tr>
+								<td></td>
+								<td>
+									<a href="/messages/view/id/<?php echo $message->id_message ?>"><?php echo $message->titre ?></a>
+								</td>
+								<td><?php echo $message->dossier?></td>
+								<td><?php echo $this->GetUserById($message->id_user) ?></td>
+								<td><?php echo date('d/m/Y', strtotime($message->date)) ?></td>
+								<td></td>
+							</tr>
+							<?php endforeach; ?>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th colspan="5" style="text-align: right;">
+									<a href="/messages/">Aller à la messagerie</a>
+								</th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="col-lg-6">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Devis en attente de validation</h3>
+			</div>
+			<div class="panel-body">
+				<div class="table-responvive">
+					<table class="table table-hover table-condensed">
+						<thead>
+							<tr>
+								<th>Validit&eacute;</th>
+								<th>Titre</th>
+								<th>Client</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach($this->devis as $dev): ?>
+								<tr id="projet_<?php echo $projet->id_projet ?>">
+									<td>
+										<span style="color:<?php echo $this->GetFlagDate($dev->date_validite) ?>">&#x25A3;</span> &nbsp;&nbsp;
+										<?php echo date('d/m/y', strtotime($dev->date_validite)) ?>
+									</td>
+									<td><?php echo $dev->titre ?></td>
+									<td><?php echo $this->GetClientById($dev->id_client) ?></td>
+									<td style="text-align: right;">
+	
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="7" style="text-align: right;">
+									<a href="/facturation/">Voir tous les devis en cours</a>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>				
+	</div>
+	<div class="col-lg-6">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Factures en cours</h3>
+			</div>
+			<div class="panel-body">
+				<div class="table-responvive">
+					<table class="table table-hover table-condensed">
+						<thead>
+							<tr>
+								<th>Date de paiement</th>
+								<th>Client</th>
+								<th>Montant H.T.</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach($this->factures as $dev): ?>
+								<tr>
+									<td>
+										<span style="color:<?php echo $this->GetFlagDate($dev->date_paiement) ?>">&#x25A3;</span> &nbsp;&nbsp;
+										<?php echo date('d/m/y', strtotime($dev->date_paiement)) ?>
+									</td>
+									<td><?php echo $dev->titre ?></td>
+									<td><?php echo $this->GetClientById($dev->id_client) ?></td>
+									<td style="text-align:right;"><?php echo $this->GetSum($dev->id)?> &euro;</td>
+									<td style="text-align: right;">
+	
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="8" style="text-align: right;">
+									<a href="/facturation/factures">Voir toutes les Factures en cours</a>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>				
+	</div>
+</div>

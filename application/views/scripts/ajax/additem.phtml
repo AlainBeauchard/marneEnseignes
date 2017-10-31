@@ -1,0 +1,19 @@
+<tr id="item_<?php echo $this->id_item ?>">
+	<td></td>
+	<td>
+		<?php if((int) $this->item == 0):?>
+			<?php echo $this->designation ?>
+		<?php else:?>
+			<?php echo $this->GetDesignationByIdItem($this->item) ?>
+		<?php endif;?>
+	</td>
+	<td><?php echo @number_format($this->pu, 2) ?></td>
+	<td><?php echo @number_format($this->qte, 2) ?></td>
+	<td><?php echo @number_format($this->remise, 2) ?></td>
+	<td class="totalligne"><?php echo @number_format($this->pht, 2) ?></td>
+	<td><?php echo $this->marge ?></td>
+	<td>
+<!-- 		<span class="glyphicon glyphicon-pencil" aria-hidden="true" id="edit_item_devis_<?php echo $this->id_item ?>"></span>&nbsp;&nbsp;&nbsp; -->
+		<span class="glyphicon glyphicon-trash" aria-hidden="true" id="delete_item_devis_<?php echo $this->id_item ?>" style="cursor:pointer;"></span>
+	</td>
+</tr>

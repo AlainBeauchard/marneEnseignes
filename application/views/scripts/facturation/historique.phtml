@@ -1,0 +1,147 @@
+<?php if($this->item == 'devis'):?>
+	<div class="row-fluid">
+		<div class="col-lg-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Historique des devis accept&eacute;s</h3>
+				</div>
+				<div class="panel-body">
+					<div class="table-responvive">
+						<table class="table tablesorter" id="sorter">
+							<thead>
+								<tr>
+									<th>Dossier</th>
+									<th>Cr&eacute;ation</th>
+									<th>Validit&eacute;</th>
+									<th>Titre</th>
+									<th>Client</th>
+									<th></th>
+								</tr>
+								<tr>
+									<td>
+										<?php echo $this->filtre->getElement('id_client')?>
+										<?php echo $this->filtre->getElement('valide')?>
+										<?php echo $this->filtre->getElement('type_filtre')?>
+									</td>
+									<td colspan="2">
+										<div class="row">
+											<div class="col-xs-6">
+												<?php echo $this->filtre->getElement('mois')?>
+											</div>
+											<div class="col-xs-6">
+												<?php echo $this->filtre->getElement('annee')?>
+											</div>
+										</div>
+										
+									</td>
+									<td><?php echo $this->filtre->getElement('projet')?></td>
+									<td><?php echo $this->filtre->getElement('client')?></td>
+									<td style="text-align: right;">
+										<?php echo $this->filtre->getElement('rechercher')?><?php echo $this->filtre->getElement('resetClient')?>
+									</td>
+								</tr>
+							</thead>
+							<tbody id="listeFactures">
+								<?php foreach($this->paginator as $dev): ?>
+									<tr id="devis_<?php echo $dev->id ?>">
+										<td><?php echo $dev->ref ?></td>
+										<td><?php echo date('d/m/Y', strtotime($dev->date)) ?></td>
+										<td><?php echo date('d/m/Y', strtotime($dev->date_validite)) ?></td>
+										<td><?php echo $dev->titre ?></td>
+										<td><?php echo $this->GetClientById($dev->id_client) ?></td>
+										<td style="text-align: right;">
+											<button type="button" class="btn btn-primary" aria-label="Left Align" id="fiche_facturation_<?php echo $dev->id ?>">
+											  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+											</button>
+										</td>
+									</tr>
+								<?php endforeach; ?>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="6">
+										<?php echo $this->paginationControl($this->paginator); ?>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php else:?>
+	<div class="row-fluid">
+		<div class="col-lg-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Historique des factures r&eacute;gl&eacute;es</h3>
+				</div>
+				<div class="panel-body">
+					<div class="table-responvive">
+						<table class="table tablesorter" id="sorter">
+							<thead>
+								<tr>
+									<th>Dossier</th>
+									<th>Cr&eacute;ation</th>
+									<th>Date paiement</th>
+									<th>Client</th>
+									<th>Montant</th>		
+									<th></th>
+								</tr>
+								<tr>
+									<td>
+										<?php echo $this->filtre->getElement('id_client')?>
+										<?php echo $this->filtre->getElement('valide')?>
+										<?php echo $this->filtre->getElement('type_filtre')?>
+									</td>
+									<td colspan="2">
+										<div class="row">
+											<div class="col-xs-6">
+												<?php echo $this->filtre->getElement('mois')?>
+											</div>
+											<div class="col-xs-6">
+												<?php echo $this->filtre->getElement('annee')?>
+											</div>
+										</div>
+										
+									</td>
+	<!-- 								<th></th> -->
+									<td><?php echo $this->filtre->getElement('client')?></th>
+									<td style="text-align: right;">
+										<?php echo $this->filtre->getElement('rechercher')?><?php echo $this->filtre->getElement('resetClient')?>
+									</td>
+								</tr>
+							</thead>
+							<tbody id="listeFactures">
+								<?php foreach($this->paginator as $dev): ?>
+									<tr id="devis_<?php echo $dev->id ?>">
+										<td><?php echo $dev->ref ?></td>
+										<td><?php echo date('d/m/Y', strtotime($dev->date_facture)) ?></td>
+										<td><?php echo date('d/m/Y', strtotime($dev->date_paiement)) ?></td>
+										<td><?php echo $this->GetClientById($dev->id_client) ?></td>
+										<td style="font-weight: bold;">
+											<?php echo $this->GetSum($dev->id)?> &euro;
+										</td>
+										<td style="text-align: right;">
+											<button type="button" class="btn btn-primary" aria-label="Left Align" id="fiche_facturation_<?php echo $dev->id ?>">
+											  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+											</button>
+										</td>
+									</tr>
+								<?php endforeach; ?>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="6">
+										<?php echo $this->paginationControl($this->paginator); ?>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endif;?>

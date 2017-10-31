@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<frontend>
+		<m0>
+			<label>Tableau de bord</label>
+			<controller>index</controller>
+			<resource>user</resource>
+		</m0>
+		<m1>
+			<label>Gestion des projets</label>
+			<controller>projets</controller>
+			<resource>user</resource>
+		</m1>
+		<m2>
+			<label>Clients</label>
+			<controller>clients</controller>
+			<resource>user</resource>
+		</m2>
+		<m3>
+			<label>Devis / Facturation</label>
+			<controller>facturation</controller>
+			<resource>user</resource>
+		</m3>
+		<m4>
+			<label>Messages</label>
+			<controller>messages</controller>
+			<resource>user</resource>
+		</m4>
+		<m5>
+			<label>Catalogue</label>
+			<controller>catalogue</controller>
+			<resource>user</resource>
+		</m5>
+		<m6>
+			<label>Utilisateurs</label>
+			<controller>utilisateur</controller>
+			<resource>user</resource>
+		</m6>
+		<m7>
+			<label>Suivi de l'activité</label>
+			<controller>suivi</controller>
+			<resource>admin</resource>
+		</m7>
+		<m8>
+			<label>Paramètres</label>
+			<controller>config</controller>
+			<resource>admin</resource>
+		</m8>
+		<m10>
+			<label>Déconnexion</label>
+			<controller>login</controller>
+			<action>deco</action>
+		</m10>
+	</frontend>
+</root>

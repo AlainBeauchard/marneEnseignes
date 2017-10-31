@@ -1,0 +1,38 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Gestion des mots clés des taches</h3>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8">
+			<div class="table-responvive">
+				<table class="table tablesorter table-hover" id="sorter">
+					<thead>
+						<tr>
+							<th>Intitulé tâche</th>
+							<th></th>
+						</tr>
+						<tr>
+							<td><?php echo $this->form?></td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach($this->presets as $preset):?>
+							<tr>
+								<td><?php echo $preset->libelle_tache ?></td>
+								<td style="text-align: right;">
+									<a href="/config/deletepreset/id/<?php echo $preset->id?>" class="btn btn-danger" aria-label="Left Align">
+									  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									</a>
+								</td>
+							</tr>
+						<?php endforeach;?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-lg-2"></div>
+	</div>
+</div>

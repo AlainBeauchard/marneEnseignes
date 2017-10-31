@@ -1,0 +1,58 @@
+<?php echo $this->doctype() . PHP_EOL; ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Marne Enseigne</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<?php
+			echo $this->JQuery()->setVersion('1.11.2')->setUIVersion('1.11.4'), PHP_EOL;			
+		?>
+		<link rel="stylesheet" href="/css/marneenseigne.css">
+		<link rel="stylesheet" type="text/css" href="/css/custom-theme/jquery-ui-1.10.0.custom.css"/>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+		
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
+		<style type="text/css">
+	      /* Override some defaults */
+	      html, body {
+	        background-color: #eee;
+	      }
+	      body {
+	        padding-top: 40px; 
+	      }
+	      .container {
+	        width: 500px;
+	      }
+	
+	      /* The white background content wrapper */
+	      .container > .content {
+	        background-color: #fff;
+	        padding: 20px;
+	        margin: 0 -20px; 
+	        -webkit-border-radius: 10px 10px 10px 10px;
+	           -moz-border-radius: 10px 10px 10px 10px;
+	                border-radius: 10px 10px 10px 10px;
+	        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+	           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+	                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+	      }
+	
+	      .login-form {
+	        margin-left: 65px;
+	      }
+	
+	      legend {
+	        margin-right: -50px;
+	        font-weight: bold;
+	          color: #404040;
+	      }
+	
+	    </style>
+	</head>
+	<body>
+		<?php echo $this->layout()->content; ?>	
+	</body>
+</html>
+

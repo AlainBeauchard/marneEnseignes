@@ -1,0 +1,26 @@
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Détail d'une note</h3>
+	</div>
+	<div class="panel-body">
+		<!--
+		<form action="/projets/sauvenote/id_note/<?= $this->note->id?>" method="POST">
+			
+			<label for="detailNote" class="optional">Notes</label>
+
+			<textarea name="detailNote" id="detailNote" class="form-control" rows="5" ><?= $this->note->note ?></textarea>
+			<br>
+			<div class="pull-right" >
+				<input type="submit" class="btn btn-primary " value="Sauver">&nbsp;
+				<input type="button" class="btn btn-danger " value="Annuler" id="btAnnuleEditNote" >
+			</div>
+		</form>
+		-->
+		<?= $this->form ?>
+	</div>
+</div>
+
+<form action="/projets/retournote" name="formRetour" method="POST" >
+	<input type="hidden" name="id_projet" value="<?= $this->note->id_projet ?>" >
+</form>

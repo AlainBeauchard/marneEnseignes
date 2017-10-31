@@ -1,0 +1,111 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Fiche prospect / client</h3>
+	</div>
+	<div class="panel-body">
+		
+		<div id="tabs">
+			<ul>
+				<li><a href="#tabs-1">Informations</a></li>
+				<li><a href="#tabs-2">Historique</a></li>
+				<li><a href="#tabs-3">Note</a></li>
+			</ul>
+			<div id="tabs-1">
+				<div class="table-responvive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Infos</th>
+								<th>Adresses</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<p><span style="font-weight:bold;">Prospect :</span> <?php echo $this->client->prospect?'OUI':'NON' ?></p>
+									<p><span style="font-weight:bold;">Soci&eacute;t&eacute; :</span> <?php echo $this->client->societe ?></p>
+									<p><span style="font-weight:bold;">M&eacute;tier :</span> <?php echo $this->client->metier ?></p>
+									<p><span style="font-weight:bold;">Num&eacute;ro client : </span> <?php echo $this->client->ref ?></p>
+								</td>
+								<td>
+									<p><span style="font-weight:bold;display:inline-block;">Adresse postale :</span> <?php echo $this->client->adresse ?></p>
+									<p><?php echo $this->client->codepostal ?> <?php echo $this->client->ville ?></p>
+									<p><span style="font-weight:bold;display:inline-block;">T&eacute;l&eacute;phone :</span> <?php echo $this->client->tel ?></p>
+									<p><span style="font-weight:bold;display:inline-block;">Fax :</span> <?php echo $this->client->fax ?></p>
+									<p><span style="font-weight:bold;display:inline-block;">Email :</span> <a href="mailto:<?php echo $this->client->mel ?>"><?php echo $this->client->mel ?></a></p>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<?php $contacts = explode(",", $this->client->contact_nom) ?>
+				<?php $tels = explode(",", $this->client->contact_tel) ?>
+				<?php $emails = explode(",", $this->client->contact_mail) ?>
+				<div class="table-responvive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Contacts</th>
+								<th>Téléphone</th>
+								<th>Email</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach($contacts as $key=>$contact) :?>
+							<tr>
+								<td>
+									<?php echo $contact ?>
+								</td>
+								<td>
+									<?php echo $tels[$key] ?>
+								</td>
+								<td>
+									<a href="mailto:<?php echo $emails[$key] ?>"><?php echo $emails[$key] ?></a>
+								</td>
+							</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+			<div id="tabs-2">
+				<div class="table-responvive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th style="width:33%;">Devis</th>
+								<th style="width:33%;">Projets</th>
+								<th style="width:33%;">Factures</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="margin-top: 5px;">
+									<ul class="list-group">
+									<?php foreach($this->devis as $dev):?>
+										<li class="list-group-item"><?php echo date('d/m/Y', strtotime($dev->date))?> - <?php echo $dev->titre ?></li>
+									<?php endforeach; ?>
+									<ul>
+								</td>
+								<td style="margin-top: 5px;">
+									<ul class="list-group">
+										<?php foreach($this->projets as $projet): ?>
+											<li class="list-group-item"><?php echo date('d/m/Y', strtotime($projet->date_commande))?> - <?php echo $projet->titre ?></li>
+										<?php endforeach; ?>
+									</ul>
+								</td>
+								<td style="margin-top: 5px;">
+									
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div id="tabs-3">
+				<?php echo $this->noteClient ?>
+			</div>
+		</div>
+	</div>
+</div>

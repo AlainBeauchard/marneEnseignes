@@ -1,0 +1,6 @@
+<div id="event_<?php echo $this->id ?>" class="thumbnail">
+	<span class="label" style="background-color: <?php echo $this->GetColorByUser($this->id_user)?>">
+		<?php echo $this->GetUserById($this->id_user); ?> : <?php echo $this->nbh ?>h - <?php echo $this->priority ?>
+		</span> <br />
+	<?php echo $this->event; ?>
+</div>

@@ -1,0 +1,275 @@
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+	   	if (localStorage.getItem('currentLine')){
+		   $('#' + localStorage.getItem('currentLine')).css('border', '3px solid orange');
+		   $('#' + localStorage.getItem('currentLine'))[0].scrollIntoView(true);
+	   	}
+
+	}, false);
+	
+	document.onkeydown = checkKey;
+
+	function checkKey(e) {
+	
+	    e = e || window.event;
+	
+	    if (e.keyCode == '38') {
+		    var current = $('#' + localStorage.getItem('currentLine'));
+	        $('#' + localStorage.getItem('currentLine')).css('border', 'none');
+	        
+	        localStorage.setItem('currentLine', '');
+	        current.prev().css('border', '3px solid orange');
+	        localStorage.setItem('currentLine', current.prev().attr('id'));
+	    }
+	    
+	    if (e.keyCode == '40') {
+	       	var current = $('#' + localStorage.getItem('currentLine'));
+	        $('#' + localStorage.getItem('currentLine')).css('border', 'none');
+	        
+	        localStorage.setItem('currentLine', '');
+	        current.next().css('border', '3px solid orange');
+	        localStorage.setItem('currentLine', current.next().attr('id'));
+	    }
+	}
+</script>
+<style>
+	thead, tbody { display: block; }
+
+	tbody {
+	    height: 700px; 
+	    overflow-y: auto; 
+	    overflow-x: hidden; 
+	}
+</style>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<?php if( $_SESSION["dr"] == 0 ) echo("Projets en cours"); else if($_SESSION["dr"] == 1) echo("Devis à relancer"); else echo("Dossier en attente"); ?>
+			
+		</h3>
+	</div>
+	<div class="panel-body">
+		<button type="button" class="btn btn-warning pull-right" aria-label="Left Align" id="disableSelection">
+		  <span class="glyphicon glyphicon-modal-window" aria-hidden="true"></span>&nbsp;&nbsp;Désactiver la selection
+		</button>
+		<br/>
+		<div class="table-responvive">
+			<table class="table table-hover table-condensed tablesorter table-striped" id="sorter">
+				<thead>
+					<tr>
+						<th style="width:4%;">Dossier</th>
+						<th style="width:4%;">Sem</th>
+						<th style="width:7%;" class="{sorter: 'shortDate'}">Livraison</th>
+						<th style="width:4%;">N° client</th>
+						<th style="width:17%;">Client</th>
+						<th style="width:10%;">Contact</th>
+						<th style="width:16%;">Titre</th>
+						<th style="width:10%;">Etapes</th>
+						<th style="width:10%;">Par</th>
+						<th>Plannfi&eacute;</th>
+						<th style="width:18%;"></th>
+					</tr>
+					<form method="post">
+						<tr>
+							<td style="width:4%;">
+								<?= $this->filtreProjet->getElement('type_filtre')?>
+								<?= $this->filtreProjet->getElement('id_projet')?>
+								<?= $this->filtreProjet->getElement('id_client')?>
+								<div class="row">
+									<div class="col-md-12">
+										<?= $this->filtreProjet->getElement('dossier')?>
+									</div>
+								</div>
+							</td>
+							<td style="width:4%;">
+								<div class="row">
+									<div class="col-md-12">
+								<?= $this->filtreProjet->getElement('sem') ?>
+									</div>
+								</div>
+							</td>
+							<td style="width:7%;">
+								<div class="row">
+									<div class="col-md-12">
+										<?= $this->filtreProjet->getElement('mois')?>
+									</div>
+								</div>
+							</td>
+							<td style="width:4%;">
+								<div class="row">
+									<div class="col-md-12">
+										<?= $this->filtreProjet->getElement('num_client')?>
+									</div>
+								</div>
+							</td>
+							<td style="width:17%;">
+								<div class="row">
+									<div class="col-md-11">
+								<?= $this->filtreProjet->getElement('client')?>
+									</div>		
+								</div>
+							</td>
+							<td style="width:10%;">
+								<div class="row">
+									<div class="col-md-11">
+								<?= $this->filtreProjet->getElement('contact')?>
+									</div>
+								</div>
+							</td>
+							<td style="width:16%;">
+								<div class="row">
+									<div class="col-md-11">
+										<?= $this->filtreProjet->getElement('projet')?>
+									</div>
+								</div>
+							</td>
+							<td style="width:10%;">
+								<div class="row">
+									<div class="col-md-10">
+								<?= $this->filtreProjet->getElement('etapes')?>
+									</div>
+								</div>
+							</td>
+							<td style="width:10%;">
+								<div class="row">
+									<div class="col-md-10">
+								<?= $this->filtreProjet->getElement('users')?>
+									</div>
+								</div>
+							</td>
+							<td></td>
+							<td style="text-align: right;width:18%;">
+								<?= $this->filtreProjet->getElement('rechercher')?><?= $this->filtreProjet->getElement('resetProjet')?>
+							</td>
+						</tr>
+					</form>
+				</thead>
+				<tbody id="listeProjets" style="">
+					<?php
+						$previousProjet = null; 
+
+						foreach($this->paginator as $key => $projet): ?>
+						<?php $taches = $this->GetEtapeProjet($projet->id_projet) ?>
+						<tr id="projet_<?= $projet->id_projet ?>" class="<?= $projet->colorclass ?>" >
+							<td  style="width:4%;">
+								<?= strlen($projet->dossier)?$projet->dossier:'00-000' ?>
+								<span style="color:<?= $this->GetFlagDate($projet->date_commande) ?>">&#x25A3;</span>
+							</td>
+							<td style="width:4%;">
+								<input type="text" id="sem_<?= $projet->id_projet ?>" style="width:60px;" value="<?= $projet->sem ?>"/>
+							</td>
+							<td style="width:7%;">
+								<?php if((int)$projet->date_commande && date('d/m/y', strtotime($projet->date_commande)) != "01/01/70"):?>
+									<?= date('d/m/Y', strtotime($projet->date_commande)) ?>	
+								<?php else:?>
+									
+								<?php endif;?>
+							</td>
+							<td style="width:4%;">
+								<?= $this->GetNumClientById($projet->id_client) ?>
+							</td>
+							<td style="font-weight: bold; text-transform: uppercase; width:17%;">
+								<?= $this->GetClientById($projet->id_client) ?>
+							</td>
+							<td style="width:10%;"><?= str_replace(',', '<br />', $projet->contact_nom) ?></td>
+							<td style="width:16%;"><?= $projet->titre ?></td>
+							
+							<td style="width:12%;">
+								<?php if(@count($taches->toArray()) > 0):?>
+									<?php foreach ($taches as $tache):?>
+										<p> - <?= str_replace("URGENT", "<span style='background-color:red; color: white;'>URGENT</span>", $tache->tache) ?></p>
+									<?php endforeach;?>
+								<?php endif; ?>
+							</td>
+							<td style="width:10%;">
+								<?php if(@count($taches->toArray()) > 0):?>
+									<?php foreach ($taches as $tache):?>
+										 <?php $liste = array($this->GetUserById($tache->id_user1), $this->GetUserById($tache->id_user2), $this->GetUserById($tache->id_user3)) ?>
+										<p> - <?= str_replace(', , ','', str_replace($this->GetUserById($this->currentUser),'<span style="background-color:' . $this->GetColorByUser($this->currentUser) . ';color:white;" class="checkBrightness">&nbsp;' .$this->GetUserById($this->currentUser) . '&nbsp;</span>', implode(', ', $liste)))?> (<?= $tache->duree ?>h)</p>
+									<?php endforeach;?>		
+								<?php endif;?>
+							</td>
+							<td>
+								<?php if(@count($taches->toArray()) > 0):?>
+									<?php foreach ($taches as $tache):?>
+										<p><?= $this->GetDatePlanif($tache->id) ?></p>
+									<?php endforeach;?>
+								<?php endif; ?>
+							</td>
+							<td style="text-align: right; width:18%;">
+								<?php if($projet->chemin !=null):?>
+									<a href="file://<?= $projet->chemin ?>" class="btn btn-info" target="_blank">
+										<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+									</a>
+								<?php endif;?>
+								<?php if($previousProjet!=null):?>
+									<input type="hidden" name="idPreviousProject_<?= $projet->id_projet ?>" id="idPreviousProject_<?= $projet->id_projet ?>" value="<?= $previousProjet->id_projet ?>">
+								<?php endif;?>
+								<button type="button" class="btn btn-primary" aria-label="Left Align" id="fiche_projets_<?= $projet->id_projet ?>">
+								  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+								</button> 
+								<button type="button" class="btn btn-warning" aria-label="Left Align" id="edit_projets_<?= $projet->id_projet ?>">
+								  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-danger sur" aria-label="Left Align" id="delete_projets_<?= $projet->id_projet ?>">
+								  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-info" aria-label="Left Align" id="changeColor_projets_<?= $projet->id_projet ?>">
+								  <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					<?php 
+						$previousProjet = $projet;
+					endforeach; ?>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="10">
+							<?= $this->paginationControl($this->paginator); ?>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div id="plaletteCouleur" class="pickColor noDisplay" >
+	<form action="" method="POST" >
+		<input type="hidden" name="id_projet" id="id_projet_pc" value="">
+		
+		<table class="pickColor">
+			<tbody>
+				<tr class="changeColor blue" >
+					<td>&nbsp;</td>
+				</tr>
+				<tr class="changeColor green">
+					<td>&nbsp;</td>
+				</tr>
+				<tr class="changeColor orange" >
+					<td>&nbsp;</td>
+				</tr>
+				<tr class="changeColor yellow" >
+					<td>&nbsp;</td>
+				</tr>
+				<tr class="changeColor red" >
+					<td>&nbsp;</td>
+				</tr>
+                <tr class="changeColor violet" >
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="changeColor gray" >
+                    <td>&nbsp;</td>
+                </tr>
+                <tr class="changeColor marron" >
+                    <td>&nbsp;</td>
+                </tr>
+				<tr class="changeColor none" >
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</form>
+</div>

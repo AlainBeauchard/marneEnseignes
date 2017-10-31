@@ -1,0 +1,61 @@
+<?php 
+	$m['1'] = 'janvier';
+	$m['2'] = 'février';
+	$m['3'] = 'mars';
+	$m['4'] = 'avril';
+	$m['5'] = 'mai';
+	$m['6'] = 'juin';
+	$m['7'] = 'juillet';
+	$m['8'] = 'août';
+	$m['9'] = 'septembre';
+	$m['10'] = 'octobre';
+	$m['11'] = 'novembre';
+	$m['12'] = 'décembre';
+	
+?>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Suivi du chiffre d'affaire (H.T.) Année <?php echo date('Y')?></h3>
+	</div>
+	<div class="panel-body">
+		<div class="table-responvive">
+			<table class="table table-hover table-condensed tablesorter" id="sorter">
+				<thead>
+					<tr>
+						<th>Mois</th>
+						<th>Nombre de devis</th>
+						<th>Nombre de devis acceptés</th>
+						<th>Nombre de factures dues</th>
+						<th>Nombre de factures payées </th>
+						<th>Chiffre d'affaire payé</th>
+						<th>Chiffre d'affaire du</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php for($i=1; $i <= (int)date('m'); $i++): ?>
+						<tr>
+							<td style="text-align: right;"><?php echo ucfirst($m[$i])?></td>
+							<td style="text-align: right;"><?php echo $this->num_devis[$i]?></td>
+							<td style="text-align: right;"><?php echo $this->num_devis_acceptes[$i]?></td>
+							<td style="text-align: right;"><?php echo $this->num_factures[$i]?></td>
+							<td style="text-align: right;"><?php echo $this->num_factures_payees[$i]?></td>
+							<td style="text-align: right;"><?php echo number_format($this->ca_factures_dues[$i], 2, '.',' ')?> &euro;</td>
+							<td style="text-align: right;"><?php echo number_format($this->ca_factures_payees[$i], 2, '.',' ')?> &euro;</td>
+						</tr>
+					<?php endfor;?>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td style="text-align: right; font-weight: bold;">TOTAUX :</td>
+						<td style="text-align: right; font-weight: bold;"><?php echo @array_sum($this->num_devis)?></td>
+						<td style="text-align: right; font-weight: bold;"><?php echo @array_sum($this->num_devis_acceptes)?></td>
+						<td style="text-align: right; font-weight: bold;"><?php echo @array_sum($this->num_factures)?></td>
+						<td style="text-align: right; font-weight: bold;"><?php echo @array_sum($this->num_factures_payees)?></td>
+						<td style="text-align: right; font-weight: bold;"><?php echo number_format(@array_sum($this->ca_factures_dues), 2, '.',' ')?> &euro;</td>
+						<td style="text-align: right; font-weight: bold;"><?php echo number_format(@array_sum($this->ca_factures_payees), 2, '.',' ')?> &euro;</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,58 @@
+
+Avoir le nom du contact qui appara”t dans projet cl™tur.
+	=> gestion de projet > Menu > Projet cl™tur : ajouter une colonne avec le nom du contact.
+	   => info ajoute dans le tableau (/Applications/MAMP/htdocs/MarneEnseigneDev/application/views/scripts/projets/historique.phtml)	  
+     	   => recherche fichier (/Applications/MAMP/htdocs/MarneEnseigneDev/application/controllers/ProjectsController ! historiqueAction)
+
+Pouvoir masquer les taches avec un bouton et pouvoir les r-afficher au besoin.
+Il faut que lorsque je les masque elle disparaissent galement dans la page projets en cours (voir PDF classeur 3)
+	=> dtail dÕun projet
+	=> modif dÕanalyse -> champ visible dans la table projetstaches
+	=> modification de fiche.phtml / AjaxController.php + Ajout de masktache.phtml update de me.css et MAJ de script.js
+	=> RESTE A FAIRE : NE PAS AFFICHER LES TACHES INVISIBLES DANS LES PROJETS EN COURS
+
+Dans le calendrier pouvoir avancer d'une journe ˆ la fois mais garder la possibilit d'avancer d'une semaine (voir PDF classeur 4)
+	=> ouvrir le calendrier ajouter un bouton pour avancer dÕune journe et un autre pour reculer dÕune journe
+	=> les boutons sont ajouts (Views/scripts/calendar.index.phtml)
+	=> le style public/css/blue/style.css
+	=> le script Js/script.js ligne 153
+	=> Ok
+
+Pouvoir modifier les notes dans fiche projet : actuellement on ne peut que la supprimer. 
+	=> Dans le dtail dÕun projet : bouton modifier le text de la note.
+	=> Ok ajout de Views/scripts/editnote.phml et motif de ProjetsController et script.js et fiche.phtml
+
+Avoir la possibilit d'envoyer un message ˆ plusieurs personnes ˆ la fois.
+	=> message Ajouter un bouton + pour choisir un autre destinataire
+	=> motif dÕanalyse : ajoute dÕune table de liaison entre les messages et les utilisateurs.
+	=> modifier les requtes des messages qui concernent une personne -> modifier la page de dtail du message.
+
+Pourrait-on crer dans la fiche projet comme cela est fait pour les projets marqus comme livr,
+un module devis ˆ relancer ce qui par le fait les ferait dispara”tre de gestion des projets,
+et pouvoir les rcuprer et les rinsrer (comme ces mmes projets marqus comme livr)
+	=> Dans menu (gestion des projets) 		
+		ajouter devis ˆ relancer (mme manip que pour marqu comme livr)	
+	=> Ajouter une colonne dans la table ÔprojetsÕ -> ÔdevisArelancerÕ
+	=> modifier les requtes des projets en cours pour ne pas prendre en compte les projets qui ont lÕtat ÔdevisAremancerÕ
+
+Lorsque lÕon cre un dossier la date par dfaut est 01/01/1970 !!!! 
+Il faudrait que ce soit celle du jour par dfaut.
+	=> Menu > Nouveau projet / modifier un projet -> onglet Information
+	   Mme date que la date de cration de dossier
+	=> Dans la class ProjetsController mthode EditerAction
+	=> Ok
+
+
+Si je pouvais mettre certains mots ou certaines lignes dans une couleur diffrente
+	=>  Couleur uniquement sur le tableau Projets
+	=> Ajouter une colonne dans la table ÔprojetsÕ pour prendre en compte la couleur.
+	=> Partie graphique Ok index.phtml + script.js + /js/theme/blue/style.css -> creation des classes ÔblueÕ, ÔgreenÕ, ÔorangeÕ, ÔyellowÕ, ÔredÕ
+
+Pouvoir purger la liste droulante ÇÊtape" dans la gestion des projets (PDF classeur 5 )
+	=> ne renvoyer que le rsultat o il y a au moins 1 dossier
+	=> condition projets non clotur AjaxController mthode etapesAction
+	=> Ok
+
+Lorsque l'on est en bas de page dans gestion des projets et que lÕon met un dossier en livr et que l'on revient dans gestion des projets
+on se retrouve tout en haut et oblig de mouliner pour revenir en bas. Il faudrait que l'on puisse rester au mme
+niveau d'ascenseur lorsque lÕon revient dans gestion des projets.

@@ -1,0 +1,103 @@
+<?php echo $this->doctype() . PHP_EOL; ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Marne Enseigne</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<?php
+			echo $this->JQuery()->setVersion('1.11.2')->setUIVersion('1.11.4'), PHP_EOL;			
+		?>
+<!-- 		<link rel="stylesheet" href="/css/marneenseigne.css"> -->
+		<link rel="stylesheet" type="text/css" href="/css/custom-theme/jquery-ui-1.10.3.custom.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/custom-theme/jquery-ui-1.10.3.theme.css"/>
+		<link rel="stylesheet" href="/css/assets/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="/css/assets/css/docs.css"/>
+        <link rel="stylesheet" href="/css/assets/js/google-code-prettify/prettify.css"/>
+        
+		<!--[if IE 7]>
+            <link rel="stylesheet" href="/css/assets/css/font-awesome-ie7.min.css">
+            <![endif]-->
+            <!--[if lt IE 9]>
+            <link rel="stylesheet" href="/css/custom-theme/jquery.ui.1.10.3.ie.css">
+        <![endif]-->
+
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+		      <script src="/css/assets/js/vendor/html5shiv.js" type="text/javascript"></script>
+		      <script src="/css/assets/js/vendor/respond.min.js" type="text/javascript"></script>
+        <![endif]-->
+            
+            
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+		
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
+		
+		<link rel="stylesheet" href="/css/uploadfile.css">
+		<link rel="stylesheet" href="/js/tablesorter/themes/blue/style.css">
+		<link rel="stylesheet" href="/css/me.css">
+		
+		 <!--[if lt IE 9]>
+            <link rel="stylesheet" type="text/css" href="css/custom-theme/jquery.ui.1.10.0.ie.css"/>
+        <![endif]-->
+		
+		<!-- Latest compiled and minified JavaScript -->
+		<script type="text/javascript" src="/js/datepicker-fr.js"></script>Ò
+		<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
+		<script type="text/javascript" src="/js/tinymce/jquery.tinymce.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.metadata.js"></script>
+		<script type="text/javascript" src="/js/tablesorter/jquery.tablesorter.js"></script>
+		<script type="text/javascript" src="/js/jquery.colourbrightness.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.stickytableheaders.min.js"></script>
+		<script type="text/javascript" src="/js/scripts.js"></script>
+	</head>
+	<body>
+			<div class="container-fluid">
+				<nav class="navbar navbar-inverse navbar-fixed-top" id="topNavBar" >
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<a href="/" class="navbar-brand">
+								Marne Enseigne
+							</a>
+						</div>
+						<?php 
+							$options = array('ulClass'=>'nav navbar-nav', 'ActiveClass'=>'active');	
+							echo $this->navigation()->menu()->renderMenu(null, $options); 
+						?>
+						<div style="margin-top: 8px;">
+							<button type="button" class="btn btn-warning pull-right" aria-label="Left Align" id="openCalendar">
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;Ouvrir le calendrier
+							</button>
+						</div>
+					</div>
+				</nav>
+				<div class="row-fluid" id="divPrincipale" >
+					<div class="col-lg-12">
+						<div class="row-fluid">
+							<div class="col-lg-12">
+								<div class="alert" role="alert" id="newMessageAlert" style="text-align: center; font-size: 18px; font-weight: bold;background-color:red;">
+									<a href="/messages" style="color:white;">Nouveaux Messages</a>
+								</div>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="col-lg-12">
+								<br />
+								<?php echo $this->layout()->sidebar; ?>
+								<br />
+							</div>				
+						</div>
+
+						<div class="row-fluid">
+							<div class="col-lg-12">
+								<?php echo $this->layout()->content; ?>	
+							</div>
+						</div>
+					</div>
+			</div>
+	</body>
+</html>
+

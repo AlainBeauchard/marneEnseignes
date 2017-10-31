@@ -1,0 +1,89 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Liste des clients / prospects</h3>
+	</div>
+	<div class="panel-body">
+		<div class="table-responvive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th><a href="<?php echo $_SERVER[HTTP_REFERER]?>" class="btn btn-primary pull-right">Retour</a></th>
+					</tr>
+					<tr>
+						<th>
+							<div id="singleupload">Téléverser dans le dossier du projet</div>
+						</th>
+					</tr>
+					<tr>
+						<th>
+							Liste des fichiers pour le projet : <?php echo $this->projet->dossier ?> - <?php echo $this->projet->titre ?>
+							</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td id="files" class="files"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<script>
+	
+	$(document).ready(function()
+	{
+	
+		refreshDir();
+			
+		var settings = {
+		    url: "/ajax/upload/",
+		    dragDrop:false,
+		    fileName: "myfile",
+		    formData: {"id_projet":<?php echo $this->projet->id_projet ?>},
+		    allowedTypes:"jpg,jpeg,png,gif,doc,pdf,docx,xls,xlsx,psd,tif,ai,eps,txt,eml,html",	
+		    returnType:"json",
+			 onSuccess:function(files,data,xhr)
+		    {
+		       refreshDir();
+		    },
+		    showDelete:false,
+	/*
+		    deleteCallback: function(data,pd)
+			{
+		    for(var i=0;i<data.length;i++)
+		    {
+		        $.post("delete.php",{op:"delete",name:data[i]},
+		        function(resp, textStatus, jqXHR)
+		        {
+		            //Show Message  
+		            $("#status").append("<div>File Deleted</div>");      
+		        });
+		     }      
+		    pd.statusbar.hide(); //You choice to hide/not.
+		
+		}
+	*/
+			dragDropStr: "<span><b>Faites glisser et déposez les fichiers</b></span>",
+			abortStr:"abandonner",
+			cancelStr:"résilier",
+			doneStr:"fait",
+			multiDragErrorStr: "Plusieurs Drag & Drop de fichiers ne sont pas autorisés.",
+			extErrorStr:"n'est pas autorisé. Extensions autorisées:",
+			sizeErrorStr:"n'est pas autorisé. Admis taille max :",
+			uploadErrorStr:"Upload n'est pas autorisé"
+		}
+		var uploadObj = $("#singleupload").uploadFile(settings);
+	
+	
+	});
+	
+	function refreshDir(){
+		$.post('/ajax/refreshdir',
+		{"id_projet":<?php echo $this->projet->id_projet ?>},
+		function(r){
+			$('#files').empty();
+			$('#files').append(r);
+		});
+	}
+</script>

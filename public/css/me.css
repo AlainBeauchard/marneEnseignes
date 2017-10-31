@@ -1,0 +1,12 @@
+thead.headfixed { display:block;}
+tbody.headfixed { display:block; overflow:auto; height:600px; }
+
+.noDisplay
+{
+	display:none;
+}
+
+.tacheNoVisible
+{
+	background-color : #F1F1F1;
+}

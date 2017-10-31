@@ -1,0 +1,82 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Projets clotur&eacute;s</h3>
+	</div>
+	<div class="panel-body">
+		<div class="table-responvive">
+			<table class="table table-hover table-condensed tablesorter" id="sorter">
+				<thead>
+					<tr>
+						<th>Dossier</th>
+						<th>Date de livraison</th>
+						<th>Num Client</th>
+						<th>Client</th>
+                        <th>Contacts</th>
+						<th>Titre</th>
+						<th>Date de cloture</th>
+						<th></th>
+					</tr>
+					<form method="post">
+						<tr>
+							<td>
+								<?= $this->filtreProjet->getElement('type_filtre')?>
+								<?= $this->filtreProjet->getElement('id_projet')?>
+								<?= $this->filtreProjet->getElement('id_client')?>
+								<?= $this->filtreProjet->getElement('dossier')?>
+							</td>
+							<td></td>
+							<td><?= $this->filtreProjet->getElement('num_client')?></td>
+							<td><?= $this->filtreProjet->getElement('client')?></td>
+                            <td><?= $this->filtreProjet->getElement('contact')?></td>
+							<td><?= $this->filtreProjet->getElement('projet')?></td>
+							<td></td>
+							<td style="text-align: right;">
+								<?= $this->filtreProjet->getElement('rechercherClotures')?>
+								<?= $this->filtreProjet->getElement('resetProjetClotures')?>
+							</td>
+						</tr>
+					</form>
+				</thead>
+				<tbody id="listeProjets">
+					<?php foreach($this->paginator as $projet): ?>
+						<tr id="projet_<?php echo $projet->id_projet ?>">
+							<td>
+								<?= $projet->dossier ?>
+							</td>
+							<td>
+								<?php if((int)$projet->date_commande):?>
+								<?= date('d/m/Y', strtotime($projet->date_commande)) ?>
+								<?php endif;?>
+							</td>
+							<td><?= $this->GetNumClientById($projet->id_client)?></td>
+							<td style="font-weight: bold; text-transform: uppercase;">
+								<?= $this->GetClientById($projet->id_client) ?>
+							</td>
+                            <td><?= $projet->contact_nom ?></td>
+							<td><?= $projet->titre ?></td>
+							
+							<td><?= date('d/m/Y', strtotime($projet->date_cloture)) ?></td>
+							<td style="text-align: right;">
+								<button type="button" class="btn btn-primary" aria-label="Left Align" id="fiche_projets_<?= $projet->id_projet ?>">
+								  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+								</button> 
+<!--
+								<button type="button" class="btn btn-warning" aria-label="Left Align" id="edit_projets_<?= $projet->id_projet ?>">
+								  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								</button>
+-->
+							</td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="7">
+							<?= $this->paginationControl($this->paginator); ?>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,18 @@
+<div class="row">
+	<?php $mimeTypes = array('docx'=>'doc', 'doc'=>'doc', 'pdf'=>'pdf', 'xlsx'=>'xlsx', 'xls'=>'xlsx', 'jpg'=>'jpg', 'jpeg'=>'jpg', 'psd'=>'jpg', 'ai'=>'ai', 'eps'=>'ai', 'png'=>'jpg'); ?>
+	<?php if(count($this->dirs)): ?>
+		<?php foreach($this->dirs as $dir): ?>
+			<?php list($file, $ext) = explode('.', $dir) ?>
+			<div class="col-xs-6 col-md-2 col-md-offset-1 thumbnail" style="margin-top:15px;">
+				<span class="glyphicon glyphicon-trash" style="cursor:pointer;" id="delete_file"></span>
+				<a href="<?php echo $this->url(array('controller'=>'ajax', 'action'=>'dl', 'f'=>$dir, 'dir'=>$this->id_projet),null, true) ?>" alt="<?php echo $this->id_projet . '/' . $dir ?>">
+					<img src="/images/mimetypes/<?php echo $mimeTypes[$ext] ?>.png" alt="<?php echo $dir ?>"/>
+				</a>
+				<br />
+				<p>
+					<span class="label label-default"><?php echo $dir ?></span>&nbsp;&nbsp;
+				</p>
+			</div>
+		<?php endforeach; ?>
+	<?php endif; ?>
+</div>

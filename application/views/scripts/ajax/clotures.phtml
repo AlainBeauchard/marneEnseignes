@@ -1,0 +1,57 @@
+<?php foreach($this->projets as $projet): ?>
+		<?php $taches = $this->GetEtapeProjet($projet->id_projet) ?>
+		<tr id="projet_<?php echo $projet->id_projet ?>">
+			<td><?php echo $projet->dossier ?></td>
+			<td>
+				<?php if($this->projet->date_creation != null) :?>
+					<?php echo date('d/m/Y', strtotime($this->projet->date_creation)) ?>
+				<?php endif;?>
+			</td>
+			<td><?php echo date('d/m/Y', strtotime($projet->date_commande)) ?></td>
+			<td>
+				<?php echo $this->GetNumClientById($projet->id_client) ?>
+			</td>
+			<td>
+				<?php echo $this->GetClientById($projet->id_client) ?>
+			</td>
+			<td><?php echo $projet->titre ?></td>
+			<td>
+				<?php if(@count($taches->toArray()) > 0):?>
+					<?php foreach ($taches as $tache):?>
+						<p> - <?php echo $tache->tache ?> (<?php echo $tache->duree ?>h)</p>
+					<?php endforeach;?>
+				<?php endif; ?>
+			</td>
+<!--
+			<td>
+				<?php if(@count($taches->toArray()) > 0):?>
+					<?php foreach ($taches as $tache):?>
+						<p><?php echo $tache->duree ?> H</p>
+					<?php endforeach;?>
+				<?php endif; ?>
+			</td>
+-->
+			<td>
+				<?php if(@count($taches->toArray()) > 0):?>
+					<?php foreach ($taches as $tache):?>
+						 <?php $liste = array($this->GetUserById($tache->id_user1), $this->GetUserById($tache->id_user2), $this->GetUserById($tache->id_user3)) ?>
+						<p> - <?php echo str_replace(', , ','', implode(', ', $liste))?></p>
+					<?php endforeach;?>		
+				<?php endif;?>
+			</td>
+			<td style="text-align: right;">
+				<a href="/projets/fichiers/id/<?php echo $projet->id_projet?>" class="btn btn-info">
+					<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+				</a>
+				<button type="button" class="btn btn-primary" aria-label="Left Align" id="fiche_projets_<?php echo $projet->id_projet ?>">
+				  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+				</button>
+				<button type="button" class="btn btn-warning" aria-label="Left Align" id="edit_projets_<?php echo $projet->id_projet ?>">
+				  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+				</button>
+				<button type="button" class="btn btn-danger" aria-label="Left Align" id="delete_projets_<?php echo $projet->id_projet ?>">
+				  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+				</button>
+			</td>
+		</tr>
+	<?php endforeach; ?>

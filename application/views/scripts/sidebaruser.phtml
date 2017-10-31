@@ -1,0 +1,15 @@
+<?php 
+	$auth = Zend_Auth::getInstance();
+?>
+<?php if($auth->getIdentity()->status == 'admin') :?>
+	<div class="dropdown">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+	    Menu
+	    <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+	    <li role="presentation"><a role="menuitem" tabindex="-1" href="/utilisateur/ajout">Ajouter un utilisateur</a></li>
+		<li role="presentation"><a role="menuitem" tabindex="-1" href="/utilisateur/liste">Liste des utilisateurs</a></li>
+	  </ul>
+	</div>
+<?php endif;?>

@@ -1,0 +1,174 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Devis / Facturation</h3>
+	</div>
+	<div class="panel-body">
+		<p style="text-align:right;">
+			<button type="button" class="btn btn-success" aria-label="Left Align" id="accepter_<?php echo $this->devis->id?>">
+			  Devis accept&eacute;
+			</button>
+			<button type="button" class="btn btn-success" aria-label="Left Align" id="preview_devis_<?php echo $this->devis->id?>">
+			  Imprimer le devis
+			</button>
+			<button type="button" class="btn btn-success" aria-label="Left Align" id="cgv">
+				Imprimer les CGV
+			</button>
+			<?php if($this->devis->facture):?>
+				<button type="button" class="btn btn-success" aria-label="Left Align" id="preview_facture_<?php echo $this->devis->id?>">
+				  Imprimer la facture
+				</button>
+			<?php else:?>
+				<button type="button" class="btn btn-success" aria-label="Left Align" id="facturer_<?php echo $this->devis->id?>">
+				  Facturer
+				</button>
+			<?php endif; ?>
+		</p>
+		<div class="table-responvive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Date du devis</th>
+						<th>Délai de réalisation</th>
+						<th>N° Projet</th>
+						<th>Intitulé du projet</th>
+						<th>Accept&eacute; par le client</th>
+						<th>Factur&eacute;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><?php echo date('d/m/Y', strtotime($this->devis->date)) ?></td>
+						<td><?php echo $this->devis->delai?> semaine<?php echo $this->devis->delai > 1?'s':'' ?></td>
+						<td><?php echo $this->devis->ref ?></td>
+						<td><?php echo $this->devis->titre ?></td>
+						<td><?php echo $this->devis->valide?'OUI':'NON' ?></td>
+						<td><?php echo $this->devis->facture?'OUI':'NON' ?></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="table-responvive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Client</th>
+						<th>Adresses</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><?php echo $this->client->societe ?></td>
+						<td>
+							<p><?php echo $this->client->adresse ?></p>
+							<p><?php echo $this->client->codepostal ?> <?php echo $this->client->ville ?></p>
+							<p>T&eacute;l : <?php echo $this->client->tel ?></p>
+							<p>Mel : <?php echo $this->client->mel ?></p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="table-responvive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>D&eacute;signation</th>
+						<th>P.U.</th>
+						<th>Qt&eacute;</th>
+						<th>P.H.T.</th>
+					</tr>
+				</thead>
+				<?php if(count($this->items->toArray())): ?>
+					<tbody>
+						<?php foreach($this->items as $item): ?>
+						<?php $inc++; ?>
+						<tr>
+							<td><?php echo $inc ?></td>
+							<td>
+								<?php if((int) $item->id_item == 0):?>
+									<?php echo $item->item ?>
+								<?php else:?>
+									<?php echo $this->GetDesignationByIdItem($item->id_item) ?>
+								<?php endif;?>
+							</td>
+							<td style="text-align: right;"><?php echo number_format($item->pu, 2) ?> &euro;</td>
+							<td><?php echo $item->qte ?></td>
+							<td style="text-align: right;"><?php echo number_format($item->qte * $item->pu, 2) ?> &euro;</td>
+						</tr>
+						<?php $total += $item->qte * $item->pu ?>
+						<?php endforeach; ?>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th colspan="4" style="text-align: right;">TOTAL H.T.</th>
+							<th style="text-align: right;"><?php echo sprintf('%0.2f',$total) ?> &euro;</th>
+						</tr>
+						<tr>
+							<th colspan="4" style="text-align: right;">T.V.A. 20%</th>
+							<th style="text-align: right;"><?php echo sprintf('%0.2f',($total * 20)/100) ?> &euro;</th>
+						</tr>
+						<tr>
+							<?php $totalttc = (($total * 20)/100) + $total?>
+							<th colspan="4" style="text-align: right;">TOTAL T.T.C.</th>
+							<th style="text-align: right;"><?php echo sprintf('%0.2f', $totalttc) ?> &euro;</th>
+						</tr>
+						<tr>
+							<?php $totalRem = $totalttc * ( $this->devis->remise / 100) ?>
+							<th colspan="4" style="text-align: right;">Remise (<?php echo $this->devis->remise?> %)</th>
+							<th style="text-align: right;">- <?php echo sprintf('%0.2f', $totalRem)?> &euro;</th>
+						</tr>
+						<tr>
+							<th colspan="4" style="text-align: right;">Acompte</th>
+							<th style="text-align: right;">- <?php echo sprintf('%0.2f', $this->devis->acompte)?> &euro;</th>
+						</tr>
+						<tr>
+							<th colspan="4" style="text-align: right;">Net &agrave; Payer</th>
+							<th style="text-align: right;"><?php echo sprintf('%0.2f', $totalttc - ($totalRem + $this->devis->acompte))?> &euro;</th>
+						</tr>
+					</tfoot>
+				<?php endif; ?>
+			</table>
+		</div>
+		<?php if($this->devis->facture == 1):?>
+			<?php echo $this->formFacture ?>
+		<?php endif;?>
+	</div>
+</div>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Facturation</h3>
+	</div>
+	<div class="panel-body">
+		<input type="hidden" id="id_devis" value="<?php echo $this->devis->id?>" />
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="btn-group btn-group-justified" role="group" aria-label="...">
+					<div class="btn-group" role="group">
+					    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="load_modele">
+					    	Charger un modèle
+						    <span class="caret"></span>
+						    <span class="sr-only">Charger un modèle</span>
+					    </button>
+					    <ul class="dropdown-menu" id="liste_nom_modeles">
+						    <?php foreach($this->modeles as $row):?>
+								<li id="modele_id_<?php echo $row->id ?>_redactionFacture"><?php echo $row->titre?></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+					<div class="btn-group" role="group">
+					    <button type="button" class="btn btn-default" id="save_modele">Sauvegarder ce texte</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php $this->formRedactionFacture->getElement('redactionFacture')->setValue($this->devis->redaction_facture)?>
+		<?php echo $this->formRedactionFacture->getElement('redactionFacture') ?>
+		<?php echo $this->formRedactionFacture->getElement('validerRedactionFacture') ?>
+
+	</div>
+</div>
+<div id="dialog_nom_modele">
+	<?php echo $this->formNomModele ?>
+</div>
