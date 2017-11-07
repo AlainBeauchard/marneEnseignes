@@ -136,8 +136,6 @@ class ProjetsController extends Zend_Controller_Action
 
 		$select->setIntegrityCheck(false);
 
-		echo($select);
-
        $projets = $db_projet->fetchAll($select);
        
        $paginator = Zend_Paginator::factory($projets);

@@ -45,9 +45,11 @@ class Application_Form_AjoutTache extends Zend_Form
 		$duree->setAttribs(array('placeholder'=>'Nombre de jours','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
 		$this->addElement($duree);
 
-        $visible = new Zend_Form_Element_Checkbox('visible');
+        $visible = new Zend_Form_Element_Select('visible');
         $visible->setAttribs(array('placeholder'=>'Tâche visible','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
-        $visible->setChecked(true);
+        $visible->addMultiOption(1, "Tache en cours");
+        $visible->addMultiOption(2, "Tache prévisionnelle");
+        $visible->addMultiOption(0, "Tache terminée");
         $this->addElement($visible);
 
 		$ajouter = new Zend_Form_Element_Button('ajouter');

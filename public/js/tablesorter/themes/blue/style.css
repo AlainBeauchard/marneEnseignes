@@ -168,3 +168,22 @@ background-color: #8dbdd8;
 .lienNumDossier{
 	cursor: pointer;
 }
+
+
+.visibleTache
+{
+	position : absolute;
+	z-index: 999;
+	background-color: #9d9d9d;
+	text-align: center;
+}
+
+.visibleTache button
+{
+	margin: 2px;
+}
+
+.visibleTache div
+{
+	color: white;
+}

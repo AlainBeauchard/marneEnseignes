@@ -1,4 +1,5 @@
 var masckPickColor = true;
+var masckVisibleTache = true;
 
 var tabColor = ['blue','green','orange', 'red', 'yellow', 'marron', 'gray', 'violet', 'none'];
 
@@ -6,6 +7,9 @@ function fctDisapiredColor()
 {
 	if(masckPickColor)
 		$("#plaletteCouleur").addClass('noDisplay');
+    if(masckVisibleTache)
+        $("#divVisibleTache").addClass('noDisplay');
+
 }
 
 function suppAllClassColorElem($elem)
@@ -561,7 +565,7 @@ $(document).ready(function(){
 		if(!ok){
 			return false;
 		}else{
-			$.post('/ajax/ajouttache', 
+			$.post('/ajax/ajouttache',
 			{
 				id_tache:$('#id_tache').val(),
 				id_projet:$('#id_projet').val(),
@@ -570,7 +574,7 @@ $(document).ready(function(){
 				id_user2:$('#id_user2').val(),
 				id_user3:$('#id_user3').val(),
 				duree:$('#duree').val(),
-				visible:$('#visible').is(':checked')? 1:0
+				visible:$('#visible').val()
 			},
 			function(r){
 				if($('#id_tache').val() == ""){
@@ -599,78 +603,102 @@ $(document).ready(function(){
 		
 	});
 
-	$('button[id^="maskEtape_"]').click(function(){	
-		
+	$("button[name='btRendTache']").each( function ()
+		{
+			$(this).click ( function () {
+				var idTache = $(this).attr('data-idTache');
+				var visible = $(this).attr('data-rendvisible');
+
+				$.post('/ajax/masktache',
+					{
+						id_tache: idTache,
+						visible : visible
+					},
+					function(r){
+						var $row = $("#row_"+idTache);
+						$row.attr('data-visible', visible ) ;
+						rendTacheInvisible(visible);
+					});
+            });
+		}
+	);
+
+	$('button[id^="maskEtape_"]').click(function(){
+		var idTache = $(this).attr('id').split('_')[1];
+        $("button[name='btRendTache']").each( function ()
+        {
+			$(this).attr('data-idTache', idTache);
+		});
+
+        masckVisibleTache = false;
+        var $elem = $("#divVisibleTache");
+        $elem.css('position','absolute');
+        $elem.css('z-index',100);
+        $elem.css('top',$(this).offset().top - 185 );
+        $elem.css('left',$(this).offset().left - 50 );
+        $elem.removeClass('noDisplay');
+
+        setTimeout( function(){masckVisibleTache = true;}, 500  );
+
+		/*
 		var id_tache = $(this).attr('id').split('_')[1];
+        var $row = $("#row_"+id_tache);
 
 		var nom = " masquer ";
-		if($("#row_"+id_tache).data('visible') == "0")
+		if($row.attr('data-visible') === "0")
 			nom = " démasquer ";
 
-		if( confirm('Etes-vous sûr(e) de vouloir '+nom+' cette tâche ?') == true)
+		if( confirm('Etes-vous sûr(e) de vouloir '+nom+' cette tâche ?') === true)
 		{
 			$.post('/ajax/masktache',
 			{
-				id_tache: id_tache
+				id_tache: id_tache,
+				visible : (1 - $row.attr('data-visible'))
 			},
 			function(r){
 				var $row = $("#row_"+id_tache);
-				$row.attr('data-visible', (1 - $row.data('visible')) ) ;
+				$row.attr('data-visible', (1 - $row.attr('data-visible')) ) ;
 				rendTacheInvisible();
 				alert(r);
 			});
 		}
-		
+		*/
 	});	
 
-	$("#btAfficheTachesMasquees").click( function()
+	$("[name='btAfficheTachesMasquees']").each(function ()
 	{
-		if( $(this).attr('data-mode') == 1 )
-		{
-			$(this).html('Voir les taches invisibles');
-            $("[data-visible]").each( function (indice) {
-                    $(this).addClass('noDisplay');
-                }
-            );
-            $("[data-visible=0]").each( function (indice) {
-                    $(this).removeClass('noDisplay');
-                }
-            );
-			$(this).attr('data-mode',0);
-		}
-		else
-		{
-			$(this).html('Voir les taches visibles');
-            $("[data-visible]").each( function (indice) {
-                    $(this).removeClass('noDisplay');
-                }
-            );
-            $("[data-visible=0]").each( function (indice) {
-                    $(this).addClass('noDisplay');
-                }
-            );
-			$(this).attr('data-mode',1);
-		}
+        var dataVisible = $(this).attr('data-mode');
+		$(this).click( function()
+        {
+        	//On masque tous le bouton concerné dans la popIn !
+			$("[name='btRendTache']").removeClass('noDisplay');
+            $("[name='btRendTache'][data-rendvisible="+dataVisible+"]").addClass('noDisplay');
+			rendTacheInvisible(dataVisible);
+        });
 	});
 
-rendTacheInvisible();
+
+rendTacheInvisible(1);
 
 	$('#addNoteTache').click(function(){
 		$('#validTache').fadeToggle();
-		
-		var id_tache = $('#id_tache').val();
-		
+
+		var $id_tache = $('#id_tache');
+		var id_tache = $id_tache.val();
+		var $commentaire = $('#commentaire');
 		$.post('/ajax/validetape',
 	        {
-		        id_tache: $('#id_tache').val(),
-		        commentaire: $('#commentaire').val()
+		        id_tache: $id_tache.val(),
+		        commentaire: $commentaire.val()
 	        }, function(r){
 	        var result = r.split('|||');
-	        $('#commentaire').val('');
-	        $('#etat_' + id_tache).empty();
-	        $('#date_' + id_tache).empty();
-	        $('#etat_' + id_tache).append(result[0]);
-	        $('#date_' + id_tache).append(result[1]);
+	        $commentaire.val('');
+	        var $etat = $('#etat_' + id_tache);
+	        var $date = $('#date_' + id_tache);
+	        $etat.empty();
+	        $date.empty();
+	        $etat.append(result[0]);
+	        $date.append(result[1]);
 	        $('#note_' + id_tache).append(result[2]);
 	    });
 	});
@@ -1272,9 +1300,21 @@ function updateDeplTotal(){
 	$('#gd_total_depl').append(total);
 }
 
-function rendTacheInvisible()
+function rendTacheInvisible(dataVisible)
 {
-	$("[data-visible=0]").addClass('noDisplay');
+    $("[data-visible]").each( function () {
+            $(this).addClass('noDisplay');
+        }
+    );
+    var selector = "[data-visible="+dataVisible+"]";
+    if(dataVisible == 1)
+    {
+        selector = "[data-visible!='0'][data-visible!='2']";
+    }
+    $("[data-visible]"+selector).each( function () {
+            $(this).removeClass('noDisplay');
+        }
+    );
 }
 
 function getClassToAdd(elem)

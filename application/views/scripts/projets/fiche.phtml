@@ -216,7 +216,10 @@
 			<?php endif;?>
 		</div>
 		<div>
-            <button class="btn btn-default" id="btAfficheTachesMasquees" data-mode="1">Afficher les taches masquées</button>
+            Afficher les taches :
+            <input type="radio" name="btAfficheTachesMasquees" data-mode="1" checked> En cours
+            <input type="radio" name="btAfficheTachesMasquees" data-mode="0" > Terminées
+            <input type="radio" name="btAfficheTachesMasquees" data-mode="2" > Prévisionnelles
         </div>
 		<div class="table-responvive">
 			<table class="table">
@@ -234,7 +237,7 @@
 				</thead>
 				<tbody>
 					<?php foreach($this->taches as $tache): ?>
-						<tr id="row_<?= $tache->id ?>" data-visible="<?= $tache->visible ?>" <?php if( $tache->visible == 0 ) { echo("class='tacheNoVisible'"); } ?> >
+						<tr id="row_<?= $tache->id ?>" data-visible="<?= $tache->visible ?>" <?php if( $tache->visible == 0) { echo("class='tacheNoVisible'"); } ?> >
 							<td><?= $tache->tache ?></td>
 							<td>
 								<?= $this->GetUserById($tache->id_user1) ?>&nbsp;
@@ -357,6 +360,13 @@
 			</table>
 		</div>
 	</div>
+</div>
+
+<div id="divVisibleTache" class="visibleTache noDisplay" >
+    <div> Rendre la tache : </div>
+    <button name="btRendTache" data-idTache="" data-rendvisible="2" >Prévisionnelle</button>
+    <button name="btRendTache" data-idTache="" data-rendvisible="1" class="noDisplay">En cours</button>
+    <button name="btRendTache" data-idTache="" data-rendvisible="0" >Terminée</button>
 </div>
 
 <input type="hidden" name="idPreviousProjet" id="idPreviousProjet" value="<?= $this->idPreviousProjet ?>">

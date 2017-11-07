@@ -84,7 +84,7 @@ class AjaxController extends Zend_Controller_Action
 			$tache->id_user2 = $this->_getParam('id_user2');
 			$tache->id_user3 = $this->_getParam('id_user3');
 			$tache->duree = $this->_getParam('duree');
-			$tache->visible = ($this->_getParam('visible')==null)? 0:1;
+			$tache->visible = ($this->_getParam('visible')==null)? 0:$this->_getParam('visible');
 			$id_tache = $tache->save();
 		}else{
 			$id_tache = $this->_getParam('id_tache');
@@ -208,11 +208,7 @@ class AjaxController extends Zend_Controller_Action
     	$id_tache = $this->_getParam('id_tache');
     	$db_taches = new Application_Model_Taches();
     	$tache = $db_taches->find($id_tache)->current();
-
-    	if( $tache->visible == 1 )
-    		$tache->visible = 0;
-    	else
-    		$tache->visible = 1;
+        $tache->visible = $this->_getParam('visible');
     	$tache->save();
     }
 
