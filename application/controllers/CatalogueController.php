@@ -14,6 +14,7 @@ class CatalogueController extends Zend_Controller_Action
         $acl = Zend_Registry::get('acl');
         $config = new Zend_Config_Xml(APPLICATION_PATH . '/configs/navigation.xml', 'frontend');
         $this->view->navigation(new Zend_Navigation($config))->setAcl($acl)->setRole($auth->getIdentity()->status);
+
     }
 
     public function indexAction()

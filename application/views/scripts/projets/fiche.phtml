@@ -215,11 +215,16 @@
 				</table>
 			<?php endif;?>
 		</div>
-		<div>
-            Afficher les taches :
-            <input type="radio" name="btAfficheTachesMasquees" data-mode="1" checked> En cours
-            <input type="radio" name="btAfficheTachesMasquees" data-mode="0" > Terminées
-            <input type="radio" name="btAfficheTachesMasquees" data-mode="2" > Prévisionnelles
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuTache" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span id="txtDropdownMenuTache">Les tâches : En cours <!-- par défaut on affiche les taches en cours --></span>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#" name="btAfficheTachesMasquees" data-mode="1" href="#">En cours</a></li>
+                <li><a href="#" name="btAfficheTachesMasquees" data-mode="0" href="#">Terminées</a></li>
+                <li><a href="#" name="btAfficheTachesMasquees" data-mode="2" href="#">Prévisionnelles</a></li>
+            </ul>
         </div>
 		<div class="table-responvive">
 			<table class="table">

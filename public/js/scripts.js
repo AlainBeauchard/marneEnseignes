@@ -673,6 +673,7 @@ $(document).ready(function(){
         	//On masque tous le bouton concerné dans la popIn !
 			$("[name='btRendTache']").removeClass('noDisplay');
             $("[name='btRendTache'][data-rendvisible="+dataVisible+"]").addClass('noDisplay');
+            $('#txtDropdownMenuTache').html('Les tâches '+ $(this).text() );
 			rendTacheInvisible(dataVisible);
         });
 	});
