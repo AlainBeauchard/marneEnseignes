@@ -157,9 +157,10 @@ class ProjetsController extends Zend_Controller_Action
 		if((int) $this->_getParam('id_client')){
 		    $db_client = new Application_Model_Clients();
 		    $client = $db_client->find($this->_getParam('id_client'))->current();
-		    
+
 		    $form->getElement('id_client')->setValue($client->id_client);
 		    $form->getElement('client')->setValue($client->societe);
+		    $form->getElement('code_client')->setValue($client->ref);
 		    $form->getElement('contact_nom')->setValue($client->contact_nom);
 		    $form->getElement('contact_mail')->setValue($client->contact_mail);
 		    $form->getElement('contact_tel')->setValue($client->contact_tel);

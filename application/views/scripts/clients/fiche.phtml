@@ -84,14 +84,14 @@
 								<td style="margin-top: 5px;">
 									<ul class="list-group">
 									<?php foreach($this->devis as $dev):?>
-										<li class="list-group-item"><?php echo date('d/m/Y', strtotime($dev->date))?> - <?php echo $dev->titre ?></li>
+										<li class="list-group-item"><?php echo date('d/m/Y', strtotime($dev->date))?> - <?= $dev->titre ?></li>
 									<?php endforeach; ?>
 									<ul>
 								</td>
 								<td style="margin-top: 5px;">
 									<ul class="list-group">
 										<?php foreach($this->projets as $projet): ?>
-											<li class="list-group-item"><?php echo date('d/m/Y', strtotime($projet->date_commande))?> - <?php echo $projet->titre ?></li>
+                                            <li class="list-group-item"><?php echo date('d/m/Y', strtotime($projet->date_commande))?> - <a href="/projets/fiche/id/<?= $projet->id_projet ?>"><?= $projet->dossier ?></a> - <?= $projet->titre ?></li>
 										<?php endforeach; ?>
 									</ul>
 								</td>
