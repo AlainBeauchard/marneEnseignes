@@ -15,6 +15,24 @@
                 </tr>
                 <form method="post">
                     <tr>
+                        <form method="post">
+                            <td>
+                                <?= $this->filtreCatalogue->getElement('codeMe')?>
+                            </td>
+                            <td>
+                                <?= $this->filtreCatalogue->getElement('reference')?>
+                            </td>
+                            <td>
+                                <?= $this->filtreCatalogue->getElement('produit')?>
+                            </td>
+                            <td>
+                                <?= $this->filtreCatalogue->getElement('fournisseur')?>
+                            </td>
+                            <td style="text-align: right;">
+                                <?= $this->filtreCatalogue->getElement('rechercher')?>
+                                <?= $this->filtreCatalogue->getElement('resetCatalogue')?>
+                            </td>
+                        </form>
                     </tr>
                 </form>
                 </thead>

@@ -5,6 +5,11 @@ class Application_Form_FiltreCatalogue extends Zend_Form
 
     public function init()
     {
+        $codeMe = new Zend_Form_Element_Text('codeMe');
+        $codeMe->setAttribs(array('placeholder'=>'Code Marne enseignes','class'=>'form-control autocomplete', 'aria-describedby'=>'sizing-addon2'))
+                    ->removeDecorator('label');
+        $this->addElement($codeMe);
+
         $reference = new Zend_Form_Element_Text('reference');
         $reference->setAttribs(array('placeholder'=>'Référence','class'=>'form-control autocomplete', 'aria-describedby'=>'sizing-addon2'))
         			->removeDecorator('label');
