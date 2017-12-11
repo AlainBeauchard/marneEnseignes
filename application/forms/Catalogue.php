@@ -96,16 +96,14 @@ class Application_Form_Catalogue extends Zend_Form
         $this->addElement($valid);
     }
     
-    function getClientNewNum(){
+    function getCatalogueNewNum(){
 	    
-	    $db_client = new Application_Model_Clients();
-	    $select = $db_client->select()->from('clients', array('max(ref) as max'));
-	    $newNumClient = $db_client->fetchRow($select);
+	    $db_catalogue = new Application_Model_Catalogue();
+	    $select = $db_catalogue->select()->from('catalogue', array('max(ref) as max'));
+	    $newNumcatalogue = $db_catalogue->fetchRow($select);
 	    
-	    return $newNumClient->max + 1;
+	    return $newNumcatalogue->max + 1;
 	    
     }
-
-
 }
 

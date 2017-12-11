@@ -15,6 +15,8 @@ class CatalogueController extends Zend_Controller_Action
         $config = new Zend_Config_Xml(APPLICATION_PATH . '/configs/navigation.xml', 'frontend');
         $this->view->navigation(new Zend_Navigation($config))->setAcl($acl)->setRole($auth->getIdentity()->status);
 
+        $response = $this->getResponse();
+        $response->insert('sidebar', $this->view->render('sidebarcatalogue.phtml'));
     }
 
     public function indexAction()
@@ -41,14 +43,14 @@ class CatalogueController extends Zend_Controller_Action
         
         $this->view->filtreCatalogue = $filtreCatalogue;
 
-        if(strlen(trim($session->filtres['code_me']))){
-            $select->where('code_me = ?', $session->filtres['code_me']);
+        if(strlen(trim($session->filtres['codeMe']))){
+            $select->where('code_me like ?', '%'.$session->filtres['codeMe'].'%');
         }
         if(strlen(trim($session->filtres['reference']))){
             $select->where('reference like ?', '%' . $session->filtres['reference'] . '%');
         }
-        if(strlen(trim($session->filtres['designation']))){
-            $select->where('designation like ?', '%' . $session->filtres['designation'] . '%');
+        if(strlen(trim($session->filtres['produit']))){
+            $select->where('designation like ?', '%' . $session->filtres['produit'] . '%');
         }
         if(strlen(trim($session->filtres['fournisseur']))){
             $select->where('fournisseur like ?', '%' . $session->filtres['fournisseur'] . '%');
@@ -65,6 +67,9 @@ class CatalogueController extends Zend_Controller_Action
     {
         $form = new Application_Form_Catalogue();
         $this->view->form = $form;
+
+        $form->getElement('Ajouter')->setLabel('Modifier le projet');
+
 
         $this->view->id_produit = $this->_getParam('id');
 

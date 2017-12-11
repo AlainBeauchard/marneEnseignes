@@ -35,7 +35,7 @@ class Application_Form_FiltreCatalogue extends Zend_Form
         			->removeDecorator('label');
         $this->addElement($epaisseur);
         
-        $rechercher = new Zend_Form_Element_Button('rechercher');
+        $rechercher = new Zend_Form_Element_Submit('rechercher');
         $rechercher->setLabel('Rechercher');
         $rechercher->setAttribs(array('class'=>'btn btn-primary btn-sm', 'type'=>'button', 'id'=>'filtreRechercheCatalogue'))
         			->removeDecorator('DtDdWrapper');
