@@ -110,8 +110,8 @@ class CatalogueController extends Zend_Controller_Action
         
         $db_catalogue = new Application_Model_Catalogue();
         $catalogue = $db_catalogue->find($id)->current();
-        
-        $this->view->catalogue = $catalogue;
+
+        $this->view->produit = $catalogue;
     }
 
     public function deleteAction()

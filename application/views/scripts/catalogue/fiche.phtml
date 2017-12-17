@@ -3,7 +3,49 @@
 		<h3 class="panel-title">Fiche produit</h3>
 	</div>
 	<div class="panel-body">
-		
+
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">Informations</a></li>
+                <li><a href="#tabs-2">Historique</a></li>
+            </ul>
+            <div id="tabs-1">
+                <div class="table-responvive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Infos</th>
+                            <th>Tarifs</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="width:50%">
+                                <p><span style="font-weight:bold;">Code Marne Enseignes : </span> <?= $this->produit->code_me ?></p>
+                                <p><span style="font-weight:bold;">Reférences : </span> <?= $this->produit->reference ?></p>
+                                <p><span style="font-weight:bold;">Désignation :</span> <?= $this->produit->designation ?></p>
+                                <p><span style="font-weight:bold;">Format : </span> <?= $this->produit->format ?></p>
+                                <p><span style="font-weight:bold;">Type : </span> <?= $this->produit->type ?></p>
+                                <p><span style="font-weight:bold;">Fournisseur : </span> <?= $this->produit->fournisseur ?></p>
+
+                            </td>
+                            <td style="width:50%">
+                                <p><span style="font-weight:bold;display:inline-block;">Prix unitaire : </span> <?= $this->produit->pu ?></p>
+                                <p><span style="font-weight:bold;display:inline-block;">Epaisseur : </span> <?= $this->produit->epaisseur ?></p>
+                                <p><span style="font-weight:bold;display:inline-block;">Surface totale : </span> <?= $this->produit->surface_totale ?></p>
+                                <p><span style="font-weight:bold;display:inline-block;">Prix M2 : </span> <?= $this->produit->prixM2 ?></p>
+                                <p><span style="font-weight:bold;display:inline-block;">Prix ML : </span> <?= $this->produit->prixML ?></p>
+                                <p><span style="font-weight:bold;display:inline-block;">Code marge : </span> <?= $this->produit->coeff_marge ?></p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="tabs-2">
+                Afficher les dix derniers devis dans lequels le produit apparait !
+            </div>
+        </div>
 
 	</div>
 </div>
