@@ -18,6 +18,23 @@ function suppAllClassColorElem($elem)
         $elem.removeClass(tabColor[i]);
 }
 
+function fctToggleBoutonTachesMasquees(dataVisible)
+{
+    //On masque tous le bouton concerné dans la popIn !
+    $("[name='btRendTache']").removeClass('noDisplay');
+    $("[name='btRendTache'][data-rendvisible="+dataVisible+"]").addClass('noDisplay');
+
+    $("[name='btAfficheTachesMasquees']").each(function()
+        {
+            if($(this).attr("data-mode")!== dataVisible) {
+                $(this).removeClass('active').attr('aria-pressed','false');
+            } else {
+                $(this).addClass('active').attr('aria-pressed','true');
+            }
+        }
+    );
+}
+
 $(document).ready(function(){
     $(document).on('click', fctDisapiredColor);
 
@@ -618,7 +635,8 @@ $(document).ready(function(){
 						var $row = $("#row_"+idTache);
 						$row.attr('data-visible', visible ) ;
 						rendTacheInvisible(visible);
-					});
+                        fctToggleBoutonTachesMasquees(visible);
+                    });
             });
 		}
 	);
@@ -670,10 +688,9 @@ $(document).ready(function(){
         var dataVisible = $(this).attr('data-mode');
 		$(this).click( function()
         {
-        	//On masque tous le bouton concerné dans la popIn !
-			$("[name='btRendTache']").removeClass('noDisplay');
-            $("[name='btRendTache'][data-rendvisible="+dataVisible+"]").addClass('noDisplay');
-            $('#txtDropdownMenuTache').html('Les tâches '+ $(this).text() );
+        	fctToggleBoutonTachesMasquees(dataVisible);
+
+            //$('#txtDropdownMenuTache').html('Les tâches '+ $(this).text() );
 			rendTacheInvisible(dataVisible);
         });
 	});

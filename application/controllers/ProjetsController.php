@@ -264,7 +264,7 @@ class ProjetsController extends Zend_Controller_Action
 		$select = $db_taches->select()
             ->where('id_projet = ?', $id_projet)
             ->where('visible = ?', 1)
-            ->order('date_fait');
+            ->order('STR_TO_DATE(date_fait,\'%d/%m/%Y\')');
 		$taches = $db_taches->fetchAll($select);
 		
 		$this->view->taches = $taches;
@@ -345,7 +345,7 @@ class ProjetsController extends Zend_Controller_Action
         $this->view->idPreviousProjet = $id_PreviousProjet;
 
         $db_taches = new Application_Model_Taches();
-        $select = $db_taches->select()->where('id_projet = ?', $id_projet)->order(["date_fait", "id"]);
+        $select = $db_taches->select()->where('id_projet = ?', $id_projet)->order(["STR_TO_DATE(date_fait,'%d/%m/%Y')", "id"]);
         $taches = $db_taches->fetchAll($select);
 
         $this->view->taches = $taches;
