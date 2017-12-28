@@ -1,0 +1,51 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Ajouter un devis</h3>
+	</div>
+	<div class="panel-body">
+
+        <div class="panel-devis" >
+            <div>
+                <div class="entete-devis">
+                    <?= $this->form->codeClient ?>
+                </div>
+                <div class="entete-devis">
+                    <table >
+                        <th>
+                            <td>Marquages taille en ml</td>
+                            <td>Surface</td>
+                            <td>Quantité</td>
+                            <td>Surf totale</td>
+                            <td>Coef pub</td>
+                            <td>Surf pub</td>
+                            <td>Périmètre</td>
+                        </th>
+                        <tr>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="corps-devis">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                        Ajouter
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation" data-addbloc="produit" >Un bloc produit</li>
+                        <li role="presentation" data-addbloc="sousTraitance" >Un bloc sous-traitance</li>
+                        <li role="presentation" data-addbloc="prestation" >Un bloc prestation</li>
+                        <li role="presentation" data-addbloc="faconnage" >Un bloc façonnage adhésif</li>
+                        <li role="presentation" data-addbloc="adhesif" >Un bloc adhésif</li>
+                        <li role="presentation" data-addbloc="fraisTechniques" >Un bloc frais techniques</li>
+                        <li role="presentation" data-addbloc="forfaitPresation" >Un bloc forfait-prestation</li>
+                        <li role="presentation" data-addbloc="deplacement" >Un bloc déplacement</li>
+                        <li role="presentation" data-addbloc="fourniture" >Un bloc fourniture</li>
+                        <li role="presentation" data-addbloc="pose" >Un bloc pose</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>

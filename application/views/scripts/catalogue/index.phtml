@@ -37,7 +37,7 @@
                 </form>
                 </thead>
                 <tbody id="listeProduits">
-                <?php foreach($this->produits as $produit): ?>
+                <?php foreach($this->paginator as $key => $produit): ?>
                     <tr>
                         <td>
                             <?= $produit->code_me ?>
@@ -65,6 +65,13 @@
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="10">
+                            <?= $this->paginationControl($this->paginator); ?>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>

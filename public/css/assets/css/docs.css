@@ -1085,3 +1085,14 @@ ul#icons span.ui-icon {
 .google-map-canvas * {
     box-sizing: content-box;
 }
+
+.entete-devis
+{
+  vertical-align: top;
+  display: inline-block;
+}
+
+.corps-devis
+{
+  display: block;
+}

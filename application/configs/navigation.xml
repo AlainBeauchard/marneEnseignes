@@ -46,6 +46,11 @@
 			<controller>config</controller>
 			<resource>admin</resource>
 		</m8>
+		<m9>
+			<label>Devis Alain</label>
+			<controller>devis</controller>
+			<resource>user</resource>
+		</m9>
 		<m10>
 			<label>Déconnexion</label>
 			<controller>login</controller>

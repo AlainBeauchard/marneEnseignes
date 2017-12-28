@@ -60,7 +60,15 @@ class CatalogueController extends Zend_Controller_Action
 
         $produits = $db_produit->fetchAll($select);
 
-        $this->view->produits = $produits;
+        $paginator = Zend_Paginator::factory($produits);
+        $paginator->setItemCountPerPage(200);
+        $paginator->setCurrentPageNumber($this->_getParam('page'));
+        Zend_Paginator::setDefaultScrollingStyle('Sliding');
+        Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination.phtml');
+
+        $this->view->paginator = $paginator;
+
+        //$this->view->produits = $produits;
     }
 
     public function editerAction()
@@ -110,7 +118,7 @@ class CatalogueController extends Zend_Controller_Action
         
         $db_catalogue = new Application_Model_Catalogue();
         $catalogue = $db_catalogue->find($id)->current();
-
++
         $this->view->produit = $catalogue;
     }
 

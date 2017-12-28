@@ -116,6 +116,14 @@ $(document).ready(function(){
 		$(this).css('border', '3px solid orange');
 	});
 
+	$('#listeProduits > tr').click(function(){
+		var currentLine = $(this).attr('id');
+		localStorage.setItem('currentLine', currentLine);
+
+		$('#listeProduits > tr').css('border', 'none');
+		$(this).css('border', '3px solid orange');
+	});
+
 	$('#newMessageAlert').css('display','none');
 
 	$.post('/ajax/getnewmessage',{},
@@ -1041,8 +1049,95 @@ rendTacheInvisible(1);
 		$('#total_calc').val('');
 		
 	});
-	
+
+	$("[data-addbloc]").click(function (){
+		switch ($(this).attr('data-addbloc'))
+		{
+			case 'produit':
+				fctAddBlocProduit();
+				break;
+			case 'sousTraitance':
+				fctAddBlocSousTraitance();
+				break;
+			case 'prestation':
+				fctAddBlocPrestation();
+				break;
+			case 'faconnage':
+				fctAddBlocFaconnage();
+				break;
+			case 'adhesif':
+				fctAddBlocAdhesif();
+				break;
+			case 'fraisTechniques':
+				fctAddBlocFraisTechniques();
+				break;
+			case 'forfaitPresation':
+				fctAddBlocForfaitPresation();
+				break;
+			case 'deplacement':
+				fctAddBlocDeplacement();
+				break;
+			case 'fourniture':
+				fctAddBlocFourniture();
+				break;
+			case 'pose':
+				fctAddBlocPose();
+				break;
+
+		}
+	});
+
 });
+
+function fctAddBlocProduit()
+{
+    console.log('on ajout un bloc produit');
+}
+
+function fctAddBlocSousTraitance()
+{
+    console.log('on ajout un bloc sous traitance');
+}
+
+function fctAddBlocPrestation()
+{
+    console.log('on ajout un bloc prestation');
+}
+
+function fctAddBlocFaconnage()
+{
+    console.log('on ajout un bloc façonnage');
+}
+
+function fctAddBlocAdhesif()
+{
+    console.log('on ajout un bloc adhesif');
+}
+
+function fctAddBlocFraisTechniques()
+{
+    console.log('on ajout un bloc frais techniques');
+}
+
+function fctAddBlocForfaitPresation()
+{
+    console.log('on ajout un bloc prestation');
+}
+
+function fctAddBlocDeplacement()
+{
+    console.log('on ajout un bloc déplacement');
+}
+
+function fctAddBlocFourniture()
+{
+    console.log('on ajout un bloc fourniture');
+}
+
+function fctAddBlocPose()
+{
+    console.log('on ajout un bloc pose');
+}
 
 $(document).on('blur', 'input[id^="sem_"]', function(){
 	var id = $(this).attr('id').split('_')[1];
