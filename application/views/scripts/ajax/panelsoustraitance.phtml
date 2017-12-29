@@ -13,19 +13,68 @@
     </div>
     <div class="panel-body">
 
-        <table class="table-produits-devis">
-            <tr>
+        <button class="btn btn-primary" id="BtAjoutligneSousTraitance" >Ajouter une ligne</button>
+        <button class="btn btn-primary" id="BtSuprimeligneSousTraitance" >Supprimer une ligne</button>
 
+
+        <table class="table-produits-devis" id="tableSousTraitance">
+            <tr>
+                <th>Code</th>
+                <th>Sous traitance</th>
+                <th>Quantité</th>
+                <th>H.A M2/ML</th>
+                <th>H.A Total</th>
+                <th>H.A Total</th>
+                <th>Coef marge</th>
+                <th>Px vente</th>
             </tr>
-            <tr>
-
+            <tr id="ligneRefSousTraitance">
+                <td><input type="text" name="code"      title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="support"   title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="format"    title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name=""          title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" /></td>
             </tr>
             <tfoot>
-                <tr>
-
-                </tr>
+            <tr>
+                <td colspan="2">
+                    <table class="table-produits-devis">
+                        <tr>
+                            <td>Total support</td>
+                            <td>H.A Total</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>Marge</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>Px vente</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
             </tfoot>
         </table>
 
+    </div>
+
+    <div class="elemCache">
+        <table>
+            <tr id="elemCacheSousTraitance">
+                <td><input type="text" name="code"      title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="support"   title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="format"    title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name=""          title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" /></td>
+            </tr>
+        </table>
     </div>
 </div>

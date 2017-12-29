@@ -1089,7 +1089,7 @@ rendTacheInvisible(1);
 
 });
 
-function fctAjaxAddBloc(url)
+function fctAjaxAddBloc(url, action)
 {
     $.post(url,
         {
@@ -1097,58 +1097,73 @@ function fctAjaxAddBloc(url)
         function($result){
             var $corps = $("#corps-devis-custom");
             $corps.html($corps.html() + $result);
+
+            $("#BtAjoutligne"+action).click(function (){
+                var ligne = $("#elemCache"+action).clone();
+                var $table = $("#table"+action);
+                $table.append(ligne);
+            });
+            $("#BtSuprimeligne"+action).click(function () {
+                $("#table"+action+" .focus").remove();
+			});
         }
     )
 }
 
 function fctAddBlocProduit()
 {
-    fctAjaxAddBloc('/ajax/panelproduits');
+    fctAjaxAddBloc('/ajax/panelproduits', 'Produit');
 }
 
 function fctAddBlocSousTraitance()
 {
-    fctAjaxAddBloc('/ajax/panelsoustraitance');
+    fctAjaxAddBloc('/ajax/panelsoustraitance', 'SousTraitance');
 }
 
 function fctAddBlocPrestation()
 {
-    fctAjaxAddBloc('/ajax/panelprestation');
+    fctAjaxAddBloc('/ajax/panelprestation', 'Prestation');
 }
 
 function fctAddBlocFaconnage()
 {
-    fctAjaxAddBloc('/ajax/panelfaconnage');
+    fctAjaxAddBloc('/ajax/panelfaconnage', 'Faconnage');
 }
 
 function fctAddBlocAdhesif()
 {
-    fctAjaxAddBloc('/ajax/paneladhesif');
+    fctAjaxAddBloc('/ajax/paneladhesif', 'Adhesif');
 }
 
 function fctAddBlocFraisTechniques()
 {
-    fctAjaxAddBloc('/ajax/panelfraistechniques');
+    fctAjaxAddBloc('/ajax/panelfraistechniques', 'FraisTechnique');
 }
 
 function fctAddBlocForfaitPrestation()
 {
-    fctAjaxAddBloc('/ajax/panelforfaitprestation');
+    fctAjaxAddBloc('/ajax/panelforfaitprestation', 'ForfaitPrestation');
 }
 
 function fctAddBlocDeplacement()
 {
-    fctAjaxAddBloc('/ajax/paneldeplacement');
+    fctAjaxAddBloc('/ajax/paneldeplacement', 'Deplacement');
 }
 
 function fctAddBlocFourniture()
 {
-    fctAjaxAddBloc('/ajax/panelfourniture');
+    fctAjaxAddBloc('/ajax/panelfourniture', 'Fourniture');
 }
 
 function fctAddBlocPose()
 {
-    fctAjaxAddBloc('/ajax/panelpose');
+    fctAjaxAddBloc('/ajax/panelpose', 'Pose');
+}
+
+function fctSetFocus()
+{
+	$("tr").removeClass("focus");
+	$(":focus").parent().parent().addClass("focus");
 }
 
 $(document).on('blur', 'input[id^="sem_"]', function(){

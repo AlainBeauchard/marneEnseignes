@@ -1086,15 +1086,47 @@ ul#icons span.ui-icon {
     box-sizing: content-box;
 }
 
+.panel-devis-head
+{
+  margin-bottom : 20px;
+}
+
 .entete-devis
 {
   vertical-align: top;
   display: inline-block;
 }
 
+.entete-devis-left
+{
+  width: 20%;
+}
+
+.entete-devis-right
+{
+  width: 60%;
+  margin-left: 25px;
+}
+
+.devis-entete-bt
+{
+  width: 15%;
+  text-align: right;
+}
+
 .corps-devis
 {
   display: block;
+}
+
+.elemCache
+{
+  display: none;
+}
+
+.table-entete-devis, .table-produits-devis
+{
+  width : 100%;
 }
 
 .table-entete-devis td, .table-entete-devis th {
@@ -1113,4 +1145,10 @@ ul#icons span.ui-icon {
 .table-produits-devis th {
     margin-bottom: 5px;
     font-weight: 700;
+}
+
+.table-produits-devis input {
+  min-width: 100px;
+  max-width: 100px;
+  border: none;
 }

@@ -13,19 +13,68 @@
     </div>
     <div class="panel-body">
 
-        <table class="table-produits-devis">
-            <tr>
+        <button class="btn btn-primary" id="BtAjoutligneFraisTechnique" >Ajouter une ligne</button>
+        <button class="btn btn-primary" id="BtSuprimeligneFraisTechnique" >Supprimer une ligne</button>
 
+
+        <table class="table-produits-devis" id="tableFraisTechnique">
+            <tr>
+                <th>Code</th>
+                <th>Frais Techniques</th>
+                <th>Taux</th>
+                <th>Heures</th>
+                <th>Minutes</th>
+                <th>Tarif horaire</th>
+                <th>Tarif minute</th>
+                <th>Px vente</th>
             </tr>
-            <tr>
-
+            <tr id="ligneRefFraisTechnique">
+                <td><input type="text" name="code"              title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="fraisTechnique"    title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="taux"              title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="heures"            title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="minutes"           title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="tarifHoraire"      title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="tarifMinute"       title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="pxVente"           title="" onFocus="fctSetFocus()" /></td>
             </tr>
             <tfoot>
-                <tr>
-
-                </tr>
+            <tr>
+                <td colspan="2">
+                    <table class="table-produits-devis">
+                        <tr>
+                            <td>Total support</td>
+                            <td>H.A Total</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>Marge</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>Px vente</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
             </tfoot>
         </table>
 
     </div>
+
+    <div class="elemCache">
+        <table>
+            <tr id="elemCacheFraisTechnique">
+                <td><input type="text" name="code"              title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="fraisTechnique"    title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="taux"              title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="heures"            title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="minutes"           title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="tarifHoraire"      title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="tarifMinute"       title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="pxVente"           title="" onFocus="fctSetFocus()" /></td>
+            </tr>
+        </table>
+    </div>
+
 </div>
