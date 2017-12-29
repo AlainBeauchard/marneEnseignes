@@ -1072,7 +1072,7 @@ rendTacheInvisible(1);
 				fctAddBlocFraisTechniques();
 				break;
 			case 'forfaitPresation':
-				fctAddBlocForfaitPresation();
+				fctAddBlocForfaitPrestation();
 				break;
 			case 'deplacement':
 				fctAddBlocDeplacement();
@@ -1089,54 +1089,66 @@ rendTacheInvisible(1);
 
 });
 
+function fctAjaxAddBloc(url)
+{
+    $.post(url,
+        {
+        },
+        function($result){
+            var $corps = $("#corps-devis-custom");
+            $corps.html($corps.html() + $result);
+        }
+    )
+}
+
 function fctAddBlocProduit()
 {
-    console.log('on ajout un bloc produit');
+    fctAjaxAddBloc('/ajax/panelproduits');
 }
 
 function fctAddBlocSousTraitance()
 {
-    console.log('on ajout un bloc sous traitance');
+    fctAjaxAddBloc('/ajax/panelsoustraitance');
 }
 
 function fctAddBlocPrestation()
 {
-    console.log('on ajout un bloc prestation');
+    fctAjaxAddBloc('/ajax/panelprestation');
 }
 
 function fctAddBlocFaconnage()
 {
-    console.log('on ajout un bloc façonnage');
+    fctAjaxAddBloc('/ajax/panelfaconnage');
 }
 
 function fctAddBlocAdhesif()
 {
-    console.log('on ajout un bloc adhesif');
+    fctAjaxAddBloc('/ajax/paneladhesif');
 }
 
 function fctAddBlocFraisTechniques()
 {
-    console.log('on ajout un bloc frais techniques');
+    fctAjaxAddBloc('/ajax/panelfraistechniques');
 }
 
-function fctAddBlocForfaitPresation()
+function fctAddBlocForfaitPrestation()
 {
-    console.log('on ajout un bloc prestation');
+    fctAjaxAddBloc('/ajax/panelforfaitprestation');
 }
 
 function fctAddBlocDeplacement()
 {
-    console.log('on ajout un bloc déplacement');
+    fctAjaxAddBloc('/ajax/paneldeplacement');
 }
 
 function fctAddBlocFourniture()
 {
-    console.log('on ajout un bloc fourniture');
+    fctAjaxAddBloc('/ajax/panelfourniture');
 }
 
 function fctAddBlocPose()
 {
-    console.log('on ajout un bloc pose');
+    fctAjaxAddBloc('/ajax/panelpose');
 }
 
 $(document).on('blur', 'input[id^="sem_"]', function(){

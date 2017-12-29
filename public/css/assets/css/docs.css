@@ -1096,3 +1096,21 @@ ul#icons span.ui-icon {
 {
   display: block;
 }
+
+.table-entete-devis td, .table-entete-devis th {
+    border: 1px solid #F0F0F0;
+}
+
+.table-entete-devis th {
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.table-produits-devis td, .table-produits-devis th {
+    border: 1px solid #F0F0F0;
+}
+
+.table-produits-devis th {
+    margin-bottom: 5px;
+    font-weight: 700;
+}

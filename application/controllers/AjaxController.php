@@ -805,6 +805,47 @@ class AjaxController extends Zend_Controller_Action
         $projet->save();
     }
 
+    public function panelproduitsAction()
+    {
+
+    }
+    public function panelsoustraitanceAction()
+    {
+
+    }
+    public function panelprestationAction()
+    {
+
+    }
+    public function panelfaconnageAction()
+    {
+
+    }
+    public function panelfraistechniquesAction()
+    {
+
+    }
+    public function paneladhesifAction()
+    {
+
+    }
+    public function panelforfaitprestationAction()
+    {
+
+    }
+    public function paneldeplacementAction()
+    {
+
+    }
+    public function panelfournitureAction()
+    {
+
+    }
+    public function panelposeAction()
+    {
+
+    }
+
 }
 
 
