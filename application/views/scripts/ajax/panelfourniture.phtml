@@ -12,11 +12,12 @@
         <h3 class="panel-title">Fournitures</h3>
     </div>
     <div class="panel-body">
-
-        <button class="btn btn-primary" id="BtAjoutligneFourniture" >Ajouter une ligne</button>
-        <button class="btn btn-primary" id="BtSuprimeligneFourniture" >Supprimer une ligne</button>
-
-
+        <button type="button" id="BtAjoutligneFourniture" class="btn btn-default voffset1" title="Ajouter une ligne">
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+        <button type="button" id="BtSuprimeligneFourniture" class="btn btn-default voffset1" title="Supprimer une ligne">
+            <span class="glyphicon glyphicon-minus"></span>
+        </button>
         <table class="table-produits-devis" id="tableFourniture">
             <tr>
                 <th>Code</th>
@@ -28,53 +29,45 @@
                 <th>Px vente</th>
             </tr>
             <tr id="ligneRefFourniture">
-                <td><input type="text" name="code"          title="" onFocus="fctSetFocus()" /></td>
-                <td><input type="text" name="Fourniture"    title="" onFocus="fctSetFocus()" /></td>
-                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" /></td>
-                <td><input type="text" name="h.a_m2ml"      title="" onFocus="fctSetFocus()" /></td>
-                <td><input type="text" name="h.a_total"     title="" onFocus="fctSetFocus()" /></td>
-                <td><input type="text" name="coefMarge"     title="" onFocus="fctSetFocus()" /></td>
-                <td><input type="text" name="pxVente"       title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="code"          title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
+                <td><input type="text" name="fourniture"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
+                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
+                <td><input type="text" name="h.a_ml"        title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
+                <td><input type="text" name="h.a_total"     title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="coefMarge"     title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
+                <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" readonly /></td>
             </tr>
             <tfoot>
-            <tr>
-                <td colspan="2">
-                    <table class="table-produits-devis">
-                        <tr>
-                            <td>Total support</td>
-                            <td>H.A Total</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>Marge</td>
-                        </tr>
-                    </table>
-                </td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>Px vente</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
+                <tr>
+                    <td colspan="7">
+                        <table class="table-produits-devis">
+                            <tr>
+                                <td class="titrefooter haTotal">Total support</td>
+                                <td class="titrefooter haTotal">H.A Total</td>
+                                <td id="h_a_totauxFourniture" class="haTotal">&nbsp;</td>
+                                <td class="titrefooter marge" >Marge</td>
+                                <td id="margeFourniture" class="marge">&nbsp;</td>
+                                <td class="titrefooter pxventeTotal">Px vente</td>
+                                <td id="totalPxVenteFourniture" class="pxventeTotal" colspan="2">&nbsp;</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
             </tfoot>
         </table>
-
     </div>
-
     <div class="elemCache">
         <table>
             <tr id="elemCacheFourniture">
-                <td><input type="text" name="code"          title="" onFocus="fctSetFocus()" /></td>
-                <td><input type="text" name="Fourniture"    title="" onFocus="fctSetFocus()" /></td>
-                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" /></td>
-                <td><input type="text" name="h.a_m2ml"      title="" onFocus="fctSetFocus()" /></td>
-                <td><input type="text" name="h.a_total"     title="" onFocus="fctSetFocus()" /></td>
-                <td><input type="text" name="coefMarge"     title="" onFocus="fctSetFocus()" /></td>
-                <td><input type="text" name="pxVente"       title="" onFocus="fctSetFocus()" /></td>
+                <td><input type="text" name="code"          title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
+                <td><input type="text" name="fourniture"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
+                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
+                <td><input type="text" name="h.a_ml"        title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
+                <td><input type="text" name="h.a_total"     title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="coefMarge"     title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
+                <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" readonly /></td>
             </tr>
         </table>
     </div>
-
-</div>
-
 
 </div>
