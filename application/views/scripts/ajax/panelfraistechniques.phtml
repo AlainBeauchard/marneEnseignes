@@ -30,7 +30,11 @@
                 <th>Px vente</th>
             </tr>
             <tr id="ligneRefFraisTechnique">
-                <td><input type="text" name="code"              title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechniques();" /></td>
+                <td>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFraisTechnique(0);" onChange="fctChangeValeurDevisFraisTechniques();" class="dropdown-toggle" list="listeFraisTechnique_0"/>
+                    <datalist id="listeFraisTechnique_0">
+                    </datalist>
+                </td>
                 <td><input type="text" name="fraisTechnique"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechniques();" /></td>
                 <td><input type="text" name="taux"              title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechniques();" /></td>
                 <td><input type="text" name="heures"            title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechniques();" /></td>
@@ -61,7 +65,11 @@
     <div class="elemCache">
         <table>
             <tr id="elemCacheFraisTechnique">
-                <td><input type="text" name="code"              title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechniques();" /></td>
+                <td>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFraisTechnique(XXX);" onChange="fctChangeValeurDevisFraisTechniques();" class="dropdown-toggle" list="listeFraisTechnique_XXX"/>
+                    <datalist id="listeFraisTechnique_XXX">
+                    </datalist>
+                </td>
                 <td><input type="text" name="fraisTechnique"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechniques();" /></td>
                 <td><input type="text" name="taux"              title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechniques();" /></td>
                 <td><input type="text" name="heures"            title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechniques();" /></td>
@@ -72,4 +80,5 @@
             </tr>
         </table>
     </div>
+    <input type="hidden" name="nbLigneFraisTechnique" id="nbLigneFraisTechnique" value="1">
 </div>

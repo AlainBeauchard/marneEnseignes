@@ -31,15 +31,19 @@
                     <th>Px vente</th>
                 </tr>
                 <tr id="ligneRefProduit">
-                    <td><input type="text" name="code"      title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
+                    <td>
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeProduit(0);" onChange="fctChangeValeurDevisProduit();" class="dropdown-toggle" list="listeProduit_0"/>
+                        <datalist id="listeProduit_0">
+                        </datalist>
+                    </td>
                     <td><input type="text" name="support"   title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
                     <td><input type="text" name="format"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
-                    <td><input type="text" name="qte"       title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
-                    <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
-                    <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus();" readonly /></td>
-                    <td rowspan="100%"><input type="text" name="totalHA"    title="" readonly /></td>
-                    <td rowspan="100%"><input type="text" name="coefMarge"  title="" onChange="fctChangeValeurDevisProduit();" /></td>
-                    <td rowspan="100%"><input type="text" name="pxvente"    title="" readonly/></td>
+                    <td><input type="text" name="qte"       title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
+                    <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
+                    <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
+                    <td rowspan="100%"><input type="text" name="totalHA"    title="" readonly class="inputNumber"/></td>
+                    <td rowspan="100%"><input type="text" name="coefMarge"  title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber"/></td>
+                    <td rowspan="100%"><input type="text" name="pxvente"    title="" readonly class="inputNumber"/></td>
                 </tr>
                 <tfoot>
                     <tr>
@@ -63,13 +67,18 @@
         <div class="elemCache">
             <table>
                 <tr id="elemCacheProduit">
-                    <td><input type="text" name="codeP"     title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisProduit();" /></td>
-                    <td><input type="text" name="support"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisProduit();" /></td>
-                    <td><input type="text" name="format"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisProduit();" /></td>
-                    <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisProduit();" /></td>
-                    <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisProduit();" /></td>
-                    <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" readonly /></td>
+                    <td>
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeProduit(XXX);" onChange="fctChangeValeurDevisProduit();" class="dropdown-toggle" list="listeProduit_XXX"/>
+                        <datalist id="listeProduit_XXX">
+                        </datalist>
+                    </td>
+                    <td><input type="text" name="support"   title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
+                    <td><input type="text" name="format"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
+                    <td><input type="text" name="qte"       title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
+                    <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
+                    <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
                 </tr>
             </table>
         </div>
+    <input type="hidden" name="nbLigneProduit" id="nbLigneProduit" value="1">
 </div>

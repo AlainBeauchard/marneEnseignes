@@ -1,0 +1,72 @@
+<div class="panel-devis" >
+    <div class="panel-devis-head">
+        <div class="entete-devis entete-devis-left">
+            <table >
+                <tr>
+                    <td>
+                        <?= $this->form->codeClient ?>
+                    </td>
+                    <td>
+                        <?= $this->form->refDossier ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <?= $this->form->dateCreation ?>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="entete-devis entete-devis-right">
+            <table class="table-entete-devis">
+                <tr>
+                    <td colspan="7">
+                        <?= $this->form->intitule ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Marquages taille en ml</th>
+                    <th>Surface</th>
+                    <th>Quantité</th>
+                    <th>Surf totale</th>
+                    <th>Coef pub</th>
+                    <th>Surf pub</th>
+                    <th>Périmètre</th>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="entete-devis devis-entete-bt">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                    Ajouter
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation" data-addbloc="produit" >Un bloc produit</li>
+                    <li role="presentation" data-addbloc="sousTraitance" >Un bloc sous-traitance</li>
+                    <li role="presentation" data-addbloc="prestation" >Un bloc prestation</li>
+                    <li role="presentation" data-addbloc="faconnage" >Un bloc façonnage adhésif</li>
+                    <li role="presentation" data-addbloc="adhesif" >Un bloc adhésif</li>
+                    <li role="presentation" data-addbloc="fraisTechniques" >Un bloc frais techniques</li>
+                    <li role="presentation" data-addbloc="forfaitPresation" >Un bloc forfait-prestation</li>
+                    <li role="presentation" data-addbloc="deplacement" >Un bloc déplacement</li>
+                    <li role="presentation" data-addbloc="fourniture" >Un bloc fourniture</li>
+                    <li role="presentation" data-addbloc="pose" >Un bloc pose</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="corps-devis">
+        <div id="corps-devis-custom" >
+        </div>
+    </div>
+</div>

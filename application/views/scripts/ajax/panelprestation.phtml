@@ -27,7 +27,11 @@
                 <th>Px vente</th>
             </tr>
             <tr id="ligneRefPrestation">
-                <td><input type="text" name="code"          title="" onFocus="fctSetFocus()"  onChange="fctChangeValeurDevisPrestation();"  /></td>
+                <td>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListePrestation(0);" onChange="fctChangeValeurDevisPrestation();" class="dropdown-toggle" list="listePrestation_0"/>
+                    <datalist id="listePrestation_0">
+                    </datalist>
+                </td>
                 <td><input type="text" name="prestation"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();" /></td>
                 <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();" /></td>
                 <td><input type="text" name="tarif"         title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();" /></td>
@@ -55,7 +59,11 @@
     <div class="elemCache">
         <table>
             <tr id="elemCachePrestation">
-                <td><input type="text" name="code"          title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();" /></td>
+                <td>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListePrestation(XXX);" onChange="fctChangeValeurDevisPrestation();" class="dropdown-toggle" list="listePrestation_XXX"/>
+                    <datalist id="listePrestation_XXX">
+                    </datalist>
+                </td>
                 <td><input type="text" name="prestation"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();" /></td>
                 <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();" /></td>
                 <td><input type="text" name="tarif"         title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();" /></td>
@@ -63,5 +71,5 @@
             </tr>
         </table>
     </div>
-
+    <input type="hidden" name="nbLignePrestation" id="nbLignePrestation" value="1">
 </div>

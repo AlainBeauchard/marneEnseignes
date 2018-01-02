@@ -27,7 +27,11 @@
                 <th>Px vente</th>
             </tr>
             <tr id="ligneRefForfaitPrestation">
-                <td><input type="text" name="code"          title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisForfaitPrestation();"/></td>
+                <td>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeForfaitPrestation(0);" onChange="fctChangeValeurDevisForfaitPrestation();" class="dropdown-toggle" list="listeForfaitPrestation_0"/>
+                    <datalist id="listeForfaitPrestation_0">
+                    </datalist>
+                </td>
                 <td><input type="text" name="prestation"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisForfaitPrestation();"/></td>
                 <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisForfaitPrestation();"/></td>
                 <td><input type="text" name="tarif"         title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisForfaitPrestation();"/></td>
@@ -55,7 +59,11 @@
     <div class="elemCache">
         <table>
             <tr id="elemCacheForfaitPrestation">
-                <td><input type="text" name="code"          title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisForfaitPrestation();" /></td>
+                <td>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeForfaitPrestation(XXX);" onChange="fctChangeValeurDevisForfaitPrestation();" class="dropdown-toggle" list="listeForfaitPrestation_XXX"/>
+                    <datalist id="listeForfaitPrestation_XXX">
+                    </datalist>
+                </td>
                 <td><input type="text" name="prestation"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisForfaitPrestation();" /></td>
                 <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisForfaitPrestation();" /></td>
                 <td><input type="text" name="tarif"         title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisForfaitPrestation();" /></td>
@@ -63,4 +71,5 @@
             </tr>
         </table>
     </div>
+    <input type="hidden" name="nbLigneForfaitPrestation" id="nbLigneForfaitPrestation" value="1">
 </div>

@@ -1098,14 +1098,20 @@ function fctAjaxAddBloc(url, action)
             var $corps = $("#corps-devis-custom");
             $corps.html($corps.html() + $result);
 
+            var $nbLigne = $("#nbLigne"+action)[0];
+            var numLigne = $nbLigne.value;
+
             $("#BtAjoutligne"+action).click(function (){
                 var ligne = $("#elemCache"+action).clone();
                 var $table = $("#table"+action);
-                $table.append(ligne);
+                var html = ligne.html().replace(new RegExp('XXX', 'g'), numLigne);
+                $table.append('<tr>'+html+'</tr>');
             });
             $("#BtSuprimeligne"+action).click(function () {
                 $("#table"+action+" .focus").remove();
+                setTimeout("fctChangeValeurDevis"+action+"();", 500);
 			});
+            $nbLigne.value = numLigne + 1;
         }
     )
 }
@@ -1164,6 +1170,358 @@ function fctSetFocus()
 {
 	$("tr").removeClass("focus");
 	$(":focus").parent().parent().addClass("focus");
+}
+
+function fctRemplitListeProduit(indice)
+{
+	$.post("/ajax/listeproduits",
+		{
+			code: $("#tableProduit input[name='code']")[indice].value
+		},
+		function (result) {
+			$("#listeProduit_"+indice).html(result);
+            $("#tableProduit input[name='code']").each(
+            	function () {
+                    $(this).on('input', function () {
+                        var value = $("#tableProduit input[name='code']")[indice].value;
+                        var option = $("#listeProduit_"+indice).find("[value='" + value + "']");
+
+                        if (option.length > 0) {
+                            var id = option.data("id");
+                            $.post("/ajax/detailproduit",
+                                {
+                                    id: id
+                                },
+                                function (result) {
+                                    result = JSON.parse(result);
+                                    $("#tableProduit input[name='support']")[indice].value = result.designation;
+                                    $("#tableProduit input[name='format']")[indice].value = result.format;
+                                    $("#tableProduit input[name='coefMarge']")[indice].value = result.coeff_marge;
+                                    fctChangeValeurDevisProduit();
+                                }
+                            )
+                        }
+                    });
+				}
+			);
+		}
+	);
+
+}
+
+function fctRemplitListeAdhesif(indice)
+{
+    $.post("/ajax/listeadhesif",
+        {
+            code: $("#tableAdhesif input[name='code']")[indice].value
+        },
+        function (result) {
+            $("#listeAdhesif_"+indice).html(result);
+            $("#tableAdhesif input[name='code']").each(
+                function () {
+                    $(this).on('input', function () {
+                        var value = $("#tableAdhesif input[name='code']")[indice].value;
+                        var option = $("#listeAdhesif_"+indice).find("[value='" + value + "']");
+
+                        if (option.length > 0) {
+                            var id = option.data("id");
+                            $.post("/ajax/detailadhesif",
+                                {
+                                    id: id
+                                },
+                                function (result) {
+                                    result = JSON.parse(result);
+
+                                    fctChangeValeurDevisAdhesif();
+                                }
+                            )
+                        }
+                    });
+                }
+            );
+        }
+    );
+
+}
+
+function fctRemplitListeDeplacement(indice)
+{
+    $.post("/ajax/listedeplacement",
+        {
+            code: $("#tableDeplacement input[name='code']")[indice].value
+        },
+        function (result) {
+            $("#listeDeplacement_"+indice).html(result);
+            $("#tableDeplacement input[name='code']").each(
+                function () {
+                    $(this).on('input', function () {
+                        var value = $("#tableDeplacement input[name='code']")[indice].value;
+                        var option = $("#listeDeplacement_"+indice).find("[value='" + value + "']");
+
+                        if (option.length > 0) {
+                            var id = option.data("id");
+                            $.post("/ajax/detaildeplacement",
+                                {
+                                    id: id
+                                },
+                                function (result) {
+                                    result = JSON.parse(result);
+
+                                    fctChangeValeurDevisDeplacement();
+                                }
+                            )
+                        }
+                    });
+                }
+            );
+        }
+    );
+
+}
+
+function fctRemplitListeFaconnage(indice)
+{
+    $.post("/ajax/listefaconnage",
+        {
+            code: $("#tableFaconnage input[name='code']")[indice].value
+        },
+        function (result) {
+            $("#listeFaconnage_"+indice).html(result);
+            $("#tableFaconnage input[name='code']").each(
+                function () {
+                    $(this).on('input', function () {
+                        var value = $("#tableFaconnage input[name='code']")[indice].value;
+                        var option = $("#listeFaconnage_"+indice).find("[value='" + value + "']");
+
+                        if (option.length > 0) {
+                            var id = option.data("id");
+                            $.post("/ajax/detailfaconnage",
+                                {
+                                    id: id
+                                },
+                                function (result) {
+                                    result = JSON.parse(result);
+
+                                    fctChangeValeurDevisFaconnage();
+                                }
+                            )
+                        }
+                    });
+                }
+            );
+        }
+    );
+
+}
+
+function fctRemplitListeForfaitPrestation(indice)
+{
+    $.post("/ajax/listeforfaitprestation",
+        {
+            code: $("#tableForfaitPrestation input[name='code']")[indice].value
+        },
+        function (result) {
+            $("#listeForfaitPrestation_"+indice).html(result);
+            $("#tableForfaitPrestation input[name='code']").each(
+                function () {
+                    $(this).on('input', function () {
+                        var value = $("#tableForfaitPrestation input[name='code']")[indice].value;
+                        var option = $("#listeForfaitPrestation_"+indice).find("[value='" + value + "']");
+
+                        if (option.length > 0) {
+                            var id = option.data("id");
+                            $.post("/ajax/detailforfaitprestation",
+                                {
+                                    id: id
+                                },
+                                function (result) {
+                                    result = JSON.parse(result);
+
+                                    fctChangeValeurDevisForfaitPrestation();
+                                }
+                            )
+                        }
+                    });
+                }
+            );
+        }
+    );
+
+}
+
+function fctRemplitListeFourniture(indice)
+{
+    $.post("/ajax/listefourniture",
+        {
+            code: $("#tableFourniture input[name='code']")[indice].value
+        },
+        function (result) {
+            $("#listeFourniture_"+indice).html(result);
+            $("#tableFourniture input[name='code']").each(
+                function () {
+                    $(this).on('input', function () {
+                        var value = $("#tableFourniture input[name='code']")[indice].value;
+                        var option = $("#listeFourniture_"+indice).find("[value='" + value + "']");
+
+                        if (option.length > 0) {
+                            var id = option.data("id");
+                            $.post("/ajax/detailfourniture",
+                                {
+                                    id: id
+                                },
+                                function (result) {
+                                    result = JSON.parse(result);
+
+                                    fctChangeValeurDevisFourniture();
+                                }
+                            )
+                        }
+                    });
+                }
+            );
+        }
+    );
+
+}
+
+function fctRemplitListeFraisTechnique(indice)
+{
+    $.post("/ajax/listefraistechnique",
+        {
+            code: $("#tableFraisTechnique input[name='code']")[indice].value
+        },
+        function (result) {
+            $("#listeFraisTechnique_"+indice).html(result);
+            $("#tableFraisTechnique input[name='code']").each(
+                function () {
+                    $(this).on('input', function () {
+                        var value = $("#tableFraisTechnique input[name='code']")[indice].value;
+                        var option = $("#listeFraisTechnique_"+indice).find("[value='" + value + "']");
+
+                        if (option.length > 0) {
+                            var id = option.data("id");
+                            $.post("/ajax/detailfraistechnique",
+                                {
+                                    id: id
+                                },
+                                function (result) {
+                                    result = JSON.parse(result);
+
+                                    fctChangeValeurDevisFraisTechniques();
+                                }
+                            )
+                        }
+                    });
+                }
+            );
+        }
+    );
+
+}
+
+function fctRemplitListePose(indice)
+{
+    $.post("/ajax/listepose",
+        {
+            code: $("#tablePose input[name='code']")[indice].value
+        },
+        function (result) {
+            $("#listePose_"+indice).html(result);
+            $("#tablePose input[name='code']").each(
+                function () {
+                    $(this).on('input', function () {
+                        var value = $("#tablePose input[name='code']")[indice].value;
+                        var option = $("#listePose_"+indice).find("[value='" + value + "']");
+
+                        if (option.length > 0) {
+                            var id = option.data("id");
+                            $.post("/ajax/detailpose",
+                                {
+                                    id: id
+                                },
+                                function (result) {
+                                    result = JSON.parse(result);
+
+                                    fctChangeValeurDevisPose();
+                                }
+                            )
+                        }
+                    });
+                }
+            );
+        }
+    );
+
+}
+
+function fctRemplitListePrestation(indice)
+{
+    $.post("/ajax/listeprestation",
+        {
+            code: $("#tablePrestation input[name='code']")[indice].value
+        },
+        function (result) {
+            $("#listePrestation_"+indice).html(result);
+            $("#tablePrestation input[name='code']").each(
+                function () {
+                    $(this).on('input', function () {
+                        var value = $("#tablePrestation input[name='code']")[indice].value;
+                        var option = $("#listePrestation_"+indice).find("[value='" + value + "']");
+
+                        if (option.length > 0) {
+                            var id = option.data("id");
+                            $.post("/ajax/detailprestation",
+                                {
+                                    id: id
+                                },
+                                function (result) {
+                                    result = JSON.parse(result);
+
+                                    fctChangeValeurDevisPrestation();
+                                }
+                            )
+                        }
+                    });
+                }
+            );
+        }
+    );
+
+}
+
+function fctRemplitListeSousTraitance(indice)
+{
+    $.post("/ajax/listesoustraitance",
+        {
+            code: $("#tableSousTraitance input[name='code']")[indice].value
+        },
+        function (result) {
+            $("#listeSousTraitance_"+indice).html(result);
+            $("#tableSousTraitance input[name='code']").each(
+                function () {
+                    $(this).on('input', function () {
+                        var value = $("#tableSousTraitance input[name='code']")[indice].value;
+                        var option = $("#listeSousTraitance_"+indice).find("[value='" + value + "']");
+
+                        if (option.length > 0) {
+                            var id = option.data("id");
+                            $.post("/ajax/detailsoustraitance",
+                                {
+                                    id: id
+                                },
+                                function (result) {
+                                    result = JSON.parse(result);
+
+                                    fctChangeValeurDevisSousTraitance();
+                                }
+                            )
+                        }
+                    });
+                }
+            );
+        }
+    );
+
 }
 
 function fctChangeValeurDevisProduit()

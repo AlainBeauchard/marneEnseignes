@@ -846,6 +846,293 @@ class AjaxController extends Zend_Controller_Action
 
     }
 
+    public function detailproduitAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $idSearch = $this->_getParam('id');
+
+        $db_catalogue = new Application_Model_Catalogue();
+        $select = $db_catalogue->select();
+        $select->where('id_produit = ?', $idSearch);
+        $produits = $db_catalogue->fetchAll($select);
+
+        $str = '';
+        foreach ($produits as $produit)
+        {
+            $str .= Zend_Json::encode($produit);
+        }
+
+        echo($str);
+    }
+
+    public function listeproduitsAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $codeSearch = $this->_getParam('code');
+
+        $db_catalogue = new Application_Model_Catalogue();
+        $select = $db_catalogue->select();
+        $select->where('code_me like ?', $codeSearch.'%');
+        $select->where('type like ?', 'PVC');
+        $select->order('code_me');
+
+        $produits = $db_catalogue->fetchAll($select);
+
+        $str = '';
+        foreach ($produits as $produit)
+        {
+            $str .= '<option value="'.$produit->code_me.'" data-id="'.$produit->id_produit.'" />'.$produit->designation.'</option>';
+        }
+
+        echo($str);
+    }
+
+    public function detailadhesifAction()
+    {
+        $this->detailproduitAction();
+    }
+
+    public function listeadhesifsAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $codeSearch = $this->_getParam('code');
+
+        $db_catalogue = new Application_Model_Catalogue();
+        $select = $db_catalogue->select();
+        $select->where('code_me like ?', $codeSearch.'%');
+        $select->order('code_me');
+
+        $produits = $db_catalogue->fetchAll($select);
+
+        $str = '';
+        foreach ($produits as $produit)
+        {
+            $str .= '<option value="'.$produit->code_me.'" data-id="'.$produit->id_produit.'" />'.$produit->designation.'</option>';
+        }
+
+        echo($str);
+    }
+    public function detailsoustraitanceAction()
+    {
+        $this->detailproduitAction();
+    }
+
+    public function listesoustraitancesAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $codeSearch = $this->_getParam('code');
+
+        $db_catalogue = new Application_Model_Catalogue();
+        $select = $db_catalogue->select();
+        $select->where('code_me like ?', $codeSearch.'%');
+        $select->order('code_me');
+
+        $produits = $db_catalogue->fetchAll($select);
+
+        $str = '';
+        foreach ($produits as $produit)
+        {
+            $str .= '<option value="'.$produit->code_me.'" data-id="'.$produit->id_produit.'" />'.$produit->designation.'</option>';
+        }
+
+        echo($str);
+    }
+
+    public function detailprestationAction()
+    {
+        $this->detailproduitAction();
+    }
+
+    public function listeprestationsAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $codeSearch = $this->_getParam('code');
+
+        $db_catalogue = new Application_Model_Catalogue();
+        $select = $db_catalogue->select();
+        $select->where('code_me like ?', $codeSearch.'%');
+        $select->where('type like ?', 'PRESTATION');
+        $select->order('code_me');
+
+        $produits = $db_catalogue->fetchAll($select);
+
+        $str = '';
+        foreach ($produits as $produit)
+        {
+            $str .= '<option value="'.$produit->code_me.'" data-id="'.$produit->id_produit.'" />'.$produit->designation.'</option>';
+        }
+
+        echo($str);
+    }
+
+    public function detailfaconnageAction()
+    {
+        $this->detailproduitAction();
+    }
+
+    public function listefaconnagesAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $codeSearch = $this->_getParam('code');
+
+        $db_catalogue = new Application_Model_Catalogue();
+        $select = $db_catalogue->select();
+        $select->where('code_me like ?', $codeSearch.'%');
+        $select->order('code_me');
+
+        $produits = $db_catalogue->fetchAll($select);
+
+        $str = '';
+        foreach ($produits as $produit)
+        {
+            $str .= '<option value="'.$produit->code_me.'" data-id="'.$produit->id_produit.'" />'.$produit->designation.'</option>';
+        }
+
+        echo($str);
+    }
+
+    public function detailfraistechniqueAction()
+    {
+        $this->detailproduitAction();
+    }
+
+    public function listefraistechniquesAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $codeSearch = $this->_getParam('code');
+
+        $db_catalogue = new Application_Model_Catalogue();
+        $select = $db_catalogue->select();
+        $select->where('code_me like ?', $codeSearch.'%');
+        $select->order('code_me');
+
+        $produits = $db_catalogue->fetchAll($select);
+
+        $str = '';
+        foreach ($produits as $produit)
+        {
+            $str .= '<option value="'.$produit->code_me.'" data-id="'.$produit->id_produit.'" />'.$produit->designation.'</option>';
+        }
+
+        echo($str);
+    }
+
+    public function detailforfaitprestationAction()
+    {
+        $this->detailproduitAction();
+    }
+
+    public function listeforfaitprestationsAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $codeSearch = $this->_getParam('code');
+
+        $db_catalogue = new Application_Model_Catalogue();
+        $select = $db_catalogue->select();
+        $select->where('code_me like ?', $codeSearch.'%');
+        $select->order('code_me');
+
+        $produits = $db_catalogue->fetchAll($select);
+
+        $str = '';
+        foreach ($produits as $produit)
+        {
+            $str .= '<option value="'.$produit->code_me.'" data-id="'.$produit->id_produit.'" />'.$produit->designation.'</option>';
+        }
+
+        echo($str);
+    }
+
+    public function detaildeplacementAction()
+    {
+        $this->detailproduitAction();
+    }
+
+    public function listedeplacementsAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $codeSearch = $this->_getParam('code');
+
+        $db_catalogue = new Application_Model_Catalogue();
+        $select = $db_catalogue->select();
+        $select->where('code_me like ?', $codeSearch.'%');
+        $select->order('code_me');
+
+        $produits = $db_catalogue->fetchAll($select);
+
+        $str = '';
+        foreach ($produits as $produit)
+        {
+            $str .= '<option value="'.$produit->code_me.'" data-id="'.$produit->id_produit.'" />'.$produit->designation.'</option>';
+        }
+
+        echo($str);
+    }
+
+    public function detailfournitureAction()
+    {
+        $this->detailproduitAction();
+    }
+
+    public function listefournituresAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $codeSearch = $this->_getParam('code');
+
+        $db_catalogue = new Application_Model_Catalogue();
+        $select = $db_catalogue->select();
+        $select->where('code_me like ?', $codeSearch.'%');
+        $select->order('code_me');
+
+        $produits = $db_catalogue->fetchAll($select);
+
+        $str = '';
+        foreach ($produits as $produit)
+        {
+            $str .= '<option value="'.$produit->code_me.'" data-id="'.$produit->id_produit.'" />'.$produit->designation.'</option>';
+        }
+
+        echo($str);
+    }
+
+    public function detailposeAction()
+    {
+        $this->detailproduitAction();
+    }
+
+    public function listeposesAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $codeSearch = $this->_getParam('code');
+
+        $db_catalogue = new Application_Model_Catalogue();
+        $select = $db_catalogue->select();
+        $select->where('code_me like ?', $codeSearch.'%');
+        $select->where('type like ?', 'PRESTATION%POSE');
+        $select->order('code_me');
+
+        $produits = $db_catalogue->fetchAll($select);
+
+        $str = '';
+        foreach ($produits as $produit)
+        {
+            $str .= '<option value="'.$produit->code_me.'" data-id="'.$produit->id_produit.'" />'.$produit->designation.'</option>';
+        }
+
+        echo($str);
+    }
+
 }
 
 

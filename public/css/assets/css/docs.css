@@ -1153,21 +1153,29 @@ ul#icons span.ui-icon {
   border: none;
 }
 
+.inputNumber {
+  text-align: right;
+}
+
+
 .titrefooter
 {
   width: 20%;
 }
 .haTotal
 {
-    background-color: #d49c45;
+  padding: 5px;
+  background-color: #d49c45;
 }
 
 .marge
 {
+  padding: 5px;
   background-color: #7cdb7c;
 }
 
 .pxventeTotal
 {
+  padding: 5px;
   background-color: #ffc04c;
 }

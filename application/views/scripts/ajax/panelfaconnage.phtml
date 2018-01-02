@@ -28,7 +28,11 @@
                 <th>Px vente</th>
             </tr>
             <tr id="ligneRefFaconnage">
-                <td><input type="text" name="code"      title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
+                <td>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFaconnage(0);" onChange="fctChangeValeurDevisFaconnage();" class="dropdown-toggle" list="listeFaconnage_0"/>
+                    <datalist id="listeFaconnage_0">
+                    </datalist>
+                </td>
                 <td><input type="text" name="faconnage" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
                 <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
                 <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
@@ -57,8 +61,12 @@
     <div class="elemCache">
         <table>
             <tr id="elemCacheFaconnage">
-                <td><input type="text" name="code"      title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
-                <td><input type="text" name="Faconnage" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
+                <td>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFaconnage(XXX);" onChange="fctChangeValeurDevisFaconnage();" class="dropdown-toggle" list="listeFaconnage_XXX"/>
+                    <datalist id="listeFaconnage_XXX">
+                    </datalist>
+                </td>
+                <td><input type="text" name="faconnage" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
                 <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
                 <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
                 <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" readonly /></td>
@@ -66,5 +74,5 @@
             </tr>
         </table>
     </div>
-
+    <input type="hidden" name="nbLigneFaconnage" id="nbLigneFaconnage" value="1">
 </div>

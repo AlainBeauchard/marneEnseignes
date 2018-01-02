@@ -30,8 +30,12 @@
                 <th>Px vente</th>
             </tr>
             <tr id="ligneRefAdhesif">
-                <td><input type="text" name="code"      title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
-                <td><input type="text" name="Adhesif"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
+                <td>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(0);" onChange="fctChangeValeurDevisAdhesif();" class="dropdown-toggle" list="listeAdhesif_0"/>
+                    <datalist id="listeAdhesif_0">
+                    </datalist>
+                </td>
+                <td><input type="text" name="adhesif"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
                 <td><input type="text" name="surface"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
                 <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
                 <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
@@ -61,8 +65,12 @@
     <div class="elemCache">
         <table>
             <tr id="elemCacheAdhesif">
-                <td><input type="text" name="code"      title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
-                <td><input type="text" name="Adhesif"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
+                <td>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(XXX);" onChange="fctChangeValeurDevisAdhesif();" class="dropdown-toggle" list="listeAdhesif_XXX"/>
+                    <datalist id="listeAdhesif_XXX">
+                    </datalist>
+                </td>
+                <td><input type="text" name="adhesif"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
                 <td><input type="text" name="surface"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
                 <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
                 <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
@@ -72,5 +80,5 @@
             </tr>
         </table>
     </div>
-
+    <input type="hidden" name="nbLigneAdhesif" id="nbLigneAdhesif" value="1">
 </div>
