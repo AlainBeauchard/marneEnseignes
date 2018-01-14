@@ -185,7 +185,7 @@
 								<?php if(@count($taches->toArray()) > 0):?>
 									<?php foreach ($taches as $tache):?>
 										 <?php $liste = array($this->GetUserById($tache->id_user1), $this->GetUserById($tache->id_user2), $this->GetUserById($tache->id_user3)) ?>
-										<p> - <?= str_replace(', , ','', str_replace($this->GetUserById($this->currentUser),'<span style="background-color:' . $this->GetColorByUser($this->currentUser) . ';color:white;" class="checkBrightness">&nbsp;' .$this->GetUserById($this->currentUser) . '&nbsp;</span>', implode(', ', $liste)))?> (<?= $tache->duree ?>h)</p>
+										<p> - <?= str_replace(', , ','', str_replace($this->GetUserById($this->currentUser),'<span style="background-color:' . $this->GetColorByUser($this->currentUser) . ';color:black;" class="checkBrightness">&nbsp;' .$this->GetUserById($this->currentUser) . '&nbsp;</span>', implode(', ', $liste)))?> (<?= $tache->duree ?>h)</p>
 									<?php endforeach;?>		
 								<?php endif;?>
 							</td>

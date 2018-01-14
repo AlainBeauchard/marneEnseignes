@@ -263,10 +263,12 @@ class ProjetsController extends Zend_Controller_Action
 		$db_taches = new Application_Model_Taches();
 		$select = $db_taches->select()
             ->where('id_projet = ?', $id_projet)
-            ->where('visible = ?', 1)
-            ->order('STR_TO_DATE(date_fait,\'%d/%m/%Y\')');
+            ->where('visible = ?', 1);
+            //->order('STR_TO_DATE(date_fait,\'%d/%m/%Y\')');
 		$taches = $db_taches->fetchAll($select);
-		
+
+		$taches = $db_taches->trieTableauTaches($taches);
+
 		$this->view->taches = $taches;
 		
 		if($this->_request->isPost() && $form->isValid($this->_request->getPost())){
@@ -347,6 +349,8 @@ class ProjetsController extends Zend_Controller_Action
         $db_taches = new Application_Model_Taches();
         $select = $db_taches->select()->where('id_projet = ?', $id_projet)->order(["STR_TO_DATE(date_fait,'%d/%m/%Y')", "id"]);
         $taches = $db_taches->fetchAll($select);
+
+        $taches = $db_taches->trieTableauTaches($taches);
 
         $this->view->taches = $taches;
         
@@ -558,25 +562,4 @@ class ProjetsController extends Zend_Controller_Action
         
         $this->_redirect('/projets/fiche/id/' . $id_projet);
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

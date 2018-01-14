@@ -18,31 +18,41 @@
             </table>
         </div>
         <div class="entete-devis entete-devis-right">
-            <table class="table-entete-devis">
-                <tr>
-                    <td colspan="7">
-                        <?= $this->form->intitule ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Marquages taille en ml</th>
-                    <th>Surface</th>
-                    <th>Quantité</th>
-                    <th>Surf totale</th>
-                    <th>Coef pub</th>
-                    <th>Surf pub</th>
-                    <th>Périmètre</th>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
+            <div style="width: 85%" class="pull-left">
+                <table class="table-entete-devis">
+                    <tr>
+                        <td colspan="7">
+                            <?= $this->form->intitule ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Marquages taille en ml</th>
+                        <th>Surface</th>
+                        <th>Quantité</th>
+                        <th>Surf totale</th>
+                        <th>Coef pub</th>
+                        <th>Surf pub</th>
+                        <th>Périmètre</th>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div style="width:20px" class="pull-right">
+                <button type="button" id="BtAjoutligneTableEntete" class="btn btn-default voffset1" title="Ajouter une ligne">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <button type="button" id="BtSuprimeligneTableEntete" class="btn btn-default voffset1" title="Supprimer une ligne">
+                    <span class="glyphicon glyphicon-minus"></span>
+                </button>
+            </div>
         </div>
         <div class="entete-devis devis-entete-bt">
             <div class="dropdown">
