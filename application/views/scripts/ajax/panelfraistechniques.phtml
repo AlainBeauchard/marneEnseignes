@@ -9,9 +9,9 @@
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title">Frais Techniques</h3>
+        <h3 class="panel-title" data-toggle="collapse" href="#collapsefraistechniques">Frais Techniques</h3>
     </div>
-    <div class="panel-body">
+    <div id="collapsefraistechniques" class="panel-body panel-collapse in">
         <button type="button" id="BtAjoutligneFraisTechnique" class="btn btn-default voffset1" title="Ajouter une ligne">
             <span class="glyphicon glyphicon-plus"></span>
         </button>
@@ -20,7 +20,7 @@
         </button>
         <table class="table-produits-devis" id="tableFraisTechnique">
             <tr>
-                <th>Code</th>
+                <th class="txtEntete">Code</th>
                 <th>Frais Techniques</th>
                 <th>Taux</th>
                 <th>Heures</th>

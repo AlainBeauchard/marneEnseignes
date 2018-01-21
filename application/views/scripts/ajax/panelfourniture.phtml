@@ -9,9 +9,9 @@
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title">Fournitures</h3>
+        <h3 class="panel-title" data-toggle="collapse" href="#collapsefourniture">Fournitures</h3>
     </div>
-    <div class="panel-body">
+    <div id="collapsefourniture" class="panel-body panel-collapse in">
         <button type="button" id="BtAjoutligneFourniture" class="btn btn-default voffset1" title="Ajouter une ligne">
             <span class="glyphicon glyphicon-plus"></span>
         </button>
@@ -20,12 +20,12 @@
         </button>
         <table class="table-produits-devis" id="tableFourniture">
             <tr>
-                <th>Code</th>
+                <th class="txtEntete">Code</th>
                 <th>Fourniture</th>
-                <th>Quantité</th>
+                <th class="txtEntete">Quantité</th>
                 <th>H.A M2/ML</th>
                 <th>H.A Total</th>
-                <th>Coef Marge</th>
+                <th class="txtEntete">Coef Marge</th>
                 <th>Px vente</th>
             </tr>
             <tr id="ligneRefFourniture">

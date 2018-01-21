@@ -15,18 +15,27 @@
                         <?= $this->form->dateCreation ?>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        <?= $this->form->delai ?>
+                    </td>
+                </tr>
             </table>
         </div>
         <div class="entete-devis entete-devis-right">
             <div style="width: 85%" class="pull-left">
-                <table class="table-entete-devis">
+                <table id="tableEntete" class="table-entete-devis">
                     <tr>
-                        <td colspan="7">
+                        <td colspan="4">
+                            <?= $this->form->nomClient ?>
+                        </td>
+                        <td colspan="4">
                             <?= $this->form->intitule ?>
                         </td>
                     </tr>
                     <tr>
-                        <th>Marquages taille en ml</th>
+                        <th>Largeur</th>
+                        <th>Hauteur</th>
                         <th>Surface</th>
                         <th>Quantité</th>
                         <th>Surf totale</th>
@@ -35,21 +44,46 @@
                         <th>Périmètre</th>
                     </tr>
                     <tr>
-                        <td>&nbsp;</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td><input type="text" name="largeurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" ></td>
+                        <td><input type="text" name="hauteurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                        <td><input type="text" name="surfaceTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                        <td><input type="text" name="qteTableEntete"         onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                        <td><input type="text" name="surfTotalTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                        <td><input type="text" name="coefPubTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                        <td><input type="text" name="surfacePubTableEntete"  onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                        <td><input type="text" name="perimetreTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
                     </tr>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" class="titrefooter haTotal">Surface totale</td>
+                            <td id="sommeSurfTotale" class="titrefooter haTotal"></td>
+                            <td class="haTotal">Surf pub</td>
+                            <td id="sommeSurfPub" class="titrefooter marge" ></td>
+                            <td id="sommePerimetre" class="marge"></td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
+            <div class="elemCache">
+                <table class="table-entete-devis">
+                    <tr id="elemCacheTableEntete">
+                        <td><input type="text" name="largeurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" ></td>
+                        <td><input type="text" name="hauteurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                        <td><input type="text" name="surfaceTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                        <td><input type="text" name="qteTableEntete"         onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                        <td><input type="text" name="surfTotalTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                        <td><input type="text" name="coefPubTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                        <td><input type="text" name="surfacePubTableEntete"  onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                        <td><input type="text" name="perimetreTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="nbLigneTableEntete" id="nbLigneTableEntete" value="1" >
+            </div>
             <div style="width:20px" class="pull-right">
-                <button type="button" id="BtAjoutligneTableEntete" class="btn btn-default voffset1" title="Ajouter une ligne">
+                <button type="button" id="BtAjoutligneTableEntete" class="btn btn-default voffset1" title="Ajouter une ligne" onclick="fctAjoutLigneTableEntete();">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
-                <button type="button" id="BtSuprimeligneTableEntete" class="btn btn-default voffset1" title="Supprimer une ligne">
+                <button type="button" id="BtSuprimeligneTableEntete" class="btn btn-default voffset1" title="Supprimer une ligne" onclick="fctSupprimeLigneTableEntete();">
                     <span class="glyphicon glyphicon-minus"></span>
                 </button>
             </div>

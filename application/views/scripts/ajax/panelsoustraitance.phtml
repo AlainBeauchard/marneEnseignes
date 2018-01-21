@@ -9,9 +9,9 @@
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title">Sous-traitance</h3>
+        <h3 class="panel-title" data-toggle="collapse" href="#collapsesoustraitance">Sous-traitance</h3>
     </div>
-    <div class="panel-body">
+    <div id="collapsesoustraitance" class="panel-body panel-collapse in">
         <button type="button" id="BtAjoutligneSousTraitance" class="btn btn-default voffset1" title="Ajouter une ligne">
             <span class="glyphicon glyphicon-plus"></span>
         </button>
@@ -20,12 +20,12 @@
         </button>
         <table class="table-produits-devis" id="tableSousTraitance">
             <tr>
-                <th>Code</th>
+                <th class="txtEntete">Code</th>
                 <th>Sous traitance</th>
-                <th>Quantité</th>
+                <th class="txtEntete">Quantité</th>
                 <th>H.A M2/ML</th>
                 <th>H.A Total</th>
-                <th>Coef marge</th>
+                <th class="txtEntete">Coef marge</th>
                 <th>Px vente</th>
             </tr>
             <tr id="ligneRefSousTraitance">

@@ -26,6 +26,18 @@ class Application_Form_Devis extends Zend_Form
         $intitule->setRequired(true);
         $this->addElement($intitule);
 
+        $nomClient = new Zend_Form_Element_Text('nomClient');
+        $nomClient->setAttribs(array('placeholder'=>'Nom du client','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
+        $nomClient->setLabel('Nom client');
+        $nomClient->setRequired(true);
+        $this->addElement($nomClient);
+
+        $delaiLivraison = new Zend_Form_Element_Text('delai');
+        $delaiLivraison->setAttribs(array('placeholder'=>'Delai de livraison','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
+        $delaiLivraison->setLabel('Délai de livraison');
+        $delaiLivraison->setRequired(true);
+        $this->addElement($delaiLivraison);
+
         $dteCreation = new ZendX_JQuery_Form_Element_DatePicker('dateCreation', ['attribs' => ['readonly' => 'true']]);
         $dteCreation->setAttribs(array('placeholder'=>'Date création','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
         $dteCreation->setLabel('Date Création');

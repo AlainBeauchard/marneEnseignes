@@ -1534,10 +1534,10 @@ function fctChangeValeurDevisProduit()
 
 	for(var i=0;i<qte.length;i++) {
 		haTotal[i].value = qte[i].value * ha[i].value;
+        $("#tableProduit input[name='pxvente']")[i].value = haTotal[i].value * $("#tableProduit input[name='coefMarge']")[i].value;
 		sommeTotale += parseFloat(haTotal[i].value);
 	}
-    $("#tableProduit input[name='totalHA']")[0].value = sommeTotale;
-    $("#tableProduit input[name='pxvente']")[0].value = sommeTotale * $("#tableProduit input[name='coefMarge']")[0].value;
+
 	$("#h_a_totauxProduit").html(sommeTotale+" euros");
 	$("#totalPxVenteProduit").html($("#tableProduit input[name='pxvente']")[0].value+" euros");
 	$("#margeProduit").html( ($("#tableProduit input[name='pxvente']")[0].value - sommeTotale)+" euros");
@@ -1735,6 +1735,55 @@ function fctChangeValeurDevisPose()
     $("#totalPxVentePose").html(sommeTotalePxVente+" euros");
     $("#margePose").html((sommeTotalePxVente - sommeTotale)+" euros");
 }
+
+function fctChangeTableEntete()
+{
+    var largeur 	= $("#tableEntete input[name='largeurTableEntete']");
+    var hauteur 	= $("#tableEntete input[name='hauteurTableEntete']");
+    var surface 	= $("#tableEntete input[name='surfaceTableEntete']");
+    var surfaceTotal= $("#tableEntete input[name='surfTotalTableEntete']");
+    var qte 		= $("#tableEntete input[name='qteTableEntete']");
+
+    var coefPub		= $("#tableEntete input[name='coefPubTableEntete']");
+    var surfacePub	= $("#tableEntete input[name='surfacePubTableEntete']");
+    var perimetre	= $("#tableEntete input[name='perimetreTableEntete']");
+
+    var sommeSurfTotale = 0;
+    var sommeSurfPub = 0;
+    var sommePerimetre = 0;
+
+    for(var i=0;i<largeur.length;i++) {
+        surface[i].value = largeur[i].value * hauteur[i].value;
+        surfaceTotal[i].value = surface[i].value * qte[i].value;
+
+        surfacePub[i].value = coefPub[i].value * surfaceTotal[i].value;
+        perimetre[i].value = (parseFloat(largeur[i].value) + parseFloat(hauteur[i].value)) * 2 * qte[i].value;
+
+        sommeSurfTotale += parseFloat(surfaceTotal[i].value);
+        sommeSurfPub += parseFloat(surfacePub[i].value);
+        sommePerimetre += parseFloat(perimetre[i].value);
+    }
+    $("#sommeSurfTotale").html(sommeSurfTotale);
+    $("#sommeSurfPub").html(sommeSurfPub);
+    $("#sommePerimetre").html(sommePerimetre);
+}
+
+function fctAjoutLigneTableEntete() {
+    var $nbLigne = $("#nbLigneTableEntete")[0];
+    var numLigne = $nbLigne.value;
+
+	var ligne = $("#elemCacheTableEntete").clone();
+	var $table = $("#tableEntete");
+	var html = ligne.html().replace(new RegExp('XXX', 'g'), numLigne);
+	$table.append('<tr>'+html+'</tr>');
+
+}
+
+function fctSupprimeLigneTableEntete() {
+	$("#tableEntete .focus").remove();
+	setTimeout(fctChangeTableEntete, 500);
+}
+
 
 $(document).on('blur', 'input[id^="sem_"]', function(){
 	var id = $(this).attr('id').split('_')[1];

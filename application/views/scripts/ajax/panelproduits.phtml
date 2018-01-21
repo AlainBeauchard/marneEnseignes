@@ -8,10 +8,10 @@
 ?>
 
 <div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3 class="panel-title">Produits</h3>
+    <div class="panel-heading" >
+        <h3 class="panel-title" data-toggle="collapse" href="#collapseproduit">Produits</h3>
     </div>
-    <div class="panel-body">
+    <div id="collapseproduit" class="panel-body panel-collapse in">
             <button type="button" id="BtAjoutligneProduit" class="btn btn-default voffset1" title="Ajouter une ligne">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
@@ -20,14 +20,13 @@
             </button>
             <table class="table-produits-devis" id="tableProduit">
                 <tr>
-                    <th>Code</th>
+                    <th class="txtEntete">Code</th>
                     <th>Support</th>
                     <th>Format</th>
-                    <th>Quantité</th>
+                    <th class="txtEntete">Quantité</th>
                     <th>H.A M2/ML</th>
                     <th>H.A Total</th>
-                    <th></th>
-                    <th>Coef marge</th>
+                    <th class="txtEntete">Coef marge</th>
                     <th>Px vente</th>
                 </tr>
                 <tr id="ligneRefProduit">
@@ -41,9 +40,8 @@
                     <td><input type="text" name="qte"       title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
                     <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
                     <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
-                    <td rowspan="100%"><input type="text" name="totalHA"    title="" readonly class="inputNumber"/></td>
-                    <td rowspan="100%"><input type="text" name="coefMarge"  title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber"/></td>
-                    <td rowspan="100%"><input type="text" name="pxvente"    title="" readonly class="inputNumber"/></td>
+                    <td><input type="text" name="coefMarge" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber"/></td>
+                    <td><input type="text" name="pxvente"   title="" readonly class="inputNumber"/></td>
                 </tr>
                 <tfoot>
                     <tr>
@@ -77,6 +75,8 @@
                     <td><input type="text" name="qte"       title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
                     <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
                     <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
+                    <td><input type="text" name="coefMarge" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber"/></td>
+                    <td><input type="text" name="pxvente"   title="" readonly class="inputNumber"/></td>
                 </tr>
             </table>
         </div>

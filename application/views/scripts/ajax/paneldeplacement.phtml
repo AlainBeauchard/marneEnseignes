@@ -9,9 +9,9 @@
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title">Déplacements</h3>
+        <h3 class="panel-title" data-toggle="collapse" href="#collapsedeplacement">Déplacements</h3>
     </div>
-    <div class="panel-body">
+    <div id="collapsedeplacement" class="panel-body panel-collapse in">
         <button type="button" id="BtAjoutligneDeplacement" class="btn btn-default voffset1" title="Ajouter une ligne">
             <span class="glyphicon glyphicon-plus"></span>
         </button>
@@ -20,12 +20,12 @@
         </button>
         <table class="table-produits-devis" id="tableDeplacement">
             <tr>
-                <th>Code</th>
+                <th class="txtEntete">Code</th>
                 <th>Deplacement</th>
-                <th>Quantité</th>
+                <th class="txtEntete">Quantité</th>
                 <th>Tarif unique</th>
                 <th>Coût/jour</th>
-                <th>Nb jours</th>
+                <th class="txtEntete">Nb jours</th>
                 <th>Px vente</th>
             </tr>
             <tr id="ligneRefDeplacement">

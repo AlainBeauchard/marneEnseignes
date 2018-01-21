@@ -1086,6 +1086,11 @@ ul#icons span.ui-icon {
     box-sizing: content-box;
 }
 
+.txtEntete
+{
+  width : 75px;
+}
+
 .panel-devis-head
 {
   margin-bottom : 20px;
