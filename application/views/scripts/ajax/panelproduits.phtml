@@ -29,20 +29,22 @@
                     <th class="txtEntete">Coef marge</th>
                     <th>Px vente</th>
                 </tr>
+                <?php foreach($this->itemsProduits as $key => $produit): ?>
                 <tr id="ligneRefProduit">
                     <td>
-                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeProduit(0);" onChange="fctChangeValeurDevisProduit();" class="dropdown-toggle" list="listeProduit_0"/>
-                        <datalist id="listeProduit_0">
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeProduit(<?= $key ?>);" onChange="fctChangeValeurDevisProduit();" class="dropdown-toggle" list="listeProduit_<?= $key ?>"/>
+                        <datalist id="listeProduit_<?= $key ?>">
                         </datalist>
                     </td>
                     <td><input type="text" name="support"   title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
                     <td><input type="text" name="format"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
-                    <td><input type="text" name="qte"       title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
-                    <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
+                    <td><input type="text" name="qte"       title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $produit->qte ?>"/></td>
+                    <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $produit->pu ?>"/></td>
                     <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
-                    <td><input type="text" name="coefMarge" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber"/></td>
+                    <td><input type="text" name="coefMarge" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $produit->marge ?>"/></td>
                     <td><input type="text" name="pxvente"   title="" readonly class="inputNumber"/></td>
                 </tr>
+                <?php endforeach; ?>
                 <tfoot>
                     <tr>
                         <td colspan="9">
@@ -80,5 +82,5 @@
                 </tr>
             </table>
         </div>
-    <input type="hidden" name="nbLigneProduit" id="nbLigneProduit" value="1">
+    <input type="hidden" name="nbLigneProduit" id="nbLigneProduit" value="<?= count($this->itemsProduits)+1 ?>">
 </div>

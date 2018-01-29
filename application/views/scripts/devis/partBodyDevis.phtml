@@ -111,6 +111,11 @@
     </div>
     <div class="corps-devis">
         <div id="corps-devis-custom" >
+
+            <?php if (count($this->itemsProduits) >0) : ?>
+                <?= $this->render('/ajax/panelproduits.phtml'); ?>
+            <?php endif ?>
+
         </div>
     </div>
 </div>

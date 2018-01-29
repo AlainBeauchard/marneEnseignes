@@ -3,6 +3,9 @@
 class Application_Form_Devis extends Zend_Form
 {
 
+    /**
+     * @throws Zend_Form_Exception
+     */
     public function init()
     {
 	    $this->setAttrib('role', 'form');
@@ -50,7 +53,10 @@ class Application_Form_Devis extends Zend_Form
         //$valid->addDecorators([['Description'=>['tag'=>'p', 'class' => 'mesBoutons']]]);
         $this->addElement($valid);
     }
-    
+
+    /**
+     * @return int|string
+     */
     function getDevisNewNum(){
 	    //TODO attention ceci est le devis initial : pas le mien !
 	    $db_devis = new Application_Model_Devis();

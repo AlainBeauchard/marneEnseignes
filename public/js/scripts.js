@@ -1087,6 +1087,8 @@ rendTacheInvisible(1);
 		}
 	});
 
+    fctRecalculTout();
+
 });
 
 function fctAjaxAddBloc(url, action)
@@ -1101,19 +1103,25 @@ function fctAjaxAddBloc(url, action)
             var $nbLigne = $("#nbLigne"+action)[0];
             var numLigne = $nbLigne.value;
 
-            $("#BtAjoutligne"+action).click(function (){
-                var ligne = $("#elemCache"+action).clone();
-                var $table = $("#table"+action);
-                var html = ligne.html().replace(new RegExp('XXX', 'g'), numLigne);
-                $table.append('<tr>'+html+'</tr>');
-            });
-            $("#BtSuprimeligne"+action).click(function () {
-                $("#table"+action+" .focus").remove();
-                setTimeout("fctChangeValeurDevis"+action+"();", 500);
-			});
+            fctBtAjoutSuppLigne(action);
+
             $nbLigne.value = numLigne + 1;
         }
     )
+}
+
+function fctBtAjoutSuppLigne(action) {
+
+    $("#BtAjoutligne"+action).click(function (){
+        var ligne = $("#elemCache"+action).clone();
+        var $table = $("#table"+action);
+        var html = ligne.html().replace(new RegExp('XXX', 'g'), numLigne);
+        $table.append('<tr>'+html+'</tr>');
+    });
+    $("#BtSuprimeligne"+action).click(function () {
+        $("#table"+action+" .focus").remove();
+        setTimeout("fctChangeValeurDevis"+action+"();", 500);
+    });
 }
 
 function fctAddBlocProduit()
@@ -1524,6 +1532,23 @@ function fctRemplitListeSousTraitance(indice)
 
 }
 
+function fctRecalculTout()
+{
+    fctBtAjoutSuppLigne("Produit");
+
+    fctChangeValeurDevisProduit();
+    fctChangeValeurDevisDeplacement();
+    fctChangeValeurDevisFaconnage();
+    fctChangeValeurDevisForfaitPrestation();
+    fctChangeValeurDevisFourniture();
+    fctChangeValeurDevisFraisTechniques();
+    fctChangeValeurDevisPose();
+    fctChangeValeurDevisAdhesif();
+    fctChangeValeurDevisPrestation();
+    fctChangeValeurDevisFaconnage();
+    fctChangeValeurDevisSousTraitance();
+}
+
 function fctChangeValeurDevisProduit()
 {
 	var qte 	= $("#tableProduit input[name='qte']");
@@ -1531,17 +1556,18 @@ function fctChangeValeurDevisProduit()
 	var haTotal = $("#tableProduit input[name='h.a_total']");
 
 	var sommeTotale = 0;
+	var sommeVenteTotale = 0;
 
 	for(var i=0;i<qte.length;i++) {
-		haTotal[i].value = qte[i].value * ha[i].value;
-        $("#tableProduit input[name='pxvente']")[i].value = haTotal[i].value * $("#tableProduit input[name='coefMarge']")[i].value;
+		haTotal[i].value = (qte[i].value * ha[i].value).toFixed(2);
+        $("#tableProduit input[name='pxvente']")[i].value = (haTotal[i].value * $("#tableProduit input[name='coefMarge']")[i].value).toFixed(2);
+		sommeVenteTotale += parseFloat($("#tableProduit input[name='pxvente']")[i].value);
 		sommeTotale += parseFloat(haTotal[i].value);
 	}
 
-	$("#h_a_totauxProduit").html(sommeTotale+" euros");
-	$("#totalPxVenteProduit").html($("#tableProduit input[name='pxvente']")[0].value+" euros");
-	$("#margeProduit").html( ($("#tableProduit input[name='pxvente']")[0].value - sommeTotale)+" euros");
-
+	$("#h_a_totauxProduit").html(sommeTotale.toFixed(2)+" euros");
+	$("#totalPxVenteProduit").html(sommeVenteTotale.toFixed(2)+" euros");
+	$("#margeProduit").html( (sommeVenteTotale - sommeTotale).toFixed(2)+" euros");
 }
 
 function fctChangeValeurDevisSousTraitance()
@@ -1556,14 +1582,14 @@ function fctChangeValeurDevisSousTraitance()
 	var sommeTotalePxVente = 0;
 
 	for(var i=0;i<qte.length;i++) {
-		haTotal[i].value = qte[i].value * ha[i].value;
-		sommeTotale += parseFloat(haTotal[i].value);
-        pxvente[i].value = coefMarge[i].value * haTotal[i].value;
-        sommeTotalePxVente += parseFloat(pxvente[i].value);
+		haTotal[i].value = (qte[i].value * ha[i].value).toFixed(2);
+		sommeTotale += parseFloat(haTotal[i].value).toFixed(2);
+        pxvente[i].value = (coefMarge[i].value * haTotal[i].value).toFixed(2);
+        sommeTotalePxVente += parseFloat(pxvente[i].value).toFixed(2);
 	}
-	$("#h_a_totauxSousTraitance").html(sommeTotale+" euros");
-	$("#totalPxVenteSousTraitance").html(sommeTotalePxVente+" euros");
-	$("#margeSousTraitance").html((sommeTotalePxVente - sommeTotale)+" euros");
+	$("#h_a_totauxSousTraitance").html(sommeTotale.toFixed(2)+" euros");
+	$("#totalPxVenteSousTraitance").html(sommeTotalePxVente.toFixed(2)+" euros");
+	$("#margeSousTraitance").html((sommeTotalePxVente - sommeTotale).toFixed(2)+" euros");
 }
 
 function fctChangeValeurDevisPrestation()
@@ -1575,12 +1601,12 @@ function fctChangeValeurDevisPrestation()
 	var sommeTotalePxVente = 0;
 
 	for(var i=0;i<qte.length;i++) {
-        pxvente[i].value = tarif[i].value * qte[i].value;
-        sommeTotalePxVente += parseFloat(pxvente[i].value);
+        pxvente[i].value = (tarif[i].value * qte[i].value).toFixed(2);
+        sommeTotalePxVente += parseFloat(pxvente[i].value).toFixed(2);
 	}
-	$("#h_a_totauxPrestation").html(sommeTotalePxVente+" euros")	;
-	$("#totalPxVentePrestation").html(sommeTotalePxVente+" euros");
-	$("#margePrestation").html((sommeTotalePxVente - sommeTotalePxVente)+" euros");
+	$("#h_a_totauxPrestation").html(sommeTotalePxVente.toFixed(2)+" euros")	;
+	$("#totalPxVentePrestation").html(sommeTotalePxVente.toFixed(2)+" euros");
+	$("#margePrestation").html((sommeTotalePxVente - sommeTotalePxVente).toFixed(2)+" euros");
 }
 
 function fctChangeValeurDevisFaconnage()
@@ -1594,14 +1620,14 @@ function fctChangeValeurDevisFaconnage()
     var sommeTotalePxVente = 0;
 
     for(var i=0;i<qte.length;i++) {
-        haTotal[i].value = qte[i].value * ha[i].value;
-        sommeTotale += parseFloat(haTotal[i].value);
+        haTotal[i].value = (qte[i].value * ha[i].value).toFixed(2);
+        sommeTotale += parseFloat(haTotal[i].value).toFixed(2);
         pxvente[i].value = haTotal[i].value;
-        sommeTotalePxVente += parseFloat(pxvente[i].value);
+        sommeTotalePxVente += parseFloat(pxvente[i].value).toFixed(2);
     }
-    $("#h_a_totauxFaconnage").html(sommeTotale+" euros");
-    $("#totalPxVenteFaconnage").html(sommeTotalePxVente+" euros");
-    $("#margeFaconnage").html((sommeTotalePxVente - sommeTotale)+" euros");
+    $("#h_a_totauxFaconnage").html(sommeTotale.toFixed(2)+" euros");
+    $("#totalPxVenteFaconnage").html(sommeTotalePxVente.toFixed(2)+" euros");
+    $("#margeFaconnage").html((sommeTotalePxVente - sommeTotale).toFixed(2)+" euros");
 }
 
 function fctChangeValeurDevisAdhesif()
@@ -1617,14 +1643,14 @@ function fctChangeValeurDevisAdhesif()
     var sommeTotalePxVente = 0;
 
     for(var i=0;i<qte.length;i++) {
-        haTotal[i].value = qte[i].value * ha[i].value * surface[i].value;
-        sommeTotale += parseFloat(haTotal[i].value);
-        pxvente[i].value = coefMarge[i].value * haTotal[i].value;
-        sommeTotalePxVente += parseFloat(pxvente[i].value);
+        haTotal[i].value = (qte[i].value * ha[i].value * surface[i].value).toFixed(2);
+        sommeTotale += parseFloat(haTotal[i].value).toFixed(2);
+        pxvente[i].value = (coefMarge[i].value * haTotal[i].value).toFixed(2);
+        sommeTotalePxVente += parseFloat(pxvente[i].value).toFixed(2);
     }
-    $("#h_a_totauxAdhesif").html(sommeTotale+" euros");
-    $("#totalPxVenteAdhesif").html(sommeTotalePxVente+" euros");
-    $("#margeAdhesif").html((sommeTotalePxVente - sommeTotale)+" euros");
+    $("#h_a_totauxAdhesif").html(sommeTotale.toFixed(2)+" euros");
+    $("#totalPxVenteAdhesif").html(sommeTotalePxVente.toFixed(2)+" euros");
+    $("#margeAdhesif").html((sommeTotalePxVente - sommeTotale).toFixed(2)+" euros");
 }
 
 function fctChangeValeurDevisFraisTechniques()
@@ -1640,15 +1666,15 @@ function fctChangeValeurDevisFraisTechniques()
     var sommeTotalePxVente = 0;
 
     for(var i=0;i<taux.length;i++) {
-        tarifHoraire[i].value = taux[i].value * heures[i].value;
-        tarifMinute[i].value = taux[i].value * minutes[i].value / 60 ;
-        pxvente[i].value = parseFloat(tarifHoraire[i].value) + parseFloat(tarifMinute[i].value);
-        sommeTotale += parseFloat(pxvente[i].value);
-        sommeTotalePxVente += parseFloat(pxvente[i].value);
+        tarifHoraire[i].value = (taux[i].value * heures[i].value).toFixed(2);
+        tarifMinute[i].value = (taux[i].value * minutes[i].value / 60).toFixed(2);
+        pxvente[i].value = (parseFloat(tarifHoraire[i].value) + parseFloat(tarifMinute[i].value)).toFixed(2);
+        sommeTotale += parseFloat(pxvente[i].value).toFixed(2);
+        sommeTotalePxVente += parseFloat(pxvente[i].value).toFixed(2);
     }
-    $("#h_a_totauxFraisTechnique").html(sommeTotale+" euros");
-    $("#totalPxVenteFraisTechnique").html(sommeTotalePxVente+" euros");
-    $("#margeFraisTechnique").html((sommeTotalePxVente - sommeTotale)+" euros");
+    $("#h_a_totauxFraisTechnique").html(sommeTotale.toFixed(2)+" euros");
+    $("#totalPxVenteFraisTechnique").html(sommeTotalePxVente.toFixed(2)+" euros");
+    $("#margeFraisTechnique").html((sommeTotalePxVente - sommeTotale).toFixed(2)+" euros");
 }
 
 function fctChangeValeurDevisForfaitPrestation()
@@ -1661,13 +1687,13 @@ function fctChangeValeurDevisForfaitPrestation()
     var sommeTotalePxVente = 0;
 
     for(var i=0;i<qte.length;i++) {
-        pxvente[i].value = parseFloat(qte[i].value) * parseFloat(tarif[i].value);
-        sommeTotale += parseFloat(pxvente[i].value);
-        sommeTotalePxVente += parseFloat(pxvente[i].value);
+        pxvente[i].value = (parseFloat(qte[i].value) * parseFloat(tarif[i].value)).toFixed(2);
+        sommeTotale += parseFloat(pxvente[i].value).toFixed(2);
+        sommeTotalePxVente += parseFloat(pxvente[i].value).toFixed(2);
     }
-    $("#h_a_totauxForfaitPrestation").html(sommeTotale+" euros");
-    $("#totalPxVenteForfaitPrestation").html(sommeTotalePxVente+" euros");
-    $("#margeForfaitPrestation").html((sommeTotalePxVente - sommeTotale)+" euros");
+    $("#h_a_totauxForfaitPrestation").html(sommeTotale.toFixed(2)+" euros");
+    $("#totalPxVenteForfaitPrestation").html(sommeTotalePxVente.toFixed(2)+" euros");
+    $("#margeForfaitPrestation").html((sommeTotalePxVente - sommeTotale).toFixed(2)+" euros");
 }
 
 function fctChangeValeurDevisDeplacement()
@@ -1682,14 +1708,14 @@ function fctChangeValeurDevisDeplacement()
     var sommeTotalePxVente = 0;
 
     for(var i=0;i<qte.length;i++) {
-    	coutJour[i].value = tarifUnique[i].value * qte[i].value;
-        pxvente[i].value = parseFloat(nbjours[i].value) * parseFloat(coutJour[i].value);
-        sommeTotale += parseFloat(coutJour[i].value);
-        sommeTotalePxVente += parseFloat(pxvente[i].value);
+    	coutJour[i].value = (tarifUnique[i].value * qte[i].value).toFixed(2);
+        pxvente[i].value = (parseFloat(nbjours[i].value) * parseFloat(coutJour[i].value)).toFixed(2);
+        sommeTotale += parseFloat(coutJour[i].value).toFixed(2);
+        sommeTotalePxVente += parseFloat(pxvente[i].value).toFixed(2);
     }
-    $("#h_a_totauxDeplacement").html(sommeTotale+" euros");
-    $("#totalPxVenteDeplacement").html(sommeTotalePxVente+" euros");
-    $("#margeDeplacement").html((sommeTotalePxVente - sommeTotale)+" euros");
+    $("#h_a_totauxDeplacement").html(sommeTotale.toFixed(2)+" euros");
+    $("#totalPxVenteDeplacement").html(sommeTotalePxVente.toFixed(2)+" euros");
+    $("#margeDeplacement").html((sommeTotalePxVente - sommeTotale).toFixed(2)+" euros");
 }
 
 function fctChangeValeurDevisFourniture()
@@ -1704,14 +1730,14 @@ function fctChangeValeurDevisFourniture()
     var sommeTotalePxVente = 0;
 
     for(var i=0;i<qte.length;i++) {
-        haTotal[i].value = qte[i].value * ha[i].value;
-        sommeTotale += parseFloat(haTotal[i].value);
-        pxvente[i].value = coefMarge[i].value * haTotal[i].value;
-        sommeTotalePxVente += parseFloat(pxvente[i].value);
+        haTotal[i].value = (qte[i].value * ha[i].value).toFixed(2);
+        sommeTotale += parseFloat(haTotal[i].value).toFixed(2);
+        pxvente[i].value = (coefMarge[i].value * haTotal[i].value).toFixed(2);
+        sommeTotalePxVente += parseFloat(pxvente[i].value).toFixed(2);
     }
-    $("#h_a_totauxFourniture").html(sommeTotale+" euros");
-    $("#totalPxVenteFourniture").html(sommeTotalePxVente+" euros");
-    $("#margeFourniture").html((sommeTotalePxVente - sommeTotale)+" euros");
+    $("#h_a_totauxFourniture").html(sommeTotale.toFixed(2)+" euros");
+    $("#totalPxVenteFourniture").html(sommeTotalePxVente.toFixed(2)+" euros");
+    $("#margeFourniture").html((sommeTotalePxVente - sommeTotale).toFixed(2)+" euros");
 }
 
 function fctChangeValeurDevisPose()
@@ -1726,14 +1752,14 @@ function fctChangeValeurDevisPose()
     var sommeTotalePxVente = 0;
 
     for(var i=0;i<qte.length;i++) {
-        haTotal[i].value = qte[i].value * ha[i].value;
-        sommeTotale += parseFloat(haTotal[i].value);
-        pxvente[i].value = coefMarge[i].value * haTotal[i].value;
-        sommeTotalePxVente += parseFloat(pxvente[i].value);
+        haTotal[i].value = (qte[i].value * ha[i].value).toFixed(2);
+        sommeTotale += parseFloat(haTotal[i].value).toFixed(2);
+        pxvente[i].value = (coefMarge[i].value * haTotal[i].value).toFixed(2);
+        sommeTotalePxVente += parseFloat(pxvente[i].value).toFixed(2);
     }
-    $("#h_a_totauxPose").html(sommeTotale+" euros");
-    $("#totalPxVentePose").html(sommeTotalePxVente+" euros");
-    $("#margePose").html((sommeTotalePxVente - sommeTotale)+" euros");
+    $("#h_a_totauxPose").html(sommeTotale.toFixed(2)+" euros");
+    $("#totalPxVentePose").html(sommeTotalePxVente.toFixed(2)+" euros");
+    $("#margePose").html((sommeTotalePxVente - sommeTotale).toFixed(2)+" euros");
 }
 
 function fctChangeTableEntete()
@@ -1753,19 +1779,19 @@ function fctChangeTableEntete()
     var sommePerimetre = 0;
 
     for(var i=0;i<largeur.length;i++) {
-        surface[i].value = largeur[i].value * hauteur[i].value;
-        surfaceTotal[i].value = surface[i].value * qte[i].value;
+        surface[i].value = (largeur[i].value * hauteur[i].value).toFixed(2);
+        surfaceTotal[i].value = (surface[i].value * qte[i].value).toFixed(2);
 
-        surfacePub[i].value = coefPub[i].value * surfaceTotal[i].value;
-        perimetre[i].value = (parseFloat(largeur[i].value) + parseFloat(hauteur[i].value)) * 2 * qte[i].value;
+        surfacePub[i].value = (coefPub[i].value * surfaceTotal[i].value).toFixed(2);
+        perimetre[i].value = ((parseFloat(largeur[i].value) + parseFloat(hauteur[i].value)) * 2 * qte[i].value).toFixed(2);
 
-        sommeSurfTotale += parseFloat(surfaceTotal[i].value);
-        sommeSurfPub += parseFloat(surfacePub[i].value);
-        sommePerimetre += parseFloat(perimetre[i].value);
+        sommeSurfTotale += parseFloat(surfaceTotal[i].value).toFixed(2);
+        sommeSurfPub += parseFloat(surfacePub[i].value).toFixed(2);
+        sommePerimetre += parseFloat(perimetre[i].value).toFixed(2);
     }
-    $("#sommeSurfTotale").html(sommeSurfTotale);
-    $("#sommeSurfPub").html(sommeSurfPub);
-    $("#sommePerimetre").html(sommePerimetre);
+    $("#sommeSurfTotale").html(sommeSurfTotale.toFixed(2));
+    $("#sommeSurfPub").html(sommeSurfPub.toFixed(2));
+    $("#sommePerimetre").html(sommePerimetre.toFixed(2));
 }
 
 function fctAjoutLigneTableEntete() {

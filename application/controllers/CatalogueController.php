@@ -2,7 +2,12 @@
 
 class CatalogueController extends Zend_Controller_Action
 {
-
+    /**
+     * @throws Zend_Config_Exception
+     * @throws Zend_Controller_Response_Exception
+     * @throws Zend_Exception
+     * @throws Zend_Navigation_Exception
+     */
     public function init()
     {
 	    $auth = Zend_Auth::getInstance();
@@ -19,6 +24,11 @@ class CatalogueController extends Zend_Controller_Action
         $response->insert('sidebar', $this->view->render('sidebarcatalogue.phtml'));
     }
 
+    /**
+     * @throws Zend_Form_Exception
+     * @throws Zend_Paginator_Exception
+     * @throws Zend_Session_Exception
+     */
     public function indexAction()
     {
         $session = new Zend_Session_Namespace('filtreCatalogue');
@@ -71,6 +81,10 @@ class CatalogueController extends Zend_Controller_Action
         //$this->view->produits = $produits;
     }
 
+    /**
+     * @throws Zend_Db_Table_Exception
+     * @throws Zend_Form_Exception
+     */
     public function editerAction()
     {
         $form = new Application_Form_Catalogue();
@@ -98,6 +112,9 @@ class CatalogueController extends Zend_Controller_Action
         }
     }
 
+    /**
+     * @throws Zend_Form_Exception
+     */
     public function ajouterAction()
     {
         $form = new Application_Form_Catalogue();
@@ -112,16 +129,22 @@ class CatalogueController extends Zend_Controller_Action
         }
     }
 
+    /**
+     * @throws Zend_Db_Table_Exception
+     */
     public function ficheAction()
     {
         $id = $this->_getParam('id');
         
         $db_catalogue = new Application_Model_Catalogue();
         $catalogue = $db_catalogue->find($id)->current();
-+
+
         $this->view->produit = $catalogue;
     }
 
+    /**
+     *
+     */
     public function deleteAction()
     {
         $db_catalogue = new Application_Model_Catalogue();
