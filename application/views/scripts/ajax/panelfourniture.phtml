@@ -28,19 +28,36 @@
                 <th class="txtEntete">Coef Marge</th>
                 <th>Px vente</th>
             </tr>
+            <?php if( count($this->itemsFourniture) == 0): ?>
             <tr id="ligneRefFourniture">
                 <td>
                     <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFourniture(0);" onChange="fctChangeValeurDevisFourniture();" class="dropdown-toggle" list="listeFourniture_0"/>
                     <datalist id="listeFourniture_0">
                     </datalist>
                 </td>
-                <td><input type="text" name="fourniture"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
-                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
-                <td><input type="text" name="h.a_ml"        title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
+                <td><input type="text" name="fourniture"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();"/></td>
+                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();"/></td>
+                <td><input type="text" name="h.a_ml"        title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();"/></td>
                 <td><input type="text" name="h.a_total"     title="" onFocus="fctSetFocus()" readonly /></td>
-                <td><input type="text" name="coefMarge"     title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
+                <td><input type="text" name="coefMarge"     title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();"/></td>
                 <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" readonly /></td>
             </tr>
+            <?php endif; ?>
+            <?php foreach($this->itemsFourniture as $key => $fourniture): ?>
+            <tr id="ligneRefFourniture">
+                <td>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFourniture(<?= $key ?>);" onChange="fctChangeValeurDevisFourniture();" class="dropdown-toggle" list="listeFourniture_<?= $key ?>"/>
+                    <datalist id="listeFourniture_<?= $key ?>">
+                    </datalist>
+                </td>
+                <td><input type="text" name="fourniture"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
+                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" value="<?= $fourniture->qte ?>" /></td>
+                <td><input type="text" name="h.a_ml"        title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" value="<?= $fourniture->pu ?>"/></td>
+                <td><input type="text" name="h.a_total"     title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="coefMarge"     title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" value="<?= $fourniture->marge ?>"/></td>
+                <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" readonly /></td>
+            </tr>
+            <?php endforeach; ?>
             <tfoot>
                 <tr>
                     <td colspan="7">
@@ -77,5 +94,5 @@
             </tr>
         </table>
     </div>
-    <input type="hidden" name="nbLigneFourniture" id="nbLigneFourniture" value="1">
+    <input type="hidden" name="nbLigneFourniture" id="nbLigneFourniture" value="<?= count($this->itemsFourniture)+1 ?>">
 </div>

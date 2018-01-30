@@ -28,6 +28,7 @@
                 <th class="txtEntete">Coef marge</th>
                 <th>Px vente</th>
             </tr>
+            <?php if( count($this->itemsSousTraitance) == 0): ?>
             <tr id="ligneRefSousTraitance">
                 <td>
                     <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeSousTraitance(0);" onChange="fctChangeValeurDevisSousTraitance();" class="dropdown-toggle" list="listeSousTraitance_0"/>
@@ -41,6 +42,22 @@
                 <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisSousTraitance();"/></td>
                 <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" readonly /></td>
             </tr>
+            <?php endif; ?>
+            <?php foreach($this->itemsSousTraitance as $key => $soustraitance): ?>
+            <tr id="ligneRefSousTraitance">
+                <td>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeSousTraitance(<?= $key ?>);" onChange="fctChangeValeurDevisSousTraitance();" class="dropdown-toggle" list="listeSousTraitance_<?= $key ?>"/>
+                    <datalist id="listeSousTraitance_<?= $key ?>">
+                    </datalist>
+                </td>
+                <td><input type="text" name="support"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisSousTraitance();"/></td>
+                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisSousTraitance();" value="<?= $soustraitance->qte ?>"/></td>
+                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisSousTraitance();" value="<?= $soustraitance->pu ?>"/></td>
+                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisSousTraitance();" value="<?= $soustraitance->marge ?>"/></td>
+                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" readonly /></td>
+            </tr>
+            <?php endforeach; ?>
             <tfoot>
                 <tr>
                     <td colspan="8">
@@ -77,5 +94,5 @@
             </tr>
         </table>
     </div>
-    <input type="hidden" name="nbLigneSousTraitance" id="nbLigneSousTraitance" value="1">
+    <input type="hidden" name="nbLigneSousTraitance" id="nbLigneSousTraitance" value="<?= count($this->itemsSousTraitance)+1 ?>">
 </div>

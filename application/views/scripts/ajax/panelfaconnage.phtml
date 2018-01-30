@@ -27,6 +27,7 @@
                 <th>H.A Total</th>
                 <th>Px vente</th>
             </tr>
+            <?php if( count($this->itemsFaconnage) == 0): ?>
             <tr id="ligneRefFaconnage">
                 <td>
                     <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFaconnage(0);" onChange="fctChangeValeurDevisFaconnage();" class="dropdown-toggle" list="listeFaconnage_0"/>
@@ -39,6 +40,21 @@
                 <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" readonly /></td>
                 <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" readonly /></td>
             </tr>
+            <?php endif; ?>
+            <?php foreach($this->itemsFaconnage as $key => $faconnage): ?>
+            <tr id="ligneRefFaconnage">
+                <td>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFaconnage(<?= $key ?>);" onChange="fctChangeValeurDevisFaconnage();" class="dropdown-toggle" list="listeFaconnage_<?= $key ?>"/>
+                    <datalist id="listeFaconnage_<?= $key ?>">
+                    </datalist>
+                </td>
+                <td><input type="text" name="faconnage" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
+                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" value="<?= $faconnage->qte ?>"/></td>
+                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" value="<?= $faconnage->pu ?>"/></td>
+                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" readonly /></td>
+            </tr>
+            <?php endforeach; ?>
             <tfoot>
                 <tr>
                     <td colspan="6">
@@ -74,5 +90,5 @@
             </tr>
         </table>
     </div>
-    <input type="hidden" name="nbLigneFaconnage" id="nbLigneFaconnage" value="1">
+    <input type="hidden" name="nbLigneFaconnage" id="nbLigneFaconnage" value="<?= count($this->itemsFaconnage)+1 ?>">
 </div>

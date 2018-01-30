@@ -29,6 +29,7 @@
                 <th class="txtEntete">Coef Marge</th>
                 <th>Px vente</th>
             </tr>
+            <?php if(count($this->itemsAdhesif) ==0): ?>
             <tr id="ligneRefAdhesif">
                 <td>
                     <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(0);" onChange="fctChangeValeurDevisAdhesif();" class="dropdown-toggle" list="listeAdhesif_0"/>
@@ -43,6 +44,23 @@
                 <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
                 <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" readonly /></td>
             </tr>
+            <?php endif; ?>
+            <?php foreach($this->itemsAdhesif as $key => $adhesif): ?>
+            <tr id="ligneRefAdhesif">
+                <td>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(<?= $key ?>);" onChange="fctChangeValeurDevisAdhesif();" class="dropdown-toggle" list="listeAdhesif_<?= $key ?>"/>
+                    <datalist id="listeAdhesif_<?= $key ?>">
+                    </datalist>
+                </td>
+                <td><input type="text" name="adhesif"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
+                <td><input type="text" name="surface"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
+                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" value="<?= $adhesif->qte ?>" /></td>
+                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" value="<?= $adhesif->pu ?>" /></td>
+                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $adhesif->marge ?>"/></td>
+                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" readonly /></td>
+            </tr>
+            <?php endforeach; ?>
             <tfoot>
                 <tr>
                     <td colspan="8">
@@ -80,5 +98,5 @@
             </tr>
         </table>
     </div>
-    <input type="hidden" name="nbLigneAdhesif" id="nbLigneAdhesif" value="1">
+    <input type="hidden" name="nbLigneAdhesif" id="nbLigneAdhesif" value="<?= count($this->itemsAdhesif)+1 ?>">
 </div>

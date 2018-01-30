@@ -28,6 +28,7 @@
                 <th class="txtEntete">Coef Marge</th>
                 <th>Px vente</th>
             </tr>
+            <?php if( count($this->itemsPose) == 0): ?>
             <tr id="ligneRefPose">
                 <td>
                     <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListePose(0);" onChange="fctChangeValeurDevisPose();" class="dropdown-toggle" list="listePose_0"/>
@@ -41,6 +42,22 @@
                 <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();"/></td>
                 <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" readonly /></td>
             </tr>
+            <?php endif; ?>
+            <?php foreach($this->itemsPose as $key => $pose): ?>
+            <tr id="ligneRefPose">
+                <td>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListePose(<?=$key ?>);" onChange="fctChangeValeurDevisPose();" class="dropdown-toggle" list="listePose_<?=$key ?>"/>
+                    <datalist id="listePose_<?=$key ?>">
+                    </datalist>
+                </td>
+                <td><input type="text" name="pose"      title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();"/></td>
+                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();" value="<?= $pose->qte ?>"/></td>
+                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();" value="<?= $pose->pu ?>"/></td>
+                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();" value="<?= $pose->marge ?>"/></td>
+                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" readonly /></td>
+            </tr>
+            <?php endforeach; ?>
             <tfoot>
                 <tr>
                     <td colspan="7">
@@ -79,5 +96,5 @@
             </tr>
         </table>
     </div>
-    <input type="hidden" name="nbLignePose" id="nbLignePose" value="1">
+    <input type="hidden" name="nbLignePose" id="nbLignePose" value="<?= count($this->itemsPose) +1 ?>">
 </div>

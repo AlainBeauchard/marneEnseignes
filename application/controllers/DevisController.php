@@ -76,7 +76,16 @@ class DevisController extends Zend_Controller_Action
         $select = $db_items->select()->where('id_devis = ?', $devis->id);
         $items = $db_items->fetchAll($select);
 
-        $this->view->itemsProduits = $items;
+        $this->view->itemsProduits = [];
+        $this->view->itemsDeplacement = [];
+        $this->view->itemsFaconnage = [];
+        $this->view->itemsForfaitPrestation = [];
+        $this->view->itemsFourniture = [];
+        $this->view->itemsFraisTechniques = [];
+        $this->view->itemsPose = [];
+        $this->view->itemsPrestation = [];
+        $this->view->itemsSousTraitance = [];
+        $this->view->itemsAdhesif = [];
 
         $db_client = new Application_Model_Clients();
         $client = $db_client->find($devis->id_client)->current();

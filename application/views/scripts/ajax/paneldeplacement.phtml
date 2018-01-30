@@ -28,19 +28,36 @@
                 <th class="txtEntete">Nb jours</th>
                 <th>Px vente</th>
             </tr>
+            <?php if(count($this->itemsDeplacement) == 0): ?>
+                <tr id="ligneRefDeplacement">
+                    <td>
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(0);" onChange="fctChangeValeurDevisDeplacement();" class="dropdown-toggle" list="listeDeplacement_0"/>
+                        <datalist id="listeDeplacement_0">
+                        </datalist>
+                    </td>
+                    <td><input type="text" name="deplacement"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" ></td>
+                    <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" ></td>
+                    <td><input type="text" name="tarifUnique"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" ></td>
+                    <td><input type="text" name="coutJour"      title="" onFocus="fctSetFocus()" readonly ></td>
+                    <td><input type="text" name="nbJours"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" ></td>
+                    <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" readonly /></td>
+                </tr>
+            <?php endif; ?>
+            <?php foreach($this->itemsDeplacement as $key => $deplacement): ?>
             <tr id="ligneRefDeplacement">
                 <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(0);" onChange="fctChangeValeurDevisDeplacement();" class="dropdown-toggle" list="listeDeplacement_0"/>
-                    <datalist id="listeDeplacement_0">
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(<?= $key ?>);" onChange="fctChangeValeurDevisDeplacement();" class="dropdown-toggle" list="listeDeplacement_<?= $key ?>"/>
+                    <datalist id="listeDeplacement_<?= $key ?>">
                     </datalist>
                 </td>
                 <td><input type="text" name="deplacement"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" ></td>
-                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" ></td>
-                <td><input type="text" name="tarifUnique"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" ></td>
+                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" value="<?= $deplacement->qte ?>"></td>
+                <td><input type="text" name="tarifUnique"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" value="<?= $deplacement->pu ?>"></td>
                 <td><input type="text" name="coutJour"      title="" onFocus="fctSetFocus()" readonly ></td>
                 <td><input type="text" name="nbJours"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" ></td>
                 <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" readonly /></td>
             </tr>
+            <?php endforeach; ?>
             <tfoot>
                 <tr>
                     <td colspan="7">
@@ -77,5 +94,5 @@
             </tr>
         </table>
     </div>
-    <input type="hidden" name="nbLigneDeplacement" id="nbLigneDeplacement" value="1">
+    <input type="hidden" name="nbLigneDeplacement" id="nbLigneDeplacement" value="<?= count($this->itemsDeplacement)+1 ?>">
 </div>
