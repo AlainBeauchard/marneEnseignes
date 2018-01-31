@@ -61,6 +61,7 @@ class DevisController extends Zend_Controller_Action
 
     /**
      * @throws Zend_Db_Table_Exception
+     * @throws Zend_Form_Exception
      */
     public function editerAction()
     {
@@ -69,10 +70,15 @@ class DevisController extends Zend_Controller_Action
         $id_devis = $this->_getParam('id');
 
         $db_devis = new Application_Model_Devis();
+        $db_items = new Application_Model_ItemDevis();
+
+        if($this->_request->isPost() && $form->isValid($this->_request->getPost())){
+            $this->sauveFormDevis($db_devis, $db_items);
+        }
+
         $devis = $db_devis->find($id_devis)->current();
         $this->view->devis = $devis;
 
-        $db_items = new Application_Model_ItemDevis();
         $select = $db_items->select()->where('id_devis = ?', $devis->id);
         $items = $db_items->fetchAll($select);
 
@@ -108,6 +114,29 @@ class DevisController extends Zend_Controller_Action
     public function deleteAction()
     {
 
+    }
+
+    /**
+     * @param Application_Model_Devis $db_devis
+     * @param Application_Model_ItemDevis $db_items
+     */
+    public function sauveFormDevis($db_devis, $db_items)
+    {
+        $idDevis = $this->_getParam('id');
+        foreach($this->_request->getPost() as $key => $value){
+            if(strlen($value)){
+                $datas[$key] = $value;
+            }
+        }
+        if($db_devis->update($datas, array('id_devis = ?' => $idDevis))){
+
+            //on supprime les items avec le devis
+            $db_items->delete("id_devis = ".$idDevis);
+
+            //TODO on ajoute ceux que l'on vient de recevoir !
+
+            $this->_redirect('/devis/editer/id/' . $idDevis);
+        }
     }
 }
 
