@@ -34,6 +34,7 @@
                     <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFourniture(0);" onChange="fctChangeValeurDevisFourniture();" class="dropdown-toggle" list="listeFourniture_0"/>
                     <datalist id="listeFourniture_0">
                     </datalist>
+                    <input type="hidden" name="json_Fourniture[]">
                 </td>
                 <td><input type="text" name="fourniture"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();"/></td>
                 <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();"/></td>
@@ -44,18 +45,20 @@
             </tr>
             <?php endif; ?>
             <?php foreach($this->itemsFourniture as $key => $fourniture): ?>
+                <?php $json = json_decode($fourniture->json, true) ?>
             <tr id="ligneRefFourniture">
                 <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFourniture(<?= $key ?>);" onChange="fctChangeValeurDevisFourniture();" class="dropdown-toggle" list="listeFourniture_<?= $key ?>"/>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFourniture(<?= $key ?>);" onChange="fctChangeValeurDevisFourniture();" class="dropdown-toggle" list="listeFourniture_<?= $key ?>" value="<?= $json['code'] ?>"/>
                     <datalist id="listeFourniture_<?= $key ?>">
                     </datalist>
+                    <input type="hidden" name="json_Fourniture[]" value="<?= json_decode($json) ?>">
                 </td>
-                <td><input type="text" name="fourniture"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
-                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" value="<?= $fourniture->qte ?>" /></td>
-                <td><input type="text" name="h.a_ml"        title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" value="<?= $fourniture->pu ?>"/></td>
-                <td><input type="text" name="h.a_total"     title="" onFocus="fctSetFocus()" readonly /></td>
-                <td><input type="text" name="coefMarge"     title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" value="<?= $fourniture->marge ?>"/></td>
-                <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="fourniture"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" value="<?= $json['fourniture'] ?>"/></td>
+                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" value="<?= $json['qte'] ?>" /></td>
+                <td><input type="text" name="h.a_ml"        title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" value="<?= $json['h.a_ml'] ?>"/></td>
+                <td><input type="text" name="h.a_total"     title="" onFocus="fctSetFocus()" readonly value="<?= $json['h.a_total'] ?>"/></td>
+                <td><input type="text" name="coefMarge"     title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" value="<?= $json['coefMarge'] ?>"/></td>
+                <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" readonly value="<?= $json['pxvente'] ?>"/></td>
             </tr>
             <?php endforeach; ?>
             <tfoot>
@@ -84,6 +87,7 @@
                     <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFourniture(XXX);" onChange="fctChangeValeurDevisFourniture();" class="dropdown-toggle" list="listeFourniture_XXX"/>
                     <datalist id="listeFourniture_XXX">
                     </datalist>
+                    <input type="hidden" name="json_Fourniture[]">
                 </td>
                 <td><input type="text" name="fourniture"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>
                 <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFourniture();" /></td>

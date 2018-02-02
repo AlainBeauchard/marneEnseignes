@@ -1566,14 +1566,36 @@ function fctChangeValeurDevisProduit()
 	var ha 		= $("#tableProduit input[name='h.a_ml']");
 	var haTotal = $("#tableProduit input[name='h.a_total']");
 
+    var code 	   = $("#tableProduit input[name='code']");
+    var support = $("#tableProduit input[name='support']");
+    var format = $("#tableProduit input[name='format']");
+    var coefMarge = $("#tableProduit input[name='coefMarge']");
+    var pxvente = $("#tableProduit input[name='pxvente']");
+
+    var jsonLigne  = $("#tableProduit input[name='json_Produit[]']");
+
 	var sommeTotale = 0;
 	var sommeVenteTotale = 0;
 
 	for(var i=0;i<qte.length;i++) {
 		haTotal[i].value = parseFloat((qte[i].value * ha[i].value).toFixed(2));
-        $("#tableProduit input[name='pxvente']")[i].value = parseFloat((haTotal[i].value * $("#tableProduit input[name='coefMarge']")[i].value).toFixed(2));
-		sommeVenteTotale += parseFloat($("#tableProduit input[name='pxvente']")[i].value);
+        pxvente[i].value = parseFloat((haTotal[i].value * coefMarge[i].value).toFixed(2));
+		sommeVenteTotale += parseFloat(pxvente[i].value);
 		sommeTotale += parseFloat(haTotal[i].value);
+
+        var strJsonLigne = "";
+        if (qte[i].value !== "") {
+            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
+            strJsonLigne += '"' + ha[i].name + '": "' + ha[i].value + '",';
+            strJsonLigne += '"' + haTotal[i].name + '": "' + haTotal[i].value + '",';
+            strJsonLigne += '"' + format[i].name + '": "' + format[i].value + '",';
+            strJsonLigne += '"' + coefMarge[i].name + '": "' + coefMarge[i].value + '",';
+            strJsonLigne += '"' + support[i].name + '": "' + support[i].value + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '"';
+        }
+
+        jsonLigne[i].value =  '{'+strJsonLigne+'}';
 	}
 
 	$("#h_a_totauxProduit").html(parseFloat(sommeTotale.toFixed(2))+" euros");
@@ -1589,6 +1611,11 @@ function fctChangeValeurDevisSousTraitance()
 	var coefMarge = $("#tableSousTraitance input[name='coefMarge']");
 	var pxvente = $("#tableSousTraitance input[name='pxvente']");
 
+    var code 	= $("#tableSousTraitance input[name='code']");
+    var support	= $("#tableSousTraitance input[name='support']");
+
+    var jsonLigne  = $("#tableSousTraitance input[name='json_SousTraitance[]']");
+
 	var sommeTotale = 0;
 	var sommeTotalePxVente = 0;
 
@@ -1597,6 +1624,19 @@ function fctChangeValeurDevisSousTraitance()
 		sommeTotale += parseFloat(haTotal[i].value);
         pxvente[i].value = parseFloat((coefMarge[i].value * haTotal[i].value).toFixed(2));
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+
+        var strJsonLigne = "";
+        if (qte[i].value !== "") {
+            strJsonLigne += '"' + ha[i].name + '": "' + ha[i].value + '",';
+            strJsonLigne += '"' + haTotal[i].name + '": "' + haTotal[i].value + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '",';
+            strJsonLigne += '"' + support[i].name + '": "' + support[i].value + '",';
+            strJsonLigne += '"' + coefMarge[i].name + '": "' + coefMarge[i].value + '",';
+            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '"';
+        }
+
+        jsonLigne[i].value =  '{'+strJsonLigne+'}';
 	}
 	$("#h_a_totauxSousTraitance").html(parseFloat(sommeTotale.toFixed(2))+" euros");
 	$("#totalPxVenteSousTraitance").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros");
@@ -1605,15 +1645,31 @@ function fctChangeValeurDevisSousTraitance()
 
 function fctChangeValeurDevisPrestation()
 {
-	var qte 	= $("#tablePrestation input[name='qte']");
-	var tarif   = $("#tablePrestation input[name='tarif']");
-	var pxvente = $("#tablePrestation input[name='pxvente']");
+	var qte 	   = $("#tablePrestation input[name='qte']");
+	var tarif      = $("#tablePrestation input[name='tarif']");
+	var pxvente    = $("#tablePrestation input[name='pxvente']");
+
+    var code 	   = $("#tablePrestation input[name='code']");
+    var prestation = $("#tablePrestation input[name='prestation']");
+
+    var jsonLigne  = $("#tablePrestation input[name='json_Prestation[]']");
 
 	var sommeTotalePxVente = 0;
 
 	for(var i=0;i<qte.length;i++) {
         pxvente[i].value = parseFloat((tarif[i].value * qte[i].value).toFixed(2));
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+
+        var strJsonLigne = "";
+        if (qte[i].value !== "") {
+            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '",';
+            strJsonLigne += '"' + prestation[i].name + '": "' + prestation[i].value + '",';
+            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '"';
+        }
+
+        jsonLigne[i].value =  '{'+strJsonLigne+'}';
 	}
 	$("#h_a_totauxPrestation").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros")	;
 	$("#totalPxVentePrestation").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros");
@@ -1627,6 +1683,11 @@ function fctChangeValeurDevisFaconnage()
     var haTotal = $("#tableFaconnage input[name='h.a_total']");
     var pxvente = $("#tableFaconnage input[name='pxvente']");
 
+    var code = $("#tableFaconnage input[name='code']");
+    var faconnage = $("#tableFaconnage input[name='faconnage']");
+
+    var jsonLigne	= $("#tableFaconnage input[name='json_Faconnage[]']");
+
     var sommeTotale = 0;
     var sommeTotalePxVente = 0;
 
@@ -1635,6 +1696,19 @@ function fctChangeValeurDevisFaconnage()
         sommeTotale += parseFloat(haTotal[i].value);
         pxvente[i].value = haTotal[i].value;
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+
+        var strJsonLigne = "";
+        if (qte[i].value !== "") {
+            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
+            strJsonLigne += '"' + ha[i].name + '": "' + ha[i].value + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
+            strJsonLigne += '"' + haTotal[i].name + '": "' + haTotal[i].value + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '",';
+            strJsonLigne += '"' + faconnage[i].name + '": "' + faconnage[i].value + '",';
+            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '"';
+        }
+
+        jsonLigne[i].value =  '{'+strJsonLigne+'}';
     }
     $("#h_a_totauxFaconnage").html(parseFloat(sommeTotale.toFixed(2))+" euros");
     $("#totalPxVenteFaconnage").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros");
@@ -1650,6 +1724,11 @@ function fctChangeValeurDevisAdhesif()
     var coefMarge = $("#tableAdhesif input[name='coefMarge']");
     var pxvente = $("#tableAdhesif input[name='pxvente']");
 
+    var code 	    = $("#tableAdhesif input[name='code']");
+    var adhesif		= $("#tableAdhesif input[name='adhesif']");
+
+    var jsonLigne  = $("#tableAdhesif input[name='json_Adhesif[]']");
+
     var sommeTotale = 0;
     var sommeTotalePxVente = 0;
 
@@ -1658,6 +1737,20 @@ function fctChangeValeurDevisAdhesif()
         sommeTotale += parseFloat(haTotal[i].value);
         pxvente[i].value = parseFloat((coefMarge[i].value * haTotal[i].value).toFixed(2));
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+
+        var strJsonLigne = "";
+        if (qte[i].value !== "") {
+            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
+            strJsonLigne += '"' + ha[i].name + '": "' + ha[i].value + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
+            strJsonLigne += '"' + haTotal[i].name + '": "' + haTotal[i].value + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '",';
+            strJsonLigne += '"' + adhesif[i].name + '": "' + adhesif[i].value + '",';
+            strJsonLigne += '"' + coefMarge[i].name + '": "' + coefMarge[i].value + '",';
+            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '"';
+        }
+
+        jsonLigne[i].value =  '{'+strJsonLigne+'}';
     }
     $("#h_a_totauxAdhesif").html(parseFloat(sommeTotale.toFixed(2))+" euros");
     $("#totalPxVenteAdhesif").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros");
@@ -1673,6 +1766,11 @@ function fctChangeValeurDevisFraisTechnique()
     var tarifMinute = $("#tableFraisTechnique input[name='tarifMinute']");
     var pxvente = $("#tableFraisTechnique input[name='pxvente']");
 
+    var code 	    	= $("#tableFraisTechnique input[name='code']");
+    var fraisTechnique	= $("#tableFraisTechnique input[name='fraisTechnique']");
+
+    var jsonLigne  = $("#tableFraisTechnique input[name='json_FraisTechnique[]']");
+
     var sommeTotale = 0;
     var sommeTotalePxVente = 0;
 
@@ -1682,6 +1780,20 @@ function fctChangeValeurDevisFraisTechnique()
         pxvente[i].value = (parseFloat(tarifHoraire[i].value) + parseFloat(tarifMinute[i].value));
         sommeTotale += parseFloat(pxvente[i].value);
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+
+        var strJsonLigne = "";
+        if (taux[i].value !== "") {
+            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
+            strJsonLigne += '"' + taux[i].name + '": "' + taux[i].value + '",';
+            strJsonLigne += '"' + heures[i].name + '": "' + heures[i].value + '",';
+            strJsonLigne += '"' + minutes[i].name + '": "' + minutes[i].value + '",';
+            strJsonLigne += '"' + tarifHoraire[i].name + '": "' + tarifHoraire[i].value + '",';
+            strJsonLigne += '"' + tarifMinute[i].name + '": "' + tarifMinute[i].value + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '",';
+            strJsonLigne += '"' + fraisTechnique[i].name + '": "' + fraisTechnique[i].value + '"';
+        }
+
+        jsonLigne[i].value =  '{'+strJsonLigne+'}';
     }
     $("#h_a_totauxFraisTechnique").html(parseFloat(sommeTotale.toFixed(2))+" euros");
     $("#totalPxVenteFraisTechnique").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros");
@@ -1694,6 +1806,11 @@ function fctChangeValeurDevisForfaitPrestation()
     var tarif	= $("#tableForfaitPrestation input[name='tarif']");
     var pxvente = $("#tableForfaitPrestation input[name='pxvente']");
 
+    var code 	   = $("#tableForfaitPrestation input[name='code']");
+    var prestation = $("#tableForfaitPrestation input[name='prestation']");
+
+    var jsonLigne  = $("#tableForfaitPrestation input[name='json_ForfaitPrestation[]']");
+
     var sommeTotale = 0;
     var sommeTotalePxVente = 0;
 
@@ -1701,6 +1818,17 @@ function fctChangeValeurDevisForfaitPrestation()
         pxvente[i].value = parseFloat((parseFloat(qte[i].value) * parseFloat(tarif[i].value)).toFixed(2));
         sommeTotale += parseFloat(pxvente[i].value);
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+
+        var strJsonLigne = "";
+        if (qte[i].value !== "") {
+            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '",';
+            strJsonLigne += '"' + prestation[i].name + '": "' + prestation[i].value + '",';
+            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '"';
+        }
+
+        jsonLigne[i].value =  '{'+strJsonLigne+'}';
     }
     $("#h_a_totauxForfaitPrestation").html(parseFloat(sommeTotale.toFixed(2))+" euros");
     $("#totalPxVenteForfaitPrestation").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros");
@@ -1714,15 +1842,33 @@ function fctChangeValeurDevisDeplacement()
     var coutJour	= $("#tableDeplacement input[name='coutJour']");
     var nbjours		= $("#tableDeplacement input[name='nbJours']");
     var pxvente	 	= $("#tableDeplacement input[name='pxvente']");
+    var code	 	= $("#tableDeplacement input[name='code']");
+    var deplacement	= $("#tableDeplacement input[name='deplacement']");
+
+    var jsonLigne	= $("#tableDeplacement input[name='json_Deplacement[]']");
 
     var sommeTotale = 0;
     var sommeTotalePxVente = 0;
+
 
     for(var i=0;i<qte.length;i++) {
     	coutJour[i].value = parseFloat((tarifUnique[i].value * qte[i].value).toFixed(2));
         pxvente[i].value = (parseFloat(nbjours[i].value) * parseFloat(coutJour[i].value));
         sommeTotale += parseFloat(coutJour[i].value);
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+
+        var strJsonLigne = "";
+        if (qte[i].value !== "") {
+        	strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
+        	strJsonLigne += '"' + tarifUnique[i].name + '": "' + tarifUnique[i].value + '",';
+        	strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
+        	strJsonLigne += '"' + coutJour[i].name + '": "' + coutJour[i].value + '",';
+        	strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '",';
+        	strJsonLigne += '"' + nbjours[i].name + '": "' + nbjours[i].value + '",';
+        	strJsonLigne += '"' + deplacement[i].name + '": "' + deplacement[i].value + '"';
+        }
+
+        jsonLigne[i].value =  '{'+strJsonLigne+'}';
     }
 
 	$("#h_a_totauxDeplacement").html(parseFloat(sommeTotale.toFixed(2))+" euros");
@@ -1738,6 +1884,11 @@ function fctChangeValeurDevisFourniture()
     var coefMarge = $("#tableFourniture input[name='coefMarge']");
     var pxvente = $("#tableFourniture input[name='pxvente']");
 
+    var code 	   = $("#tableFourniture input[name='code']");
+    var fourniture = $("#tableFourniture input[name='fourniture']");
+
+    var jsonLigne  = $("#tableFourniture input[name='json_Fourniture[]']");
+
     var sommeTotale = 0;
     var sommeTotalePxVente = 0;
 
@@ -1746,6 +1897,19 @@ function fctChangeValeurDevisFourniture()
         sommeTotale += parseFloat(haTotal[i].value);
         pxvente[i].value = parseFloat((coefMarge[i].value * haTotal[i].value).toFixed(2));
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+
+        var strJsonLigne = "";
+        if (qte[i].value !== "") {
+            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
+            strJsonLigne += '"' + fourniture[i].name + '": "' + fourniture[i].value + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
+            strJsonLigne += '"' + ha[i].name + '": "' + ha[i].value + '",';
+            strJsonLigne += '"' + haTotal[i].name + '": "' + haTotal[i].value + '",';
+            strJsonLigne += '"' + coefMarge[i].name + '": "' + coefMarge[i].value + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '"';
+        }
+
+        jsonLigne[i].value =  '{'+strJsonLigne+'}';
     }
     $("#h_a_totauxFourniture").html(parseFloat(sommeTotale.toFixed(2))+" euros");
     $("#totalPxVenteFourniture").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros");
@@ -1760,6 +1924,11 @@ function fctChangeValeurDevisPose()
     var coefMarge = $("#tablePose input[name='coefMarge']");
     var pxvente = $("#tablePose input[name='pxvente']");
 
+    var code 	   = $("#tablePose input[name='code']");
+    var pose = $("#tablePose input[name='pose']");
+
+    var jsonLigne  = $("#tablePose input[name='json_Pose[]']");
+
     var sommeTotale = 0;
     var sommeTotalePxVente = 0;
 
@@ -1768,6 +1937,19 @@ function fctChangeValeurDevisPose()
         sommeTotale += parseFloat(haTotal[i].value);
         pxvente[i].value = parseFloat((coefMarge[i].value * haTotal[i].value).toFixed(2));
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+
+        var strJsonLigne = "";
+        if (qte[i].value !== "") {
+            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
+            strJsonLigne += '"' + pose[i].name + '": "' + pose[i].value + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
+            strJsonLigne += '"' + ha[i].name + '": "' + ha[i].value + '",';
+            strJsonLigne += '"' + haTotal[i].name + '": "' + haTotal[i].value + '",';
+            strJsonLigne += '"' + coefMarge[i].name + '": "' + coefMarge[i].value + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '"';
+        }
+
+        jsonLigne[i].value =  '{'+strJsonLigne+'}';
     }
 
     $("#h_a_totauxPose").html(parseFloat(sommeTotale.toFixed(2))+" euros");

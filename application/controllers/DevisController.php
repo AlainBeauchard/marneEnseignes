@@ -79,19 +79,47 @@ class DevisController extends Zend_Controller_Action
         $devis = $db_devis->find($id_devis)->current();
         $this->view->devis = $devis;
 
-        $select = $db_items->select()->where('id_devis = ?', $devis->id);
-        $items = $db_items->fetchAll($select);
+        $selectAdhesif = $db_items->select()->where('id_devis = ?', $devis->id)
+        ->where(' typeligne = ? ', 'adhesif');
+        $itemsAdhesif = $db_items->fetchAll($selectAdhesif);
+        $selectDeplacement = $db_items->select()->where('id_devis = ?', $devis->id)
+        ->where(' typeligne = ? ', 'deplacement');
+        $itemsDeplacement = $db_items->fetchAll($selectDeplacement);
+        $selectFaconnage = $db_items->select()->where('id_devis = ?', $devis->id)
+        ->where(' typeligne = ? ', 'faconnage');
+        $itemsFaconnage = $db_items->fetchAll($selectFaconnage);
+        $selectForfaitPrestation = $db_items->select()->where('id_devis = ?', $devis->id)
+        ->where(' typeligne = ? ', 'forfaitprestation');
+        $itemsForfaitPrestation = $db_items->fetchAll($selectForfaitPrestation);
+        $selectFourntiure = $db_items->select()->where('id_devis = ?', $devis->id)
+        ->where(' typeligne = ? ', 'fourniture');
+        $itemsFourntiure = $db_items->fetchAll($selectFourntiure);
+        $selectFraisTechnique = $db_items->select()->where('id_devis = ?', $devis->id)
+        ->where(' typeligne = ? ', 'fraistechnique');
+        $itemsFraisTechnique = $db_items->fetchAll($selectFraisTechnique);
+        $selectPose = $db_items->select()->where('id_devis = ?', $devis->id)
+        ->where(' typeligne = ? ', 'pose');
+        $itemsPose = $db_items->fetchAll($selectPose);
+        $selectPrestation = $db_items->select()->where('id_devis = ?', $devis->id)
+        ->where(' typeligne = ? ', 'prestation');
+        $itemsPrestation = $db_items->fetchAll($selectPrestation);
+        $selectProduit = $db_items->select()->where('id_devis = ?', $devis->id)
+        ->where(' typeligne = ? ', 'produit');
+        $itemsProduit = $db_items->fetchAll($selectProduit);
+        $selectSousTraitance = $db_items->select()->where('id_devis = ?', $devis->id)
+        ->where(' typeligne = ? ', 'soustraitance');
+        $itemsSousTraitance = $db_items->fetchAll($selectSousTraitance);
 
-        $this->view->itemsProduits = [];
-        $this->view->itemsDeplacement = [];
-        $this->view->itemsFaconnage = [];
-        $this->view->itemsForfaitPrestation = [];
-        $this->view->itemsFourniture = [];
-        $this->view->itemsFraisTechniques = [];
-        $this->view->itemsPose = [];
-        $this->view->itemsPrestation = [];
-        $this->view->itemsSousTraitance = [];
-        $this->view->itemsAdhesif = [];
+        $this->view->itemsProduits = $itemsProduit;
+        $this->view->itemsDeplacement = $itemsDeplacement;
+        $this->view->itemsFaconnage = $itemsFaconnage;
+        $this->view->itemsForfaitPrestation = $itemsForfaitPrestation;
+        $this->view->itemsFourniture = $itemsFourntiure;
+        $this->view->itemsFraisTechniques = $itemsFraisTechnique;
+        $this->view->itemsPose = $itemsPose;
+        $this->view->itemsPrestation = $itemsPrestation;
+        $this->view->itemsSousTraitance = $itemsSousTraitance;
+        $this->view->itemsAdhesif = $itemsAdhesif;
 
         $db_client = new Application_Model_Clients();
         $client = $db_client->find($devis->id_client)->current();
