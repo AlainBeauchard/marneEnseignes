@@ -79,47 +79,16 @@ class DevisController extends Zend_Controller_Action
         $devis = $db_devis->find($id_devis)->current();
         $this->view->devis = $devis;
 
-        $selectAdhesif = $db_items->select()->where('id_devis = ?', $devis->id)
-        ->where(' typeligne = ? ', 'adhesif');
-        $itemsAdhesif = $db_items->fetchAll($selectAdhesif);
-        $selectDeplacement = $db_items->select()->where('id_devis = ?', $devis->id)
-        ->where(' typeligne = ? ', 'deplacement');
-        $itemsDeplacement = $db_items->fetchAll($selectDeplacement);
-        $selectFaconnage = $db_items->select()->where('id_devis = ?', $devis->id)
-        ->where(' typeligne = ? ', 'faconnage');
-        $itemsFaconnage = $db_items->fetchAll($selectFaconnage);
-        $selectForfaitPrestation = $db_items->select()->where('id_devis = ?', $devis->id)
-        ->where(' typeligne = ? ', 'forfaitprestation');
-        $itemsForfaitPrestation = $db_items->fetchAll($selectForfaitPrestation);
-        $selectFourntiure = $db_items->select()->where('id_devis = ?', $devis->id)
-        ->where(' typeligne = ? ', 'fourniture');
-        $itemsFourntiure = $db_items->fetchAll($selectFourntiure);
-        $selectFraisTechnique = $db_items->select()->where('id_devis = ?', $devis->id)
-        ->where(' typeligne = ? ', 'fraistechnique');
-        $itemsFraisTechnique = $db_items->fetchAll($selectFraisTechnique);
-        $selectPose = $db_items->select()->where('id_devis = ?', $devis->id)
-        ->where(' typeligne = ? ', 'pose');
-        $itemsPose = $db_items->fetchAll($selectPose);
-        $selectPrestation = $db_items->select()->where('id_devis = ?', $devis->id)
-        ->where(' typeligne = ? ', 'prestation');
-        $itemsPrestation = $db_items->fetchAll($selectPrestation);
-        $selectProduit = $db_items->select()->where('id_devis = ?', $devis->id)
-        ->where(' typeligne = ? ', 'produit');
-        $itemsProduit = $db_items->fetchAll($selectProduit);
-        $selectSousTraitance = $db_items->select()->where('id_devis = ?', $devis->id)
-        ->where(' typeligne = ? ', 'soustraitance');
-        $itemsSousTraitance = $db_items->fetchAll($selectSousTraitance);
+        $tab = ['Adhesif', 'Deplacement', 'Faconnage', 'ForfaitPrestation', 'Fourniture',
+                'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique'
+               ];
 
-        $this->view->itemsProduits = $itemsProduit;
-        $this->view->itemsDeplacement = $itemsDeplacement;
-        $this->view->itemsFaconnage = $itemsFaconnage;
-        $this->view->itemsForfaitPrestation = $itemsForfaitPrestation;
-        $this->view->itemsFourniture = $itemsFourntiure;
-        $this->view->itemsFraisTechniques = $itemsFraisTechnique;
-        $this->view->itemsPose = $itemsPose;
-        $this->view->itemsPrestation = $itemsPrestation;
-        $this->view->itemsSousTraitance = $itemsSousTraitance;
-        $this->view->itemsAdhesif = $itemsAdhesif;
+        foreach($tab as $item) {
+            $valItem = 'items'.$item;
+            $select = $db_items->select()->where('id_devis = ?', $devis->id)
+                ->where(' typeligne = ? ', strtolower($item));
+            $this->view->$valItem = $db_items->fetchAll($select);
+        }
 
         $db_client = new Application_Model_Clients();
         $client = $db_client->find($devis->id_client)->current();
@@ -141,7 +110,14 @@ class DevisController extends Zend_Controller_Action
 
     public function deleteAction()
     {
+        $db_devis = new Application_Model_Devis();
+        $db_items = new Application_Model_ItemDevis();
 
+        $idDevis = $this->_getParam('id');
+        $db_items->delete("id_devis = ".$idDevis);
+        $db_devis->delete("id_devis = ".$idDevis);
+
+        $this->_redirect('/devis/');
     }
 
     /**
@@ -156,15 +132,62 @@ class DevisController extends Zend_Controller_Action
                 $datas[$key] = $value;
             }
         }
-        if($db_devis->update($datas, array('id_devis = ?' => $idDevis))){
+
+        $devis = $db_devis->find($idDevis)->current();
+
+        $data = [];
+        $data['id'] = $idDevis;
+        $data['id_client'] = $devis->id_client;
+        $data['date'] = $devis->date;
+        $data['date_validite'] = $devis->date_validite;
+        $data['delai'] = $datas['delai'];
+        $data['titre'] = $datas['intitule'];
+        $data['redaction'] = $devis->redaction;
+        $data['valide'] = $devis->valide;
+        $data['date_validation'] = $devis->date_validation;
+        $data['facture'] = $devis->facture;
+        $data['date_facture'] = $devis->date_facture;
+        $data['paye'] = $devis->paye;
+        $data['redaction_facture'] = $devis->redaction_facture;
+        $data['date_paiement'] = $devis->date_paiement;
+        $data['acompte'] = $devis->acompte;
+        $data['remise'] = $devis->remise;
+        $data['ref'] = $datas['refDossier'];
+        $data['reglement'] = $devis->reglement;
+
+        //if($db_devis->update($data, array('id = ?' => $idDevis))){
 
             //on supprime les items avec le devis
             $db_items->delete("id_devis = ".$idDevis);
 
-            //TODO on ajoute ceux que l'on vient de recevoir !
+            $tab = ['Adhesif', 'Deplacement', 'Faconnage', 'ForfaitPrestation', 'Fourniture',
+                'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique'
+            ];
+
+            foreach ($tab as $item) {
+                if (isset($_REQUEST['json_' . $item])) {
+                    foreach ($_REQUEST['json_' . $item] as $ligne) {
+
+                        if( $ligne != '' ) {
+                            $row = $db_items->createRow(['id_devis' => $idDevis]);
+
+                            $row->id_item = 0;
+                            $row->remise = 0;
+                            $row->pht = 0;
+                            $row->typeligne = strtolower($item);
+                            $row->json = strtolower($ligne);
+
+                            $row->save();
+                        }
+                    }
+                }
+            }
 
             $this->_redirect('/devis/editer/id/' . $idDevis);
-        }
+        //} else {
+
+        //}
+
     }
 }
 

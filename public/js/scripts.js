@@ -1585,14 +1585,14 @@ function fctChangeValeurDevisProduit()
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
-            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
-            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
-            strJsonLigne += '"' + ha[i].name + '": "' + ha[i].value + '",';
-            strJsonLigne += '"' + haTotal[i].name + '": "' + haTotal[i].value + '",';
-            strJsonLigne += '"' + format[i].name + '": "' + format[i].value + '",';
-            strJsonLigne += '"' + coefMarge[i].name + '": "' + coefMarge[i].value + '",';
-            strJsonLigne += '"' + support[i].name + '": "' + support[i].value + '",';
-            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '"';
+            strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + $(qte[i]).val() + '",';
+            strJsonLigne += '"' + ha[i].name + '": "' + $(ha[i]).val() + '",';
+            strJsonLigne += '"' + haTotal[i].name + '": "' + $(haTotal[i]).val() + '",';
+            strJsonLigne += '"' + format[i].name + '": "' + $(format[i]).val() + '",';
+            strJsonLigne += '"' + coefMarge[i].name + '": "' + $(coefMarge[i]).val() + '",';
+            strJsonLigne += '"' + support[i].name + '": "' + $(support[i]).val() + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '"';
         }
 
         jsonLigne[i].value =  '{'+strJsonLigne+'}';
@@ -1627,13 +1627,13 @@ function fctChangeValeurDevisSousTraitance()
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
-            strJsonLigne += '"' + ha[i].name + '": "' + ha[i].value + '",';
-            strJsonLigne += '"' + haTotal[i].name + '": "' + haTotal[i].value + '",';
-            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
-            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '",';
-            strJsonLigne += '"' + support[i].name + '": "' + support[i].value + '",';
-            strJsonLigne += '"' + coefMarge[i].name + '": "' + coefMarge[i].value + '",';
-            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '"';
+            strJsonLigne += '"' + ha[i].name + '": "' + $(ha[i]).val() + '",';
+            strJsonLigne += '"' + haTotal[i].name + '": "' + $(haTotal[i]).val() + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + $(qte[i]).val() + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '",';
+            strJsonLigne += '"' + support[i].name + '": "' + $(support[i]).val() + '",';
+            strJsonLigne += '"' + coefMarge[i].name + '": "' + $(coefMarge[i]).val() + '",';
+            strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '"';
         }
 
         jsonLigne[i].value =  '{'+strJsonLigne+'}';
@@ -1662,11 +1662,11 @@ function fctChangeValeurDevisPrestation()
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
-            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
-            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
-            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '",';
-            strJsonLigne += '"' + prestation[i].name + '": "' + prestation[i].value + '",';
-            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '"';
+            strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + $(qte[i]).val() + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '",';
+            strJsonLigne += '"' + prestation[i].name + '": "' + $(prestation[i]).val() + '",';
+            strJsonLigne += '"' + tarif[i].name + '": "' + $(tarif[i]).val() + '"';
         }
 
         jsonLigne[i].value =  '{'+strJsonLigne+'}';
@@ -1699,13 +1699,13 @@ function fctChangeValeurDevisFaconnage()
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
-            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
-            strJsonLigne += '"' + ha[i].name + '": "' + ha[i].value + '",';
-            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
-            strJsonLigne += '"' + haTotal[i].name + '": "' + haTotal[i].value + '",';
-            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '",';
-            strJsonLigne += '"' + faconnage[i].name + '": "' + faconnage[i].value + '",';
-            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '"';
+            strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '",';
+            strJsonLigne += '"' + ha[i].name + '": "' + $(ha[i]).val() + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + $(qte[i]).val() + '",';
+            strJsonLigne += '"' + haTotal[i].name + '": "' + $(haTotal[i]).val() + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '",';
+            strJsonLigne += '"' + faconnage[i].name + '": "' + $(faconnage[i]).val() + '",';
+            strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '"';
         }
 
         jsonLigne[i].value =  '{'+strJsonLigne+'}';
@@ -1740,14 +1740,14 @@ function fctChangeValeurDevisAdhesif()
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
-            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
-            strJsonLigne += '"' + ha[i].name + '": "' + ha[i].value + '",';
-            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
-            strJsonLigne += '"' + haTotal[i].name + '": "' + haTotal[i].value + '",';
-            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '",';
-            strJsonLigne += '"' + adhesif[i].name + '": "' + adhesif[i].value + '",';
-            strJsonLigne += '"' + coefMarge[i].name + '": "' + coefMarge[i].value + '",';
-            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '"';
+            strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '",';
+            strJsonLigne += '"' + ha[i].name + '": "' + $(ha[i]).val() + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + $(qte[i]).val() + '",';
+            strJsonLigne += '"' + haTotal[i].name + '": "' + $(haTotal[i]).val() + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '",';
+            strJsonLigne += '"' + adhesif[i].name + '": "' + $(adhesif[i]).val() + '",';
+            strJsonLigne += '"' + coefMarge[i].name + '": "' + $(coefMarge[i]).val() + '",';
+            strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '"';
         }
 
         jsonLigne[i].value =  '{'+strJsonLigne+'}';
@@ -1783,14 +1783,14 @@ function fctChangeValeurDevisFraisTechnique()
 
         var strJsonLigne = "";
         if (taux[i].value !== "") {
-            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
-            strJsonLigne += '"' + taux[i].name + '": "' + taux[i].value + '",';
-            strJsonLigne += '"' + heures[i].name + '": "' + heures[i].value + '",';
-            strJsonLigne += '"' + minutes[i].name + '": "' + minutes[i].value + '",';
-            strJsonLigne += '"' + tarifHoraire[i].name + '": "' + tarifHoraire[i].value + '",';
-            strJsonLigne += '"' + tarifMinute[i].name + '": "' + tarifMinute[i].value + '",';
-            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '",';
-            strJsonLigne += '"' + fraisTechnique[i].name + '": "' + fraisTechnique[i].value + '"';
+            strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '",';
+            strJsonLigne += '"' + taux[i].name + '": "' + $(taux[i]).val() + '",';
+            strJsonLigne += '"' + heures[i].name + '": "' + $(heures[i]).val() + '",';
+            strJsonLigne += '"' + minutes[i].name + '": "' + $(minutes[i]).val() + '",';
+            strJsonLigne += '"' + tarifHoraire[i].name + '": "' + $(tarifHoraire[i]).val() + '",';
+            strJsonLigne += '"' + tarifMinute[i].name + '": "' + $(tarifMinute[i]).val() + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '",';
+            strJsonLigne += '"' + fraisTechnique[i].name + '": "' + $(fraisTechnique[i]).val() + '"';
         }
 
         jsonLigne[i].value =  '{'+strJsonLigne+'}';
@@ -1821,11 +1821,11 @@ function fctChangeValeurDevisForfaitPrestation()
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
-            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
-            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
-            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '",';
-            strJsonLigne += '"' + prestation[i].name + '": "' + prestation[i].value + '",';
-            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '"';
+            strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + $(qte[i]).val() + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '",';
+            strJsonLigne += '"' + prestation[i].name + '": "' + $(prestation[i]).val() + '",';
+            strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '"';
         }
 
         jsonLigne[i].value =  '{'+strJsonLigne+'}';
@@ -1859,13 +1859,13 @@ function fctChangeValeurDevisDeplacement()
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
-        	strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
-        	strJsonLigne += '"' + tarifUnique[i].name + '": "' + tarifUnique[i].value + '",';
-        	strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
-        	strJsonLigne += '"' + coutJour[i].name + '": "' + coutJour[i].value + '",';
-        	strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '",';
-        	strJsonLigne += '"' + nbjours[i].name + '": "' + nbjours[i].value + '",';
-        	strJsonLigne += '"' + deplacement[i].name + '": "' + deplacement[i].value + '"';
+        	strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '",';
+        	strJsonLigne += '"' + tarifUnique[i].name + '": "' + $(tarifUnique[i]).val() + '",';
+        	strJsonLigne += '"' + qte[i].name + '": "' + $(qte[i]).val() + '",';
+        	strJsonLigne += '"' + coutJour[i].name + '": "' + $(coutJour[i]).val() + '",';
+        	strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '",';
+        	strJsonLigne += '"' + nbjours[i].name + '": "' + $(nbjours[i]).val() + '",';
+        	strJsonLigne += '"' + deplacement[i].name + '": "' + $(deplacement[i]).val() + '"';
         }
 
         jsonLigne[i].value =  '{'+strJsonLigne+'}';
@@ -1900,13 +1900,13 @@ function fctChangeValeurDevisFourniture()
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
-            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
-            strJsonLigne += '"' + fourniture[i].name + '": "' + fourniture[i].value + '",';
-            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
-            strJsonLigne += '"' + ha[i].name + '": "' + ha[i].value + '",';
-            strJsonLigne += '"' + haTotal[i].name + '": "' + haTotal[i].value + '",';
-            strJsonLigne += '"' + coefMarge[i].name + '": "' + coefMarge[i].value + '",';
-            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '"';
+            strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '",';
+            strJsonLigne += '"' + fourniture[i].name + '": "' + $(fourniture[i]).val() + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + $(qte[i]).val() + '",';
+            strJsonLigne += '"' + ha[i].name + '": "' + $(ha[i]).val() + '",';
+            strJsonLigne += '"' + haTotal[i].name + '": "' + $(haTotal[i]).val() + '",';
+            strJsonLigne += '"' + coefMarge[i].name + '": "' + $(coefMarge[i]).val() + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '"';
         }
 
         jsonLigne[i].value =  '{'+strJsonLigne+'}';
@@ -1940,13 +1940,13 @@ function fctChangeValeurDevisPose()
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
-            strJsonLigne += '"' + code[i].name + '": "' + code[i].value + '",';
-            strJsonLigne += '"' + pose[i].name + '": "' + pose[i].value + '",';
-            strJsonLigne += '"' + qte[i].name + '": "' + qte[i].value + '",';
-            strJsonLigne += '"' + ha[i].name + '": "' + ha[i].value + '",';
-            strJsonLigne += '"' + haTotal[i].name + '": "' + haTotal[i].value + '",';
-            strJsonLigne += '"' + coefMarge[i].name + '": "' + coefMarge[i].value + '",';
-            strJsonLigne += '"' + pxvente[i].name + '": "' + pxvente[i].value + '"';
+            strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '",';
+            strJsonLigne += '"' + pose[i].name + '": "' + $(pose[i]).val() + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + $(qte[i]).val() + '",';
+            strJsonLigne += '"' + ha[i].name + '": "' + $(ha[i]).val() + '",';
+            strJsonLigne += '"' + haTotal[i].name + '": "' + $(haTotal[i]).val() + '",';
+            strJsonLigne += '"' + coefMarge[i].name + '": "' + $(coefMarge[i]).val() + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '"';
         }
 
         jsonLigne[i].value =  '{'+strJsonLigne+'}';

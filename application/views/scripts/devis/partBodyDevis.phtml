@@ -1,157 +1,160 @@
-<div class="panel-devis" >
-    <div class="panel-devis-head">
-        <div class="entete-devis entete-devis-left">
-            <table >
-                <tr>
-                    <td>
-                        <?= $this->form->codeClient ?>
-                    </td>
-                    <td>
-                        <?= $this->form->refDossier ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <?= $this->form->dateCreation ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <?= $this->form->delai ?>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="entete-devis entete-devis-right">
-            <div style="width: 85%" class="pull-left">
-                <table id="tableEntete" class="table-entete-devis">
+<form action="" method="POST" name="formDevis">
+    <div class="panel-devis" >
+        <div class="panel-devis-head">
+            <div class="entete-devis entete-devis-left">
+                <table >
                     <tr>
-                        <td colspan="4">
-                            <?= $this->form->nomClient ?>
+                        <td>
+                            <?= $this->form->codeClient ?>
                         </td>
-                        <td colspan="4">
-                            <?= $this->form->intitule ?>
+                        <td>
+                            <?= $this->form->refDossier ?>
                         </td>
                     </tr>
                     <tr>
-                        <th>Largeur</th>
-                        <th>Hauteur</th>
-                        <th>Surface</th>
-                        <th>Quantité</th>
-                        <th>Surf totale</th>
-                        <th>Coef pub</th>
-                        <th>Surf pub</th>
-                        <th>Périmètre</th>
+                        <td colspan="2">
+                            <?= $this->form->dateCreation ?>
+                        </td>
                     </tr>
                     <tr>
-                        <td><input type="text" name="largeurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" ></td>
-                        <td><input type="text" name="hauteurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                        <td><input type="text" name="surfaceTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                        <td><input type="text" name="qteTableEntete"         onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                        <td><input type="text" name="surfTotalTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                        <td><input type="text" name="coefPubTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                        <td><input type="text" name="surfacePubTableEntete"  onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                        <td><input type="text" name="perimetreTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                        <td colspan="2">
+                            <?= $this->form->delai ?>
+                        </td>
                     </tr>
-                    <tfoot>
+                </table>
+            </div>
+            <div class="entete-devis entete-devis-right">
+                <div style="width: 85%" class="pull-left">
+                    <table id="tableEntete" class="table-entete-devis">
                         <tr>
-                            <td colspan="4" class="titrefooter haTotal">Surface totale</td>
-                            <td id="sommeSurfTotale" class="titrefooter haTotal"></td>
-                            <td class="haTotal">Surf pub</td>
-                            <td id="sommeSurfPub" class="titrefooter marge" ></td>
-                            <td id="sommePerimetre" class="marge"></td>
+                            <td colspan="4">
+                                <?= $this->form->nomClient ?>
+                            </td>
+                            <td colspan="4">
+                                <?= $this->form->intitule ?>
+                            </td>
                         </tr>
-                    </tfoot>
-                </table>
+                        <tr>
+                            <th>Largeur</th>
+                            <th>Hauteur</th>
+                            <th>Surface</th>
+                            <th>Quantité</th>
+                            <th>Surf totale</th>
+                            <th>Coef pub</th>
+                            <th>Surf pub</th>
+                            <th>Périmètre</th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="largeurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" ></td>
+                            <td><input type="text" name="hauteurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                            <td><input type="text" name="surfaceTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                            <td><input type="text" name="qteTableEntete"         onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                            <td><input type="text" name="surfTotalTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                            <td><input type="text" name="coefPubTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                            <td><input type="text" name="surfacePubTableEntete"  onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                            <td><input type="text" name="perimetreTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                        </tr>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4" class="titrefooter haTotal">Surface totale</td>
+                                <td id="sommeSurfTotale" class="titrefooter haTotal"></td>
+                                <td class="haTotal">Surf pub</td>
+                                <td id="sommeSurfPub" class="titrefooter marge" ></td>
+                                <td id="sommePerimetre" class="marge"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="elemCache">
+                    <table class="table-entete-devis">
+                        <tr id="elemCacheTableEntete">
+                            <td><input type="text" name="largeurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" ></td>
+                            <td><input type="text" name="hauteurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                            <td><input type="text" name="surfaceTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                            <td><input type="text" name="qteTableEntete"         onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                            <td><input type="text" name="surfTotalTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                            <td><input type="text" name="coefPubTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                            <td><input type="text" name="surfacePubTableEntete"  onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                            <td><input type="text" name="perimetreTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                        </tr>
+                    </table>
+                    <input type="hidden" name="nbLigneTableEntete" id="nbLigneTableEntete" value="1" >
+                </div>
+                <div style="width:20px" class="pull-right">
+                    <button type="button" id="BtAjoutligneTableEntete" class="btn btn-default voffset1" title="Ajouter une ligne" onclick="fctAjoutLigneTableEntete();">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <button type="button" id="BtSuprimeligneTableEntete" class="btn btn-default voffset1" title="Supprimer une ligne" onclick="fctSupprimeLigneTableEntete();">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                </div>
             </div>
-            <div class="elemCache">
-                <table class="table-entete-devis">
-                    <tr id="elemCacheTableEntete">
-                        <td><input type="text" name="largeurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" ></td>
-                        <td><input type="text" name="hauteurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                        <td><input type="text" name="surfaceTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                        <td><input type="text" name="qteTableEntete"         onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                        <td><input type="text" name="surfTotalTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                        <td><input type="text" name="coefPubTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                        <td><input type="text" name="surfacePubTableEntete"  onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                        <td><input type="text" name="perimetreTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                    </tr>
-                </table>
-                <input type="hidden" name="nbLigneTableEntete" id="nbLigneTableEntete" value="1" >
-            </div>
-            <div style="width:20px" class="pull-right">
-                <button type="button" id="BtAjoutligneTableEntete" class="btn btn-default voffset1" title="Ajouter une ligne" onclick="fctAjoutLigneTableEntete();">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-                <button type="button" id="BtSuprimeligneTableEntete" class="btn btn-default voffset1" title="Supprimer une ligne" onclick="fctSupprimeLigneTableEntete();">
-                    <span class="glyphicon glyphicon-minus"></span>
-                </button>
+            <div class="entete-devis devis-entete-bt">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                        Ajouter
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation" data-addbloc="produit" >Un bloc produit</li>
+                        <li role="presentation" data-addbloc="sousTraitance" >Un bloc sous-traitance</li>
+                        <li role="presentation" data-addbloc="prestation" >Un bloc prestation</li>
+                        <li role="presentation" data-addbloc="faconnage" >Un bloc façonnage adhésif</li>
+                        <li role="presentation" data-addbloc="adhesif" >Un bloc adhésif</li>
+                        <li role="presentation" data-addbloc="fraisTechniques" >Un bloc frais techniques</li>
+                        <li role="presentation" data-addbloc="forfaitPresation" >Un bloc forfait-prestation</li>
+                        <li role="presentation" data-addbloc="deplacement" >Un bloc déplacement</li>
+                        <li role="presentation" data-addbloc="fourniture" >Un bloc fourniture</li>
+                        <li role="presentation" data-addbloc="pose" >Un bloc pose</li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="entete-devis devis-entete-bt">
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                    Ajouter
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                    <li role="presentation" data-addbloc="produit" >Un bloc produit</li>
-                    <li role="presentation" data-addbloc="sousTraitance" >Un bloc sous-traitance</li>
-                    <li role="presentation" data-addbloc="prestation" >Un bloc prestation</li>
-                    <li role="presentation" data-addbloc="faconnage" >Un bloc façonnage adhésif</li>
-                    <li role="presentation" data-addbloc="adhesif" >Un bloc adhésif</li>
-                    <li role="presentation" data-addbloc="fraisTechniques" >Un bloc frais techniques</li>
-                    <li role="presentation" data-addbloc="forfaitPresation" >Un bloc forfait-prestation</li>
-                    <li role="presentation" data-addbloc="deplacement" >Un bloc déplacement</li>
-                    <li role="presentation" data-addbloc="fourniture" >Un bloc fourniture</li>
-                    <li role="presentation" data-addbloc="pose" >Un bloc pose</li>
-                </ul>
+        <div class="corps-devis">
+            <div id="corps-devis-custom" >
+
+                <?php if (count($this->itemsProduit) >0) : ?>
+                    <?= $this->render('/ajax/panelproduits.phtml'); ?>
+                <?php endif ?>
+
+                <?php if (count($this->itemsDeplacement) >0) : ?>
+                    <?= $this->render('/ajax/paneldeplacement.phtml'); ?>
+                <?php endif ?>
+
+                <?php if (count($this->itemsFaconnage) >0) : ?>
+                    <?= $this->render('/ajax/panelfaconnage.phtml'); ?>
+                <?php endif ?>
+
+                <?php if (count($this->itemsForfaitPrestation) >0) : ?>
+                    <?= $this->render('/ajax/panelforfaitprestation.phtml'); ?>
+                <?php endif ?>
+
+                <?php if (count($this->itemsFourniture) >0) : ?>
+                    <?= $this->render('/ajax/panelfourniture.phtml'); ?>
+                <?php endif ?>
+
+                <?php if (count($this->itemsFraisTechniques) >0) : ?>
+                    <?= $this->render('/ajax/panelfraistechniques.phtml'); ?>
+                <?php endif ?>
+
+                <?php if (count($this->itemsPose) >0) : ?>
+                    <?= $this->render('/ajax/panelpose.phtml'); ?>
+                <?php endif ?>
+
+                <?php if (count($this->itemsPrestation) >0) : ?>
+                    <?= $this->render('/ajax/panelprestation.phtml'); ?>
+                <?php endif ?>
+
+                <?php if (count($this->itemsSousTraitance) >0) : ?>
+                    <?= $this->render('/ajax/panelsoustraitance.phtml'); ?>
+                <?php endif ?>
+
+                <?php if (count($this->itemsAdhesif) >0) : ?>
+                    <?= $this->render('/ajax/paneladhesif.phtml'); ?>
+                <?php endif ?>
+
             </div>
         </div>
     </div>
-    <div class="corps-devis">
-        <div id="corps-devis-custom" >
-
-            <?php if (count($this->itemsProduits) >0) : ?>
-                <?= $this->render('/ajax/panelproduits.phtml'); ?>
-            <?php endif ?>
-
-            <?php if (count($this->itemsDeplacement) >0) : ?>
-                <?= $this->render('/ajax/paneldeplacement.phtml'); ?>
-            <?php endif ?>
-
-            <?php if (count($this->itemsFaconnage) >0) : ?>
-                <?= $this->render('/ajax/panelfaconnage.phtml'); ?>
-            <?php endif ?>
-
-            <?php if (count($this->itemsForfaitPrestation) >0) : ?>
-                <?= $this->render('/ajax/panelforfaitprestation.phtml'); ?>
-            <?php endif ?>
-
-            <?php if (count($this->itemsFourniture) >0) : ?>
-                <?= $this->render('/ajax/panelfourniture.phtml'); ?>
-            <?php endif ?>
-
-            <?php if (count($this->itemsFraisTechniques) >0) : ?>
-                <?= $this->render('/ajax/panelfraistechniques.phtml'); ?>
-            <?php endif ?>
-
-            <?php if (count($this->itemsPose) >0) : ?>
-                <?= $this->render('/ajax/panelpose.phtml'); ?>
-            <?php endif ?>
-
-            <?php if (count($this->itemsPrestation) >0) : ?>
-                <?= $this->render('/ajax/panelprestation.phtml'); ?>
-            <?php endif ?>
-
-            <?php if (count($this->itemsSousTraitance) >0) : ?>
-                <?= $this->render('/ajax/panelsoustraitance.phtml'); ?>
-            <?php endif ?>
-
-            <?php if (count($this->itemsAdhesif) >0) : ?>
-                <?= $this->render('/ajax/paneladhesif.phtml'); ?>
-            <?php endif ?>
-
-        </div>
-    </div>
-</div>
+    <input type="submit" class="btn btn-primary" value="Enregistrer" >
+</form>
