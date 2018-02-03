@@ -29,7 +29,7 @@
                 <th>Tarif minute</th>
                 <th>Px vente</th>
             </tr>
-            <?php if( count($this->itemsFraisTechniques) == 0): ?>
+            <?php if( count($this->itemsFraisTechnique) == 0): ?>
             <tr id="ligneRefFraisTechnique">
                 <td>
                     <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFraisTechnique(0);" onChange="fctChangeValeurDevisFraisTechnique();" class="dropdown-toggle" list="listeFraisTechnique_0"/>
@@ -38,15 +38,15 @@
                     <input type="hidden" name="json_FraisTechnique[]">
                 </td>
                 <td><input type="text" name="fraisTechnique"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" /></td>
-                <td><input type="text" name="taux"              title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" /></td>
-                <td><input type="text" name="heures"            title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" /></td>
-                <td><input type="text" name="minutes"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" /></td>
-                <td><input type="text" name="tarifHoraire"      title="" onFocus="fctSetFocus()" readonly /></td>
-                <td><input type="text" name="tarifMinute"       title="" onFocus="fctSetFocus()" readonly /></td>
-                <td><input type="text" name="pxvente"           title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="taux"              title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" /></td>
+                <td><input type="text" name="heures"            title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" /></td>
+                <td><input type="text" name="minutes"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" /></td>
+                <td><input type="text" name="tarifHoraire"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><input type="text" name="tarifMinute"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><input type="text" name="pxvente"           title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
             </tr>
             <?php endif; ?>
-            <?php foreach($this->itemsFraisTechniques as $key => $fraistechnique): ?>
+            <?php foreach($this->itemsFraisTechnique as $key => $fraistechnique): ?>
                 <?php $json = json_decode($fraistechnique->json, true) ?>
             <tr id="ligneRefFraisTechnique">
                 <td>
@@ -55,13 +55,13 @@
                     </datalist>
                     <input type="hidden" name="json_FraisTechnique[]" value="<?= json_encode($json) ?>">
                 </td>
-                <td><input type="text" name="fraisTechnique"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['fraisTechnique'] ?>"/></td>
-                <td><input type="text" name="taux"              title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['taux'] ?>"/></td>
-                <td><input type="text" name="heures"            title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['heures'] ?>"/></td>
-                <td><input type="text" name="minutes"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['minutes'] ?>"/></td>
-                <td><input type="text" name="tarifHoraire"      title="" onFocus="fctSetFocus()" readonly value="<?= $json['tarifHoraire'] ?>"/></td>
-                <td><input type="text" name="tarifMinute"       title="" onFocus="fctSetFocus()" readonly value="<?= $json['tarifMinute'] ?>"/></td>
-                <td><input type="text" name="pxvente"           title="" onFocus="fctSetFocus()" readonly value="<?= $json['pxvente'] ?>"/></td>
+                <td><input type="text" name="fraisTechnique"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['fraistechnique'] ?>"/></td>
+                <td><input type="text" name="taux"              title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['taux'] ?>"/></td>
+                <td><input type="text" name="heures"            title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['heures'] ?>"/></td>
+                <td><input type="text" name="minutes"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['minutes'] ?>"/></td>
+                <td><input type="text" name="tarifHoraire"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['tarifhoraire'] ?>"/></td>
+                <td><input type="text" name="tarifMinute"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['tarifminute'] ?>"/></td>
+                <td><input type="text" name="pxvente"           title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
             </tr>
             <?php endforeach; ?>
             <tfoot>
@@ -93,14 +93,14 @@
                     <input type="hidden" name="json_FraisTechnique[]">
                 </td>
                 <td><input type="text" name="fraisTechnique"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" /></td>
-                <td><input type="text" name="taux"              title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" /></td>
-                <td><input type="text" name="heures"            title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" /></td>
-                <td><input type="text" name="minutes"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" /></td>
-                <td><input type="text" name="tarifHoraire"      title="" onFocus="fctSetFocus()" readonly /></td>
-                <td><input type="text" name="tarifMinute"       title="" onFocus="fctSetFocus()" readonly /></td>
-                <td><input type="text" name="pxvente"           title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="taux"              title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" /></td>
+                <td><input type="text" name="heures"            title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" /></td>
+                <td><input type="text" name="minutes"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" /></td>
+                <td><input type="text" name="tarifHoraire"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><input type="text" name="tarifMinute"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><input type="text" name="pxvente"           title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
             </tr>
         </table>
     </div>
-    <input type="hidden" name="nbLigneFraisTechnique" id="nbLigneFraisTechnique" value="<?= count($this->itemsFraisTechniques)+1 ?>">
+    <input type="hidden" name="nbLigneFraisTechnique" id="nbLigneFraisTechnique" value="<?= count($this->itemsFraisTechnique)+1 ?>">
 </div>

@@ -37,11 +37,11 @@
                     <input type="hidden" name="json_Pose[]">
                 </td>
                 <td><input type="text" name="pose"      title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();"/></td>
-                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();"/></td>
-                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();"/></td>
-                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" readonly /></td>
-                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();"/></td>
-                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();"/></td>
+                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();"/></td>
+                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();"/></td>
+                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
             </tr>
             <?php endif; ?>
             <?php foreach($this->itemsPose as $key => $pose): ?>
@@ -54,11 +54,11 @@
                     <input type="hidden" name="json_Pose[]" value="<?= json_decode($json) ?>">
                 </td>
                 <td><input type="text" name="pose"      title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();" value="<?= $json['pose'] ?>"/></td>
-                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();" value="<?= $json['qte'] ?>"/></td>
-                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();" value="<?= $json['h.a_ml'] ?>"/></td>
-                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" readonly value="<?= $json['h.a_total'] ?>"/></td>
-                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();" value="<?= $json['coefMarge'] ?>"/></td>
-                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" readonly value="<?= $json['pxvente'] ?>"/></td>
+                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();" value="<?= $json['qte'] ?>"/></td>
+                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();" value="<?= $json['h.a_ml'] ?>"/></td>
+                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['h.a_total'] ?>"/></td>
+                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();" value="<?= $json['coefmarge'] ?>"/></td>
+                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
             </tr>
             <?php endforeach; ?>
             <tfoot>
@@ -92,11 +92,11 @@
                     <input type="hidden" name="json_Pose[]">
                 </td>
                 <td><input type="text" name="pose"      title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();"/></td>
-                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();"/></td>
-                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();"/></td>
-                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" readonly /></td>
-                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();"/></td>
-                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();"/></td>
+                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();"/></td>
+                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();"/></td>
+                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
             </tr>
         </table>
     </div>

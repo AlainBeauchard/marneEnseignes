@@ -35,9 +35,9 @@
                     <input type="hidden" name="json_Prestation[]">
                 </td>
                 <td><input type="text" name="prestation"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();" /></td>
-                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();" /></td>
-                <td><input type="text" name="tarif"         title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();" /></td>
-                <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPrestation();" /></td>
+                <td><input type="text" name="tarif"         title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPrestation();" /></td>
+                <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
             </tr>
             <?php endif; ?>
             <?php foreach($this->itemsPrestation as $key => $presta): ?>
@@ -50,9 +50,9 @@
                     <input type="hidden" name="json_Prestation[]"  value="<?= json_encode($json) ?>">
                 </td>
                 <td><input type="text" name="prestation"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();"  value="<?= $json['prestation'] ?>"/></td>
-                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();"  value="<?= $json['qte'] ?>" /></td>
-                <td><input type="text" name="tarif"         title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();"  value="<?= $json['tarif'] ?>" /></td>
-                <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" readonly  value="<?= $json['pxvente'] ?>"/></td>
+                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPrestation();"  value="<?= $json['qte'] ?>" /></td>
+                <td><input type="text" name="tarif"         title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPrestation();"  value="<?= $json['tarif'] ?>" /></td>
+                <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly  value="<?= $json['pxvente'] ?>"/></td>
             </tr>
             <?php endforeach; ?>
             <tfoot>
@@ -84,9 +84,9 @@
                     <input type="hidden" name="json_Prestation[]">
                 </td>
                 <td><input type="text" name="prestation"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();" /></td>
-                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();" /></td>
-                <td><input type="text" name="tarif"         title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPrestation();" /></td>
-                <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPrestation();" /></td>
+                <td><input type="text" name="tarif"         title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPrestation();" /></td>
+                <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
             </tr>
         </table>
     </div>

@@ -1747,7 +1747,7 @@ function fctChangeValeurDevisAdhesif()
             strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '",';
             strJsonLigne += '"' + adhesif[i].name + '": "' + $(adhesif[i]).val() + '",';
             strJsonLigne += '"' + coefMarge[i].name + '": "' + $(coefMarge[i]).val() + '",';
-            strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '"';
+            strJsonLigne += '"' + surface[i].name + '": "' + $(surface[i]).val() + '"';
         }
 
         jsonLigne[i].value =  '{'+strJsonLigne+'}';
@@ -1825,7 +1825,7 @@ function fctChangeValeurDevisForfaitPrestation()
             strJsonLigne += '"' + qte[i].name + '": "' + $(qte[i]).val() + '",';
             strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '",';
             strJsonLigne += '"' + prestation[i].name + '": "' + $(prestation[i]).val() + '",';
-            strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '"';
+            strJsonLigne += '"' + tarif[i].name + '": "' + $(tarif[i]).val() + '"';
         }
 
         jsonLigne[i].value =  '{'+strJsonLigne+'}';

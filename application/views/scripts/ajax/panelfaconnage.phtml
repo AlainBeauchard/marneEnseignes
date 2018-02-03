@@ -36,10 +36,10 @@
                     <input type="hidden" name="json_Faconnage[]">
                 </td>
                 <td><input type="text" name="faconnage" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
-                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
-                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
-                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" readonly /></td>
-                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFaconnage();" /></td>
+                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFaconnage();" /></td>
+                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
             </tr>
             <?php endif; ?>
             <?php foreach($this->itemsFaconnage as $key => $faconnage): ?>
@@ -52,10 +52,10 @@
                     <input type="hidden" name="json_Faconnage[]" value="<?= json_decode($json) ?>">
                 </td>
                 <td><input type="text" name="faconnage" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" value="<?= $json['faconnage'] ?>"/></td>
-                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" value="<?= $json['qte'] ?>"/></td>
-                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" value="<?= $json['h.a_ml'] ?>"/></td>
-                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" readonly value="<?= $json['h.a_total'] ?>"/></td>
-                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" readonly value="<?= $json['pxvente'] ?>"/></td>
+                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFaconnage();" value="<?= $json['qte'] ?>"/></td>
+                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFaconnage();" value="<?= $json['h.a_ml'] ?>"/></td>
+                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['h.a_total'] ?>"/></td>
+                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
             </tr>
             <?php endforeach; ?>
             <tfoot>
@@ -87,10 +87,10 @@
                     <input type="hidden" name="json_Faconnage[]">
                 </td>
                 <td><input type="text" name="faconnage" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
-                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
-                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" /></td>
-                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" readonly /></td>
-                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" readonly /></td>
+                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFaconnage();" /></td>
+                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFaconnage();" /></td>
+                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
             </tr>
         </table>
     </div>
