@@ -1,7 +1,36 @@
 <div class="panel panel-primary">
-	<div class="panel-heading">
-		<h3 class="panel-title">Editer un devis</h3>
-	</div>
+    <div class="panel-heading nav navbar-default">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="panel-title">Editer un devis</h3>
+            </div>
+            <div class="col-md-6">
+                <ul class="nav navbar-nav navbar-right navbarPanel">
+                    <li id="BtAjoutligneTableEntete" title="Ajouter une ligne" onclick="fctAjoutLigneTableEntete();">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </li>
+                    <li id="BtSuprimeligneTableEntete" title="Supprimer une ligne" onclick="fctSupprimeLigneTableEntete();">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle monDropDownNavBar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ajouter <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li data-addbloc="produit"><a href="#">Produit</a></li>
+                            <li data-addbloc="sousTraitance"><a href="#">Sous traitance</a></li>
+                            <li data-addbloc="prestation"><a href="#">Prestation</a></li>
+                            <li data-addbloc="faconnage"><a href="#">Façonnage</a></li>
+                            <li data-addbloc="adhesif"><a href="#">Adhésif</a></li>
+                            <li data-addbloc="fraisTechniques"><a href="#">Frais Techniques</a></li>
+                            <li data-addbloc="forfaitPresation"><a href="#">Forfait Prestation</a></li>
+                            <li data-addbloc="deplacement"><a href="#">Déplacement</a></li>
+                            <li data-addbloc="fourniture"><a href="#">Fourniture</a></li>
+                            <li data-addbloc="pose"><a href="#">Pose</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 	<div class="panel-body">
         <?= $this->render('devis/partBodyDevis.phtml') ?>
 	</div>

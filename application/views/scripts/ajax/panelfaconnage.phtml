@@ -8,16 +8,24 @@
 ?>
 
 <div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3 class="panel-title" data-toggle="collapse" href="#collapsefaconnages">Façonnages</h3>
+    <div class="panel-heading nav navbar-default">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="panel-title" data-toggle="collapse" href="#collapsefaconnages">Façonnage</h3>
+            </div>
+            <div class="col-md-6">
+                <ul class="nav navbar-nav navbar-right navbarPanel">
+                    <li id="BtAjoutligneFaconnage" title="Ajouter une ligne">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </li>
+                    <li id="BtSuprimeligneFaconnage" title="Supprimer une ligne">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div id="collapsefaconnages" class="panel-body panel-collapse in">
-        <button type="button" id="BtAjoutligneFaconnage" class="btn btn-default voffset1" title="Ajouter une ligne">
-            <span class="glyphicon glyphicon-plus"></span>
-        </button>
-        <button type="button" id="BtSuprimeligneFaconnage" class="btn btn-default voffset1" title="Supprimer une ligne">
-            <span class="glyphicon glyphicon-minus"></span>
-        </button>
         <table class="table-produits-devis" id="tableFaconnage">
             <tr>
                 <th class="txtEntete">Code</th>
