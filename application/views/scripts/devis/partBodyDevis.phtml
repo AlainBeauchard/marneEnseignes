@@ -21,6 +21,11 @@
                             <?= $this->form->delai ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td colspan="2">
+                            <?= $this->form->reglement ?>
+                        </td>
+                    </tr>
                 </table>
             </div>
             <div class="entete-devis entete-devis-right">
@@ -44,16 +49,18 @@
                             <th>Surf pub</th>
                             <th>Périmètre</th>
                         </tr>
+                        <?php foreach($this->itemsEntete as $key => $entete): ?>
                         <tr>
-                            <td><input type="text" name="largeurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" ></td>
-                            <td><input type="text" name="hauteurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                            <td><input type="text" name="surfaceTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                            <td><input type="text" name="qteTableEntete"         onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                            <td><input type="text" name="surfTotalTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                            <td><input type="text" name="coefPubTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                            <td><input type="text" name="surfacePubTableEntete"  onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
-                            <td><input type="text" name="perimetreTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                            <td><input type="text" name="largeurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['largeurTableEntete'] ?>"></td>
+                            <td><input type="text" name="hauteurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['hauteurTableEntete'] ?>"></td>
+                            <td><input type="text" name="surfaceTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['surfaceTableEntete'] ?>"></td>
+                            <td><input type="text" name="qteTableEntete"         onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['qteTableEntete'] ?>"></td>
+                            <td><input type="text" name="surfTotalTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['surfTotalTableEntete'] ?>"></td>
+                            <td><input type="text" name="coefPubTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['coefPubTableEntete'] ?>"></td>
+                            <td><input type="text" name="surfacePubTableEntete"  onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['surfacePubTableEntete'] ?>"></td>
+                            <td><input type="text" name="perimetreTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['perimetreTableEntete'] ?>"></td>
                         </tr>
+                        <?php endforeach; ?>
                         <tfoot>
                             <tr>
                                 <td colspan="4" class="titrefooter haTotal">Surface totale</td>
@@ -64,6 +71,7 @@
                             </tr>
                         </tfoot>
                     </table>
+                    <input type="hidden" name="jsonEntete" id="jsonEntete" value="<?= json_encode($this->itemsEntete) ?>">
                 </div>
                 <div class="elemCache">
                     <table class="table-entete-devis">
@@ -78,7 +86,7 @@
                             <td><input type="text" name="perimetreTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
                         </tr>
                     </table>
-                    <input type="hidden" name="nbLigneTableEntete" id="nbLigneTableEntete" value="1" >
+                    <input type="hidden" name="nbLigneTableEntete" id="nbLigneTableEntete" value="<?= count($this->itemsEntete) + 1 ?>" >
                 </div>
             </div>
         </div>
@@ -124,6 +132,8 @@
                 <?php if (count($this->itemsAdhesif) >0) : ?>
                     <?= $this->render('/ajax/paneladhesif.phtml'); ?>
                 <?php endif ?>
+
+                <?= $this->render('/ajax/panelredaction.phtml'); ?>
 
             </div>
         </div>

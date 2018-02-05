@@ -41,6 +41,12 @@ class Application_Form_Devis extends Zend_Form
         $delaiLivraison->setRequired(true);
         $this->addElement($delaiLivraison);
 
+        $modeDeReglement = new Zend_Form_Element_Text('reglement');
+        $modeDeReglement->setAttribs(array('placeholder'=>'Delai de livraison','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
+        $modeDeReglement->setLabel('Mode de règlement');
+        $modeDeReglement->setRequired(true);
+        $this->addElement($modeDeReglement);
+
         $dteCreation = new ZendX_JQuery_Form_Element_DatePicker('dateCreation', ['attribs' => ['readonly' => 'true']]);
         $dteCreation->setAttribs(array('placeholder'=>'Date création','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
         $dteCreation->setLabel('Date Création');

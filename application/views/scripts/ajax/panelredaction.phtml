@@ -1,0 +1,43 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: alain
+ * Date: 29/12/2017
+ * Time: 11:12
+ */
+?>
+
+<div class="panel panel-primary">
+    <div class="panel-heading nav navbar-default">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="panel-title" data-toggle="collapse" href="#collapseRedaction">Rédaction du devis</h3>
+            </div>
+        </div>
+    </div>
+    <div id="collapseRedaction" class="panel-body panel-collapse in">
+        <div class="btn-group col-lg-6 col-xs-6 col-md-6 col-sm-6" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="load_modele">
+                    Charger un modèle
+                    <span class="caret"></span>
+                    <span class="sr-only">Charger un modèle</span>
+                </button>
+                <ul class="dropdown-menu" id="liste_nom_modeles">
+                    <?php foreach($this->modeles as $row):?>
+                        <li id="modele_id_<?= $row->id ?>_redactionFacture"><?= $row->titre?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" id="save_modele">Sauvegarder ce texte</button>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xs-6 col-md-6 col-sm-6">
+        <button type="button" class="btn btn-success pull-right" aria-label="Left Align" id="preview_devis_<?= $this->id_devis?>">
+            <span class="glyphicon glyphicon-eye-open" aria-hidden="false">&nbsp;Aperçu avant impression</span>
+        </button>
+        </div><br /><br />
+        <?= $this->formRedaction->getElement('redactionDevis') ?>
+    </div>
+</div>

@@ -1125,6 +1125,11 @@ ul#icons span.ui-icon {
   display: block;
 }
 
+.corps-devis .panel-body
+{
+  padding : 5px
+}
+
 .elemCache
 {
   display: none;
@@ -1137,6 +1142,7 @@ ul#icons span.ui-icon {
 
 .table-entete-devis td, .table-entete-devis th {
     border: 1px solid #F0F0F0;
+    border-radius: 5px;
 }
 
 .table-entete-devis th {

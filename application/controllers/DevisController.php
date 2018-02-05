@@ -7,6 +7,7 @@ class DevisController extends Zend_Controller_Action
      * @throws Zend_Controller_Response_Exception
      * @throws Zend_Exception
      * @throws Zend_Navigation_Exception
+     * @throws \Exception
      */
     public function init()
     {
@@ -62,6 +63,7 @@ class DevisController extends Zend_Controller_Action
     /**
      * @throws Zend_Db_Table_Exception
      * @throws Zend_Form_Exception
+     * @throws \Exception
      */
     public function editerAction()
     {
@@ -97,10 +99,19 @@ class DevisController extends Zend_Controller_Action
         $form->getElement('nomClient')->setValue($client->contact_nom);
         $form->getElement('refDossier')->setValue($devis->ref);
         $form->getElement('delai')->setValue($devis->delai);
+        $form->getElement('reglement')->setValue($devis->reglement);
         $form->getElement('intitule')->setValue($devis->titre);
         $form->getElement('dateCreation')->setValue(date('d/m/Y', strtotime($devis->date)));
 
         $this->view->form = $form;
+
+        $formRedaction = new Application_Form_WriteDevis();
+        $formRedaction->getElement('redactionDevis')->setValue($devis->redaction);
+        $this->view->formRedaction = $formRedaction;
+
+        $db_modeles = new Application_Model_Modeles();
+        $this->view->modeles = $db_modeles->fetchAll();
+        $this->view->id_devis = $id_devis;
     }
 
     public function ficheAction()
@@ -123,6 +134,7 @@ class DevisController extends Zend_Controller_Action
     /**
      * @param Application_Model_Devis $db_devis
      * @param Application_Model_ItemDevis $db_items
+     * @throws \Exception
      */
     public function sauveFormDevis($db_devis, $db_items)
     {
@@ -142,7 +154,7 @@ class DevisController extends Zend_Controller_Action
         $data['date_validite'] = $devis->date_validite;
         $data['delai'] = $datas['delai'];
         $data['titre'] = $datas['intitule'];
-        $data['redaction'] = $devis->redaction;
+        $data['redaction'] = $datas['redactionDevis'];
         $data['valide'] = $devis->valide;
         $data['date_validation'] = $devis->date_validation;
         $data['facture'] = $devis->facture;
@@ -155,38 +167,35 @@ class DevisController extends Zend_Controller_Action
         $data['ref'] = $datas['refDossier'];
         $data['reglement'] = $devis->reglement;
 
-        //if($db_devis->update($data, array('id = ?' => $idDevis))){
+        $db_devis->update($data, array('id = ?' => $idDevis));
 
-            //on supprime les items avec le devis
-            $db_items->delete("id_devis = ".$idDevis);
+        //on supprime les items avec le devis
+        $db_items->delete("id_devis = ".$idDevis);
 
-            $tab = ['Adhesif', 'Deplacement', 'Faconnage', 'ForfaitPrestation', 'Fourniture',
-                'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique'
-            ];
+        $tab = ['Adhesif', 'Deplacement', 'Faconnage', 'ForfaitPrestation', 'Fourniture',
+            'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique'
+        ];
 
-            foreach ($tab as $item) {
-                if (isset($_REQUEST['json_' . $item])) {
-                    foreach ($_REQUEST['json_' . $item] as $ligne) {
+        foreach ($tab as $item) {
+            if (isset($_REQUEST['json_' . $item])) {
+                foreach ($_REQUEST['json_' . $item] as $ligne) {
 
-                        if( $ligne != '' ) {
-                            $row = $db_items->createRow(['id_devis' => $idDevis]);
+                    if( $ligne != '' ) {
+                        $row = $db_items->createRow(['id_devis' => $idDevis]);
 
-                            $row->id_item = 0;
-                            $row->remise = 0;
-                            $row->pht = 0;
-                            $row->typeligne = strtolower($item);
-                            $row->json = strtolower($ligne);
+                        $row->id_item = 0;
+                        $row->remise = 0;
+                        $row->pht = 0;
+                        $row->typeligne = strtolower($item);
+                        $row->json = strtolower($ligne);
 
-                            $row->save();
-                        }
+                        $row->save();
                     }
                 }
             }
+        }
 
-            $this->_redirect('/devis/editer/id/' . $idDevis);
-        //} else {
-
-        //}
+        $this->_redirect('/devis/editer/id/' . $idDevis);
 
     }
 }

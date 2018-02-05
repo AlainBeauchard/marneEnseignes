@@ -2,7 +2,9 @@
 
 class Application_Form_WriteDevis extends Zend_Form
 {
-
+    /**
+     * @throws Zend_Form_Exception
+     */
     public function init()
     {
         $text = new Zend_Form_Element_Textarea('redactionDevis');
@@ -15,7 +17,4 @@ class Application_Form_WriteDevis extends Zend_Form
         $valid->setAttribs(array('class'=>'btn btn-primary', 'aria-describedby'=>'sizing-addon2'));
         $this->addElement($valid);
     }
-
-
 }
-
