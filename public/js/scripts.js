@@ -1598,6 +1598,8 @@ function fctRemplitListeSousTraitance(indice)
 
 function fctRecalculTout()
 {
+    fctChangeTableEntete();
+
     fctBtAjoutSuppLigne("Produit");
     fctBtAjoutSuppLigne("Deplacement");
     fctBtAjoutSuppLigne("Faconnage");
@@ -2050,7 +2052,18 @@ function fctChangeTableEntete()
     $("#sommeSurfPub").html(sommeSurfPub);
     $("#sommePerimetre").html(sommePerimetre);
 
-    //TODO mettre à jour la valeur du json_entete
+    var jsonLigne  = $("#tableEntete tr");
+
+    var strJsonLigne = " ";
+    for(var i=2; i<jsonLigne.length-1;i++) {
+    	var jsonInput = $(jsonLigne[i]).find("input");
+        strJsonLigne += "{";
+        for(var j=0;j<jsonInput.length;j++) {
+            strJsonLigne += '"' + $(jsonInput[j]).attr('name') + '": "' + $(jsonInput[j]).val() + '",';
+        }
+        strJsonLigne += " \"toto\":\"titi\" },";
+    }
+    $("#jsonEntete").val('['+strJsonLigne.substring(0, strJsonLigne.length - 1)+']');
 }
 
 function fctAjoutLigneTableEntete() {

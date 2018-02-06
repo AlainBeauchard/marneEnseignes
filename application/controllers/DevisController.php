@@ -166,6 +166,7 @@ class DevisController extends Zend_Controller_Action
         $data['remise'] = $devis->remise;
         $data['ref'] = $datas['refDossier'];
         $data['reglement'] = $devis->reglement;
+        $data['jsonEntete'] = $datas['jsonEntete'];
 
         $db_devis->update($data, array('id = ?' => $idDevis));
 

@@ -8,6 +8,7 @@ ALTER TABLE projets ADD ( colorclass varchar(10),
 UPDATE projets set devisarelancer = 0;
 
 -- --------------------------------------------------
-ALTER TABLE itemsdevis ADD ( json VARCHAR(200) );
+ALTER TABLE itemsdevis ADD ( json VARCHAR(2000) );
 ALTER TABLE itemsdevis ADD ( typeligne VARCHAR(20) );
 
+ALTER TABLE devis ADD (jsonEntete VARCHAR(2000) );

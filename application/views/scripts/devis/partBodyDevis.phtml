@@ -49,7 +49,7 @@
                             <th>Surf pub</th>
                             <th>Périmètre</th>
                         </tr>
-                        <?php foreach($this->itemsEntete as $key => $entete): ?>
+                        <?php foreach(json_decode($this->devis->jsonEntete, true) as $key => $entete): ?>
                         <tr>
                             <td><input type="text" name="largeurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['largeurTableEntete'] ?>"></td>
                             <td><input type="text" name="hauteurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['hauteurTableEntete'] ?>"></td>
@@ -71,7 +71,7 @@
                             </tr>
                         </tfoot>
                     </table>
-                    <input type="hidden" name="jsonEntete" id="jsonEntete" value="<?= json_encode($this->itemsEntete) ?>">
+                    <input type="hidden" name="jsonEntete" id="jsonEntete" value="<?= json_encode($this->devis->jsonEntete) ?>">
                 </div>
                 <div class="elemCache">
                     <table class="table-entete-devis">
