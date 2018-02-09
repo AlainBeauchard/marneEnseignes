@@ -866,6 +866,33 @@ class AjaxController extends Zend_Controller_Action
         echo($str);
     }
 
+    public function listeclientsAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $codeSearch = $this->_getParam('code');
+
+        $db_clients = new Application_Model_Clients();
+        $select = $db_clients->select();
+        $select->where('ref = ?', $codeSearch.'');
+        $select->orWhere('contact_nom like ?', '%'.$codeSearch.'%');
+        $select->order('contact_nom');
+
+        $clients = $db_clients->fetchAll($select);
+
+        $str = '';
+        $ind = 0;
+        foreach ($clients as $client)
+        {
+            //if ($ind<20) {
+                $str .= '<option value="' . $client->contact_nom .' '.$client->ref. '" data-ref="' . $client->ref . '" data-id="' . $client->id_client . '" />' . $client->contact_nom . '</option>';
+            //}
+            $ind++;
+        }
+
+        echo($str);
+    }
+
     public function listeproduitsAction()
     {
         $this->_helper->viewRenderer->setNoRender();

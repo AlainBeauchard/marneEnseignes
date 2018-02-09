@@ -6,6 +6,8 @@
                     <tr>
                         <td>
                             <?= $this->form->codeClient ?>
+                            <datalist id="listeClientsDevis">
+                            </datalist>
                         </td>
                         <td>
                             <?= $this->form->refDossier ?>
@@ -24,6 +26,11 @@
                     <tr>
                         <td colspan="2">
                             <?= $this->form->reglement ?>
+                            <datalist id="listeReglement">
+                                <?php foreach($this->listeReglement as $reglement): ?>
+                                    <option value="<?= $reglement->libelle_reglement ?>" data-id="<?= $reglement->id ?>"><?= $reglement->libelle_reglement ?></option>
+                                <?php endforeach; ?>
+                            </datalist>
                         </td>
                     </tr>
                 </table>

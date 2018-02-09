@@ -44,6 +44,8 @@ $(document).ready(function(){
 
 	$("#listeProjets").on('scroll', fctDisapiredColor);
 
+	$("#codeClient").unbind('keyup').bind('keyup', fctRemplitListeClient);
+
 	$(".changeColor").click(function()
 		{
 			var classToAdd = getClassToAdd( $(this) );
@@ -1242,6 +1244,34 @@ function fctSetFocus()
 {
 	$("tr").removeClass("focus");
 	$(":focus").parent().parent().addClass("focus");
+}
+
+function fctRemplitListeClient()
+{
+    $.post("/ajax/listeclients",
+        {
+            code: $("#codeClient").val()
+        },
+        function (result) {
+            $("#listeClientsDevis").html(result);
+
+			$("#codeClient").off('input').on('input', function () {
+				var option = $("#listeClientsDevis").find("[value='" + $("#codeClient").val() + "']");
+
+				if (option.length > 0) {
+					var value = (option.attr("value")).split(' ') ;
+					var val = '';
+					for(var i=0;i<(value.length-1);i++) {
+						val += ' '+value[i];
+					}
+                    $("#codeClient").val(option.attr("data-ref"));
+					$("#nomClient").val(val.trim());
+				}
+			});
+
+        }
+    );
+
 }
 
 function fctRemplitListeProduit(indice)

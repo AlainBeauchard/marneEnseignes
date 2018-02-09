@@ -12,7 +12,7 @@ class Application_Form_Devis extends Zend_Form
         //$this->addDecorators([['Description'=>['tag'=> 'p', 'class' => 'formDevis']]]);
 
         $codeClient = new Zend_Form_Element_Text('codeClient');
-        $codeClient->setAttribs(array('placeholder'=>'code client','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
+        $codeClient->setAttribs(array('placeholder'=>'code client','class'=>'form-control', 'aria-describedby'=>'sizing-addon2', 'list' => 'listeClientsDevis'));
         $codeClient->setLabel('Code Client');
         $codeClient->setRequired(true);
         $this->addElement($codeClient);
@@ -42,7 +42,7 @@ class Application_Form_Devis extends Zend_Form
         $this->addElement($delaiLivraison);
 
         $modeDeReglement = new Zend_Form_Element_Text('reglement');
-        $modeDeReglement->setAttribs(array('placeholder'=>'Delai de livraison','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
+        $modeDeReglement->setAttribs(array('placeholder'=>'Delai de livraison','class'=>'form-control', 'aria-describedby'=>'sizing-addon2', 'list' => 'listeReglement'));
         $modeDeReglement->setLabel('Mode de règlement');
         $modeDeReglement->setRequired(true);
         $this->addElement($modeDeReglement);
