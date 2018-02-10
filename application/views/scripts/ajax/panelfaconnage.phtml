@@ -50,22 +50,24 @@
                 <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
             </tr>
             <?php endif; ?>
-            <?php foreach($this->itemsFaconnage as $key => $faconnage): ?>
-                <?php $json = json_decode($faconnage->json, true) ?>
-            <tr id="ligneRefFaconnage">
-                <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFaconnage(<?= $key ?>);" onChange="fctChangeValeurDevisFaconnage();" class="dropdown-toggle" list="listeFaconnage_<?= $key ?>" value="<?= $json['code'] ?>"/>
-                    <datalist id="listeFaconnage_<?= $key ?>">
-                    </datalist>
-                    <input type="hidden" name="json_Faconnage[]" value="<?= json_decode($json) ?>">
-                </td>
-                <td><input type="text" name="faconnage" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" value="<?= $json['faconnage'] ?>"/></td>
-                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFaconnage();" value="<?= $json['qte'] ?>"/></td>
-                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFaconnage();" value="<?= $json['h.a_ml'] ?>"/></td>
-                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['h.a_total'] ?>"/></td>
-                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
-            </tr>
-            <?php endforeach; ?>
+            <?php if (isset($this->itemsFaconnage)) : ?>
+                <?php foreach($this->itemsFaconnage as $key => $faconnage): ?>
+                    <?php $json = json_decode($faconnage->json, true) ?>
+                <tr id="ligneRefFaconnage">
+                    <td>
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFaconnage(<?= $key ?>);" onChange="fctChangeValeurDevisFaconnage();" class="dropdown-toggle" list="listeFaconnage_<?= $key ?>" value="<?= $json['code'] ?>"/>
+                        <datalist id="listeFaconnage_<?= $key ?>">
+                        </datalist>
+                        <input type="hidden" name="json_Faconnage[]" value="<?= json_decode($json) ?>">
+                    </td>
+                    <td><input type="text" name="faconnage" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFaconnage();" value="<?= $json['faconnage'] ?>"/></td>
+                    <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFaconnage();" value="<?= $json['qte'] ?>"/></td>
+                    <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFaconnage();" value="<?= $json['h.a_ml'] ?>"/></td>
+                    <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['h.a_total'] ?>"/></td>
+                    <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
+                </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
             <tfoot>
                 <tr>
                     <td colspan="6">

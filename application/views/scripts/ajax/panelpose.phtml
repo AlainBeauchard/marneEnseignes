@@ -52,23 +52,25 @@
                 <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
             </tr>
             <?php endif; ?>
-            <?php foreach($this->itemsPose as $key => $pose): ?>
-                <?php $json = json_decode($pose->json, true) ?>
-            <tr id="ligneRefPose">
-                <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListePose(<?=$key ?>);" onChange="fctChangeValeurDevisPose();" class="dropdown-toggle" list="listePose_<?=$key ?>" value="<?= $json['code'] ?>"/>
-                    <datalist id="listePose_<?=$key ?>">
-                    </datalist>
-                    <input type="hidden" name="json_Pose[]" value="<?= json_decode($json) ?>">
-                </td>
-                <td><input type="text" name="pose"      title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();" value="<?= $json['pose'] ?>"/></td>
-                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();" value="<?= $json['qte'] ?>"/></td>
-                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();" value="<?= $json['h.a_ml'] ?>"/></td>
-                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['h.a_total'] ?>"/></td>
-                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();" value="<?= $json['coefmarge'] ?>"/></td>
-                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
-            </tr>
-            <?php endforeach; ?>
+            <?php if (isset($this->itemsPose)) : ?>
+                <?php foreach($this->itemsPose as $key => $pose): ?>
+                    <?php $json = json_decode($pose->json, true) ?>
+                <tr id="ligneRefPose">
+                    <td>
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListePose(<?=$key ?>);" onChange="fctChangeValeurDevisPose();" class="dropdown-toggle" list="listePose_<?=$key ?>" value="<?= $json['code'] ?>"/>
+                        <datalist id="listePose_<?=$key ?>">
+                        </datalist>
+                        <input type="hidden" name="json_Pose[]" value="<?= json_decode($json) ?>">
+                    </td>
+                    <td><input type="text" name="pose"      title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisPose();" value="<?= $json['pose'] ?>"/></td>
+                    <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();" value="<?= $json['qte'] ?>"/></td>
+                    <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();" value="<?= $json['h.a_ml'] ?>"/></td>
+                    <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['h.a_total'] ?>"/></td>
+                    <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();" value="<?= $json['coefmarge'] ?>"/></td>
+                    <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
+                </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
             <tfoot>
                 <tr>
                     <td colspan="7">

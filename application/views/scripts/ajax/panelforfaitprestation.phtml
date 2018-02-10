@@ -48,21 +48,23 @@
                 <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
             </tr>
             <?php endif; ?>
-            <?php foreach($this->itemsForfaitPrestation as $key => $forfaitPresta): ?>
-                <?php $json = json_decode($forfaitPresta->json, true) ?>
-            <tr id="ligneRefForfaitPrestation">
-                <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeForfaitPrestation(<?= $key ?>);" onChange="fctChangeValeurDevisForfaitPrestation();" class="dropdown-toggle" list="listeForfaitPrestation_<?= $key ?>" value="<?= $json['code'] ?>"/>
-                    <datalist id="listeForfaitPrestation_<?= $key ?>">
-                    </datalist>
-                    <input type="hidden" name="json_ForfaitPrestation[]" value="<?= json_encode($json) ?>">
-                </td>
-                <td><input type="text" name="prestation"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisForfaitPrestation();" value="<?= $json['prestation'] ?>"/></td>
-                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisForfaitPrestation();" value="<?= $json['qte'] ?>" /></td>
-                <td><input type="text" name="tarif"         title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisForfaitPrestation();" value="<?= $json['tarif'] ?>"/></td>
-                <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
-            </tr>
-            <?php endforeach; ?>
+            <?php if (isset($this->itemsForfaitPrestation)) : ?>
+                <?php foreach($this->itemsForfaitPrestation as $key => $forfaitPresta): ?>
+                    <?php $json = json_decode($forfaitPresta->json, true) ?>
+                <tr id="ligneRefForfaitPrestation">
+                    <td>
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeForfaitPrestation(<?= $key ?>);" onChange="fctChangeValeurDevisForfaitPrestation();" class="dropdown-toggle" list="listeForfaitPrestation_<?= $key ?>" value="<?= $json['code'] ?>"/>
+                        <datalist id="listeForfaitPrestation_<?= $key ?>">
+                        </datalist>
+                        <input type="hidden" name="json_ForfaitPrestation[]" value="<?= json_encode($json) ?>">
+                    </td>
+                    <td><input type="text" name="prestation"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisForfaitPrestation();" value="<?= $json['prestation'] ?>"/></td>
+                    <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisForfaitPrestation();" value="<?= $json['qte'] ?>" /></td>
+                    <td><input type="text" name="tarif"         title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisForfaitPrestation();" value="<?= $json['tarif'] ?>"/></td>
+                    <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
+                </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
             <tfoot>
                 <tr>
                     <td colspan="8">

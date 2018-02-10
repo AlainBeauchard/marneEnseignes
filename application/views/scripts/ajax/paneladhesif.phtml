@@ -54,24 +54,26 @@
                 <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
             </tr>
             <?php endif; ?>
-            <?php foreach($this->itemsAdhesif as $key => $adhesif): ?>
-            <?php $json = json_decode($adhesif->json, true) ?>
-            <tr id="ligneRefAdhesif">
-                <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(<?= $key ?>);" onChange="fctChangeValeurDevisAdhesif();" class="dropdown-toggle" list="listeAdhesif_<?= $key ?>" value="<?= $json['code'] ?>"/>
-                    <datalist id="listeAdhesif_<?= $key ?>">
-                    </datalist>
-                    <input type="hidden" name="json_Adhesif[]" value="<?= json_encode($json) ?>">
-                </td>
-                <td><input type="text" name="adhesif"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['adhesif'] ?>"/></td>
-                <td><input type="text" name="surface"   title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['surface'] ?>"/></td>
-                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['qte'] ?>" /></td>
-                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['h.a_ml'] ?>" /></td>
-                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly  value="<?= $json['h.a_total'] ?>"/></td>
-                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"   value="<?= $json['coefmarge'] ?>"/></td>
-                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly  value="<?= $json['pxvente'] ?>"/></td>
-            </tr>
-            <?php endforeach; ?>
+            <?php if (isset($this->itemsAdhesif)) : ?>
+                <?php foreach($this->itemsAdhesif as $key => $adhesif): ?>
+                <?php $json = json_decode($adhesif->json, true) ?>
+                <tr id="ligneRefAdhesif">
+                    <td>
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(<?= $key ?>);" onChange="fctChangeValeurDevisAdhesif();" class="dropdown-toggle" list="listeAdhesif_<?= $key ?>" value="<?= $json['code'] ?>"/>
+                        <datalist id="listeAdhesif_<?= $key ?>">
+                        </datalist>
+                        <input type="hidden" name="json_Adhesif[]" value="<?= json_encode($json) ?>">
+                    </td>
+                    <td><input type="text" name="adhesif"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['adhesif'] ?>"/></td>
+                    <td><input type="text" name="surface"   title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['surface'] ?>"/></td>
+                    <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['qte'] ?>" /></td>
+                    <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['h.a_ml'] ?>" /></td>
+                    <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly  value="<?= $json['h.a_total'] ?>"/></td>
+                    <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"   value="<?= $json['coefmarge'] ?>"/></td>
+                    <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly  value="<?= $json['pxvente'] ?>"/></td>
+                </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
             <tfoot>
                 <tr>
                     <td colspan="8">

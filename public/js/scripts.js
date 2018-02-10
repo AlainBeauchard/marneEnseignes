@@ -1264,6 +1264,7 @@ function fctRemplitListeClient()
 					for(var i=0;i<(value.length-1);i++) {
 						val += ' '+value[i];
 					}
+                    $("#idClient").val(option.attr("data-id"));
                     $("#codeClient").val(option.attr("data-ref"));
 					$("#nomClient").val(val.trim());
 				}

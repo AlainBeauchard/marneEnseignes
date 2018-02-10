@@ -49,15 +49,41 @@ class DevisController extends Zend_Controller_Action
     }
 
     /**
-     *
+     * @throws Exception
+     * @throws Zend_Form_Exception
      */
     public function ajouterAction()
     {
         $form = new Application_Form_Devis();
 
-        $form->getElement('dateCreation')->setValue(date('d/m/Y'));
+        $db_devis = new Application_Model_Devis();
+        $db_items = new Application_Model_ItemDevis();
 
+        if($this->_request->isPost() && $form->isValid($this->_request->getPost())){
+            $this->sauveFormDevis($db_devis, $db_items, true);
+        }
+
+        $form->getElement('dateCreation')->setValue(date('d/m/Y'));
         $this->view->form = $form;
+
+        $tab = ['Adhesif', 'Deplacement', 'Faconnage', 'ForfaitPrestation', 'Fourniture',
+            'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique'
+        ];
+
+        foreach($tab as $item) {
+            $valItem = 'items'.$item;
+            $this->view->$valItem = [];
+        }
+
+        $formRedaction = new Application_Form_WriteDevis();
+        $this->view->formRedaction = $formRedaction;
+
+        $dbReglement = new Application_Model_PresetReglement();
+        $this->view->listeReglement = $dbReglement->fetchAll($dbReglement->select()->where('1=1'));
+
+        $db_modeles = new Application_Model_Modeles();
+        $this->view->modeles = $db_modeles->fetchAll();
+        $this->view->id_devis = -1;
     }
 
     /**
@@ -75,7 +101,7 @@ class DevisController extends Zend_Controller_Action
         $db_items = new Application_Model_ItemDevis();
 
         if($this->_request->isPost() && $form->isValid($this->_request->getPost())){
-            $this->sauveFormDevis($db_devis, $db_items);
+            $this->sauveFormDevis($db_devis, $db_items, false);
         }
 
         $devis = $db_devis->find($id_devis)->current();
@@ -137,9 +163,10 @@ class DevisController extends Zend_Controller_Action
     /**
      * @param Application_Model_Devis $db_devis
      * @param Application_Model_ItemDevis $db_items
+     * @param bool $bAjout
      * @throws \Exception
      */
-    public function sauveFormDevis($db_devis, $db_items)
+    public function sauveFormDevis($db_devis, $db_items, $bAjout)
     {
         $idDevis = $this->_getParam('id');
         foreach($this->_request->getPost() as $key => $value){
@@ -148,30 +175,33 @@ class DevisController extends Zend_Controller_Action
             }
         }
 
-        $devis = $db_devis->find($idDevis)->current();
-
         $data = [];
         $data['id'] = $idDevis;
-        $data['id_client'] = $devis->id_client;
-        $data['date'] = $devis->date;
-        $data['date_validite'] = $devis->date_validite;
+        $data['id_client'] = $datas['idClient'];
+        $data['date'] = $datas['dateCreation'];
+        $data['date_validite'] = $datas[''];
         $data['delai'] = $datas['delai'];
         $data['titre'] = $datas['intitule'];
         $data['redaction'] = $datas['redactionDevis'];
-        $data['valide'] = $devis->valide;
-        $data['date_validation'] = $devis->date_validation;
-        $data['facture'] = $devis->facture;
-        $data['date_facture'] = $devis->date_facture;
-        $data['paye'] = $devis->paye;
-        $data['redaction_facture'] = $devis->redaction_facture;
-        $data['date_paiement'] = $devis->date_paiement;
-        $data['acompte'] = $devis->acompte;
-        $data['remise'] = $devis->remise;
+        $data['valide'] = $datas['valide'];
+        $data['date_validation'] = $datas['date_validation'];
+        $data['facture'] = $datas['facture'];
+        $data['date_facture'] = $datas['date_facture'];
+        $data['paye'] = $datas['paye'];
+        $data['redaction_facture'] = $datas['redaction_facture'];
+        $data['date_paiement'] = $datas['date_paiement'];
+        $data['acompte'] = $datas['acompte'];
+        $data['remise'] = $datas['remise'];
         $data['ref'] = $datas['refDossier'];
-        $data['reglement'] = $devis->reglement;
+        $data['reglement'] = $datas['reglement'];
         $data['jsonEntete'] = $datas['jsonEntete'];
 
-        $db_devis->update($data, array('id = ?' => $idDevis));
+        if ($bAjout) {
+            $row = $db_devis->createRow($data);
+            $idDevis = $row->save();
+        } else {
+            $db_devis->update($data, array('id = ?' => $idDevis));
+        }
 
         //on supprime les items avec le devis
         $db_items->delete("id_devis = ".$idDevis);
@@ -200,7 +230,6 @@ class DevisController extends Zend_Controller_Action
         }
 
         $this->_redirect('/devis/editer/id/' . $idDevis);
-
     }
 }
 

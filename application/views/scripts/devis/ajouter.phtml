@@ -1,8 +1,13 @@
 <div class="panel panel-primary">
-	<div class="panel-heading">
-		<h3 class="panel-title">Ajouter un devis</h3>
-	</div>
-	<div class="panel-body">
+    <div class="panel-heading nav navbar-default">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="panel-title">Ajouter un devis</h3>
+            </div>
+            <?= $this->render('devis/partNavBarHeader.phtml') ?>
+        </div>
+    </div>
+    <div class="panel-body">
         <?= $this->render('devis/partBodyDevis.phtml') ?>
-	</div>
+    </div>
 </div>

@@ -1,5 +1,16 @@
 <form action="" method="POST" name="formDevis">
-    <div class="panel-devis" >
+
+        <input type="hidden" name="idClient"        id="idClient"       value="<?= (isset($this->devis->id_client))? $this->devis->id_client : -1 ?>">
+        <input type="hidden" name="valide"          id="valide"         value="<?= (isset($this->devis->valide))? $this->devis->valide : -1 ?>">
+        <input type="hidden" name="date_validation" id="date_validation" value="<?= (isset($this->devis->date_validation))? $this->devis->date_validation : -1 ?>">
+        <input type="hidden" name="facture"         id="facture"        value="<?= (isset($this->devis->facture))? $this->devis->facture : -1 ?>">
+        <input type="hidden" name="date_facture"    id="date_facture"   value="<?= (isset($this->devis->date_facture))? $this->devis->date_facture : -1 ?>">
+        <input type="hidden" name="paye"            id="paye"           value="<?= (isset($this->devis->paye))? $this->devis->paye : -1 ?>">
+        <input type="hidden" name="redaction_facture" id="redaction_facture" value="<?= (isset($this->devis->redaction_facture))? $this->devis->redaction_facture : -1 ?>">
+        <input type="hidden" name="date_paiement"   id="date_paiement"  value="<?= (isset($this->devis->date_paiement))? $this->devis->date_paiement : -1 ?>">
+        <input type="hidden" name="acompte"         id="acompte"        value="<?= (isset($this->devis->acompte))? $this->devis->acompte : -1 ?>">
+        <input type="hidden" name="remise"          id="remise"         value="<?= (isset($this->devis->remise))? $this->devis->remise : -1 ?>">
+
         <div class="panel-devis-head">
             <div class="entete-devis entete-devis-left">
                 <table >
@@ -56,18 +67,20 @@
                             <th>Surf pub</th>
                             <th>Périmètre</th>
                         </tr>
-                        <?php foreach(json_decode($this->devis->jsonEntete, true) as $key => $entete): ?>
-                        <tr>
-                            <td><input type="text" name="largeurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['largeurTableEntete'] ?>"></td>
-                            <td><input type="text" name="hauteurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['hauteurTableEntete'] ?>"></td>
-                            <td><input type="text" name="surfaceTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['surfaceTableEntete'] ?>"></td>
-                            <td><input type="text" name="qteTableEntete"         onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['qteTableEntete'] ?>"></td>
-                            <td><input type="text" name="surfTotalTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['surfTotalTableEntete'] ?>"></td>
-                            <td><input type="text" name="coefPubTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['coefPubTableEntete'] ?>"></td>
-                            <td><input type="text" name="surfacePubTableEntete"  onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['surfacePubTableEntete'] ?>"></td>
-                            <td><input type="text" name="perimetreTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['perimetreTableEntete'] ?>"></td>
-                        </tr>
-                        <?php endforeach; ?>
+                        <?php if (isset($this->devis->jsonEntete) ) : ?>
+                            <?php foreach(json_decode($this->devis->jsonEntete, true) as $key => $entete): ?>
+                            <tr>
+                                <td><input type="text" name="largeurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['largeurTableEntete'] ?>"></td>
+                                <td><input type="text" name="hauteurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['hauteurTableEntete'] ?>"></td>
+                                <td><input type="text" name="surfaceTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['surfaceTableEntete'] ?>"></td>
+                                <td><input type="text" name="qteTableEntete"         onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['qteTableEntete'] ?>"></td>
+                                <td><input type="text" name="surfTotalTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['surfTotalTableEntete'] ?>"></td>
+                                <td><input type="text" name="coefPubTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['coefPubTableEntete'] ?>"></td>
+                                <td><input type="text" name="surfacePubTableEntete"  onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['surfacePubTableEntete'] ?>"></td>
+                                <td><input type="text" name="perimetreTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['perimetreTableEntete'] ?>"></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                         <tfoot>
                             <tr>
                                 <td colspan="4" class="titrefooter haTotal">Surface totale</td>

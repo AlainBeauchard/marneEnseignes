@@ -54,24 +54,26 @@
                 <td><input type="text" name="pxvente"           title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
             </tr>
             <?php endif; ?>
-            <?php foreach($this->itemsFraisTechnique as $key => $fraistechnique): ?>
-                <?php $json = json_decode($fraistechnique->json, true) ?>
-            <tr id="ligneRefFraisTechnique">
-                <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFraisTechnique(<?= $key ?>);" onChange="fctChangeValeurDevisFraisTechnique();" class="dropdown-toggle" list="listeFraisTechnique_<?= $key ?>" value="<?= $json['code'] ?>"/>
-                    <datalist id="listeFraisTechnique_<?= $key ?>">
-                    </datalist>
-                    <input type="hidden" name="json_FraisTechnique[]" value="<?= json_encode($json) ?>">
-                </td>
-                <td><input type="text" name="fraisTechnique"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['fraistechnique'] ?>"/></td>
-                <td><input type="text" name="taux"              title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['taux'] ?>"/></td>
-                <td><input type="text" name="heures"            title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['heures'] ?>"/></td>
-                <td><input type="text" name="minutes"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['minutes'] ?>"/></td>
-                <td><input type="text" name="tarifHoraire"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['tarifhoraire'] ?>"/></td>
-                <td><input type="text" name="tarifMinute"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['tarifminute'] ?>"/></td>
-                <td><input type="text" name="pxvente"           title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
-            </tr>
-            <?php endforeach; ?>
+            <?php if (isset($this->itemsFraisTechnique)) : ?>
+                <?php foreach($this->itemsFraisTechnique as $key => $fraistechnique): ?>
+                    <?php $json = json_decode($fraistechnique->json, true) ?>
+                <tr id="ligneRefFraisTechnique">
+                    <td>
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFraisTechnique(<?= $key ?>);" onChange="fctChangeValeurDevisFraisTechnique();" class="dropdown-toggle" list="listeFraisTechnique_<?= $key ?>" value="<?= $json['code'] ?>"/>
+                        <datalist id="listeFraisTechnique_<?= $key ?>">
+                        </datalist>
+                        <input type="hidden" name="json_FraisTechnique[]" value="<?= json_encode($json) ?>">
+                    </td>
+                    <td><input type="text" name="fraisTechnique"    title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['fraistechnique'] ?>"/></td>
+                    <td><input type="text" name="taux"              title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['taux'] ?>"/></td>
+                    <td><input type="text" name="heures"            title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['heures'] ?>"/></td>
+                    <td><input type="text" name="minutes"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['minutes'] ?>"/></td>
+                    <td><input type="text" name="tarifHoraire"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['tarifhoraire'] ?>"/></td>
+                    <td><input type="text" name="tarifMinute"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['tarifminute'] ?>"/></td>
+                    <td><input type="text" name="pxvente"           title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
+                </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
             <tfoot>
                 <tr>
                     <td colspan="8">

@@ -52,23 +52,25 @@
                     <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
                 </tr>
             <?php endif; ?>
-            <?php foreach($this->itemsDeplacement as $key => $deplacement): ?>
-                <?php $json = json_decode($deplacement->json, true) ?>
-            <tr id="ligneRefDeplacement">
-                <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(<?= $key ?>);" onChange="fctChangeValeurDevisDeplacement();" class="dropdown-toggle" list="listeDeplacement_<?= $key ?>" value="<?= $json['code'] ?>" />
-                    <datalist id="listeDeplacement_<?= $key ?>">
-                    </datalist>
-                    <input type="hidden" name="json_Deplacement[]" value="<?= json_encode($json) ?>">
-                </td>
-                <td><input type="text" name="deplacement"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['deplacement'] ?>"></td>
-                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['qte'] ?>"></td>
-                <td><input type="text" name="tarifUnique"   title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['tarifunique'] ?>"></td>
-                <td><input type="text" name="coutJour"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['coutjour'] ?>"></td>
-                <td><input type="text" name="nbJours"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['nbjours'] ?>"></td>
-                <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
-            </tr>
-            <?php endforeach; ?>
+           <?php if (isset($this->itemsDeplacement)) : ?>
+                <?php foreach($this->itemsDeplacement as $key => $deplacement): ?>
+                    <?php $json = json_decode($deplacement->json, true) ?>
+                <tr id="ligneRefDeplacement">
+                    <td>
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(<?= $key ?>);" onChange="fctChangeValeurDevisDeplacement();" class="dropdown-toggle" list="listeDeplacement_<?= $key ?>" value="<?= $json['code'] ?>" />
+                        <datalist id="listeDeplacement_<?= $key ?>">
+                        </datalist>
+                        <input type="hidden" name="json_Deplacement[]" value="<?= json_encode($json) ?>">
+                    </td>
+                    <td><input type="text" name="deplacement"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['deplacement'] ?>"></td>
+                    <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['qte'] ?>"></td>
+                    <td><input type="text" name="tarifUnique"   title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['tarifunique'] ?>"></td>
+                    <td><input type="text" name="coutJour"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['coutjour'] ?>"></td>
+                    <td><input type="text" name="nbJours"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['nbjours'] ?>"></td>
+                    <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
+                </tr>
+                <?php endforeach; ?>
+           <?php endif; ?>
             <tfoot>
                 <tr>
                     <td colspan="7">

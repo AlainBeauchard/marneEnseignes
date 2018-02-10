@@ -52,23 +52,25 @@
                 <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
             </tr>
             <?php endif; ?>
-            <?php foreach($this->itemsSousTraitance as $key => $soustraitance): ?>
-                <?php $json = json_decode($soustraitance->json, true) ?>
-            <tr id="ligneRefSousTraitance">
-                <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeSousTraitance(<?= $key ?>);" onChange="fctChangeValeurDevisSousTraitance();" class="dropdown-toggle" list="listeSousTraitance_<?= $key ?>" value="<?= $json['code'] ?>"/>
-                    <datalist id="listeSousTraitance_<?= $key ?>">
-                    </datalist>
-                    <input type="hidden" name="json_SousTraitance[]" value="<?= json_encode($json) ?>">
-                </td>
-                <td><input type="text" name="support"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisSousTraitance();" value="<?= $json['support'] ?>"/></td>
-                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisSousTraitance();" value="<?= $json['qte'] ?>"/></td>
-                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisSousTraitance();" value="<?= $json['h.a_ml'] ?>"/></td>
-                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['h.a_total'] ?>"/></td>
-                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisSousTraitance();" value="<?= $json['coefmarge'] ?>"/></td>
-                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
-            </tr>
-            <?php endforeach; ?>
+            <?php if (isset($this->itemsSousTraitance)) : ?>
+                <?php foreach($this->itemsSousTraitance as $key => $soustraitance): ?>
+                    <?php $json = json_decode($soustraitance->json, true) ?>
+                <tr id="ligneRefSousTraitance">
+                    <td>
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeSousTraitance(<?= $key ?>);" onChange="fctChangeValeurDevisSousTraitance();" class="dropdown-toggle" list="listeSousTraitance_<?= $key ?>" value="<?= $json['code'] ?>"/>
+                        <datalist id="listeSousTraitance_<?= $key ?>">
+                        </datalist>
+                        <input type="hidden" name="json_SousTraitance[]" value="<?= json_encode($json) ?>">
+                    </td>
+                    <td><input type="text" name="support"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisSousTraitance();" value="<?= $json['support'] ?>"/></td>
+                    <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisSousTraitance();" value="<?= $json['qte'] ?>"/></td>
+                    <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisSousTraitance();" value="<?= $json['h.a_ml'] ?>"/></td>
+                    <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['h.a_total'] ?>"/></td>
+                    <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisSousTraitance();" value="<?= $json['coefmarge'] ?>"/></td>
+                    <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
+                </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
             <tfoot>
                 <tr>
                     <td colspan="8">
