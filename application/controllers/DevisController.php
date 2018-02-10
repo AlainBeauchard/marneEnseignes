@@ -143,9 +143,40 @@ class DevisController extends Zend_Controller_Action
         $this->view->id_devis = $id_devis;
     }
 
+    /**
+     * @throws Zend_Db_Table_Exception
+     */
     public function ficheAction()
     {
+        $db_devis = new Application_Model_Devis();
+        $db_items = new Application_Model_ItemDevis();
 
+        $id_devis = $this->_getParam('id');
+
+        $devis = $db_devis->find($id_devis)->current();
+        $this->view->devis = $devis;
+
+        $tab = ['Adhesif', 'Deplacement', 'Faconnage', 'ForfaitPrestation', 'Fourniture',
+            'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique'
+        ];
+
+        foreach($tab as $item) {
+            $valItem = 'items'.$item;
+            $select = $db_items->select()->where('id_devis = ?', $devis->id)
+                ->where(' typeligne = ? ', strtolower($item));
+            $this->view->$valItem = $db_items->fetchAll($select);
+        }
+
+        $db_client = new Application_Model_Clients();
+        $this->view->client = $db_client->find($devis->id_client)->current();
+
+        $formRedaction = new Application_Form_WriteFacture();
+        $formRedaction->getElement('redactionFacture')->setValue($devis->redaction_facture);
+        $this->view->formRedactionFacture = $formRedaction;
+
+        $db_modeles = new Application_Model_Modeles();
+        $this->view->modeles = $db_modeles->fetchAll();
+        $this->view->id_devis = $id_devis;
     }
 
     public function deleteAction()
@@ -232,4 +263,3 @@ class DevisController extends Zend_Controller_Action
         $this->_redirect('/devis/editer/id/' . $idDevis);
     }
 }
-

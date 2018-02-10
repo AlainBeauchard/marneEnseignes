@@ -1,0 +1,32 @@
+<table width="100%">
+    <tr>
+        <th colspan="8">Produits</th>
+    </tr>
+    <tr>
+        <th>Code</th>
+        <th>Support</th>
+        <th>Format</th>
+        <th>Quantité</th>
+        <th>H.A M2/ML</th>
+        <th>H.A Total</th>
+        <th>Coef marge</th>
+        <th>Px vente</th>
+    </tr>
+    <?php if (isset($this->itemsProduit)) : ?>
+        <?php foreach($this->itemsProduit as $key => $produit): ?>
+            <?php $json = json_decode($produit->json, true) ?>
+            <tr id="ligneRefProduit">
+                <td>
+                    <?= $json['code'] ?>
+                </td>
+                <td><?= $json['support'] ?></td>
+                <td><?= $json['format'] ?></td>
+                <td><?= $json['qte'] ?></td>
+                <td><?= $json['h.a_ml'] ?></td>
+                <td><?= $json['h.a_total'] ?></td>
+                <td><?= $json['coefmarge'] ?></td>
+                <td><?= $json['pxvente'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</table>

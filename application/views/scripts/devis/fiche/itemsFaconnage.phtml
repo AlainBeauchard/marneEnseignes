@@ -1,0 +1,28 @@
+<table width="100%">
+    <tr>
+        <th colspan="8">Façonnage</th>
+    </tr>
+    <tr>
+        <th>Code</th>
+        <th>Faconnage</th>
+        <th>Quantité</th>
+        <th>H.A M2/ML</th>
+        <th>H.A Total</th>
+        <th>Px vente</th>
+    </tr>
+    <?php if (isset($this->itemsFaconnage)) : ?>
+        <?php foreach($this->itemsFaconnage as $key => $faconnage): ?>
+            <?php $json = json_decode($faconnage->json, true) ?>
+            <tr id="ligneRefFaconnage">
+                <td>
+                    <?= $json['code'] ?>
+                </td>
+                <td><?= $json['faconnage'] ?></td>
+                <td><?= $json['qte'] ?></td>
+                <td><?= $json['h.a_ml'] ?></td>
+                <td><?= $json['h.a_total'] ?></td>
+                <td><?= $json['pxvente'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</table>

@@ -1,0 +1,26 @@
+<table width="100%">
+    <tr>
+        <th colspan="8">Prestation</th>
+    </tr>
+    <tr>
+        <th>Code</th>
+        <th>Presation</th>
+        <th>Quantité</th>
+        <th>Tarif</th>
+        <th>Px vente</th>
+    </tr>
+    <?php if (isset($this->itemsPrestation)) : ?>
+        <?php foreach($this->itemsPrestation as $key => $presta): ?>
+            <?php $json = json_decode($presta->json, true) ?>
+            <tr id="ligneRefPrestation">
+                <td>
+                    <?= $json['code'] ?>
+                </td>
+                <td><?= $json['prestation'] ?></td>
+                <td><?= $json['qte'] ?>"</td>
+                <td><?= $json['tarif'] ?>"</td>
+                <td><?= $json['pxvente'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</table>

@@ -1,0 +1,32 @@
+<table width="100%">
+    <tr>
+        <th colspan="8">Frais techniques</th>
+    </tr>
+    <tr>
+        <th>Code</th>
+        <th>Frais Techniques</th>
+        <th>Taux</th>
+        <th>Heures</th>
+        <th>Minutes</th>
+        <th>Tarif horaire</th>
+        <th>Tarif minute</th>
+        <th>Px vente</th>
+    </tr>
+    <?php if (isset($this->itemsFraisTechnique)) : ?>
+        <?php foreach($this->itemsFraisTechnique as $key => $fraistechnique): ?>
+            <?php $json = json_decode($fraistechnique->json, true) ?>
+            <tr id="ligneRefFraisTechnique">
+                <td>
+                    <?= $json['code'] ?>
+                </td>
+                <td><?= $json['fraistechnique'] ?></td>
+                <td><?= $json['taux'] ?></td>
+                <td><?= $json['heures'] ?></td>
+                <td><?= $json['minutes'] ?></td>
+                <td><?= $json['tarifhoraire'] ?></td>
+                <td><?= $json['tarifminute'] ?></td>
+                <td><?= $json['pxvente'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</table>

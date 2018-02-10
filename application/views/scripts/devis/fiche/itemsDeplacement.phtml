@@ -1,0 +1,30 @@
+<table width="100%">
+    <tr>
+        <th colspan="8">Déplacement</th>
+    </tr>
+    <tr>
+        <th>Code</th>
+        <th>Deplacement</th>
+        <th>Quantité</th>
+        <th>Tarif unique</th>
+        <th>Coût/jour</th>
+        <th>Nb jours</th>
+        <th>Px vente</th>
+    </tr>
+    <?php if (isset($this->itemsDeplacement)) : ?>
+        <?php foreach($this->itemsDeplacement as $key => $deplacement): ?>
+            <?php $json = json_decode($deplacement->json, true) ?>
+            <tr id="ligneRefDeplacement">
+                <td>
+                    <?= $json['code'] ?>
+                </td>
+                <td><?= $json['deplacement'] ?></td>
+                <td><?= $json['qte'] ?></td>
+                <td><?= $json['tarifunique'] ?></td>
+                <td><?= $json['coutjour'] ?></td>
+                <td><?= $json['nbjours'] ?></td>
+                <td><?= $json['pxvente'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</table>

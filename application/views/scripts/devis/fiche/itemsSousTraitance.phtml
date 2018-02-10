@@ -1,0 +1,30 @@
+<table width="100%">
+    <tr>
+        <th colspan="8">Produits</th>
+    </tr>
+    <tr>
+        <th>Code</th>
+        <th>Sous traitance</th>
+        <th>Quantité</th>
+        <th>H.A M2/ML</th>
+        <th>H.A Total</th>
+        <th>Coef marge</th>
+        <th>Px vente</th>
+    </tr>
+    <?php if (isset($this->itemsSousTraitance)) : ?>
+        <?php foreach($this->itemsSousTraitance as $key => $soustraitance): ?>
+            <?php $json = json_decode($soustraitance->json, true) ?>
+            <tr id="ligneRefSousTraitance">
+                <td>
+                    <?= $json['code'] ?>
+                </td>
+                <td><?= $json['support'] ?></td>
+                <td><?= $json['qte'] ?></td>
+                <td><?= $json['h.a_ml'] ?></td>
+                <td><?= $json['h.a_total'] ?></td>
+                <td><?= $json['coefmarge'] ?></td>
+                <td><?= $json['pxvente'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</table>
