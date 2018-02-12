@@ -209,7 +209,6 @@ class DevisController extends Zend_Controller_Action
         $data = [];
         $data['id'] = $idDevis;
         $data['id_client'] = $datas['idClient'];
-        $data['date'] = $datas['dateCreation'];
         $data['date_validite'] = $datas[''];
         $data['delai'] = $datas['delai'];
         $data['titre'] = $datas['intitule'];
@@ -228,6 +227,7 @@ class DevisController extends Zend_Controller_Action
         $data['jsonEntete'] = $datas['jsonEntete'];
 
         if ($bAjout) {
+            $data['date'] = date('Y-m-d');
             $row = $db_devis->createRow($data);
             $idDevis = $row->save();
         } else {
