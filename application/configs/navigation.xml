@@ -52,9 +52,14 @@
 			<resource>admin</resource>
 		</m9>
 		<m10>
+			<label>Factures Alain</label>
+			<controller>facture</controller>
+			<resource>admin</resource>
+		</m10>
+		<m11>
 			<label>Déconnexion</label>
 			<controller>login</controller>
 			<action>deco</action>
-		</m10>
+		</m11>
 	</frontend>
 </root>

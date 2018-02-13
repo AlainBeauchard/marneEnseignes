@@ -1,6 +1,6 @@
 <?php
 
-class DevisController extends Zend_Controller_Action
+class FactureController extends Zend_Controller_Action
 {
     /**
      * @throws Zend_Config_Exception
@@ -22,7 +22,7 @@ class DevisController extends Zend_Controller_Action
         $this->view->navigation(new Zend_Navigation($config))->setAcl($acl)->setRole($auth->getIdentity()->status);
 
         $response = $this->getResponse();
-        $response->insert('sidebar', $this->view->render('sidebardevis.phtml'));
+        $response->insert('sidebar', $this->view->render('sidebarfacture.phtml'));
     }
 
     /**
@@ -30,22 +30,14 @@ class DevisController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $db_devis = new Application_Model_Devis();
-        $select = $db_devis->select()->where('facture = 0 ')->where('valide = 0')->order('date DESC');
-        $devis = $db_devis->fetchAll($select);
-
-        $this->indexPrivateAction($devis);
-    }
-
-    /**
-     * @throws Zend_Paginator_Exception
-     */
-    private function indexPrivateAction($devis)
-    {
         $filtre = new Application_Form_FiltreClient();
         $filtre->getElement('type_filtre')->setValue('factures');
         $filtre->getElement('valide')->setValue('0');
         $this->view->filtre = $filtre;
+
+        $db_devis = new Application_Model_Devis();
+        $select = $db_devis->select()->where('facture = 1 ')->where('valide = 0')->order('date DESC');
+        $devis = $db_devis->fetchAll($select);
 
         $paginator = Zend_Paginator::factory($devis);
         $paginator->setItemCountPerPage(50);
@@ -56,43 +48,10 @@ class DevisController extends Zend_Controller_Action
         $this->view->paginator = $paginator;
     }
 
-    /**
-     * @throws Exception
-     * @throws Zend_Form_Exception
-     */
+
     public function ajouterAction()
     {
-        $form = new Application_Form_Devis();
 
-        $db_devis = new Application_Model_Devis();
-        $db_items = new Application_Model_ItemDevis();
-
-        if($this->_request->isPost() && $form->isValid($this->_request->getPost())){
-            $this->sauveFormDevis($db_devis, $db_items, true);
-        }
-
-        $form->getElement('dateCreation')->setValue(date('d/m/Y'));
-        $form->getElement('refDossier')->setValue($this->getRefDossierMax());
-        $this->view->form = $form;
-
-        $tab = ['Adhesif', 'Deplacement', 'Faconnage', 'ForfaitPrestation', 'Fourniture',
-            'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique'
-        ];
-
-        foreach($tab as $item) {
-            $valItem = 'items'.$item;
-            $this->view->$valItem = [];
-        }
-
-        $formRedaction = new Application_Form_WriteDevis();
-        $this->view->formRedaction = $formRedaction;
-
-        $dbReglement = new Application_Model_PresetReglement();
-        $this->view->listeReglement = $dbReglement->fetchAll($dbReglement->select()->where('1=1'));
-
-        $db_modeles = new Application_Model_Modeles();
-        $this->view->modeles = $db_modeles->fetchAll();
-        $this->view->id_devis = -1;
     }
 
     /**
@@ -200,110 +159,8 @@ class DevisController extends Zend_Controller_Action
         $this->_redirect('/devis/');
     }
 
-    /**
-     * @param Application_Model_Devis $db_devis
-     * @param Application_Model_ItemDevis $db_items
-     * @param bool $bAjout
-     * @throws \Exception
-     */
-    public function sauveFormDevis($db_devis, $db_items, $bAjout)
-    {
-        $idDevis = $this->_getParam('id');
-        foreach($this->_request->getPost() as $key => $value){
-            if(strlen($value)){
-                $datas[$key] = $value;
-            }
-        }
-
-        $data = [];
-        $data['id'] = $idDevis;
-        $data['id_client'] = $datas['idClient'];
-        $data['date_validite'] = $datas[''];
-        $data['delai'] = $datas['delai'];
-        $data['titre'] = $datas['intitule'];
-        $data['redaction'] = $datas['redactionDevis'];
-        $data['valide'] = $datas['valide'];
-        $data['date_validation'] = $datas['date_validation'];
-        $data['facture'] = $datas['facture'];
-        $data['date_facture'] = $datas['date_facture'];
-        $data['paye'] = $datas['paye'];
-        $data['redaction_facture'] = $datas['redaction_facture'];
-        $data['date_paiement'] = $datas['date_paiement'];
-        $data['acompte'] = $datas['acompte'];
-        $data['remise'] = $datas['remise'];
-        $data['ref'] = $datas['refDossier'];
-        $data['reglement'] = $datas['reglement'];
-        $data['jsonEntete'] = $datas['jsonEntete'];
-
-        if ($bAjout) {
-            $data['date'] = date('Y-m-d');
-            $row = $db_devis->createRow($data);
-            $idDevis = $row->save();
-        } else {
-            $db_devis->update($data, array('id = ?' => $idDevis));
-        }
-
-        //on supprime les items avec le devis
-        $db_items->delete("id_devis = ".$idDevis);
-
-        $tab = ['Adhesif', 'Deplacement', 'Faconnage', 'ForfaitPrestation', 'Fourniture',
-            'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique'
-        ];
-
-        foreach ($tab as $item) {
-            if (isset($_REQUEST['json_' . $item])) {
-                foreach ($_REQUEST['json_' . $item] as $ligne) {
-
-                    if( $ligne != '' ) {
-                        $row = $db_items->createRow(['id_devis' => $idDevis]);
-
-                        $row->id_item = 0;
-                        $row->remise = 0;
-                        $row->pht = 0;
-                        $row->typeligne = strtolower($item);
-                        $row->json = strtolower($ligne);
-
-                        $row->save();
-                    }
-                }
-            }
-        }
-
-        $this->_redirect('/devis/editer/id/' . $idDevis);
-    }
-
-    public function getRefDossierMax()
-    {
-        // TODO aller chercher le max du num dossier pour l'année !
-        $max = 1;
-        $retour = date('y') . '-'.str_pad ((string)$max,4, "0", STR_PAD_LEFT);
-
-        return $retour;
-    }
-
     public function histoAction()
     {
-        $db_devis = new Application_Model_Devis();
-        $select = $db_devis->select()
-            ->where('valide = 1')
-            ->order('date DESC');
-        $devis = $db_devis->fetchAll($select);
-
-        $this->indexPrivateAction($devis);
-    }
-
-    /**
-     * @throws Zend_Paginator_Exception
-     */
-    public function acceptAction()
-    {
-        $db_devis = new Application_Model_Devis();
-        $select = $db_devis->select()
-            ->where('facture = 0 ')
-            ->where('valide = 1')
-            ->order('date DESC');
-        $devis = $db_devis->fetchAll($select);
-
-        $this->indexPrivateAction($devis);
+        // TODO faire l'historique des factures
     }
 }

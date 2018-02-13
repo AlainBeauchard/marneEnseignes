@@ -24,6 +24,7 @@ class Application_Model_Devis extends Zend_Db_Table_Abstract
 		$r = $this->fetchAll($select);
 		
 		$db_items_devis = new Application_Model_ItemDevis();
+        $total = 0;
 		foreach($r as $f){
 			$total += $db_items_devis->getSumFacture($f->id);
 		}

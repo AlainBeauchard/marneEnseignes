@@ -1,0 +1,152 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Détail</h3>
+    </div>
+    <div class="panel-body">
+        <p style="text-align:right;">
+            <button type="button" class="btn btn-success" aria-label="Left Align" id="accepter_<?php echo $this->devis->id?>">
+                Devis accept&eacute;
+            </button>
+            <button type="button" class="btn btn-success" aria-label="Left Align" id="preview_devis_<?php echo $this->devis->id?>">
+                Imprimer le devis
+            </button>
+            <button type="button" class="btn btn-success" aria-label="Left Align" id="cgv">
+                Imprimer les CGV
+            </button>
+            <?php if($this->devis->facture):?>
+                <button type="button" class="btn btn-success" aria-label="Left Align" id="preview_facture_<?php echo $this->devis->id?>">
+                    Imprimer la facture
+                </button>
+            <?php else:?>
+                <button type="button" class="btn btn-success" aria-label="Left Align" id="facturer_<?php echo $this->devis->id?>">
+                    Facturer
+                </button>
+            <?php endif; ?>
+        </p>
+        <div class="table-responvive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Date du devis</th>
+                    <th>Délai de réalisation</th>
+                    <th>N° Projet</th>
+                    <th>Intitulé du projet</th>
+                    <th>Accept&eacute; par le client</th>
+                    <th>Factur&eacute;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><?php echo date('d/m/Y', strtotime($this->devis->date)) ?></td>
+                    <td><?php echo $this->devis->delai?> semaine<?php echo $this->devis->delai > 1?'s':'' ?></td>
+                    <td><?php echo $this->devis->ref ?></td>
+                    <td><?php echo $this->devis->titre ?></td>
+                    <td><?php echo $this->devis->valide?'OUI':'NON' ?></td>
+                    <td><?php echo $this->devis->facture?'OUI':'NON' ?></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-responvive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Client</th>
+                    <th>Adresses</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><?php echo $this->client->societe ?></td>
+                    <td>
+                        <p><?php echo $this->client->adresse ?></p>
+                        <p><?php echo $this->client->codepostal ?> <?php echo $this->client->ville ?></p>
+                        <p>T&eacute;l : <?php echo $this->client->tel ?></p>
+                        <p>Mel : <?php echo $this->client->mel ?></p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responvive">
+            <?php if (count($this->itemsProduit) >0) : ?>
+                <?= $this->render('devis/fiche/itemsProduit.phtml'); ?>
+            <?php endif ?>
+
+            <?php if (count($this->itemsDeplacement) >0) : ?>
+                <?= $this->render('devis/fiche/itemsDeplacement.phtml'); ?>
+            <?php endif ?>
+
+            <?php if (count($this->itemsFaconnage) >0) : ?>
+                <?= $this->render('devis/fiche/itemsFaconnage.phtml'); ?>
+            <?php endif ?>
+
+            <?php if (count($this->itemsForfaitPrestation) >0) : ?>
+                <?= $this->render('devis/fiche/itemsPrestation.phtml'); ?>
+            <?php endif ?>
+
+            <?php if (count($this->itemsFourniture) >0) : ?>
+                <?= $this->render('devis/fiche/itemsFourniture.phtml'); ?>
+            <?php endif ?>
+
+            <?php if (count($this->itemsFraisTechnique) >0) : ?>
+                <?= $this->render('devis/fiche/itemsFraisTechnique.phtml'); ?>
+            <?php endif ?>
+
+            <?php if (count($this->itemsPose) >0) : ?>
+                <?= $this->render('devis/fiche/itemsPose.phtml'); ?>
+            <?php endif ?>
+
+            <?php if (count($this->itemsPrestation) >0) : ?>
+                <?= $this->render('devis/fiche/itemsPrestation.phtml'); ?>
+            <?php endif ?>
+
+            <?php if (count($this->itemsSousTraitance) >0) : ?>
+                <?= $this->render('devis/fiche/itemsSousTraitance.phtml'); ?>
+            <?php endif ?>
+
+            <?php if (count($this->itemsAdhesif) >0) : ?>
+                <?= $this->render('devis/fiche/itemsAdhesif.phtml'); ?>
+            <?php endif ?>
+        </div>
+        <?php if($this->devis->facture == 1):?>
+            <?php echo $this->formFacture ?>
+        <?php endif;?>
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Facturation</h3>
+    </div>
+    <div class="panel-body">
+        <input type="hidden" id="id_devis" value="<?php echo $this->devis->id?>" />
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="load_modele">
+                            Charger un modèle
+                            <span class="caret"></span>
+                            <span class="sr-only">Charger un modèle</span>
+                        </button>
+                        <ul class="dropdown-menu" id="liste_nom_modeles">
+                            <?php foreach($this->modeles as $row):?>
+                                <li id="modele_id_<?php echo $row->id ?>_redactionFacture"><?php echo $row->titre?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" id="save_modele">Sauvegarder ce texte</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php echo $this->formRedactionFacture->getElement('redactionFacture') ?>
+        <?php echo $this->formRedactionFacture->getElement('validerRedactionFacture') ?>
+
+    </div>
+</div>
+<div id="dialog_nom_modele">
+    <?php echo $this->formNomModele ?>
+</div>
