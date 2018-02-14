@@ -23,6 +23,12 @@ class Application_Form_Devis extends Zend_Form
         $refDossier->setRequired(true);
         $this->addElement($refDossier);
 
+        $montantTotal = new Zend_Form_Element_Text('montantTotal');
+        $montantTotal->setAttribs(array('placeholder'=>'Montant total','class'=>'form-control txtEntete', 'aria-describedby'=>'sizing-addon2', 'readonly'=>true));
+        $montantTotal->setLabel('Montant Total');
+        $montantTotal->setRequired(false);
+        $this->addElement($montantTotal);
+
         $intitule = new Zend_Form_Element_Text('intitule');
         $intitule->setAttribs(array('placeholder'=>'Intitule','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
         $intitule->setLabel('Intitulé');

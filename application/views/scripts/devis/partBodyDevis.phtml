@@ -50,11 +50,15 @@
                 <div style="width: 100%" class="pull-left">
                     <table id="tableEntete" class="table-entete-devis">
                         <tr>
-                            <td colspan="4">
+                            <td colspan="2">
                                 <?= $this->form->nomClient ?>
                             </td>
-                            <td colspan="4">
+                            <td colspan="5">
                                 <?= $this->form->intitule ?>
+                            </td>
+                            <td colspan="1">
+                                <Label>Montant Total</Label>
+                                <div id="montantTotal" style="text-align: right; font-weight: bolder"></div>
                             </td>
                         </tr>
                         <tr>
