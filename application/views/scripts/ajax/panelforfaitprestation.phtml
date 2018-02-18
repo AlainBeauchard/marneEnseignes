@@ -18,9 +18,11 @@
                     <li id="BtAjoutligneForfaitPrestation" title="Ajouter une ligne">
                         <span class="glyphicon glyphicon-plus"></span>
                     </li>
+                    <!--
                     <li id="BtSuprimeligneForfaitPrestation" title="Supprimer une ligne">
                         <span class="glyphicon glyphicon-minus"></span>
                     </li>
+                    -->
                 </ul>
             </div>
         </div>
@@ -35,7 +37,7 @@
                 <th>Px vente</th>
             </tr>
             <?php if( count($this->itemsForfaitPrestation) == 0): ?>
-            <tr id="ligneRefForfaitPrestation">
+            <tr id="ligneRefForfaitPrestation"  data-key="ligneRefForfaitPrestation_0">
                 <td>
                     <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeForfaitPrestation(0);" onChange="fctChangeValeurDevisForfaitPrestation();" class="dropdown-toggle" list="listeForfaitPrestation_0"/>
                     <datalist id="listeForfaitPrestation_0">
@@ -46,12 +48,13 @@
                 <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisForfaitPrestation();"/></td>
                 <td><input type="text" name="tarif"         title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisForfaitPrestation();"/></td>
                 <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneForfaitPrestation(0);" title="Supprimer la ligne" ></span></td>
             </tr>
             <?php endif; ?>
             <?php if (isset($this->itemsForfaitPrestation)) : ?>
                 <?php foreach($this->itemsForfaitPrestation as $key => $forfaitPresta): ?>
                     <?php $json = json_decode($forfaitPresta->json, true) ?>
-                <tr id="ligneRefForfaitPrestation">
+                <tr id="ligneRefForfaitPrestation"  data-key="ligneRefForfaitPrestation_<?= $key ?>">
                     <td>
                         <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeForfaitPrestation(<?= $key ?>);" onChange="fctChangeValeurDevisForfaitPrestation();" class="dropdown-toggle" list="listeForfaitPrestation_<?= $key ?>" value="<?= $json['code'] ?>"/>
                         <datalist id="listeForfaitPrestation_<?= $key ?>">
@@ -62,6 +65,7 @@
                     <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisForfaitPrestation();" value="<?= $json['qte'] ?>" /></td>
                     <td><input type="text" name="tarif"         title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisForfaitPrestation();" value="<?= $json['tarif'] ?>"/></td>
                     <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
+                    <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneForfaitPrestation(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
                 </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -97,6 +101,7 @@
                 <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisForfaitPrestation();" /></td>
                 <td><input type="text" name="tarif"         title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisForfaitPrestation();" /></td>
                 <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneForfaitPrestation(XXX);" title="Supprimer la ligne" ></span></td>
             </tr>
         </table>
     </div>

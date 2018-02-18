@@ -18,9 +18,11 @@
                     <li id="BtAjoutligneProduit" title="Ajouter une ligne">
                         <span class="glyphicon glyphicon-plus"></span>
                     </li>
+                    <!--
                     <li id="BtSuprimeligneProduit" title="Supprimer une ligne">
                         <span class="glyphicon glyphicon-minus"></span>
                     </li>
+                    -->
                 </ul>
             </div>
         </div>
@@ -39,7 +41,7 @@
                     <th>Px vente</th>
                 </tr>
                 <?php if( count($this->itemsProduit) == 0): ?>
-                <tr id="ligneRefProduit">
+                <tr id="ligneRefProduit" data-key="ligneRefProduit_0">
                     <td>
                         <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeProduit(0);" onChange="fctChangeValeurDevisProduit();" class="dropdown-toggle" list="listeProduit_0"/>
                         <datalist id="listeProduit_0">
@@ -53,12 +55,13 @@
                     <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
                     <td><input type="text" name="coefMarge" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
                     <td><input type="text" name="pxvente"   title="" readonly class="inputNumber"/></td>
+                    <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneProduits(0);" title="Supprimer la ligne" ></span></td>
                 </tr>
                 <?php endif; ?>
                 <?php if (isset($this->itemsProduit)) : ?>
                     <?php foreach($this->itemsProduit as $key => $produit): ?>
                         <?php $json = json_decode($produit->json, true) ?>
-                    <tr id="ligneRefProduit">
+                    <tr id="ligneRefProduit" data-key="ligneRefProduit_<?= $key ?>">
                         <td>
                             <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeProduit(<?= $key ?>);" onChange="fctChangeValeurDevisProduit();" class="dropdown-toggle" list="listeProduit_<?= $key ?>" value="<?= $json['code'] ?>"/>
                             <datalist id="listeProduit_<?= $key ?>">
@@ -72,6 +75,7 @@
                         <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" value="<?= $json['h.a_total'] ?>" /></td>
                         <td><input type="text" name="coefMarge" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $json['coefmarge'] ?>" /></td>
                         <td><input type="text" name="pxvente"   title="" readonly class="inputNumber" value="<?= $json['pxvente'] ?>"/></td>
+                        <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneProduits(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
                     </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>
@@ -110,8 +114,9 @@
                     <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
                     <td><input type="text" name="coefMarge" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber"/></td>
                     <td><input type="text" name="pxvente"   title="" readonly class="inputNumber"/></td>
+                    <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneProduits(XXX);" title="Supprimer la ligne" ></span></td>
                 </tr>
             </table>
         </div>
-    <input type="hidden" name="nbLigneProduit" id="nbLigneProduit" value="<?= count($this->itemsProduit)+1 ?>">
+    <input type="hidden" name="nbLigneProduit" id="nbLigneProduit" value="<?= (count($this->itemsProduit) + 1) ?>">
 </div>

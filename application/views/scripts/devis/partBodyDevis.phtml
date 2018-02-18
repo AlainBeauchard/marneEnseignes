@@ -70,10 +70,13 @@
                             <th>Coef pub</th>
                             <th>Surf pub</th>
                             <th>Périmètre</th>
+                            <th></th>
                         </tr>
+                        <?php $nbLigne = 0 ; ?>
                         <?php if (isset($this->devis->jsonEntete) ) : ?>
+                            <?php $nbLigne = count(json_decode($this->devis->jsonEntete, true)); ?>
                             <?php foreach(json_decode($this->devis->jsonEntete, true) as $key => $entete): ?>
-                            <tr>
+                            <tr  id="ligneRefEntete"  data-key="ligneRefEntete_<?= $key ?>">
                                 <td><input type="text" name="largeurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['largeurTableEntete'] ?>"></td>
                                 <td><input type="text" name="hauteurTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['hauteurTableEntete'] ?>"></td>
                                 <td><input type="text" name="surfaceTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['surfaceTableEntete'] ?>"></td>
@@ -82,6 +85,7 @@
                                 <td><input type="text" name="coefPubTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['coefPubTableEntete'] ?>"></td>
                                 <td><input type="text" name="surfacePubTableEntete"  onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['surfacePubTableEntete'] ?>"></td>
                                 <td><input type="text" name="perimetreTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete" value="<?= $entete['perimetreTableEntete'] ?>"></td>
+                                <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneEntete(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
                             </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -108,9 +112,10 @@
                             <td><input type="text" name="coefPubTableEntete"     onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
                             <td><input type="text" name="surfacePubTableEntete"  onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
                             <td><input type="text" name="perimetreTableEntete"   onchange="fctChangeTableEntete();" onFocus="fctSetFocus();" title="" class="txtEntete"></td>
+                            <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneEntete(XXX);" title="Supprimer la ligne" ></span></td>
                         </tr>
                     </table>
-                    <input type="hidden" name="nbLigneTableEntete" id="nbLigneTableEntete" value="<?= count($this->itemsEntete) + 1 ?>" >
+                    <input type="hidden" name="nbLigneTableEntete" id="nbLigneTableEntete" value="<?= $nbLigne + 1 ?>" >
                 </div>
             </div>
         </div>

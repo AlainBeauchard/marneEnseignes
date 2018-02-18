@@ -18,9 +18,11 @@
                     <li id="BtAjoutligneDeplacement" title="Ajouter une ligne">
                         <span class="glyphicon glyphicon-plus"></span>
                     </li>
+                    <!--
                     <li id="BtSuprimeligneDeplacement" title="Supprimer une ligne">
                         <span class="glyphicon glyphicon-minus"></span>
                     </li>
+                    -->
                 </ul>
             </div>
         </div>
@@ -37,7 +39,7 @@
                 <th>Px vente</th>
             </tr>
             <?php if(count($this->itemsDeplacement) == 0): ?>
-                <tr id="ligneRefDeplacement">
+                <tr id="ligneRefDeplacement"  data-key="ligneRefDeplacement_0">
                     <td>
                         <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(0);" onChange="fctChangeValeurDevisDeplacement();" class="dropdown-toggle" list="listeDeplacement_0"/>
                         <datalist id="listeDeplacement_0">
@@ -50,12 +52,13 @@
                     <td><input type="text" name="coutJour"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly ></td>
                     <td><input type="text" name="nbJours"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" ></td>
                     <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                    <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneDeplacement(0);" title="Supprimer la ligne" ></span></td>
                 </tr>
             <?php endif; ?>
            <?php if (isset($this->itemsDeplacement)) : ?>
                 <?php foreach($this->itemsDeplacement as $key => $deplacement): ?>
                     <?php $json = json_decode($deplacement->json, true) ?>
-                <tr id="ligneRefDeplacement">
+                <tr id="ligneRefDeplacement"  data-key="ligneRefDeplacement_<?= $key ?>">
                     <td>
                         <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(<?= $key ?>);" onChange="fctChangeValeurDevisDeplacement();" class="dropdown-toggle" list="listeDeplacement_<?= $key ?>" value="<?= $json['code'] ?>" />
                         <datalist id="listeDeplacement_<?= $key ?>">
@@ -68,6 +71,7 @@
                     <td><input type="text" name="coutJour"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['coutjour'] ?>"></td>
                     <td><input type="text" name="nbJours"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['nbjours'] ?>"></td>
                     <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
+                    <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneDeplacement(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
                 </tr>
                 <?php endforeach; ?>
            <?php endif; ?>
@@ -105,6 +109,7 @@
                 <td><input type="text" name="coutJour"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly ></td>
                 <td><input type="text" name="nbJours"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" ></td>
                 <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneDeplacement(XXX);" title="Supprimer la ligne" ></span></td>
             </tr>
         </table>
     </div>

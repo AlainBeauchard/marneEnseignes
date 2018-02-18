@@ -18,9 +18,11 @@
                     <li id="BtAjoutlignePose" title="Ajouter une ligne">
                         <span class="glyphicon glyphicon-plus"></span>
                     </li>
+                    <!--
                     <li id="BtSuprimelignePose" title="Supprimer une ligne">
                         <span class="glyphicon glyphicon-minus"></span>
                     </li>
+                    -->
                 </ul>
             </div>
         </div>
@@ -37,7 +39,7 @@
                 <th>Px vente</th>
             </tr>
             <?php if( count($this->itemsPose) == 0): ?>
-            <tr id="ligneRefPose">
+            <tr id="ligneRefPose"  data-key="ligneRefPose_0">
                 <td>
                     <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListePose(0);" onChange="fctChangeValeurDevisPose();" class="dropdown-toggle" list="listePose_0"/>
                     <datalist id="listePose_0">
@@ -50,12 +52,13 @@
                 <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
                 <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();"/></td>
                 <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLignePose(0);" title="Supprimer la ligne" ></span></td>
             </tr>
             <?php endif; ?>
             <?php if (isset($this->itemsPose)) : ?>
                 <?php foreach($this->itemsPose as $key => $pose): ?>
                     <?php $json = json_decode($pose->json, true) ?>
-                <tr id="ligneRefPose">
+                <tr id="ligneRefPose"  data-key="ligneRefPose_<?= $key ?>">
                     <td>
                         <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListePose(<?=$key ?>);" onChange="fctChangeValeurDevisPose();" class="dropdown-toggle" list="listePose_<?=$key ?>" value="<?= $json['code'] ?>"/>
                         <datalist id="listePose_<?=$key ?>">
@@ -68,6 +71,7 @@
                     <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['h.a_total'] ?>"/></td>
                     <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();" value="<?= $json['coefmarge'] ?>"/></td>
                     <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
+                    <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLignePose(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
                 </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -107,6 +111,7 @@
                 <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
                 <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisPose();"/></td>
                 <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLignePose(XXX);" title="Supprimer la ligne" ></span></td>
             </tr>
         </table>
     </div>

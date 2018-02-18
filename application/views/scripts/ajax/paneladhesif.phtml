@@ -18,9 +18,11 @@
                     <li id="BtAjoutligneAdhesif" title="Ajouter une ligne">
                         <span class="glyphicon glyphicon-plus"></span>
                     </li>
+                    <!--
                     <li id="BtSuprimeligneAdhesif" title="Supprimer une ligne">
                         <span class="glyphicon glyphicon-minus"></span>
                     </li>
+                    -->
                 </ul>
             </div>
         </div>
@@ -36,9 +38,10 @@
                 <th>H.A Total</th>
                 <th>Coef Marge</th>
                 <th>Px vente</th>
+                <th></th>
             </tr>
             <?php if(count($this->itemsAdhesif) ==0): ?>
-            <tr id="ligneRefAdhesif">
+            <tr id="ligneRefAdhesif"  data-key="ligneRefAdhesif_0">
                 <td>
                     <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(0);" onChange="fctChangeValeurDevisAdhesif();" class="dropdown-toggle" list="listeAdhesif_0"/>
                     <datalist id="listeAdhesif_0">
@@ -52,12 +55,13 @@
                 <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
                 <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
                 <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneAdhesif(0);" title="Supprimer la ligne" ></span></td>
             </tr>
             <?php endif; ?>
             <?php if (isset($this->itemsAdhesif)) : ?>
                 <?php foreach($this->itemsAdhesif as $key => $adhesif): ?>
                 <?php $json = json_decode($adhesif->json, true) ?>
-                <tr id="ligneRefAdhesif">
+                <tr id="ligneRefAdhesif"  data-key="ligneRefAdhesif_<?= $key ?>">
                     <td>
                         <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(<?= $key ?>);" onChange="fctChangeValeurDevisAdhesif();" class="dropdown-toggle" list="listeAdhesif_<?= $key ?>" value="<?= $json['code'] ?>"/>
                         <datalist id="listeAdhesif_<?= $key ?>">
@@ -71,6 +75,7 @@
                     <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly  value="<?= $json['h.a_total'] ?>"/></td>
                     <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"   value="<?= $json['coefmarge'] ?>"/></td>
                     <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly  value="<?= $json['pxvente'] ?>"/></td>
+                    <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneAdhesif(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
                 </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -109,6 +114,7 @@
                 <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
                 <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
                 <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneAdhesif(XXX);" title="Supprimer la ligne" ></span></td>
             </tr>
         </table>
     </div>

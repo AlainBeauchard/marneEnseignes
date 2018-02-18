@@ -18,9 +18,11 @@
                     <li id="BtAjoutligneFraisTechnique" title="Ajouter une ligne">
                         <span class="glyphicon glyphicon-plus"></span>
                     </li>
+                    <!--
                     <li id="BtSuprimeligneFraisTechnique" title="Supprimer une ligne">
                         <span class="glyphicon glyphicon-minus"></span>
                     </li>
+                    -->
                 </ul>
             </div>
         </div>
@@ -38,7 +40,7 @@
                 <th>Px vente</th>
             </tr>
             <?php if( count($this->itemsFraisTechnique) == 0): ?>
-            <tr id="ligneRefFraisTechnique">
+            <tr id="ligneRefFraisTechnique"  data-key="ligneRefFraisTechnique_0">
                 <td>
                     <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFraisTechnique(0);" onChange="fctChangeValeurDevisFraisTechnique();" class="dropdown-toggle" list="listeFraisTechnique_0"/>
                     <datalist id="listeFraisTechnique_0">
@@ -52,12 +54,13 @@
                 <td><input type="text" name="tarifHoraire"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
                 <td><input type="text" name="tarifMinute"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
                 <td><input type="text" name="pxvente"           title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneFraisTechnique(0);" title="Supprimer la ligne" ></span></td>
             </tr>
             <?php endif; ?>
             <?php if (isset($this->itemsFraisTechnique)) : ?>
                 <?php foreach($this->itemsFraisTechnique as $key => $fraistechnique): ?>
                     <?php $json = json_decode($fraistechnique->json, true) ?>
-                <tr id="ligneRefFraisTechnique">
+                <tr id="ligneRefFraisTechnique"  data-key="ligneRefFraisTechnique_<?= $key ?>">
                     <td>
                         <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFraisTechnique(<?= $key ?>);" onChange="fctChangeValeurDevisFraisTechnique();" class="dropdown-toggle" list="listeFraisTechnique_<?= $key ?>" value="<?= $json['code'] ?>"/>
                         <datalist id="listeFraisTechnique_<?= $key ?>">
@@ -71,6 +74,7 @@
                     <td><input type="text" name="tarifHoraire"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['tarifhoraire'] ?>"/></td>
                     <td><input type="text" name="tarifMinute"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['tarifminute'] ?>"/></td>
                     <td><input type="text" name="pxvente"           title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
+                    <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneFraisTechnique(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
                 </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -109,8 +113,9 @@
                 <td><input type="text" name="tarifHoraire"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
                 <td><input type="text" name="tarifMinute"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
                 <td><input type="text" name="pxvente"           title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneFraisTechnique(XXX);" title="Supprimer la ligne" ></span></td>
             </tr>
         </table>
     </div>
-    <input type="hidden" name="nbLigneFraisTechnique" id="nbLigneFraisTechnique" value="<?= count($this->itemsFraisTechnique)+1 ?>">
+    <input type="hidden" name="nbLigneFraisTechnique" id="nbLigneFraisTechnique" value="<?= count($this->itemsFraisTechnique) + intval(1) ?>">
 </div>

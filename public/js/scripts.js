@@ -1165,7 +1165,7 @@ function fctAjaxAddBloc(url, action)
             $corps.html($corps.html() + $result);
 
             var $nbLigne = $("#nbLigne"+action)[0];
-            var numLigne = $nbLigne.value;
+            var numLigne = parseInt($nbLigne.value, 10);
 
             fctBtAjoutSuppLigne(action);
 
@@ -1174,17 +1174,28 @@ function fctAjaxAddBloc(url, action)
     )
 }
 
+function fctAjoutLigneTableEntete() {
+    var $nbLigne = $("#nbLigneTableEntete")[0];
+    var numLigne = parseInt($nbLigne.value, 10);
+
+    var ligne = $("#elemCacheTableEntete").clone();
+    var $table = $("#tableEntete");
+    var html = ligne.html().replace(new RegExp('XXX', 'g'), numLigne);
+    $table.append('<tr data-key="ligneRefEntete_'+numLigne+'">'+html+'</tr>');
+
+}
+
 function fctBtAjoutSuppLigne(action) {
 
-    $("#BtAjoutligne"+action).click(function (){
+    $("#BtAjoutligne"+action).unbind('click').bind('click',function (){
         var $nbLigne = $("#nbLigne"+action)[0];
-        var numLigne = $nbLigne.value;
+        var numLigne = parseInt($nbLigne.value, 10);
         var ligne = $("#elemCache"+action).clone();
         var $table = $("#table"+action);
         var html = ligne.html().replace(new RegExp('XXX', 'g'), numLigne);
-        $table.append('<tr>'+html+'</tr>');
+        $table.append('<tr data-key="ligneRef'+action+'_'+numLigne+'">'+html+'</tr>');
     });
-    $("#BtSuprimeligne"+action).click(function () {
+    $("#BtSuprimeligne"+action).unbind('click').bind('click',function () {
         $("#table"+action+" .focus").remove();
         setTimeout("fctChangeValeurDevis"+action+"();", 500);
     });
@@ -2119,20 +2130,73 @@ function fctChangeTableEntete()
     fctCalculMontantTotal();
 }
 
-function fctAjoutLigneTableEntete() {
-    var $nbLigne = $("#nbLigneTableEntete")[0];
-    var numLigne = $nbLigne.value;
-
-	var ligne = $("#elemCacheTableEntete").clone();
-	var $table = $("#tableEntete");
-	var html = ligne.html().replace(new RegExp('XXX', 'g'), numLigne);
-	$table.append('<tr>'+html+'</tr>');
-
-}
-
 function fctSupprimeLigneTableEntete() {
 	$("#tableEntete .focus").remove();
 	setTimeout(fctChangeTableEntete, 500);
+}
+
+function fctSupprimeLigneGlobal(indice, action)
+{
+    if (confirm("Supprimer la ligne ?"))
+    {
+        $("tr[data-key='ligneRef"+action+"_"+(parseInt(indice, 10))+"']")[0].remove();
+        setTimeout(fctRecalculTout, 500);
+    }
+}
+
+function fctSupprimeLigneEntete(indice)
+{
+    fctSupprimeLigneGlobal(indice, 'Entete');
+}
+
+function fctSupprimeLigneSousTraitance(indice)
+{
+    fctSupprimeLigneGlobal(indice, 'SousTraitance');
+}
+
+function fctSupprimeLigneProduits(indice)
+{
+    fctSupprimeLigneGlobal(indice, 'Produit');
+}
+
+function fctSupprimeLignePrestation(indice)
+{
+    fctSupprimeLigneGlobal(indice, 'Prestation');
+}
+
+function fctSupprimeLignePose(indice)
+{
+    fctSupprimeLigneGlobal(indice, 'Pose');
+}
+
+function fctSupprimeLigneFraisTechnique(indice)
+{
+    fctSupprimeLigneGlobal(indice, 'FraisTechnique');
+}
+
+function fctSupprimeLigneFourniture(indice)
+{
+    fctSupprimeLigneGlobal(indice, 'Fourniture');
+}
+
+function fctSupprimeLigneForfaitPrestation(indice)
+{
+    fctSupprimeLigneGlobal(indice, 'ForfaitPrestation');
+}
+
+function fctSupprimeLigneFaconnage(indice)
+{
+    fctSupprimeLigneGlobal(indice, 'Faconnage');
+}
+
+function fctSupprimeLigneDeplacement(indice)
+{
+    fctSupprimeLigneGlobal(indice, 'Deplacement');
+}
+
+function fctSupprimeLigneAdhesif(indice)
+{
+    fctSupprimeLigneGlobal(indice, 'Adhesif');
 }
 
 function fctCalculMontantTotal() {
@@ -2149,7 +2213,9 @@ function fctCalculMontantTotal() {
 	montant += parseFloat($("#totalPxVenteSousTraitance").text());
 	montant += parseFloat($("#totalPxVenteAdhesif").text());
 	montant += parseFloat($("#totalPxVenteAdhesif").text());
-	$("#montantTotal").text(montant + ' euros');
+	if (!isNaN(montant)) {
+        $("#montantTotal").text(montant + ' euros');
+    }
 }
 
 $(document).on('blur', 'input[id^="sem_"]', function(){

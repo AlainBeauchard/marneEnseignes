@@ -18,9 +18,11 @@
                     <li id="BtAjoutligneSousTraitance" title="Ajouter une ligne">
                         <span class="glyphicon glyphicon-plus"></span>
                     </li>
+                    <!--
                     <li id="BtSuprimeligneSousTraitance" title="Supprimer une ligne">
                         <span class="glyphicon glyphicon-minus"></span>
                     </li>
+                    -->
                 </ul>
             </div>
         </div>
@@ -37,7 +39,7 @@
                 <th>Px vente</th>
             </tr>
             <?php if( count($this->itemsSousTraitance) == 0): ?>
-            <tr id="ligneRefSousTraitance">
+            <tr id="ligneRefSousTraitance"  data-key="ligneRefSousTraitance_0">
                 <td>
                     <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeSousTraitance(0);" onChange="fctChangeValeurDevisSousTraitance();" class="dropdown-toggle" list="listeSousTraitance_0"/>
                     <datalist id="listeSousTraitance_0">
@@ -50,12 +52,13 @@
                 <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
                 <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisSousTraitance();"/></td>
                 <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneSousTraitance(0);" title="Supprimer la ligne" ></span></td>
             </tr>
             <?php endif; ?>
             <?php if (isset($this->itemsSousTraitance)) : ?>
                 <?php foreach($this->itemsSousTraitance as $key => $soustraitance): ?>
                     <?php $json = json_decode($soustraitance->json, true) ?>
-                <tr id="ligneRefSousTraitance">
+                <tr id="ligneRefSousTraitance"  data-key="ligneRefSousTraitance_<?= $key ?>">
                     <td>
                         <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeSousTraitance(<?= $key ?>);" onChange="fctChangeValeurDevisSousTraitance();" class="dropdown-toggle" list="listeSousTraitance_<?= $key ?>" value="<?= $json['code'] ?>"/>
                         <datalist id="listeSousTraitance_<?= $key ?>">
@@ -68,6 +71,7 @@
                     <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['h.a_total'] ?>"/></td>
                     <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisSousTraitance();" value="<?= $json['coefmarge'] ?>"/></td>
                     <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
+                    <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneSousTraitance(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
                 </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -105,6 +109,7 @@
                 <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
                 <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisSousTraitance();" /></td>
                 <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneSousTraitance(XXX);" title="Supprimer la ligne" ></span></td>
             </tr>
         </table>
     </div>
