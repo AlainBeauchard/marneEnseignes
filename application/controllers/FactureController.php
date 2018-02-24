@@ -30,22 +30,11 @@ class FactureController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $filtre = new Application_Form_FiltreClient();
-        $filtre->getElement('type_filtre')->setValue('factures');
-        $filtre->getElement('valide')->setValue('0');
-        $this->view->filtre = $filtre;
-
         $db_devis = new Application_Model_Devis();
         $select = $db_devis->select()->where('facture = 1 ')->where('valide = 0')->order('date DESC');
         $devis = $db_devis->fetchAll($select);
 
-        $paginator = Zend_Paginator::factory($devis);
-        $paginator->setItemCountPerPage(50);
-        $paginator->setCurrentPageNumber($this->_getParam('page'));
-        Zend_Paginator::setDefaultScrollingStyle('Sliding');
-        Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination.phtml');
-
-        $this->view->paginator = $paginator;
+        $this->indexPrivateAction($devis);
     }
 
 
@@ -161,6 +150,32 @@ class FactureController extends Zend_Controller_Action
 
     public function histoAction()
     {
-        // TODO faire l'historique des factures
+        $db_devis = new Application_Model_Devis();
+        $select = $db_devis->select()
+            ->where('paye = 1')
+            ->order('date DESC');
+        $devis = $db_devis->fetchAll($select);
+
+        $this->indexPrivateAction($devis);
     }
+
+    /**
+     * @throws Zend_Paginator_Exception
+     */
+    private function indexPrivateAction($devis)
+    {
+        $filtre = new Application_Form_FiltreClient();
+        $filtre->getElement('type_filtre')->setValue('factures');
+        $filtre->getElement('valide')->setValue('0');
+        $this->view->filtre = $filtre;
+
+        $paginator = Zend_Paginator::factory($devis);
+        $paginator->setItemCountPerPage(50);
+        $paginator->setCurrentPageNumber($this->_getParam('page'));
+        Zend_Paginator::setDefaultScrollingStyle('Sliding');
+        Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination.phtml');
+
+        $this->view->paginator = $paginator;
+    }
+
 }

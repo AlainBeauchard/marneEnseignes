@@ -1202,3 +1202,11 @@ ul#icons span.ui-icon {
   padding: 5px;
   background-color: #ffc04c;
 }
+
+.tableItemsDevis
+{
+  border: 1px solid #0e0e0e !important;
+  margin: 10px 0;
+  border-collapse: unset;
+
+}
