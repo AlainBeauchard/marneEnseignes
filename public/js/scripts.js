@@ -2201,18 +2201,40 @@ function fctSupprimeLigneAdhesif(indice)
 
 function fctCalculMontantTotal() {
 	var montant = 0;
-	montant += parseFloat($("#sommePerimetre").text());
-	montant += parseFloat($("#totalPxVenteProduit").text());
-	montant += parseFloat($("#totalPxVenteDeplacement").text());
-	montant += parseFloat($("#totalPxVenteFaconnage").text());
-	montant += parseFloat($("#totalPxVenteForfaitPrestation").text());
-	montant += parseFloat($("#totalPxVenteFourniture").text());
-	montant += parseFloat($("#totalPxVenteFraisTechnique").text());
-	montant += parseFloat($("#totalPxVentePose").text());
-	montant += parseFloat($("#totalPxVentePrestation").text());
-	montant += parseFloat($("#totalPxVenteSousTraitance").text());
-	montant += parseFloat($("#totalPxVenteAdhesif").text());
-	montant += parseFloat($("#totalPxVenteAdhesif").text());
+	if ($("#sommePerimetre").length) {
+		montant += parseFloat($("#sommePerimetre").text());
+    }
+    if ($("#totalPxVenteProduit").length) {
+		montant += parseFloat($("#totalPxVenteProduit").text());
+	}
+    if ($("#totalPxVenteDeplacement").length) {
+        montant += parseFloat($("#totalPxVenteDeplacement").text());
+    }
+    if ($("#totalPxVenteFaconnage").length) {
+        montant += parseFloat($("#totalPxVenteFaconnage").text());
+    }
+    if ($("#totalPxVenteForfaitPrestation").length) {
+        montant += parseFloat($("#totalPxVenteForfaitPrestation").text());
+    }
+    if ($("#totalPxVenteFourniture").length) {
+        montant += parseFloat($("#totalPxVenteFourniture").text());
+    }
+    if ($("#totalPxVenteFraisTechnique").length) {
+        montant += parseFloat($("#totalPxVenteFraisTechnique").text());
+    }
+    if ($("#totalPxVentePose").length) {
+        montant += parseFloat($("#totalPxVentePose").text());
+    }
+    if ($("#totalPxVentePrestation").length) {
+        montant += parseFloat($("#totalPxVentePrestation").text());
+    }
+    if ($("#totalPxVenteSousTraitance").length) {
+        montant += parseFloat($("#totalPxVenteSousTraitance").text());
+    }
+    if ($("#totalPxVenteAdhesif").length) {
+        montant += parseFloat($("#totalPxVenteAdhesif").text());
+    }
+
 	if (!isNaN(montant)) {
         $("#montantTotal").text(montant + ' euros');
     }
