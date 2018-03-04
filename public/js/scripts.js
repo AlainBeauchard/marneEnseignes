@@ -23,7 +23,7 @@ function fctToggleBoutonTachesMasquees(dataVisible)
     //On masque tous le bouton concerné dans la popIn !
     $("[name='btRendTache']").removeClass('noDisplay');
     $("[name='btRendTache'][data-rendvisible="+dataVisible+"]").addClass('noDisplay');
-
+   /*
     $("[name='btAfficheTachesMasquees']").each(function()
         {
             if($(this).attr("data-mode")!== dataVisible) {
@@ -33,6 +33,7 @@ function fctToggleBoutonTachesMasquees(dataVisible)
             }
         }
     );
+    */
 }
 
 $(document).ready(function(){
@@ -1286,19 +1287,19 @@ function fctRemplitListeClient()
 
 }
 
-function fctRemplitListeProduit(indice)
+function  fctRemplitListePrivate(nomTable, nomListe, indice, fctFinale)
 {
-	$.post("/ajax/listeproduits",
-		{
-			code: $("#tableProduit input[name='code']")[indice].value
-		},
-		function (result) {
-			$("#listeProduit_"+indice).html(result);
-            $("#tableProduit input[name='code']").each(
-            	function () {
+    $.post("/ajax/listeproduits",
+        {
+            code: $("#"+nomTable+" input[name='code']")[indice].value
+        },
+        function (result) {
+            $("#"+nomListe+"_"+indice).html(result);
+            $("#"+nomTable+" input[name='code']").each(
+                function () {
                     $(this).on('input', function () {
-                        var value = $("#tableProduit input[name='code']")[indice].value;
-                        var option = $("#listeProduit_"+indice).find("[value='" + value + "']");
+                        var value = $("#"+nomTable+" input[name='code']")[indice].value;
+                        var option = $("#"+nomListe+"_"+indice).find("[value='" + value + "']");
 
                         if (option.length > 0) {
                             var id = option.data("id");
@@ -1306,336 +1307,246 @@ function fctRemplitListeProduit(indice)
                                 {
                                     id: id
                                 },
-                                function (result) {
-                                    result = JSON.parse(result);
-                                    $("#tableProduit input[name='support']")[indice].value = result.designation;
-                                    $("#tableProduit input[name='format']")[indice].value = result.format;
-                                    $("#tableProduit input[name='coefMarge']")[indice].value = result.coeff_marge;
-                                    fctChangeValeurDevisProduit();
+								function (result2) {
+                                    fctFinale(result2)
                                 }
                             )
                         }
                     });
-				}
-			);
-		}
-	);
+                }
+            );
+        }
+    );
+}
 
+function fctRemplitListeProduit(indice)
+{
+    var nomTable = "tableProduit";
+    var nomListe = "listeProduit";
+    fctRemplitListePrivate(
+    	nomTable,
+		nomListe,
+		indice,
+		function (result) {
+			result = JSON.parse(result);
+			$("#"+nomTable+" input[name='support']")[indice].value = result.designation;
+			$("#"+nomTable+" input[name='format']")[indice].value = result.format;
+			var prix = result.prixM2;
+			if (!prix || prix === '')
+				prix = result.prixML;
+			if (!prix || prix === '')
+				prix = result.unitaire;
+			$("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
+			$("#"+nomTable+" input[name='coefMarge']")[indice].value = result.coeff_marge;
+			fctChangeValeurDevisProduit();
+		}
+	)
 }
 
 function fctRemplitListeAdhesif(indice)
 {
-    $.post("/ajax/listeadhesif",
-        {
-            code: $("#tableAdhesif input[name='code']")[indice].value
-        },
-        function (result) {
-            $("#listeAdhesif_"+indice).html(result);
-            $("#tableAdhesif input[name='code']").each(
-                function () {
-                    $(this).on('input', function () {
-                        var value = $("#tableAdhesif input[name='code']")[indice].value;
-                        var option = $("#listeAdhesif_"+indice).find("[value='" + value + "']");
-
-                        if (option.length > 0) {
-                            var id = option.data("id");
-                            $.post("/ajax/detailadhesif",
-                                {
-                                    id: id
-                                },
-                                function (result) {
-                                    result = JSON.parse(result);
-
-                                    fctChangeValeurDevisAdhesif();
-                                }
-                            )
-                        }
-                    });
-                }
-            );
-        }
-    );
-
+	var nomTable = "tableAdhesif";
+	var nomListe = "listeAdhesif";
+    fctRemplitListePrivate(
+        nomTable,
+        nomListe,
+		indice,
+		function (result) {
+			result = JSON.parse(result);
+			$("#"+nomTable+" input[name='adhesif']")[indice].value = result.designation;
+			$("#"+nomTable+" input[name='surface']")[indice].value = result.surface_totale;
+			var prix = result.prixM2;
+			if (!prix || prix === '')
+				prix = result.prixML;
+			if (!prix || prix === '')
+				prix = result.unitaire;
+			$("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
+			$("#"+nomTable+" input[name='coefMarge']")[indice].value = result.coeff_marge;
+			fctChangeValeurDevisAdhesif();
+		}
+	);
 }
 
 function fctRemplitListeDeplacement(indice)
 {
-    $.post("/ajax/listedeplacement",
-        {
-            code: $("#tableDeplacement input[name='code']")[indice].value
-        },
+    var nomTable = "tableDeplacement";
+    var nomListe = "listeDeplacement";
+    fctRemplitListePrivate(
+        nomTable,
+        nomListe,
+        indice,
         function (result) {
-            $("#listeDeplacement_"+indice).html(result);
-            $("#tableDeplacement input[name='code']").each(
-                function () {
-                    $(this).on('input', function () {
-                        var value = $("#tableDeplacement input[name='code']")[indice].value;
-                        var option = $("#listeDeplacement_"+indice).find("[value='" + value + "']");
-
-                        if (option.length > 0) {
-                            var id = option.data("id");
-                            $.post("/ajax/detaildeplacement",
-                                {
-                                    id: id
-                                },
-                                function (result) {
-                                    result = JSON.parse(result);
-
-                                    fctChangeValeurDevisDeplacement();
-                                }
-                            )
-                        }
-                    });
-                }
-            );
+            result = JSON.parse(result);
+            $("#"+nomTable+" input[name='deplacement']")[indice].value = result.designation;
+            var prix = result.prixM2;
+            if (!prix || prix === '')
+                prix = result.prixML;
+            if (!prix || prix === '')
+                prix = result.unitaire;
+            $("#"+nomTable+" input[name='tarifUnique']")[indice].value = prix;
+            fctChangeValeurDevisDeplacement();
         }
     );
-
 }
 
 function fctRemplitListeFaconnage(indice)
 {
-    $.post("/ajax/listefaconnage",
-        {
-            code: $("#tableFaconnage input[name='code']")[indice].value
-        },
+    var nomTable = "tableFaconnage";
+    var nomListe = "listeFaconnage";
+    fctRemplitListePrivate(
+        nomTable,
+        nomListe,
+        indice,
         function (result) {
-            $("#listeFaconnage_"+indice).html(result);
-            $("#tableFaconnage input[name='code']").each(
-                function () {
-                    $(this).on('input', function () {
-                        var value = $("#tableFaconnage input[name='code']")[indice].value;
-                        var option = $("#listeFaconnage_"+indice).find("[value='" + value + "']");
-
-                        if (option.length > 0) {
-                            var id = option.data("id");
-                            $.post("/ajax/detailfaconnage",
-                                {
-                                    id: id
-                                },
-                                function (result) {
-                                    result = JSON.parse(result);
-
-                                    fctChangeValeurDevisFaconnage();
-                                }
-                            )
-                        }
-                    });
-                }
-            );
+            result = JSON.parse(result);
+            $("#"+nomTable+" input[name='faconnage']")[indice].value = result.designation;
+            var prix = result.prixM2;
+            if (!prix || prix === '')
+                prix = result.prixML;
+            if (!prix || prix === '')
+                prix = result.unitaire;
+            $("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
+            fctChangeValeurDevisFaconnage();
         }
     );
-
 }
 
 function fctRemplitListeForfaitPrestation(indice)
 {
-    $.post("/ajax/listeforfaitprestation",
-        {
-            code: $("#tableForfaitPrestation input[name='code']")[indice].value
-        },
+    var nomTable = "tableForfaitPrestation";
+    var nomListe = "listeForfaitPrestation";
+    fctRemplitListePrivate(
+        nomTable,
+        nomListe,
+        indice,
         function (result) {
-            $("#listeForfaitPrestation_"+indice).html(result);
-            $("#tableForfaitPrestation input[name='code']").each(
-                function () {
-                    $(this).on('input', function () {
-                        var value = $("#tableForfaitPrestation input[name='code']")[indice].value;
-                        var option = $("#listeForfaitPrestation_"+indice).find("[value='" + value + "']");
-
-                        if (option.length > 0) {
-                            var id = option.data("id");
-                            $.post("/ajax/detailforfaitprestation",
-                                {
-                                    id: id
-                                },
-                                function (result) {
-                                    result = JSON.parse(result);
-
-                                    fctChangeValeurDevisForfaitPrestation();
-                                }
-                            )
-                        }
-                    });
-                }
-            );
+            result = JSON.parse(result);
+            $("#"+nomTable+" input[name='prestation']")[indice].value = result.designation;
+            var prix = result.prixM2;
+            if (!prix || prix === '')
+                prix = result.prixML;
+            if (!prix || prix === '')
+                prix = result.unitaire;
+            $("#"+nomTable+" input[name='tarif']")[indice].value = prix;
+            fctChangeValeurDevisForfaitPrestation();
         }
     );
-
 }
 
 function fctRemplitListeFourniture(indice)
 {
-    $.post("/ajax/listefourniture",
-        {
-            code: $("#tableFourniture input[name='code']")[indice].value
-        },
+    var nomTable = "tableFourniture";
+    var nomListe = "listeFourniture";
+    fctRemplitListePrivate(
+        nomTable,
+        nomListe,
+        indice,
         function (result) {
-            $("#listeFourniture_"+indice).html(result);
-            $("#tableFourniture input[name='code']").each(
-                function () {
-                    $(this).on('input', function () {
-                        var value = $("#tableFourniture input[name='code']")[indice].value;
-                        var option = $("#listeFourniture_"+indice).find("[value='" + value + "']");
-
-                        if (option.length > 0) {
-                            var id = option.data("id");
-                            $.post("/ajax/detailfourniture",
-                                {
-                                    id: id
-                                },
-                                function (result) {
-                                    result = JSON.parse(result);
-
-                                    fctChangeValeurDevisFourniture();
-                                }
-                            )
-                        }
-                    });
-                }
-            );
+            result = JSON.parse(result);
+            $("#"+nomTable+" input[name='fourniture']")[indice].value = result.designation;
+            var prix = result.prixM2;
+            if (!prix || prix === '')
+                prix = result.prixML;
+            if (!prix || prix === '')
+                prix = result.unitaire;
+            $("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
+            $("#"+nomTable+" input[name='coefMarge']")[indice].value = result.coeff_marge;
+            fctChangeValeurDevisFourniture();
         }
     );
-
 }
 
 function fctRemplitListeFraisTechnique(indice)
 {
-    $.post("/ajax/listefraistechnique",
-        {
-            code: $("#tableFraisTechnique input[name='code']")[indice].value
-        },
+    var nomTable = "tableFraisTechnique";
+    var nomListe = "listeFraisTechnique";
+    fctRemplitListePrivate(
+        nomTable,
+        nomListe,
+        indice,
         function (result) {
-            $("#listeFraisTechnique_"+indice).html(result);
-            $("#tableFraisTechnique input[name='code']").each(
-                function () {
-                    $(this).on('input', function () {
-                        var value = $("#tableFraisTechnique input[name='code']")[indice].value;
-                        var option = $("#listeFraisTechnique_"+indice).find("[value='" + value + "']");
-
-                        if (option.length > 0) {
-                            var id = option.data("id");
-                            $.post("/ajax/detailfraistechnique",
-                                {
-                                    id: id
-                                },
-                                function (result) {
-                                    result = JSON.parse(result);
-
-                                    fctChangeValeurDevisFraisTechnique();
-                                }
-                            )
-                        }
-                    });
-                }
-            );
+            result = JSON.parse(result);
+            $("#"+nomTable+" input[name='fraisTechnique']")[indice].value = result.designation;
+            /*
+            var prix = result.prixM2;
+            if (!prix || prix === '')
+                prix = result.prixML;
+            if (!prix || prix === '')
+                prix = result.unitaire;
+            $("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
+            $("#"+nomTable+" input[name='coefMarge']")[indice].value = result.coeff_marge;
+            */
+            fctChangeValeurDevisFraisTechnique();
         }
     );
-
 }
 
 function fctRemplitListePose(indice)
 {
-    $.post("/ajax/listepose",
-        {
-            code: $("#tablePose input[name='code']")[indice].value
-        },
+    var nomTable = "tablePose";
+    var nomListe = "listePose";
+    fctRemplitListePrivate(
+        nomTable,
+        nomListe,
+        indice,
         function (result) {
-            $("#listePose_"+indice).html(result);
-            $("#tablePose input[name='code']").each(
-                function () {
-                    $(this).on('input', function () {
-                        var value = $("#tablePose input[name='code']")[indice].value;
-                        var option = $("#listePose_"+indice).find("[value='" + value + "']");
-
-                        if (option.length > 0) {
-                            var id = option.data("id");
-                            $.post("/ajax/detailpose",
-                                {
-                                    id: id
-                                },
-                                function (result) {
-                                    result = JSON.parse(result);
-
-                                    fctChangeValeurDevisPose();
-                                }
-                            )
-                        }
-                    });
-                }
-            );
+            result = JSON.parse(result);
+            $("#"+nomTable+" input[name='pose']")[indice].value = result.designation;
+            var prix = result.prixM2;
+            if (!prix || prix === '')
+                prix = result.prixML;
+            if (!prix || prix === '')
+                prix = result.unitaire;
+            $("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
+            $("#"+nomTable+" input[name='coefMarge']")[indice].value = result.coeff_marge;
+            fctChangeValeurDevisPose();
         }
     );
-
 }
 
 function fctRemplitListePrestation(indice)
 {
-    $.post("/ajax/listeprestation",
-        {
-            code: $("#tablePrestation input[name='code']")[indice].value
-        },
+    var nomTable = "tablePrestation";
+    var nomListe = "listePrestation";
+    fctRemplitListePrivate(
+        nomTable,
+        nomListe,
+        indice,
         function (result) {
-            $("#listePrestation_"+indice).html(result);
-            $("#tablePrestation input[name='code']").each(
-                function () {
-                    $(this).on('input', function () {
-                        var value = $("#tablePrestation input[name='code']")[indice].value;
-                        var option = $("#listePrestation_"+indice).find("[value='" + value + "']");
-
-                        if (option.length > 0) {
-                            var id = option.data("id");
-                            $.post("/ajax/detailprestation",
-                                {
-                                    id: id
-                                },
-                                function (result) {
-                                    result = JSON.parse(result);
-
-                                    fctChangeValeurDevisPrestation();
-                                }
-                            )
-                        }
-                    });
-                }
-            );
+            result = JSON.parse(result);
+            $("#"+nomTable+" input[name='prestation']")[indice].value = result.designation;
+            var prix = result.prixM2;
+            if (!prix || prix === '')
+                prix = result.prixML;
+            if (!prix || prix === '')
+                prix = result.unitaire;
+            $("#"+nomTable+" input[name='tarif']")[indice].value = prix;
+            fctChangeValeurDevisPrestation();
         }
     );
-
 }
 
 function fctRemplitListeSousTraitance(indice)
 {
-    $.post("/ajax/listesoustraitance",
-        {
-            code: $("#tableSousTraitance input[name='code']")[indice].value
-        },
+    var nomTable = "tableSousTraitance";
+    var nomListe = "listeSousTraitance";
+    fctRemplitListePrivate(
+        nomTable,
+        nomListe,
+        indice,
         function (result) {
-            $("#listeSousTraitance_"+indice).html(result);
-            $("#tableSousTraitance input[name='code']").each(
-                function () {
-                    $(this).on('input', function () {
-                        var value = $("#tableSousTraitance input[name='code']")[indice].value;
-                        var option = $("#listeSousTraitance_"+indice).find("[value='" + value + "']");
-
-                        if (option.length > 0) {
-                            var id = option.data("id");
-                            $.post("/ajax/detailsoustraitance",
-                                {
-                                    id: id
-                                },
-                                function (result) {
-                                    result = JSON.parse(result);
-
-                                    fctChangeValeurDevisSousTraitance();
-                                }
-                            )
-                        }
-                    });
-                }
-            );
+            result = JSON.parse(result);
+            $("#"+nomTable+" input[name='support']")[indice].value = result.designation;
+            var prix = result.prixM2;
+            if (!prix || prix === '')
+                prix = result.prixML;
+            if (!prix || prix === '')
+                prix = result.unitaire;
+            $("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
+            $("#"+nomTable+" input[name='coefMarge']")[indice].value = result.coeff_marge;
+            fctChangeValeurDevisSousTraitance();
         }
     );
-
 }
 
 function fctRecalculTout()
