@@ -1,7 +1,7 @@
 var masckPickColor = true;
 var masckVisibleTache = true;
 
-var tabColor = ['blue','green','orange', 'red', 'yellow', 'marron', 'gray', 'violet', 'none'];
+var tabColor = ['blue','lightBlue','green','orange', 'red', 'redVif', 'yellow', 'marron', 'gray', 'violet', 'none'];
 
 function fctDisapiredColor()
 {

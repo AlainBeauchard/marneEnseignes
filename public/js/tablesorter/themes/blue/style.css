@@ -112,6 +112,16 @@ table tbody tr.marron td{
 	background-color: #ca892c;
 }
 
+table tbody tr.lightBlue td{
+	background-color: #4540d8;
+	color: #FFFFFF;
+}
+
+table tbody tr.redVif td{
+	background-color: #d8131e;
+	color: #FFFFFF;
+}
+
 table tbody tr.none{
 	background-color: #FFFFFF;
 }

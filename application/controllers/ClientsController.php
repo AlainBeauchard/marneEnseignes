@@ -127,7 +127,8 @@ class ClientsController extends Zend_Controller_Action
         
         $noteClient = new Application_Form_NotesClient();
         $noteClient->getElement('id_client')->setValue($id);
-        
+        $noteClient->getElement('note')->setValue($client->note);
+
         $this->view->noteClient = $noteClient;
         
         if($this->_request->isPost() && $noteClient->isValid($this->_request->getPost())){
