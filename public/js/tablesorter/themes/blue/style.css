@@ -122,6 +122,19 @@ table tbody tr.redVif td{
 	color: #FFFFFF;
 }
 
+table tbody tr.lightgreen td{
+	background-color: #bdfd5e;
+}
+
+table tbody tr.darkorange td{
+	background-color: #e79f45;
+	color: #FFFFFF;
+}
+
+table tbody tr.lemon td{
+	background-color: #81d84c;
+}
+
 table tbody tr.none{
 	background-color: #FFFFFF;
 }
@@ -135,7 +148,7 @@ table tbody tr.none{
 
 .pickColor, table.pickColor tbody
 {
-	height : 186px;
+	height : 296px;
 }
 
 div.pickColor
