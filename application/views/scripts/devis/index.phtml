@@ -11,8 +11,7 @@
                         <tr>
                             <th>Dossier</th>
                             <th>Cr&eacute;ation</th>
-                            <th>Validit&eacute;</th>
-                            <th>Titre</th>
+                            <th width="200px">Titre</th>
                             <th>Client</th>
                             <th></th>
                         </tr>
@@ -20,10 +19,9 @@
                             <td>
                                 <?= $this->filtre->getElement('id_client')?>
                                 <?= $this->filtre->getElement('id_projet')?>
-                                <?= $this->filtre->getElement('valide')?>
                                 <?= $this->filtre->getElement('type_filtre')?>
                             </td>
-                            <td colspan="2">
+                            <td colspan="1">
                                 <div class="row">
                                     <div class="col-xs-6">
                                         <?= $this->filtre->getElement('mois')?>
@@ -49,10 +47,6 @@
                                     <?= $dev->ref ?>
                                 </td>
                                 <td><?= date('d/m/Y', strtotime($dev->date)) ?></td>
-                                <td>
-                                    <span style="color:<?= $this->GetFlagDate($dev->date_validite) ?>">&#x25A3;</span> &nbsp;&nbsp;
-                                    <?= date('d/m/Y', strtotime($dev->date_validite)) ?>
-                                </td>
                                 <td><?= $dev->titre ?></td>
                                 <td><?= $this->GetClientById($dev->id_client) ?></td>
                                 <td style="text-align: right;">
@@ -71,7 +65,7 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td colspan="6">
+                            <td colspan="5">
                                 <?= $this->paginationControl($this->paginator); ?>
                             </td>
                         </tr>

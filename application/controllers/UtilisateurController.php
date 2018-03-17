@@ -96,7 +96,11 @@ class UtilisateurController extends Zend_Controller_Action
 	        $user->nom = $formDatas[nom];
 	        $user->login = $formDatas[login];
 	        $user->mdp = $formDatas[mdp];
-		    $user->status = $formDatas[status]; 
+		    $user->status = $formDatas[status];
+		    $user->color = $formDatas['color'];
+		    if ( strpos($user->color,'#') == false ) {
+                $user->color = '#'.$user->color;
+            }
 
 	        $user->save();
 	    } 

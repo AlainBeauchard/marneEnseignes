@@ -3,6 +3,13 @@ var masckVisibleTache = true;
 
 var tabColor = ['blue','lightBlue','green', 'lightgreen', 'orange', 'darkorange', 'red', 'redVif', 'yellow', 'lemon', 'marron', 'gray', 'violet', 'none'];
 
+function updateColor(jscolor)
+{
+	console.log(" update Color " + jscolor);
+	// 'jscolor' instance can be used as a string
+    setTimeout($('#color').val( '#' + jscolor), 500);
+}
+
 function fctDisapiredColor()
 {
 	if(masckPickColor)
@@ -51,7 +58,7 @@ $(document).ready(function(){
 		{
 			var classToAdd = getClassToAdd( $(this) );
 			console.log(classToAdd);
-			if( classToAdd == "none" ) {
+			if( classToAdd === "none" ) {
                 $.post('/ajax/changeColorProjet',
                     {
                         id_projet  : $("#id_projet_pc").val(),

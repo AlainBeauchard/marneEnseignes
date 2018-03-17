@@ -21,7 +21,12 @@ class Application_Form_Users extends Zend_Form
         $mdp->setAttribs(array('placeholder'=>'Mot de passe','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
         $mdp->setRequired(true);
         $this->addElement($mdp);
-        
+
+        $color = new Zend_Form_Element_Text('color');
+        $color->setAttribs(array('placeholder'=>'couleur','class'=>'form-control jscolor', 'aria-describedby'=>'sizing-addon2', 'onchange' => 'updateColor(this.jscolor)'));
+        $color->setRequired(true);
+        $this->addElement($color);
+
         if($auth->getIdentity()->status == 'admin'){
             $status = new Zend_Form_Element_Select('status');
 			$status->setAttribs(array('class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));

@@ -885,7 +885,7 @@ class AjaxController extends Zend_Controller_Action
         foreach ($clients as $client)
         {
             //if ($ind<20) {
-                $str .= '<option value="' . $client->contact_nom .' '.$client->ref. '" data-ref="' . $client->ref . '" data-id="' . $client->id_client . '" />' . $client->contact_nom . '</option>';
+                $str .= '<option value="' . $client->societe .' '.$client->ref. '" data-ref="' . $client->ref . '" data-id="' . $client->id_client . '" />' . $client->societe . '</option>';
             //}
             $ind++;
         }
@@ -899,11 +899,13 @@ class AjaxController extends Zend_Controller_Action
 
         $codeSearch = $this->_getParam('code');
 
+        $intMax = 20;
+
         $db_catalogue = new Application_Model_Catalogue();
         $select = $db_catalogue->select();
         $select->where('code_me like ?', $codeSearch.'%');
-        $select->where('type like ?', 'PVC');
-        $select->order('code_me');
+        //$select->where('type like ?', 'PVC');
+        $select->order('code_me')->limit($intMax, 10);
 
         $produits = $db_catalogue->fetchAll($select);
 
@@ -914,6 +916,7 @@ class AjaxController extends Zend_Controller_Action
         }
 
         echo($str);
+
     }
 
     public function detailadhesifAction()
