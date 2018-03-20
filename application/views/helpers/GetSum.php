@@ -13,8 +13,15 @@ class Zend_View_Helper_GetSum extends Zend_View_Helper_Abstract{
 		
 		$total = 0;
 		foreach($rows as $row){
+		    if (is_null($row->json)) {
 				$total += $row->pht;
-		}							
+            } else {
+		        $json = json_decode($row->json, true);
+		        if ($json['pxvente']) {
+		            $total += $json['pxvente'] ;
+                }
+            }
+		}
 		
 		return sprintf('%0.2f', $total);
 	}

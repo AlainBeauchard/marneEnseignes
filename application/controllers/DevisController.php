@@ -144,6 +144,9 @@ class DevisController extends Zend_Controller_Action
         $formRedaction->getElement('redactionDevis')->setValue($devis->redaction);
         $this->view->formRedaction = $formRedaction;
 
+        $formNomModele = new Application_Form_NomModele();
+        $this->view->formNomModele = $formNomModele;
+
         $dbReglement = new Application_Model_PresetReglement();
         $this->view->listeReglement = $dbReglement->fetchAll($dbReglement->select()->where('1=1'));
 

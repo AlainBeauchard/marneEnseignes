@@ -1336,15 +1336,15 @@ function fctRemplitListeProduit(indice)
 		indice,
 		function (result) {
 			result = JSON.parse(result);
-			$("#"+nomTable+" input[name='support']")[indice].value = result.designation;
-			$("#"+nomTable+" input[name='format']")[indice].value = result.format;
+			$($("#"+nomTable+" input[name='support']")[indice]).attr('value',  result.designation);
+            $($("#"+nomTable+" input[name='format']")[indice]).attr('value', result.format);
 			var prix = result.prixM2;
 			if (!prix || prix === '')
 				prix = result.prixML;
 			if (!prix || prix === '')
 				prix = result.unitaire;
-			$("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
-			$("#"+nomTable+" input[name='coefMarge']")[indice].value = result.coeff_marge;
+            $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
+            $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
 			fctChangeValeurDevisProduit();
 		}
 	)
@@ -1360,15 +1360,15 @@ function fctRemplitListeAdhesif(indice)
 		indice,
 		function (result) {
 			result = JSON.parse(result);
-			$("#"+nomTable+" input[name='adhesif']")[indice].value = result.designation;
-			$("#"+nomTable+" input[name='surface']")[indice].value = result.surface_totale;
+			$($("#"+nomTable+" input[name='adhesif']")[indice]).attr('value',result.designation);
+			$($("#"+nomTable+" input[name='surface']")[indice]).attr('value',result.surface_totale);
 			var prix = result.prixM2;
 			if (!prix || prix === '')
 				prix = result.prixML;
 			if (!prix || prix === '')
 				prix = result.unitaire;
-			$("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
-			$("#"+nomTable+" input[name='coefMarge']")[indice].value = result.coeff_marge;
+			$($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value',prix);
+			$($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value',result.coeff_marge);
 			fctChangeValeurDevisAdhesif();
 		}
 	);
@@ -1384,13 +1384,13 @@ function fctRemplitListeDeplacement(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $("#"+nomTable+" input[name='deplacement']")[indice].value = result.designation;
+            $($("#"+nomTable+" input[name='deplacement']")[indice]).attr('value',result.designation);
             var prix = result.prixM2;
             if (!prix || prix === '')
                 prix = result.prixML;
             if (!prix || prix === '')
                 prix = result.unitaire;
-            $("#"+nomTable+" input[name='tarifUnique']")[indice].value = prix;
+            $($("#"+nomTable+" input[name='tarifUnique']")[indice]).attr('value',prix);
             fctChangeValeurDevisDeplacement();
         }
     );
@@ -1406,13 +1406,13 @@ function fctRemplitListeFaconnage(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $("#"+nomTable+" input[name='faconnage']")[indice].value = result.designation;
+            $($("#"+nomTable+" input[name='faconnage']")[indice]).attr('value', result.designation);
             var prix = result.prixM2;
             if (!prix || prix === '')
                 prix = result.prixML;
             if (!prix || prix === '')
                 prix = result.unitaire;
-            $("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
+            $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
             fctChangeValeurDevisFaconnage();
         }
     );
@@ -1428,13 +1428,13 @@ function fctRemplitListeForfaitPrestation(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $("#"+nomTable+" input[name='prestation']")[indice].value = result.designation;
+            $($("#"+nomTable+" input[name='prestation']")[indice]).attr('value', result.designation);
             var prix = result.prixM2;
             if (!prix || prix === '')
                 prix = result.prixML;
             if (!prix || prix === '')
                 prix = result.unitaire;
-            $("#"+nomTable+" input[name='tarif']")[indice].value = prix;
+            $($("#"+nomTable+" input[name='tarif']")[indice]).attr('value', prix);
             fctChangeValeurDevisForfaitPrestation();
         }
     );
@@ -1450,14 +1450,14 @@ function fctRemplitListeFourniture(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $("#"+nomTable+" input[name='fourniture']")[indice].value = result.designation;
+            $($("#"+nomTable+" input[name='fourniture']")[indice]).attr('value', result.designation);
             var prix = result.prixM2;
             if (!prix || prix === '')
                 prix = result.prixML;
             if (!prix || prix === '')
                 prix = result.unitaire;
-            $("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
-            $("#"+nomTable+" input[name='coefMarge']")[indice].value = result.coeff_marge;
+            $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
+            $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
             fctChangeValeurDevisFourniture();
         }
     );
@@ -1473,7 +1473,7 @@ function fctRemplitListeFraisTechnique(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $("#"+nomTable+" input[name='fraisTechnique']")[indice].value = result.designation;
+            $($("#"+nomTable+" input[name='fraisTechnique']")[indice]).attr('value', result.designation);
             /*
             var prix = result.prixM2;
             if (!prix || prix === '')
@@ -1498,14 +1498,14 @@ function fctRemplitListePose(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $("#"+nomTable+" input[name='pose']")[indice].value = result.designation;
+            $($("#"+nomTable+" input[name='pose']")[indice]).attr('value', result.designation);
             var prix = result.prixM2;
             if (!prix || prix === '')
                 prix = result.prixML;
             if (!prix || prix === '')
                 prix = result.unitaire;
-            $("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
-            $("#"+nomTable+" input[name='coefMarge']")[indice].value = result.coeff_marge;
+            $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
+            $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
             fctChangeValeurDevisPose();
         }
     );
@@ -1521,13 +1521,13 @@ function fctRemplitListePrestation(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $("#"+nomTable+" input[name='prestation']")[indice].value = result.designation;
+            $($("#"+nomTable+" input[name='prestation']")[indice]).attr('value', result.designation);
             var prix = result.prixM2;
             if (!prix || prix === '')
                 prix = result.prixML;
             if (!prix || prix === '')
                 prix = result.unitaire;
-            $("#"+nomTable+" input[name='tarif']")[indice].value = prix;
+            $($("#"+nomTable+" input[name='tarif']")[indice]).attr('value', prix);
             fctChangeValeurDevisPrestation();
         }
     );
@@ -1543,14 +1543,14 @@ function fctRemplitListeSousTraitance(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $("#"+nomTable+" input[name='support']")[indice].value = result.designation;
+            $($("#"+nomTable+" input[name='support']")[indice]).attr('value', result.designation);
             var prix = result.prixM2;
             if (!prix || prix === '')
                 prix = result.prixML;
             if (!prix || prix === '')
                 prix = result.unitaire;
-            $("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
-            $("#"+nomTable+" input[name='coefMarge']")[indice].value = result.coeff_marge;
+            $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
+            $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
             fctChangeValeurDevisSousTraitance();
         }
     );
@@ -1602,10 +1602,11 @@ function fctChangeValeurDevisProduit()
 	var sommeVenteTotale = 0;
 
 	for(var i=0;i<qte.length;i++) {
-		haTotal[i].value = parseFloat((qte[i].value * ha[i].value).toFixed(2));
-        pxvente[i].value = parseFloat((haTotal[i].value * coefMarge[i].value).toFixed(2));
+		$(haTotal[i]).attr('value', parseFloat((qte[i].value * ha[i].value).toFixed(2)));
+        $(pxvente[i]).attr('value', parseFloat((haTotal[i].value * coefMarge[i].value).toFixed(2)));
 		sommeVenteTotale += parseFloat(pxvente[i].value);
 		sommeTotale += parseFloat(haTotal[i].value);
+        $(qte[i]).attr('value', qte[i].value);
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
@@ -1619,7 +1620,7 @@ function fctChangeValeurDevisProduit()
             strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '"';
         }
 
-        jsonLigne[i].value =  '{'+strJsonLigne+'}';
+        $(jsonLigne[i]).attr('value',  '{'+strJsonLigne+'}');
 	}
 
 	$("#h_a_totauxProduit").html(parseFloat(sommeTotale.toFixed(2))+" euros");
@@ -1646,10 +1647,11 @@ function fctChangeValeurDevisSousTraitance()
 	var sommeTotalePxVente = 0;
 
 	for(var i=0;i<qte.length;i++) {
-		haTotal[i].value = parseFloat((qte[i].value * ha[i].value).toFixed(2));
+		$(haTotal[i]).attr('value', parseFloat((qte[i].value * ha[i].value).toFixed(2)));
 		sommeTotale += parseFloat(haTotal[i].value);
-        pxvente[i].value = parseFloat((coefMarge[i].value * haTotal[i].value).toFixed(2));
+        $(pxvente[i]).attr('value', parseFloat((coefMarge[i].value * haTotal[i].value).toFixed(2)));
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+        $(qte[i]).attr('value', qte[i].value);
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
@@ -1662,7 +1664,7 @@ function fctChangeValeurDevisSousTraitance()
             strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '"';
         }
 
-        jsonLigne[i].value =  '{'+strJsonLigne+'}';
+        $(jsonLigne[i]).attr('value',  '{'+strJsonLigne+'}');
 	}
 	$("#h_a_totauxSousTraitance").html(parseFloat(sommeTotale.toFixed(2))+" euros");
 	$("#totalPxVenteSousTraitance").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros");
@@ -1685,8 +1687,9 @@ function fctChangeValeurDevisPrestation()
 	var sommeTotalePxVente = 0;
 
 	for(var i=0;i<qte.length;i++) {
-        pxvente[i].value = parseFloat((tarif[i].value * qte[i].value).toFixed(2));
+        $(pxvente[i]).attr('value', parseFloat((tarif[i].value * qte[i].value).toFixed(2)));
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+        $(qte[i]).attr('value', qte[i].value);
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
@@ -1697,7 +1700,7 @@ function fctChangeValeurDevisPrestation()
             strJsonLigne += '"' + tarif[i].name + '": "' + $(tarif[i]).val() + '"';
         }
 
-        jsonLigne[i].value =  '{'+strJsonLigne+'}';
+        $(jsonLigne[i]).attr('value',  '{'+strJsonLigne+'}');
 	}
 	$("#h_a_totauxPrestation").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros")	;
 	$("#totalPxVentePrestation").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros");
@@ -1722,10 +1725,11 @@ function fctChangeValeurDevisFaconnage()
     var sommeTotalePxVente = 0;
 
     for(var i=0;i<qte.length;i++) {
-        haTotal[i].value = parseFloat((qte[i].value * ha[i].value).toFixed(2));
+        $(haTotal[i]).attr('value', parseFloat((qte[i].value * ha[i].value).toFixed(2)));
         sommeTotale += parseFloat(haTotal[i].value);
-        pxvente[i].value = haTotal[i].value;
+        $(pxvente[i]).attr('value', haTotal[i].value);
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+        $(qte[i]).attr('value', qte[i].value);
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
@@ -1738,7 +1742,7 @@ function fctChangeValeurDevisFaconnage()
             strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '"';
         }
 
-        jsonLigne[i].value =  '{'+strJsonLigne+'}';
+        $(jsonLigne[i]).attr('value',  '{'+strJsonLigne+'}');
     }
     $("#h_a_totauxFaconnage").html(parseFloat(sommeTotale.toFixed(2))+" euros");
     $("#totalPxVenteFaconnage").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros");
@@ -1765,10 +1769,11 @@ function fctChangeValeurDevisAdhesif()
     var sommeTotalePxVente = 0;
 
     for(var i=0;i<qte.length;i++) {
-        haTotal[i].value = parseFloat((qte[i].value * ha[i].value * surface[i].value).toFixed(2));
+        $(haTotal[i]).attr('value', parseFloat((qte[i].value * ha[i].value * surface[i].value).toFixed(2)));
         sommeTotale += parseFloat(haTotal[i].value);
-        pxvente[i].value = parseFloat((coefMarge[i].value * haTotal[i].value).toFixed(2));
+        $(pxvente[i]).attr('value', parseFloat((coefMarge[i].value * haTotal[i].value).toFixed(2)));
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+		$(qte[i]).attr('value', qte[i].value);
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
@@ -1782,7 +1787,7 @@ function fctChangeValeurDevisAdhesif()
             strJsonLigne += '"' + surface[i].name + '": "' + $(surface[i]).val() + '"';
         }
 
-        jsonLigne[i].value =  '{'+strJsonLigne+'}';
+        $(jsonLigne[i]).attr('value',  '{'+strJsonLigne+'}');
     }
     $("#h_a_totauxAdhesif").html(parseFloat(sommeTotale.toFixed(2))+" euros");
     $("#totalPxVenteAdhesif").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros");
@@ -1809,11 +1814,12 @@ function fctChangeValeurDevisFraisTechnique()
     var sommeTotalePxVente = 0;
 
     for(var i=0;i<taux.length;i++) {
-        tarifHoraire[i].value = parseFloat((taux[i].value * heures[i].value).toFixed(2));
-        tarifMinute[i].value = parseFloat((taux[i].value * minutes[i].value / 60).toFixed(2));
-        pxvente[i].value = (parseFloat(tarifHoraire[i].value) + parseFloat(tarifMinute[i].value));
+        $(tarifHoraire[i]).attr('value', parseFloat((taux[i].value * heures[i].value).toFixed(2)));
+        $(tarifMinute[i]).attr('value', parseFloat((taux[i].value * minutes[i].value / 60).toFixed(2)));
+        $(pxvente[i]).attr('value', (parseFloat(tarifHoraire[i].value) + parseFloat(tarifMinute[i].value)));
         sommeTotale += parseFloat(pxvente[i].value);
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+        $(taux[i]).attr('value', taux[i].value);
 
         var strJsonLigne = "";
         if (taux[i].value !== "") {
@@ -1827,7 +1833,7 @@ function fctChangeValeurDevisFraisTechnique()
             strJsonLigne += '"' + fraisTechnique[i].name + '": "' + $(fraisTechnique[i]).val() + '"';
         }
 
-        jsonLigne[i].value =  '{'+strJsonLigne+'}';
+        $(jsonLigne[i]).attr('value',  '{'+strJsonLigne+'}');
     }
     $("#h_a_totauxFraisTechnique").html(parseFloat(sommeTotale.toFixed(2))+" euros");
     $("#totalPxVenteFraisTechnique").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros");
@@ -1851,9 +1857,10 @@ function fctChangeValeurDevisForfaitPrestation()
     var sommeTotalePxVente = 0;
 
     for(var i=0;i<qte.length;i++) {
-        pxvente[i].value = parseFloat((parseFloat(qte[i].value) * parseFloat(tarif[i].value)).toFixed(2));
+        $(pxvente[i]).attr('value', parseFloat((parseFloat(qte[i].value) * parseFloat(tarif[i].value)).toFixed(2)));
         sommeTotale += parseFloat(pxvente[i].value);
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+        $(qte[i]).attr('value', qte[i].value);
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
@@ -1864,7 +1871,7 @@ function fctChangeValeurDevisForfaitPrestation()
             strJsonLigne += '"' + tarif[i].name + '": "' + $(tarif[i]).val() + '"';
         }
 
-        jsonLigne[i].value =  '{'+strJsonLigne+'}';
+        $(jsonLigne[i]).attr('value',  '{'+strJsonLigne+'}');
     }
     $("#h_a_totauxForfaitPrestation").html(parseFloat(sommeTotale.toFixed(2))+" euros");
     $("#totalPxVenteForfaitPrestation").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros");
@@ -1890,10 +1897,11 @@ function fctChangeValeurDevisDeplacement()
 
 
     for(var i=0;i<qte.length;i++) {
-    	coutJour[i].value = parseFloat((tarifUnique[i].value * qte[i].value).toFixed(2));
-        pxvente[i].value = (parseFloat(nbjours[i].value) * parseFloat(coutJour[i].value));
+    	$(coutJour[i]).attr('value', parseFloat((tarifUnique[i].value * qte[i].value).toFixed(2)));
+        $(pxvente[i]).attr('value', (parseFloat(nbjours[i].value) * parseFloat(coutJour[i].value)));
         sommeTotale += parseFloat(coutJour[i].value);
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+        $(qte[i]).attr('value', qte[i].value);
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
@@ -1906,7 +1914,7 @@ function fctChangeValeurDevisDeplacement()
         	strJsonLigne += '"' + deplacement[i].name + '": "' + $(deplacement[i]).val() + '"';
         }
 
-        jsonLigne[i].value =  '{'+strJsonLigne+'}';
+        $(jsonLigne[i]).attr('value',  '{'+strJsonLigne+'}');
     }
 
 	$("#h_a_totauxDeplacement").html(parseFloat(sommeTotale.toFixed(2))+" euros");
@@ -1933,10 +1941,11 @@ function fctChangeValeurDevisFourniture()
     var sommeTotalePxVente = 0;
 
     for(var i=0;i<qte.length;i++) {
-        haTotal[i].value = parseFloat((qte[i].value * ha[i].value).toFixed(2));
+        $(haTotal[i]).attr('value', parseFloat((qte[i].value * ha[i].value).toFixed(2)));
         sommeTotale += parseFloat(haTotal[i].value);
-        pxvente[i].value = parseFloat((coefMarge[i].value * haTotal[i].value).toFixed(2));
+        $(pxvente[i]).attr('value', parseFloat((coefMarge[i].value * haTotal[i].value).toFixed(2)));
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+        $(qte[i]).attr('value', qte[i].value);
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
@@ -1949,7 +1958,7 @@ function fctChangeValeurDevisFourniture()
             strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '"';
         }
 
-        jsonLigne[i].value =  '{'+strJsonLigne+'}';
+        $(jsonLigne[i]).attr('value',  '{'+strJsonLigne+'}');
     }
     $("#h_a_totauxFourniture").html(parseFloat(sommeTotale.toFixed(2))+" euros");
     $("#totalPxVenteFourniture").html(parseFloat(sommeTotalePxVente.toFixed(2))+" euros");
@@ -1975,10 +1984,11 @@ function fctChangeValeurDevisPose()
     var sommeTotalePxVente = 0;
 
     for(var i=0;i<qte.length;i++) {
-        haTotal[i].value = parseFloat((qte[i].value * ha[i].value).toFixed(2));
+        $(haTotal[i]).attr('value', parseFloat((qte[i].value * ha[i].value).toFixed(2)));
         sommeTotale += parseFloat(haTotal[i].value);
-        pxvente[i].value = parseFloat((coefMarge[i].value * haTotal[i].value).toFixed(2));
+        $(pxvente[i]).attr('value', parseFloat((coefMarge[i].value * haTotal[i].value).toFixed(2)));
         sommeTotalePxVente += parseFloat(pxvente[i].value);
+        $(qte[i]).attr('value', qte[i].value);
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
@@ -1991,7 +2001,7 @@ function fctChangeValeurDevisPose()
             strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '"';
         }
 
-        jsonLigne[i].value =  '{'+strJsonLigne+'}';
+        $(jsonLigne[i]).attr('value',  '{'+strJsonLigne+'}');
     }
 
     $("#h_a_totauxPose").html(parseFloat(sommeTotale.toFixed(2))+" euros");
@@ -2018,11 +2028,11 @@ function fctChangeTableEntete()
     var sommePerimetre = 0;
 
     for(var i=0;i<largeur.length;i++) {
-        surface[i].value = (largeur[i].value * hauteur[i].value);
-        surfaceTotal[i].value = (surface[i].value * qte[i].value);
+        $(surface[i]).attr('value', (largeur[i].value * hauteur[i].value));
+        $(surfaceTotal[i]).attr('value', (surface[i].value * qte[i].value));
 
-        surfacePub[i].value = (coefPub[i].value * surfaceTotal[i].value);
-        perimetre[i].value = ((parseFloat(largeur[i].value) + parseFloat(hauteur[i].value)) * 2 * qte[i].value);
+        $(surfacePub[i]).attr('value', (coefPub[i].value * surfaceTotal[i].value));
+        $(perimetre[i]).attr('value', ((parseFloat(largeur[i].value) + parseFloat(hauteur[i].value)) * 2 * qte[i].value));
 
         sommeSurfTotale += parseFloat(surfaceTotal[i].value);
         sommeSurfPub += parseFloat(surfacePub[i].value);
@@ -2154,7 +2164,7 @@ function fctCalculMontantTotal() {
     }
 
 	if (!isNaN(montant)) {
-        $("#montantTotal").text(montant + ' euros');
+        $("#montantTotal").text(parseFloat(montant).toFixed(2) + ' euros');
     }
 }
 

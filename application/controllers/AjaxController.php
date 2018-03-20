@@ -903,9 +903,9 @@ class AjaxController extends Zend_Controller_Action
 
         $db_catalogue = new Application_Model_Catalogue();
         $select = $db_catalogue->select();
-        $select->where('code_me like ?', $codeSearch.'%');
+        $select->where('upper(code_me) like upper(?)', $codeSearch.'%');
         //$select->where('type like ?', 'PVC');
-        $select->order('code_me')->limit($intMax, 10);
+        $select->order('code_me')->limit($intMax, 0);
 
         $produits = $db_catalogue->fetchAll($select);
 
