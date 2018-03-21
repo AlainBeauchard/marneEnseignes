@@ -134,7 +134,7 @@
 							<th style="font-size: 10px;text-align: center;">TOTAL TTC</th>
 						</tr>
 					</thead>
-					<?php $remise = 0;?>
+					<?php $remise = $this->devis->remise;?>
 					<?php $montantTVA = sprintf('%0.2f', $totalHt * 0.2) ?>
 					<tbody>
 						<tr>

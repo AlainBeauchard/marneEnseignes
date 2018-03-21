@@ -22,7 +22,26 @@ class Zend_View_Helper_GetSum extends Zend_View_Helper_Abstract{
                 }
             }
 		}
-		
-		return sprintf('%0.2f', $total);
+
+		// On doit ajouter le montant entete
+        $db_devis = new Application_Model_Devis();
+        $select = $db_devis->select()
+            ->where('id = ?', $devis);
+
+        $rows = $db_devis->fetchAll($select);
+        foreach($rows as $row){
+            if (! is_null($row->jsonEntete)) {
+                $json = json_decode($row->jsonEntete, true);
+                foreach($json as $elem) {
+                    if ($elem['perimetreTableEntete']) {
+                        $total += $elem['perimetreTableEntete'] ;
+                    }
+                }
+            }
+        }
+
+
+
+        return sprintf('%0.2f', $total);
 	}
 }

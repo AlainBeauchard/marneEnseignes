@@ -1204,9 +1204,21 @@ function fctBtAjoutSuppLigne(action) {
         $table.append('<tr data-key="ligneRef'+action+'_'+numLigne+'">'+html+'</tr>');
     });
     $("#BtSuprimeligne"+action).unbind('click').bind('click',function () {
-        $("#table"+action+" .focus").remove();
-        setTimeout("fctChangeValeurDevis"+action+"();", 500);
+    	if (confirm("Etes-vous sûr de vouloir supprimer cet élément ?")) {
+			$("#panel"+action).remove();
+			setTimeout("fctChangeValeurDevis"+action+"();", 500);
+    	}
     });
+}
+
+function fctChangeValeurRemise()
+{
+	var montantTotalInit = $("#montantTotal").html().replace(' euros', '');
+	var pourcentageRemise = $("#remise").val();
+
+	var montant = parseFloat((montantTotalInit * pourcentageRemise)/100).toFixed(2);
+
+	$("#montantTotalRemise").html( parseFloat(montantTotalInit - montant).toFixed(2) + " euros" );
 }
 
 function fctAddBlocProduit()
@@ -2045,13 +2057,13 @@ function fctChangeTableEntete()
     var jsonLigne  = $("#tableEntete tr");
 
     var strJsonLigne = " ";
-    for(var i=2; i<jsonLigne.length-1;i++) {
+    for(var i=4; i<jsonLigne.length-1;i++) {
     	var jsonInput = $(jsonLigne[i]).find("input");
-        strJsonLigne += "{";
+        strJsonLigne += " { ";
         for(var j=0;j<jsonInput.length;j++) {
             strJsonLigne += '"' + $(jsonInput[j]).attr('name') + '": "' + $(jsonInput[j]).val() + '",';
         }
-        strJsonLigne += " \"toto\":\"titi\" },";
+        strJsonLigne = strJsonLigne.substring(0, strJsonLigne.length - 1) + " },";
     }
     $("#jsonEntete").val('['+strJsonLigne.substring(0, strJsonLigne.length - 1)+']');
 
@@ -2166,6 +2178,8 @@ function fctCalculMontantTotal() {
 	if (!isNaN(montant)) {
         $("#montantTotal").text(parseFloat(montant).toFixed(2) + ' euros');
     }
+
+    fctChangeValeurRemise();
 }
 
 $(document).on('blur', 'input[id^="sem_"]', function(){

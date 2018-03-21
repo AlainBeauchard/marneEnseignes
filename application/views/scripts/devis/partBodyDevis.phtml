@@ -9,7 +9,6 @@
         <input type="hidden" name="redaction_facture" id="redaction_facture" value="<?= (isset($this->devis->redaction_facture))? $this->devis->redaction_facture : 0 ?>">
         <input type="hidden" name="date_paiement"   id="date_paiement"  value="<?= (isset($this->devis->date_paiement))? $this->devis->date_paiement : -1 ?>">
         <input type="hidden" name="acompte"         id="acompte"        value="<?= (isset($this->devis->acompte))? $this->devis->acompte : 0 ?>">
-        <input type="hidden" name="remise"          id="remise"         value="<?= (isset($this->devis->remise))? $this->devis->remise : 0 ?>">
 
         <div class="panel-devis-head">
             <div class="entete-devis entete-devis-left">
@@ -48,17 +47,33 @@
             </div>
             <div class="entete-devis entete-devis-right">
                 <div style="width: 100%" class="pull-left">
-                    <table id="tableEntete" class="table-entete-devis">
+                    <table id="tableEntete" class="table-entete-devis" >
                         <tr>
-                            <td colspan="2">
-                                <?= $this->form->nomClient ?>
-                            </td>
-                            <td colspan="5">
-                                <?= $this->form->intitule ?>
-                            </td>
-                            <td colspan="1">
-                                <Label>Montant Total</Label>
-                                <div id="montantTotal" style="text-align: right; font-weight: bolder"></div>
+                            <td colspan="8">
+                                <table width="100%">
+                                    <tr>
+                                        <td colspan="4">
+                                            <?= $this->form->nomClient ?>
+                                        </td>
+                                        <td colspan="5">
+                                            <?= $this->form->intitule ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <Label>Montant Total avant remise</Label>
+                                            <div id="montantTotal" style="text-align: right; font-weight: bolder"></div>
+                                        </td>
+                                        <td colspan="3">
+                                            <Label>Montant Remise(%)</Label><br/>
+                                            <input type="text" name="remise" id="remise" value="<?= $this->devis->remise ?>" onchange="fctChangeValeurRemise();">
+                                        </td>
+                                        <td colspan="3">
+                                            <Label>Montant Total</Label>
+                                            <div id="montantTotalRemise" style="text-align: right; font-weight: bolder"></div>
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
                         <tr>
