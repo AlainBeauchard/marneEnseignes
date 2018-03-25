@@ -39,7 +39,10 @@
             <?php if( count($this->itemsFourniture) == 0): ?>
             <tr id="ligneRefFourniture"  data-key="ligneRefFourniture_0">
                 <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFourniture(0);" onChange="fctChangeValeurDevisFourniture();" class="dropdown-toggle" list="listeFourniture_0"/>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFourniture(0);" onChange="fctChangeValeurDevisFourniture();" class="tableCode dropdown-toggle" list="listeFourniture_0"/>
+                    <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(0, 'Fourniture');">
+                        <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                    </button>
                     <datalist id="listeFourniture_0">
                     </datalist>
                     <input type="hidden" name="json_Fourniture[]">
@@ -58,7 +61,10 @@
                     <?php $json = json_decode($fourniture->json, true) ?>
                 <tr id="ligneRefFourniture"  data-key="ligneRefFourniture_<?= $key ?>">
                     <td>
-                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFourniture(<?= $key ?>);" onChange="fctChangeValeurDevisFourniture();" class="dropdown-toggle" list="listeFourniture_<?= $key ?>" value="<?= $json['code'] ?>"/>
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFourniture(<?= $key ?>);" onChange="fctChangeValeurDevisFourniture();" class="tableCode dropdown-toggle" list="listeFourniture_<?= $key ?>" value="<?= $json['code'] ?>"/>
+                        <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(<?= $key ?>, 'Fourniture');">
+                            <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                        </button>
                         <datalist id="listeFourniture_<?= $key ?>">
                         </datalist>
                         <input type="hidden" name="json_Fourniture[]" value="<?= json_decode($json) ?>">
@@ -96,7 +102,10 @@
         <table>
             <tr id="elemCacheFourniture">
                 <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFourniture(XXX);" onChange="fctChangeValeurDevisFourniture();" class="dropdown-toggle" list="listeFourniture_XXX"/>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeFourniture(XXX);" onChange="fctChangeValeurDevisFourniture();" class="tableCode dropdown-toggle" list="listeFourniture_XXX"/>
+                    <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(XXX, 'ForfaitPrestation');">
+                        <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                    </button>
                     <datalist id="listeFourniture_XXX">
                     </datalist>
                     <input type="hidden" name="json_Fourniture[]">

@@ -37,7 +37,10 @@
             <?php if( count($this->itemsForfaitPrestation) == 0): ?>
             <tr id="ligneRefForfaitPrestation"  data-key="ligneRefForfaitPrestation_0">
                 <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeForfaitPrestation(0);" onChange="fctChangeValeurDevisForfaitPrestation();" class="dropdown-toggle" list="listeForfaitPrestation_0"/>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeForfaitPrestation(0);" onChange="fctChangeValeurDevisForfaitPrestation();" class="tableCode dropdown-toggle" list="listeForfaitPrestation_0"/>
+                    <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(0, 'ForfaitPrestation');">
+                        <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                    </button>
                     <datalist id="listeForfaitPrestation_0">
                     </datalist>
                     <input type="hidden" name="json_ForfaitPrestation[]">
@@ -54,7 +57,10 @@
                     <?php $json = json_decode($forfaitPresta->json, true) ?>
                 <tr id="ligneRefForfaitPrestation"  data-key="ligneRefForfaitPrestation_<?= $key ?>">
                     <td>
-                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeForfaitPrestation(<?= $key ?>);" onChange="fctChangeValeurDevisForfaitPrestation();" class="dropdown-toggle" list="listeForfaitPrestation_<?= $key ?>" value="<?= $json['code'] ?>"/>
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeForfaitPrestation(<?= $key ?>);" onChange="fctChangeValeurDevisForfaitPrestation();" class="tableCode dropdown-toggle" list="listeForfaitPrestation_<?= $key ?>" value="<?= $json['code'] ?>"/>
+                        <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(<?= $key ?>, 'ForfaitPrestation');">
+                            <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                        </button>
                         <datalist id="listeForfaitPrestation_<?= $key ?>">
                         </datalist>
                         <input type="hidden" name="json_ForfaitPrestation[]" value="<?= json_encode($json) ?>">
@@ -90,7 +96,10 @@
         <table>
             <tr id="elemCacheForfaitPrestation">
                 <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeForfaitPrestation(XXX);" onChange="fctChangeValeurDevisForfaitPrestation();" class="dropdown-toggle" list="listeForfaitPrestation_XXX"/>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeForfaitPrestation(XXX);" onChange="fctChangeValeurDevisForfaitPrestation();" class="tableCode dropdown-toggle" list="listeForfaitPrestation_XXX"/>
+                    <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(XXX, 'ForfaitPrestation');">
+                        <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                    </button>
                     <datalist id="listeForfaitPrestation_XXX">
                     </datalist>
                     <input type="hidden" name="json_ForfaitPrestation[]">

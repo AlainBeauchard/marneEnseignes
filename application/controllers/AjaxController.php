@@ -542,7 +542,8 @@ class AjaxController extends Zend_Controller_Action
 	        $prixU = $catalogue->unitaire;
         }
         
-        echo $catalogue->designation . '||' . $prixU . '||' . $catalogue->coeff_marge . '||' . $id;
+        //echo $catalogue->designation . '||' . $prixU . '||' . $catalogue->coeff_marge . '||' . $id;
+        echo $catalogue->code_me;
     }
 
     public function filtrecatalogueAction()

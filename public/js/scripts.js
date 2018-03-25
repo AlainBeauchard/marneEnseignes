@@ -1,5 +1,8 @@
 var masckPickColor = true;
 var masckVisibleTache = true;
+var $elemCode = null;
+var nomTableGlobal = null;
+var indiceLigneGlobal = null;
 
 var tabColor = ['blue','lightBlue','green', 'lightgreen', 'orange', 'darkorange', 'red', 'redVif', 'yellow', 'lemon', 'marron', 'gray', 'violet', 'none'];
 
@@ -1338,6 +1341,136 @@ function  fctRemplitListePrivate(nomTable, nomListe, indice, fctFinale)
     );
 }
 
+function fillProduit(result, nomTable, indice) {
+    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='support']")[indice]).attr('value',  result.designation);
+    $($("#"+nomTable+" input[name='format']")[indice]).attr('value', result.format);
+    var prix = result.prixM2;
+    if (!prix || prix === '')
+        prix = result.prixML;
+    if (!prix || prix === '')
+        prix = result.unitaire;
+    $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
+    $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
+    fctChangeValeurDevisProduit();
+}
+
+function fillAdhesif(result, nomTable, indice) {
+    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='adhesif']")[indice]).attr('value',result.designation);
+    $($("#"+nomTable+" input[name='surface']")[indice]).attr('value',result.surface_totale);
+    var prix = result.prixM2;
+    if (!prix || prix === '')
+        prix = result.prixML;
+    if (!prix || prix === '')
+        prix = result.unitaire;
+    $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value',prix);
+    $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value',result.coeff_marge);
+    fctChangeValeurDevisAdhesif();
+}
+
+function fillDeplacement(result, nomTable, indice) {
+    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='deplacement']")[indice]).attr('value',result.designation);
+    var prix = result.prixM2;
+    if (!prix || prix === '')
+        prix = result.prixML;
+    if (!prix || prix === '')
+        prix = result.unitaire;
+    $($("#"+nomTable+" input[name='tarifUnique']")[indice]).attr('value',prix);
+    fctChangeValeurDevisDeplacement();
+}
+
+function fillFaconnage(result, nomTable, indice) {
+    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='faconnage']")[indice]).attr('value', result.designation);
+    var prix = result.prixM2;
+    if (!prix || prix === '')
+        prix = result.prixML;
+    if (!prix || prix === '')
+        prix = result.unitaire;
+    $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
+    fctChangeValeurDevisFaconnage();
+}
+
+function fillForfaitPrestation(result, nomTable, indice) {
+    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='prestation']")[indice]).attr('value', result.designation);
+    var prix = result.prixM2;
+    if (!prix || prix === '')
+        prix = result.prixML;
+    if (!prix || prix === '')
+        prix = result.unitaire;
+    $($("#"+nomTable+" input[name='tarif']")[indice]).attr('value', prix);
+    fctChangeValeurDevisForfaitPrestation();
+}
+
+function fillFourniture(result, nomTable, indice) {
+    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='fourniture']")[indice]).attr('value', result.designation);
+    var prix = result.prixM2;
+    if (!prix || prix === '')
+        prix = result.prixML;
+    if (!prix || prix === '')
+        prix = result.unitaire;
+    $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
+    $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
+    fctChangeValeurDevisFourniture();
+}
+
+function fillFraisTechnique(result, nomTable, indice) {
+    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='fraisTechnique']")[indice]).attr('value', result.designation);
+    /*
+    var prix = result.prixM2;
+    if (!prix || prix === '')
+        prix = result.prixML;
+    if (!prix || prix === '')
+        prix = result.unitaire;
+    $("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
+    $("#"+nomTable+" input[name='coefMarge']")[indice].value = result.coeff_marge;
+    */
+    fctChangeValeurDevisFraisTechnique();
+}
+
+function fillPose(result, nomTable, indice) {
+    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='pose']")[indice]).attr('value', result.designation);
+    var prix = result.prixM2;
+    if (!prix || prix === '')
+        prix = result.prixML;
+    if (!prix || prix === '')
+        prix = result.unitaire;
+    $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
+    $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
+    fctChangeValeurDevisPose();
+}
+
+function fillPrestation(result, nomTable, indice) {
+    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='prestation']")[indice]).attr('value', result.designation);
+    var prix = result.prixM2;
+    if (!prix || prix === '')
+        prix = result.prixML;
+    if (!prix || prix === '')
+        prix = result.unitaire;
+    $($("#"+nomTable+" input[name='tarif']")[indice]).attr('value', prix);
+    fctChangeValeurDevisPrestation();
+}
+
+function fillSousTraitance(result, nomTable, indice) {
+    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
+    $$($("#"+nomTable+" input[name='support']")[indice]).attr('value', result.designation);
+    var prix = result.prixM2;
+    if (!prix || prix === '')
+        prix = result.prixML;
+    if (!prix || prix === '')
+        prix = result.unitaire;
+    $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
+    $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
+    fctChangeValeurDevisSousTraitance();
+}
+
 function fctRemplitListeProduit(indice)
 {
     var nomTable = "tableProduit";
@@ -1348,16 +1481,7 @@ function fctRemplitListeProduit(indice)
 		indice,
 		function (result) {
 			result = JSON.parse(result);
-			$($("#"+nomTable+" input[name='support']")[indice]).attr('value',  result.designation);
-            $($("#"+nomTable+" input[name='format']")[indice]).attr('value', result.format);
-			var prix = result.prixM2;
-			if (!prix || prix === '')
-				prix = result.prixML;
-			if (!prix || prix === '')
-				prix = result.unitaire;
-            $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
-            $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
-			fctChangeValeurDevisProduit();
+			fillProduit(result, nomTable, indice);
 		}
 	)
 }
@@ -1372,16 +1496,7 @@ function fctRemplitListeAdhesif(indice)
 		indice,
 		function (result) {
 			result = JSON.parse(result);
-			$($("#"+nomTable+" input[name='adhesif']")[indice]).attr('value',result.designation);
-			$($("#"+nomTable+" input[name='surface']")[indice]).attr('value',result.surface_totale);
-			var prix = result.prixM2;
-			if (!prix || prix === '')
-				prix = result.prixML;
-			if (!prix || prix === '')
-				prix = result.unitaire;
-			$($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value',prix);
-			$($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value',result.coeff_marge);
-			fctChangeValeurDevisAdhesif();
+			fillAdhesif(result, nomTable, indice);
 		}
 	);
 }
@@ -1396,14 +1511,7 @@ function fctRemplitListeDeplacement(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $($("#"+nomTable+" input[name='deplacement']")[indice]).attr('value',result.designation);
-            var prix = result.prixM2;
-            if (!prix || prix === '')
-                prix = result.prixML;
-            if (!prix || prix === '')
-                prix = result.unitaire;
-            $($("#"+nomTable+" input[name='tarifUnique']")[indice]).attr('value',prix);
-            fctChangeValeurDevisDeplacement();
+            fillDeplacement(result, nomTable, indice);
         }
     );
 }
@@ -1418,14 +1526,7 @@ function fctRemplitListeFaconnage(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $($("#"+nomTable+" input[name='faconnage']")[indice]).attr('value', result.designation);
-            var prix = result.prixM2;
-            if (!prix || prix === '')
-                prix = result.prixML;
-            if (!prix || prix === '')
-                prix = result.unitaire;
-            $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
-            fctChangeValeurDevisFaconnage();
+            fillFaconnage(result, nomTable, indice);
         }
     );
 }
@@ -1440,14 +1541,7 @@ function fctRemplitListeForfaitPrestation(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $($("#"+nomTable+" input[name='prestation']")[indice]).attr('value', result.designation);
-            var prix = result.prixM2;
-            if (!prix || prix === '')
-                prix = result.prixML;
-            if (!prix || prix === '')
-                prix = result.unitaire;
-            $($("#"+nomTable+" input[name='tarif']")[indice]).attr('value', prix);
-            fctChangeValeurDevisForfaitPrestation();
+            fillForfaitPrestation(result, nomTable, indice);
         }
     );
 }
@@ -1462,15 +1556,7 @@ function fctRemplitListeFourniture(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $($("#"+nomTable+" input[name='fourniture']")[indice]).attr('value', result.designation);
-            var prix = result.prixM2;
-            if (!prix || prix === '')
-                prix = result.prixML;
-            if (!prix || prix === '')
-                prix = result.unitaire;
-            $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
-            $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
-            fctChangeValeurDevisFourniture();
+            fillFourniture(result, nomTable, indice);
         }
     );
 }
@@ -1485,17 +1571,7 @@ function fctRemplitListeFraisTechnique(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $($("#"+nomTable+" input[name='fraisTechnique']")[indice]).attr('value', result.designation);
-            /*
-            var prix = result.prixM2;
-            if (!prix || prix === '')
-                prix = result.prixML;
-            if (!prix || prix === '')
-                prix = result.unitaire;
-            $("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
-            $("#"+nomTable+" input[name='coefMarge']")[indice].value = result.coeff_marge;
-            */
-            fctChangeValeurDevisFraisTechnique();
+            fillFraisTechnique(result, nomTable, indice);
         }
     );
 }
@@ -1510,15 +1586,7 @@ function fctRemplitListePose(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $($("#"+nomTable+" input[name='pose']")[indice]).attr('value', result.designation);
-            var prix = result.prixM2;
-            if (!prix || prix === '')
-                prix = result.prixML;
-            if (!prix || prix === '')
-                prix = result.unitaire;
-            $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
-            $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
-            fctChangeValeurDevisPose();
+            fillPose(result, nomTable, indice);
         }
     );
 }
@@ -1533,14 +1601,7 @@ function fctRemplitListePrestation(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $($("#"+nomTable+" input[name='prestation']")[indice]).attr('value', result.designation);
-            var prix = result.prixM2;
-            if (!prix || prix === '')
-                prix = result.prixML;
-            if (!prix || prix === '')
-                prix = result.unitaire;
-            $($("#"+nomTable+" input[name='tarif']")[indice]).attr('value', prix);
-            fctChangeValeurDevisPrestation();
+            fillPrestation(result, nomTable, indice);
         }
     );
 }
@@ -1555,15 +1616,7 @@ function fctRemplitListeSousTraitance(indice)
         indice,
         function (result) {
             result = JSON.parse(result);
-            $($("#"+nomTable+" input[name='support']")[indice]).attr('value', result.designation);
-            var prix = result.prixM2;
-            if (!prix || prix === '')
-                prix = result.prixML;
-            if (!prix || prix === '')
-                prix = result.unitaire;
-            $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
-            $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
-            fctChangeValeurDevisSousTraitance();
+         	fillSousTraitance(result, nomTable, indice);
         }
     );
 }
@@ -2070,6 +2123,21 @@ function fctChangeTableEntete()
     fctCalculMontantTotal();
 }
 
+// TODO modifier l'affichage de la pop up pour que cela modifie la bonne ligne dans le devis
+// modifier le clic sur les boutons dnt l'id commence par fill_form_ ligne 2229
+function fctOuvreCatalogue(indice, action) {
+
+	nomTableGlobal = "table"+action;
+	indiceLigneGlobal = indice;
+
+    $('#liste_catalogue').dialog({
+        title: 'Catalogue produits',
+        width: 1200,
+        height: 600
+    });
+};
+
+
 function fctSupprimeLigneTableEntete() {
 	$("#tableEntete .focus").remove();
 	setTimeout(fctChangeTableEntete, 500);
@@ -2218,21 +2286,49 @@ $(document).on('click', 'li[id^="modele_id_"]', function(){
 $(document).on('click','button[id^="fill_form_"]', function(){
 	var id = $(this).attr('id').split('_')[2];
 	
-	$.post('/ajax/produit',{
-		id:id
-	}, function(r){
-		var values = r.split('||');
-		
-		$('#id_item').val(values[3]);
-		$('#designation').val(values[0]);
-		$('#pu').val(values[1]);
-		$('#coeff_marge').val(values[2]);
-		$('#qte').val(1);
-		
-		updatePrix();
-		
-		$('#liste_catalogue').dialog("close");
-	});
+
+	$.post("/ajax/detailproduit",
+		{
+			id: id
+		},
+		function (result2) {
+			result2= JSON.parse(result2);
+
+			if (nomTableGlobal === 'tableProduit') {
+                fillProduit(result2 , nomTableGlobal, indiceLigneGlobal);
+			}
+			if (nomTableGlobal === 'tableSousTraitance') {
+                fillSousTraitance(result2 , nomTableGlobal, indiceLigneGlobal);
+			}
+			if (nomTableGlobal === 'tablePrestation') {
+                fillPrestation(result2 , nomTableGlobal, indiceLigneGlobal);
+			}
+			if (nomTableGlobal === 'tableFraisTechnique') {
+                fillFraisTechnique(result2 , nomTableGlobal, indiceLigneGlobal);
+			}
+			if (nomTableGlobal === 'tableFourniture') {
+                fillFourniture(result2 , nomTableGlobal, indiceLigneGlobal);
+			}
+			if (nomTableGlobal === 'tableForfaitPrestation') {
+                fillForfaitPrestation(result2 , nomTableGlobal, indiceLigneGlobal);
+			}
+			if (nomTableGlobal === 'tableFaconnage') {
+                fillFaconnage(result2 , nomTableGlobal, indiceLigneGlobal);
+			}
+			if (nomTableGlobal === 'tableDeplacement') {
+                fillDeplacement(result2 , nomTableGlobal, indiceLigneGlobal);
+			}
+			if (nomTableGlobal === 'tableAdhesif') {
+                fillAdhesif(result2 , nomTableGlobal, indiceLigneGlobal);
+			}
+			if (nomTableGlobal === 'tablePose') {
+                fillPose(result2 , nomTableGlobal, indiceLigneGlobal);
+			}
+		}
+	);
+
+	$('#liste_catalogue').dialog("close");
+
 });
 
 $(document).on('click',	'span[id^="delete_item_devis_"]', function(){

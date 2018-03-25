@@ -140,6 +140,15 @@ class DevisController extends Zend_Controller_Action
 
         $this->view->form = $form;
 
+        $db_catalogue = new Application_Model_Produits();
+        $select = $db_catalogue->select()->order('designation');
+        $catalogues = $db_catalogue->fetchAll($select);
+        $this->view->catalogues = $catalogues;
+
+        $filtreForm = new Application_Form_FiltreCatalogue();
+        $this->view->filtreForm = $filtreForm;
+
+
         $formRedaction = new Application_Form_WriteDevis();
         $formRedaction->getElement('redactionDevis')->setValue($devis->redaction);
         $this->view->formRedaction = $formRedaction;

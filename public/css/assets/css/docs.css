@@ -1210,3 +1210,7 @@ ul#icons span.ui-icon {
   border-collapse: unset;
 
 }
+
+.tableCode {
+  width: 75% !important;
+}

@@ -41,7 +41,10 @@
             <?php if(count($this->itemsAdhesif) ==0): ?>
             <tr id="ligneRefAdhesif"  data-key="ligneRefAdhesif_0">
                 <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(0);" onChange="fctChangeValeurDevisAdhesif();" class="dropdown-toggle" list="listeAdhesif_0"/>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(0);" onChange="fctChangeValeurDevisAdhesif();" class="tableCode dropdown-toggle" list="listeAdhesif_0"/>
+                    <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(0, 'Adhesif');">
+                        <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                    </button>
                     <datalist id="listeAdhesif_0">
                     </datalist>
                     <input type="hidden" name="json_Adhesif[]">
@@ -61,7 +64,10 @@
                 <?php $json = json_decode($adhesif->json, true) ?>
                 <tr id="ligneRefAdhesif"  data-key="ligneRefAdhesif_<?= $key ?>">
                     <td>
-                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(<?= $key ?>);" onChange="fctChangeValeurDevisAdhesif();" class="dropdown-toggle" list="listeAdhesif_<?= $key ?>" value="<?= $json['code'] ?>"/>
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(<?= $key ?>);" onChange="fctChangeValeurDevisAdhesif();" class="tableCode dropdown-toggle" list="listeAdhesif_<?= $key ?>" value="<?= $json['code'] ?>"/>
+                        <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(<?= $key ?>, 'Adhesif');">
+                            <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                        </button>
                         <datalist id="listeAdhesif_<?= $key ?>">
                         </datalist>
                         <input type="hidden" name="json_Adhesif[]" value="<?= json_encode($json) ?>">
@@ -100,7 +106,10 @@
         <table>
             <tr id="elemCacheAdhesif">
                 <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(XXX);" onChange="fctChangeValeurDevisAdhesif();" class="dropdown-toggle" list="listeAdhesif_XXX"/>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(XXX);" onChange="fctChangeValeurDevisAdhesif();" class="tableCode dropdown-toggle" list="listeAdhesif_XXX"/>
+                    <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(XXX, 'Adhesif');">
+                        <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                    </button>
                     <datalist id="listeAdhesif_XXX">
                     </datalist>
                     <input type="hidden" name="json_Adhesif[]">

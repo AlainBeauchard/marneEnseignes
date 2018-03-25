@@ -39,7 +39,10 @@
             <?php if(count($this->itemsDeplacement) == 0): ?>
                 <tr id="ligneRefDeplacement"  data-key="ligneRefDeplacement_0">
                     <td>
-                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(0);" onChange="fctChangeValeurDevisDeplacement();" class="dropdown-toggle" list="listeDeplacement_0"/>
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(0);" onChange="fctChangeValeurDevisDeplacement();" class="tableCode dropdown-toggle" list="listeDeplacement_0"/>
+                        <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(0, 'Deplacement');">
+                            <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                        </button>
                         <datalist id="listeDeplacement_0">
                         </datalist>
                         <input type="hidden" name="json_Deplacement[]">
@@ -59,6 +62,9 @@
                 <tr id="ligneRefDeplacement"  data-key="ligneRefDeplacement_<?= $key ?>">
                     <td>
                         <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(<?= $key ?>);" onChange="fctChangeValeurDevisDeplacement();" class="dropdown-toggle" list="listeDeplacement_<?= $key ?>" value="<?= $json['code'] ?>" />
+                        <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(<?= $key ?>, 'Deplacement');">
+                            <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                        </button>
                         <datalist id="listeDeplacement_<?= $key ?>">
                         </datalist>
                         <input type="hidden" name="json_Deplacement[]" value="<?= json_encode($json) ?>">
@@ -96,7 +102,10 @@
         <table>
             <tr id="elemCacheDeplacement">
                 <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(XXX);" onChange="fctChangeValeurDevisDeplacement();" class="dropdown-toggle" list="listeDeplacement_XXX"/>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(XXX);" onChange="fctChangeValeurDevisDeplacement();" class="tableCode dropdown-toggle" list="listeDeplacement_XXX"/>
+                    <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(XXX, 'Deplacement');">
+                        <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                    </button>
                     <datalist id="listeDeplacement_XXX">
                     </datalist>
                     <input type="hidden" name="json_Deplacement[]">

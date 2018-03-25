@@ -39,7 +39,10 @@
             <?php if( count($this->itemsPose) == 0): ?>
             <tr id="ligneRefPose"  data-key="ligneRefPose_0">
                 <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListePose(0);" onChange="fctChangeValeurDevisPose();" class="dropdown-toggle" list="listePose_0"/>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListePose(0);" onChange="fctChangeValeurDevisPose();" class="tableCode dropdown-toggle" list="listePose_0"/>
+                    <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(0, 'Pose');">
+                        <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                    </button>
                     <datalist id="listePose_0">
                     </datalist>
                     <input type="hidden" name="json_Pose[]">
@@ -58,7 +61,10 @@
                     <?php $json = json_decode($pose->json, true) ?>
                 <tr id="ligneRefPose"  data-key="ligneRefPose_<?= $key ?>">
                     <td>
-                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListePose(<?=$key ?>);" onChange="fctChangeValeurDevisPose();" class="dropdown-toggle" list="listePose_<?=$key ?>" value="<?= $json['code'] ?>"/>
+                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListePose(<?=$key ?>);" onChange="fctChangeValeurDevisPose();" class="tableCode dropdown-toggle" list="listePose_<?=$key ?>" value="<?= $json['code'] ?>"/>
+                        <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(<?= $key ?>, 'Pose');">
+                            <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                        </button>
                         <datalist id="listePose_<?=$key ?>">
                         </datalist>
                         <input type="hidden" name="json_Pose[]" value="<?= json_decode($json) ?>">
@@ -98,7 +104,10 @@
         <table>
             <tr id="elemCachePose">
                 <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListePose(XXX);" onChange="fctChangeValeurDevisPose();" class="dropdown-toggle" list="listePose_XXX"/>
+                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListePose(XXX);" onChange="fctChangeValeurDevisPose();" class="tableCode dropdown-toggle" list="listePose_XXX"/>
+                    <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(XXX, 'Pose');">
+                        <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                    </button>
                     <datalist id="listePose_XXX">
                     </datalist>
                     <input type="hidden" name="json_Pose[]">
