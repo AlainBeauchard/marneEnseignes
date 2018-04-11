@@ -1194,6 +1194,8 @@ function fctAjoutLigneTableEntete() {
     var html = ligne.html().replace(new RegExp('XXX', 'g'), numLigne);
     $table.append('<tr data-key="ligneRefEntete_'+numLigne+'">'+html+'</tr>');
 
+    $nbLigne.value = numLigne + 1;
+
 }
 
 function fctBtAjoutSuppLigne(action) {
@@ -2209,9 +2211,9 @@ function fctSupprimeLigneAdhesif(indice)
 
 function fctCalculMontantTotal() {
 	var montant = 0;
-	if ($("#sommePerimetre").length) {
-		montant += parseFloat($("#sommePerimetre").text());
-    }
+	//if ($("#sommePerimetre").length) {
+	//	montant += parseFloat($("#sommePerimetre").text());
+    //}
     if ($("#totalPxVenteProduit").length) {
 		montant += parseFloat($("#totalPxVenteProduit").text());
 	}

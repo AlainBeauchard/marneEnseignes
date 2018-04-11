@@ -53,7 +53,7 @@ class Application_Form_Devis extends Zend_Form
         $modeDeReglement->setRequired(true);
         $this->addElement($modeDeReglement);
 
-        $dteCreation = new ZendX_JQuery_Form_Element_DatePicker('dateCreation', ['attribs' => []]);
+        $dteCreation = new Zend_Form_Element_Text('dateCreation', ['attribs' => []]);
         $dteCreation->setAttribs(array('placeholder'=>'Date création','class'=>'form-control', 'aria-describedby'=>'sizing-addon2', 'readonly' => 'true'));
         $dteCreation->setLabel('Date Création');
         $dteCreation->setRequired(true);

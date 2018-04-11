@@ -84,6 +84,17 @@ class DevisController extends Zend_Controller_Action
             $this->view->$valItem = [];
         }
 
+        $this->view->montantRemise = '';
+
+        $db_catalogue = new Application_Model_Produits();
+        $select = $db_catalogue->select()->order('designation');
+        $catalogues = $db_catalogue->fetchAll($select);
+        $this->view->catalogues = $catalogues;
+
+        $filtreForm = new Application_Form_FiltreCatalogue();
+        $this->view->filtreForm = $filtreForm;
+
+
         $formRedaction = new Application_Form_WriteDevis();
         $this->view->formRedaction = $formRedaction;
 
@@ -116,6 +127,8 @@ class DevisController extends Zend_Controller_Action
         $devis = $db_devis->find($id_devis)->current();
         $this->view->devis = $devis;
 
+        $this->view->montantRemise = $devis->remise;
+
         $tab = ['Adhesif', 'Deplacement', 'Faconnage', 'ForfaitPrestation', 'Fourniture',
                 'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique'
                ];
@@ -131,7 +144,7 @@ class DevisController extends Zend_Controller_Action
         $client = $db_client->find($devis->id_client)->current();
 
         $form->getElement('codeClient')->setValue($client->ref);
-        $form->getElement('nomClient')->setValue($client->contact_nom);
+        $form->getElement('nomClient')->setValue($client->societe);
         $form->getElement('refDossier')->setValue($devis->ref);
         $form->getElement('delai')->setValue($devis->delai);
         $form->getElement('reglement')->setValue($devis->reglement);
