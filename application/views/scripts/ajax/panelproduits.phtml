@@ -37,6 +37,7 @@
                     <th>Quantité</th>
                     <th>H.A M2/ML</th>
                     <th>H.A Total</th>
+                    <th>Surface</th>
                     <th>Coef marge</th>
                     <th>Px vente</th>
                 </tr>
@@ -56,6 +57,7 @@
                     <td><input type="text" name="qte"       title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
                     <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
                     <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
+                    <td><input type="text" name="surface"   title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
                     <td><input type="text" name="coefMarge" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
                     <td><input type="text" name="pxvente"   title="" readonly class="inputNumber"/></td>
                     <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneProduits(0);" title="Supprimer la ligne" ></span></td>
@@ -79,6 +81,7 @@
                         <td><input type="text" name="qte"       title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $json['qte'] ?>" /></td>
                         <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $json['h.a_ml'] ?>" /></td>
                         <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" value="<?= $json['h.a_total'] ?>" /></td>
+                        <td><input type="text" name="surface"   title="" onFocus="fctSetFocus();" readonly  class="inputNumber" value="<?php if(isset($json['surface'])) { echo($json['surface']); } else { echo(''); } ?>"/></td>
                         <td><input type="text" name="coefMarge" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $json['coefmarge'] ?>" /></td>
                         <td><input type="text" name="pxvente"   title="" readonly class="inputNumber" value="<?= $json['pxvente'] ?>"/></td>
                         <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneProduits(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
@@ -121,6 +124,7 @@
                     <td><input type="text" name="qte"       title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
                     <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
                     <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
+                    <td><input type="text" name="surface"   title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
                     <td><input type="text" name="coefMarge" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber"/></td>
                     <td><input type="text" name="pxvente"   title="" readonly class="inputNumber"/></td>
                     <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneProduits(XXX);" title="Supprimer la ligne" ></span></td>

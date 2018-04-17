@@ -78,7 +78,7 @@ class CatalogueController extends Zend_Controller_Action
 
         $this->view->paginator = $paginator;
 
-        //$this->view->produits = $produits;
+        $this->view->catalogues = $produits;
     }
 
     /**

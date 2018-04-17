@@ -41,7 +41,7 @@ class Application_Form_FiltreCatalogue extends Zend_Form
         			->removeDecorator('DtDdWrapper');
         $this->addElement($rechercher);
         
-        $resetClient = new Zend_Form_Element_Reset('resetCatalogue');
+        $resetClient = new Zend_Form_Element_Button('resetCatalogue');
         $resetClient->setLabel('Reset');
         $resetClient->setAttribs(array('class'=>'btn btn-primary btn-sm', 'type'=>'button', 'id'=>'resetFiltreCatalogue'))
         			->removeDecorator('DtDdWrapper');

@@ -867,12 +867,21 @@ rendTacheInvisible(1);
 	});
 	
 	$('#resetFiltreCatalogue').click(function(){
-		
-		$('#reference').val('');
+
+		if ($('#codeMe').length) {
+            console.log('Ok');
+            $('#codeMe').val('');
+            console.log('done');
+        }
+        if ($('#reference').length) {
+            $('#reference').val('');
+        }
 		$('#fournisseur').val('');
 		$('#produit').val('');
 		$('#epaisseur').val('');
-		$('#type').val('');
+        if ($('#type').length) {
+            $('#type').val('');
+        }
 		
 		$.post('/ajax/filtrecatalogue',{}, 
 			function(r){
@@ -1218,12 +1227,14 @@ function fctBtAjoutSuppLigne(action) {
 
 function fctChangeValeurRemise()
 {
-	var montantTotalInit = $("#montantTotal").html().replace(' euros', '');
-	var pourcentageRemise = $("#remise").val();
+	if ($("#montantTotal").length) {
+        var montantTotalInit = $("#montantTotal").html().replace(' euros', '');
+        var pourcentageRemise = $("#remise").val();
 
-	var montant = parseFloat((montantTotalInit * pourcentageRemise)/100).toFixed(2);
+        var montant = parseFloat((montantTotalInit * pourcentageRemise) / 100).toFixed(2);
 
-	$("#montantTotalRemise").html( parseFloat(montantTotalInit - montant).toFixed(2) + " euros" );
+        $("#montantTotalRemise").html(parseFloat(montantTotalInit - montant).toFixed(2) + " euros");
+    }
 }
 
 function fctAddBlocProduit()
@@ -1656,6 +1667,7 @@ function fctChangeValeurDevisProduit()
 	var qte 	= $("#tableProduit input[name='qte']");
 	var ha 		= $("#tableProduit input[name='h.a_ml']");
 	var haTotal = $("#tableProduit input[name='h.a_total']");
+	var surface = $("#tableProduit input[name='surface']");
 
     var code 	   = $("#tableProduit input[name='code']");
     var support = $("#tableProduit input[name='support']");
@@ -1671,6 +1683,7 @@ function fctChangeValeurDevisProduit()
 	for(var i=0;i<qte.length;i++) {
 		$(haTotal[i]).attr('value', parseFloat((qte[i].value * ha[i].value).toFixed(2)));
         $(pxvente[i]).attr('value', parseFloat((haTotal[i].value * coefMarge[i].value).toFixed(2)));
+        $(surface[i]).attr('value', parseFloat((qte[i].value * ha[i].value * haTotal[i].value).toFixed(2)));
 		sommeVenteTotale += parseFloat(pxvente[i].value);
 		sommeTotale += parseFloat(haTotal[i].value);
         $(qte[i]).attr('value', qte[i].value);

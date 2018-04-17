@@ -86,10 +86,10 @@ class DevisController extends Zend_Controller_Action
 
         $this->view->montantRemise = '';
 
-        $db_catalogue = new Application_Model_Produits();
-        $select = $db_catalogue->select()->order('designation');
-        $catalogues = $db_catalogue->fetchAll($select);
-        $this->view->catalogues = $catalogues;
+        //$db_catalogue = new Application_Model_Produits();
+        //$select = $db_catalogue->select()->order('designation');
+        //$catalogues = $db_catalogue->fetchAll($select);
+        $this->view->catalogues = []; //$catalogues;
 
         $filtreForm = new Application_Form_FiltreCatalogue();
         $this->view->filtreForm = $filtreForm;
@@ -153,10 +153,10 @@ class DevisController extends Zend_Controller_Action
 
         $this->view->form = $form;
 
-        $db_catalogue = new Application_Model_Produits();
-        $select = $db_catalogue->select()->order('designation');
-        $catalogues = $db_catalogue->fetchAll($select);
-        $this->view->catalogues = $catalogues;
+        //$db_catalogue = new Application_Model_Produits();
+        //$select = $db_catalogue->select()->order('designation');
+        //$catalogues = $db_catalogue->fetchAll($select);
+        $this->view->catalogues = [];//$catalogues;
 
         $filtreForm = new Application_Form_FiltreCatalogue();
         $this->view->filtreForm = $filtreForm;
