@@ -857,7 +857,8 @@ rendTacheInvisible(1);
 			fournisseur: fournisseur,
 			designation: des,
 			epaisseur: epaisseur,
-			type: type
+			type: type,
+			fromDevis: $('#fromDevis').length,
 		}, function(r){
 			$('#liste_produits').empty();
 			$('#liste_produits').append(r);
@@ -1355,9 +1356,11 @@ function  fctRemplitListePrivate(nomTable, nomListe, indice, fctFinale)
 }
 
 function fillProduit(result, nomTable, indice) {
+	console.log(result);
     $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
     $($("#"+nomTable+" input[name='support']")[indice]).attr('value',  result.designation);
     $($("#"+nomTable+" input[name='format']")[indice]).attr('value', result.format);
+    $($("#"+nomTable+" input[name='surface']")[indice]).attr('value', result.surface_totale);
     var prix = result.prixM2;
     if (!prix || prix === '')
         prix = result.prixML;
@@ -1682,8 +1685,8 @@ function fctChangeValeurDevisProduit()
 
 	for(var i=0;i<qte.length;i++) {
 		$(haTotal[i]).attr('value', parseFloat((qte[i].value * ha[i].value).toFixed(2)));
-        $(pxvente[i]).attr('value', parseFloat((haTotal[i].value * coefMarge[i].value).toFixed(2)));
-        $(surface[i]).attr('value', parseFloat((qte[i].value * ha[i].value * haTotal[i].value).toFixed(2)));
+        $(pxvente[i]).attr('value', parseFloat((haTotal[i].value * coefMarge[i].value * surface[i].value).toFixed(2)));
+        // $(surface[i]).attr('value', parseFloat((qte[i].value * ha[i].value * haTotal[i].value).toFixed(2)));
 		sommeVenteTotale += parseFloat(pxvente[i].value);
 		sommeTotale += parseFloat(haTotal[i].value);
         $(qte[i]).attr('value', qte[i].value);
@@ -2144,6 +2147,8 @@ function fctOuvreCatalogue(indice, action) {
 
 	nomTableGlobal = "table"+action;
 	indiceLigneGlobal = indice;
+
+    $('#liste_produits').empty();
 
     $('#liste_catalogue').dialog({
         title: 'Catalogue produits',

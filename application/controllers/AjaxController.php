@@ -556,7 +556,8 @@ class AjaxController extends Zend_Controller_Action
         $designation = $this->_getParam('designation');
         $type = $this->_getParam('type');
         $epaisseur = $this->_getParam('epaisseur');
-        
+
+        $fromDevis = $this->_getParam('fromDevis');
         
         $db_catalogue = new Application_Model_Produits();
         $select = $db_catalogue->select();
@@ -582,7 +583,8 @@ class AjaxController extends Zend_Controller_Action
         }
         
         $catalogues = $db_catalogue->fetchAll($select);
-        
+
+        $this->view->fromDevis = $fromDevis;
         $this->view->catalogues = $catalogues;
         			
     }
