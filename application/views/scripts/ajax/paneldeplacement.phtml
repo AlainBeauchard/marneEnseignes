@@ -28,18 +28,19 @@
     <div id="collapsedeplacement" class="panel-body panel-collapse in">
        <table class="table-produits-devis" id="tableDeplacement">
             <tr>
-                <th>Code</th>
+                <th width="3%">Code</th>
                 <th>Deplacement</th>
-                <th>Quantité</th>
-                <th>Tarif unique</th>
-                <th>Coût/jour</th>
-                <th>Nb jours</th>
-                <th>Px vente</th>
+                <th width="3%">Quantité</th>
+                <th width="7%">Tarif unique</th>
+                <th width="7%">Coût/jour</th>
+                <th width="3%">Nb jours</th>
+                <th width="7%">Px vente</th>
+                <th width="2%"></th>
             </tr>
             <?php if(count($this->itemsDeplacement) == 0): ?>
                 <tr id="ligneRefDeplacement"  data-key="ligneRefDeplacement_0">
                     <td>
-                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(0);" onChange="fctChangeValeurDevisDeplacement();" class="tableCode dropdown-toggle" list="listeDeplacement_0"/>
+                        <input type="text" name="code"          data-indice="0" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(0);" onChange="fctChangeValeurDevisDeplacement();" class="tableCode dropdown-toggle" list="listeDeplacement_0"/>
                         <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(0, 'Deplacement');">
                             <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
                         </button>
@@ -47,12 +48,12 @@
                         </datalist>
                         <input type="hidden" name="json_Deplacement[]">
                     </td>
-                    <td><input type="text" name="deplacement"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" ></td>
-                    <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" ></td>
-                    <td><input type="text" name="tarifUnique"   title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" ></td>
-                    <td><input type="text" name="coutJour"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly ></td>
-                    <td><input type="text" name="nbJours"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" ></td>
-                    <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                    <td><input type="text" name="deplacement"   data-indice="0" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" ></td>
+                    <td><input type="text" name="qte"           data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" ></td>
+                    <td><input type="text" name="tarifUnique"   data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" ></td>
+                    <td><input type="text" name="coutJour"      data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" readonly ></td>
+                    <td><input type="text" name="nbJours"       data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" ></td>
+                    <td><input type="text" name="pxvente"       data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
                     <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneDeplacement(0);" title="Supprimer la ligne" ></span></td>
                 </tr>
             <?php endif; ?>
@@ -61,7 +62,7 @@
                     <?php $json = json_decode($deplacement->json, true) ?>
                 <tr id="ligneRefDeplacement"  data-key="ligneRefDeplacement_<?= $key ?>">
                     <td>
-                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(<?= $key ?>);" onChange="fctChangeValeurDevisDeplacement();" class="dropdown-toggle" list="listeDeplacement_<?= $key ?>" value="<?= $json['code'] ?>" />
+                        <input type="text" name="code"          data-indice="<?= $key ?>" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(<?= $key ?>);" onChange="fctChangeValeurDevisDeplacement();" class="dropdown-toggle" list="listeDeplacement_<?= $key ?>" value="<?= $json['code'] ?>" />
                         <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(<?= $key ?>, 'Deplacement');">
                             <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
                         </button>
@@ -69,12 +70,12 @@
                         </datalist>
                         <input type="hidden" name="json_Deplacement[]" value="<?= json_encode($json) ?>">
                     </td>
-                    <td><input type="text" name="deplacement"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['deplacement'] ?>"></td>
-                    <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['qte'] ?>"></td>
-                    <td><input type="text" name="tarifUnique"   title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['tarifunique'] ?>"></td>
-                    <td><input type="text" name="coutJour"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['coutjour'] ?>"></td>
-                    <td><input type="text" name="nbJours"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['nbjours'] ?>"></td>
-                    <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
+                    <td><input type="text" name="deplacement"   data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['deplacement'] ?>"></td>
+                    <td><input type="text" name="qte"           data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['qte'] ?>"></td>
+                    <td><input type="text" name="tarifUnique"   data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['tarifunique'] ?>"></td>
+                    <td><input type="text" name="coutJour"      data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['coutjour'] ?>"></td>
+                    <td><input type="text" name="nbJours"       data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" value="<?= $json['nbjours'] ?>"></td>
+                    <td><input type="text" name="pxvente"       data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
                     <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneDeplacement(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
                 </tr>
                 <?php endforeach; ?>
@@ -102,7 +103,7 @@
         <table>
             <tr id="elemCacheDeplacement">
                 <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(XXX);" onChange="fctChangeValeurDevisDeplacement();" class="tableCode dropdown-toggle" list="listeDeplacement_XXX"/>
+                    <input type="text" name="code"          data-indice="XXX" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeDeplacement(XXX);" onChange="fctChangeValeurDevisDeplacement();" class="tableCode dropdown-toggle" list="listeDeplacement_XXX"/>
                     <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(XXX, 'Deplacement');">
                         <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
                     </button>
@@ -110,12 +111,12 @@
                     </datalist>
                     <input type="hidden" name="json_Deplacement[]">
                 </td>
-                <td><input type="text" name="deplacement"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" ></td>
-                <td><input type="text" name="qte"           title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" ></td>
-                <td><input type="text" name="tarifUnique"   title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" ></td>
-                <td><input type="text" name="coutJour"      title="" onFocus="fctSetFocus()" class="inputNumber" readonly ></td>
-                <td><input type="text" name="nbJours"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" ></td>
-                <td><input type="text" name="pxvente"       title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><input type="text" name="deplacement"   data-indice="XXX" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisDeplacement();" ></td>
+                <td><input type="text" name="qte"           data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" ></td>
+                <td><input type="text" name="tarifUnique"   data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" ></td>
+                <td><input type="text" name="coutJour"      data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" readonly ></td>
+                <td><input type="text" name="nbJours"       data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisDeplacement();" ></td>
+                <td><input type="text" name="pxvente"       data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
                 <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneDeplacement(XXX);" title="Supprimer la ligne" ></span></td>
             </tr>
         </table>

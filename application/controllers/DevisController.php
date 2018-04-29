@@ -220,7 +220,7 @@ class DevisController extends Zend_Controller_Action
 
         $idDevis = $this->_getParam('id');
         $db_items->delete("id_devis = ".$idDevis);
-        $db_devis->delete("id_devis = ".$idDevis);
+        $db_devis->delete("id = ".$idDevis);
 
         $this->_redirect('/devis/');
     }

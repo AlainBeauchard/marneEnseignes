@@ -28,20 +28,20 @@
     <div id="collapseadhesif" class="panel-body panel-collapse in">
         <table class="table-produits-devis" id="tableAdhesif">
             <tr>
-                <th>Code</th>
+                <th width="3%">Code</th>
                 <th>Adhesifs</th>
-                <th>Surface</th>
-                <th>Quantité</th>
-                <th>H.A M2/ML</th>
-                <th>H.A Total</th>
-                <th>Coef Marge</th>
-                <th>Px vente</th>
+                <th width="7%">Surface</th>
+                <th width="3%">Quantité</th>
+                <th width="7%">H.A M2/ML</th>
+                <th width="7%">H.A Total</th>
+                <th width="7%">Coef Marge</th>
+                <th width="7%">Px vente</th>
                 <th></th>
             </tr>
             <?php if(count($this->itemsAdhesif) ==0): ?>
             <tr id="ligneRefAdhesif"  data-key="ligneRefAdhesif_0">
                 <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(0);" onChange="fctChangeValeurDevisAdhesif();" class="tableCode dropdown-toggle" list="listeAdhesif_0"/>
+                    <input type="text" name="code"      data-indice="0" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(0);" onChange="fctChangeValeurDevisAdhesif();" class="tableCode dropdown-toggle" list="listeAdhesif_0"/>
                     <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(0, 'Adhesif');">
                         <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
                     </button>
@@ -49,13 +49,13 @@
                     </datalist>
                     <input type="hidden" name="json_Adhesif[]">
                 </td>
-                <td><input type="text" name="adhesif"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
-                <td><input type="text" name="surface"   title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
-                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
-                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
-                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
-                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
-                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><input type="text" name="adhesif"   data-indice="0" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
+                <td><input type="text" name="surface"   data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
+                <td><input type="text" name="qte"       data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
+                <td><input type="text" name="h.a_ml"    data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
+                <td><input type="text" name="h.a_total" data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><input type="text" name="coefMarge" data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
+                <td><input type="text" name="pxvente"   data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
                 <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneAdhesif(0);" title="Supprimer la ligne" ></span></td>
             </tr>
             <?php endif; ?>
@@ -64,7 +64,7 @@
                 <?php $json = json_decode($adhesif->json, true) ?>
                 <tr id="ligneRefAdhesif"  data-key="ligneRefAdhesif_<?= $key ?>">
                     <td>
-                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(<?= $key ?>);" onChange="fctChangeValeurDevisAdhesif();" class="tableCode dropdown-toggle" list="listeAdhesif_<?= $key ?>" value="<?= $json['code'] ?>"/>
+                        <input type="text" name="code"      data-indice="<?= $key ?>" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(<?= $key ?>);" onChange="fctChangeValeurDevisAdhesif();" class="tableCode dropdown-toggle" list="listeAdhesif_<?= $key ?>" value="<?= $json['code'] ?>"/>
                         <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(<?= $key ?>, 'Adhesif');">
                             <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
                         </button>
@@ -72,13 +72,13 @@
                         </datalist>
                         <input type="hidden" name="json_Adhesif[]" value="<?= json_encode($json) ?>">
                     </td>
-                    <td><input type="text" name="adhesif"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['adhesif'] ?>"/></td>
-                    <td><input type="text" name="surface"   title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['surface'] ?>"/></td>
-                    <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['qte'] ?>" /></td>
-                    <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['h.a_ml'] ?>" /></td>
-                    <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly  value="<?= $json['h.a_total'] ?>"/></td>
-                    <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"   value="<?= $json['coefmarge'] ?>"/></td>
-                    <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly  value="<?= $json['pxvente'] ?>"/></td>
+                    <td><input type="text" name="adhesif"   data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['adhesif'] ?>"/></td>
+                    <td><input type="text" name="surface"   data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['surface'] ?>"/></td>
+                    <td><input type="text" name="qte"       data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['qte'] ?>" /></td>
+                    <td><input type="text" name="h.a_ml"    data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"  value="<?= $json['h.a_ml'] ?>" /></td>
+                    <td><input type="text" name="h.a_total" data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" readonly  value="<?= $json['h.a_total'] ?>"/></td>
+                    <td><input type="text" name="coefMarge" data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();"   value="<?= $json['coefmarge'] ?>"/></td>
+                    <td><input type="text" name="pxvente"   data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" readonly  value="<?= $json['pxvente'] ?>"/></td>
                     <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneAdhesif(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
                 </tr>
                 <?php endforeach; ?>
@@ -106,7 +106,7 @@
         <table>
             <tr id="elemCacheAdhesif">
                 <td>
-                    <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(XXX);" onChange="fctChangeValeurDevisAdhesif();" class="tableCode dropdown-toggle" list="listeAdhesif_XXX"/>
+                    <input type="text" name="code"      data-indice="XXX" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeAdhesif(XXX);" onChange="fctChangeValeurDevisAdhesif();" class="tableCode dropdown-toggle" list="listeAdhesif_XXX"/>
                     <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(XXX, 'Adhesif');">
                         <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
                     </button>
@@ -114,13 +114,13 @@
                     </datalist>
                     <input type="hidden" name="json_Adhesif[]">
                 </td>
-                <td><input type="text" name="adhesif"   title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
-                <td><input type="text" name="surface"   title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
-                <td><input type="text" name="qte"       title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
-                <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
-                <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
-                <td><input type="text" name="coefMarge" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
-                <td><input type="text" name="pxvente"   title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><input type="text" name="adhesif"   data-indice="XXX" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisAdhesif();" /></td>
+                <td><input type="text" name="surface"   data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
+                <td><input type="text" name="qte"       data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
+                <td><input type="text" name="h.a_ml"    data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
+                <td><input type="text" name="h.a_total" data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
+                <td><input type="text" name="coefMarge" data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisAdhesif();" /></td>
+                <td><input type="text" name="pxvente"   data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" readonly /></td>
                 <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneAdhesif(XXX);" title="Supprimer la ligne" ></span></td>
             </tr>
         </table>

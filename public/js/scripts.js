@@ -1327,14 +1327,14 @@ function  fctRemplitListePrivate(nomTable, nomListe, indice, fctFinale)
 {
     $.post("/ajax/listeproduits",
         {
-            code: $("#"+nomTable+" input[name='code']")[indice].value
+            code: $("#"+nomTable+" input[name='code'][data-indice='"+indice+"']").val()
         },
         function (result) {
             $("#"+nomListe+"_"+indice).html(result);
             $("#"+nomTable+" input[name='code']").each(
                 function () {
                     $(this).on('input', function () {
-                        var value = $("#"+nomTable+" input[name='code']")[indice].value;
+                        var value = $("#"+nomTable+" input[name='code'][data-indice='"+indice+"']").val();
                         var option = $("#"+nomListe+"_"+indice).find("[value='" + value + "']");
 
                         if (option.length > 0) {
@@ -1356,134 +1356,133 @@ function  fctRemplitListePrivate(nomTable, nomListe, indice, fctFinale)
 }
 
 function fillProduit(result, nomTable, indice) {
-	console.log(result);
-    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
-    $($("#"+nomTable+" input[name='support']")[indice]).attr('value',  result.designation);
-    $($("#"+nomTable+" input[name='format']")[indice]).attr('value', result.format);
-    $($("#"+nomTable+" input[name='surface']")[indice]).attr('value', result.surface_totale);
+    $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='support'][data-indice='"+indice+"']")).attr('value',  result.designation);
+    $($("#"+nomTable+" input[name='format'][data-indice='"+indice+"']")).attr('value', result.format);
+    $($("#"+nomTable+" input[name='surface'][data-indice='"+indice+"']")).attr('value', result.surface_totale);
     var prix = result.prixM2;
     if (!prix || prix === '')
         prix = result.prixML;
     if (!prix || prix === '')
         prix = result.unitaire;
-    $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
-    $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
+    $($("#"+nomTable+" input[name='h.a_ml'][data-indice='"+indice+"']")).attr('value', prix);
+    $($("#"+nomTable+" input[name='coefMarge'][data-indice='"+indice+"']")).attr('value', result.coeff_marge);
     fctChangeValeurDevisProduit();
 }
 
 function fillAdhesif(result, nomTable, indice) {
-    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
-    $($("#"+nomTable+" input[name='adhesif']")[indice]).attr('value',result.designation);
-    $($("#"+nomTable+" input[name='surface']")[indice]).attr('value',result.surface_totale);
+    $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='adhesif'][data-indice='"+indice+"']")).attr('value',result.designation);
+    $($("#"+nomTable+" input[name='surface'][data-indice='"+indice+"']")).attr('value',result.surface_totale);
     var prix = result.prixM2;
     if (!prix || prix === '')
         prix = result.prixML;
     if (!prix || prix === '')
         prix = result.unitaire;
-    $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value',prix);
-    $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value',result.coeff_marge);
+    $($("#"+nomTable+" input[name='h.a_ml'][data-indice='"+indice+"']")).attr('value',prix);
+    $($("#"+nomTable+" input[name='coefMarge'][data-indice='"+indice+"']")).attr('value',result.coeff_marge);
     fctChangeValeurDevisAdhesif();
 }
 
 function fillDeplacement(result, nomTable, indice) {
-    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
-    $($("#"+nomTable+" input[name='deplacement']")[indice]).attr('value',result.designation);
+    $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='deplacement'][data-indice='"+indice+"']")).attr('value',result.designation);
     var prix = result.prixM2;
     if (!prix || prix === '')
         prix = result.prixML;
     if (!prix || prix === '')
         prix = result.unitaire;
-    $($("#"+nomTable+" input[name='tarifUnique']")[indice]).attr('value',prix);
+    $($("#"+nomTable+" input[name='tarifUnique'][data-indice='"+indice+"']")).attr('value',prix);
     fctChangeValeurDevisDeplacement();
 }
 
 function fillFaconnage(result, nomTable, indice) {
-    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
-    $($("#"+nomTable+" input[name='faconnage']")[indice]).attr('value', result.designation);
+    $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='faconnage'][data-indice='"+indice+"']")).attr('value', result.designation);
     var prix = result.prixM2;
     if (!prix || prix === '')
         prix = result.prixML;
     if (!prix || prix === '')
         prix = result.unitaire;
-    $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
+    $($("#"+nomTable+" input[name='h.a_ml'][data-indice='"+indice+"']")).attr('value', prix);
     fctChangeValeurDevisFaconnage();
 }
 
 function fillForfaitPrestation(result, nomTable, indice) {
-    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
-    $($("#"+nomTable+" input[name='prestation']")[indice]).attr('value', result.designation);
+    $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='prestation'][data-indice='"+indice+"']")).attr('value', result.designation);
     var prix = result.prixM2;
     if (!prix || prix === '')
         prix = result.prixML;
     if (!prix || prix === '')
         prix = result.unitaire;
-    $($("#"+nomTable+" input[name='tarif']")[indice]).attr('value', prix);
+    $($("#"+nomTable+" input[name='tarif'][data-indice='"+indice+"']")).attr('value', prix);
     fctChangeValeurDevisForfaitPrestation();
 }
 
 function fillFourniture(result, nomTable, indice) {
-    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
-    $($("#"+nomTable+" input[name='fourniture']")[indice]).attr('value', result.designation);
+    $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='fourniture'][data-indice='"+indice+"']")).attr('value', result.designation);
     var prix = result.prixM2;
     if (!prix || prix === '')
         prix = result.prixML;
     if (!prix || prix === '')
         prix = result.unitaire;
-    $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
-    $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
+    $($("#"+nomTable+" input[name='h.a_ml'][data-indice='"+indice+"']")).attr('value', prix);
+    $($("#"+nomTable+" input[name='coefMarge'][data-indice='"+indice+"']")).attr('value', result.coeff_marge);
     fctChangeValeurDevisFourniture();
 }
 
 function fillFraisTechnique(result, nomTable, indice) {
-    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
-    $($("#"+nomTable+" input[name='fraisTechnique']")[indice]).attr('value', result.designation);
+    $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='fraisTechnique'][data-indice='"+indice+"']")).attr('value', result.designation);
     /*
     var prix = result.prixM2;
     if (!prix || prix === '')
         prix = result.prixML;
     if (!prix || prix === '')
         prix = result.unitaire;
-    $("#"+nomTable+" input[name='h.a_ml']")[indice].value = prix;
-    $("#"+nomTable+" input[name='coefMarge']")[indice].value = result.coeff_marge;
+    $("#"+nomTable+" input[name='h.a_ml'][data-indice='"+indice+"']").value = prix;
+    $("#"+nomTable+" input[name='coefMarge'][data-indice='"+indice+"']").value = result.coeff_marge;
     */
     fctChangeValeurDevisFraisTechnique();
 }
 
 function fillPose(result, nomTable, indice) {
-    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
-    $($("#"+nomTable+" input[name='pose']")[indice]).attr('value', result.designation);
+    $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='pose'][data-indice='"+indice+"']")).attr('value', result.designation);
     var prix = result.prixM2;
     if (!prix || prix === '')
         prix = result.prixML;
     if (!prix || prix === '')
         prix = result.unitaire;
-    $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
-    $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
+    $($("#"+nomTable+" input[name='h.a_ml'][data-indice='"+indice+"']")).attr('value', prix);
+    $($("#"+nomTable+" input[name='coefMarge'][data-indice='"+indice+"']")).attr('value', result.coeff_marge);
     fctChangeValeurDevisPose();
 }
 
 function fillPrestation(result, nomTable, indice) {
-    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
-    $($("#"+nomTable+" input[name='prestation']")[indice]).attr('value', result.designation);
+    $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
+    $($("#"+nomTable+" input[name='prestation'][data-indice='"+indice+"']")).attr('value', result.designation);
     var prix = result.prixM2;
     if (!prix || prix === '')
         prix = result.prixML;
     if (!prix || prix === '')
         prix = result.unitaire;
-    $($("#"+nomTable+" input[name='tarif']")[indice]).attr('value', prix);
+    $($("#"+nomTable+" input[name='tarif'][data-indice='"+indice+"']")).attr('value', prix);
     fctChangeValeurDevisPrestation();
 }
 
 function fillSousTraitance(result, nomTable, indice) {
-    $($("#"+nomTable+" input[name='code']")[indice]).attr('value',  result.code_me);
-    $$($("#"+nomTable+" input[name='support']")[indice]).attr('value', result.designation);
+    $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
+    $$($("#"+nomTable+" input[name='support'][data-indice='"+indice+"']")).attr('value', result.designation);
     var prix = result.prixM2;
     if (!prix || prix === '')
         prix = result.prixML;
     if (!prix || prix === '')
         prix = result.unitaire;
-    $($("#"+nomTable+" input[name='h.a_ml']")[indice]).attr('value', prix);
-    $($("#"+nomTable+" input[name='coefMarge']")[indice]).attr('value', result.coeff_marge);
+    $($("#"+nomTable+" input[name='h.a_ml'][data-indice='"+indice+"']")).attr('value', prix);
+    $($("#"+nomTable+" input[name='coefMarge'][data-indice='"+indice+"']")).attr('value', result.coeff_marge);
     fctChangeValeurDevisSousTraitance();
 }
 
@@ -1698,6 +1697,7 @@ function fctChangeValeurDevisProduit()
             strJsonLigne += '"' + ha[i].name + '": "' + $(ha[i]).val() + '",';
             strJsonLigne += '"' + haTotal[i].name + '": "' + $(haTotal[i]).val() + '",';
             strJsonLigne += '"' + format[i].name + '": "' + $(format[i]).val() + '",';
+            strJsonLigne += '"' + surface[i].name + '": "' + $(surface[i]).val() + '",';
             strJsonLigne += '"' + coefMarge[i].name + '": "' + $(coefMarge[i]).val() + '",';
             strJsonLigne += '"' + support[i].name + '": "' + $(support[i]).val() + '",';
             strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '"';

@@ -31,20 +31,21 @@
     <div id="collapseproduit" class="panel-body panel-collapse in">
             <table class="table-produits-devis" id="tableProduit">
                 <tr>
-                    <th>Code</th>
+                    <th width="3%">Code</th>
                     <th>Support</th>
                     <th>Format</th>
-                    <th>Quantité</th>
-                    <th>H.A M2/ML</th>
-                    <th>H.A Total</th>
-                    <th>Surface</th>
-                    <th>Coef marge</th>
-                    <th>Px vente</th>
+                    <th width="3%">Quantité</th>
+                    <th width="7%">H.A M2/ML</th>
+                    <th width="7%">H.A Total</th>
+                    <th width="7%">Surface</th>
+                    <th width="7%">Coef marge</th>
+                    <th width="7%">Px vente</th>
+                    <th width="2%"></th>
                 </tr>
                 <?php if( count($this->itemsProduit) == 0): ?>
                 <tr id="ligneRefProduit" data-key="ligneRefProduit_0">
                     <td>
-                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeProduit(0);" onChange="fctChangeValeurDevisProduit();" class="tableCode dropdown-toggle" list="listeProduit_0"/>
+                        <input type="text" name="code"       data-indice="0" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeProduit(0);" onChange="fctChangeValeurDevisProduit();" class="tableCode dropdown-toggle" list="listeProduit_0"/>
                         <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(0, 'Produit');">
                             <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
                         </button>
@@ -52,14 +53,14 @@
                         </datalist>
                         <input type="hidden" name="json_Produit[]">
                     </td>
-                    <td><input type="text" name="support"   title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
-                    <td><input type="text" name="format"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
-                    <td><input type="text" name="qte"       title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
-                    <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
-                    <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
-                    <td><input type="text" name="surface"   title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
-                    <td><input type="text" name="coefMarge" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
-                    <td><input type="text" name="pxvente"   title="" readonly class="inputNumber"/></td>
+                    <td><input type="text" name="support"   data-indice="0" title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
+                    <td><input type="text" name="format"    data-indice="0" title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
+                    <td><input type="text" name="qte"       data-indice="0" title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
+                    <td><input type="text" name="h.a_ml"    data-indice="0" title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
+                    <td><input type="text" name="h.a_total" data-indice="0" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
+                    <td><input type="text" name="surface"   data-indice="0" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
+                    <td><input type="text" name="coefMarge" data-indice="0" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
+                    <td><input type="text" name="pxvente"   data-indice="0" title="" readonly class="inputNumber"/></td>
                     <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneProduits(0);" title="Supprimer la ligne" ></span></td>
                 </tr>
                 <?php endif; ?>
@@ -68,7 +69,7 @@
                         <?php $json = json_decode($produit->json, true) ?>
                     <tr id="ligneRefProduit" data-key="ligneRefProduit_<?= $key ?>">
                         <td>
-                            <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeProduit(<?= $key ?>);" onChange="fctChangeValeurDevisProduit();" class="tableCode dropdown-toggle" list="listeProduit_<?= $key ?>" value="<?= $json['code'] ?>"/>
+                            <input type="text" name="code"      data-indice="<?= $key ?>" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeProduit(<?= $key ?>);" onChange="fctChangeValeurDevisProduit();" class="tableCode dropdown-toggle" list="listeProduit_<?= $key ?>" value="<?= $json['code'] ?>"/>
                             <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(<?= $key ?>, 'Produit');">
                                 <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
                             </button>
@@ -76,14 +77,14 @@
                             </datalist>
                             <input type="hidden" name="json_Produit[]" value="<?= json_encode($json) ?>">
                         </td>
-                        <td><input type="text" name="support"   title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" value="<?= $json['support'] ?>" /></td>
-                        <td><input type="text" name="format"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" value="<?= $json['format'] ?>" /></td>
-                        <td><input type="text" name="qte"       title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $json['qte'] ?>" /></td>
-                        <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $json['h.a_ml'] ?>" /></td>
-                        <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" value="<?= $json['h.a_total'] ?>" /></td>
-                        <td><input type="text" name="surface"   title="" onFocus="fctSetFocus();" readonly  class="inputNumber" value="<?php if(isset($json['surface'])) { echo($json['surface']); } else { echo(''); } ?>"/></td>
-                        <td><input type="text" name="coefMarge" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $json['coefmarge'] ?>" /></td>
-                        <td><input type="text" name="pxvente"   title="" readonly class="inputNumber" value="<?= $json['pxvente'] ?>"/></td>
+                        <td><input type="text" name="support"   data-indice="<?= $key ?>" title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" value="<?= $json['support'] ?>" /></td>
+                        <td><input type="text" name="format"    data-indice="<?= $key ?>" title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" value="<?= $json['format'] ?>" /></td>
+                        <td><input type="text" name="qte"       data-indice="<?= $key ?>" title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $json['qte'] ?>" /></td>
+                        <td><input type="text" name="h.a_ml"    data-indice="<?= $key ?>" title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $json['h.a_ml'] ?>" /></td>
+                        <td><input type="text" name="h.a_total" data-indice="<?= $key ?>" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" value="<?= $json['h.a_total'] ?>" /></td>
+                        <td><input type="text" name="surface"   data-indice="<?= $key ?>" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" value="<?php if(isset($json['surface'])) { echo($json['surface']); } else { echo(''); } ?>"/></td>
+                        <td><input type="text" name="coefMarge" data-indice="<?= $key ?>" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $json['coefmarge'] ?>" /></td>
+                        <td><input type="text" name="pxvente"   data-indice="<?= $key ?>" title="" readonly class="inputNumber" value="<?= $json['pxvente'] ?>"/></td>
                         <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneProduits(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
                     </tr>
                     <?php endforeach; ?>
@@ -111,7 +112,7 @@
             <table>
                 <tr id="elemCacheProduit">
                     <td>
-                        <input type="text" name="code"      title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeProduit(XXX);" onChange="fctChangeValeurDevisProduit();" class="tableCode dropdown-toggle" list="listeProduit_XXX"/>
+                        <input type="text" name="code"      data-indice="XXX" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeProduit(XXX);" onChange="fctChangeValeurDevisProduit();" class="tableCode dropdown-toggle" list="listeProduit_XXX"/>
                         <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreCatalogue(XXX, 'Produit');">
                             <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
                         </button>
@@ -119,14 +120,14 @@
                         </datalist>
                         <input type="hidden" name="json_Produit[]">
                     </td>
-                    <td><input type="text" name="support"   title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
-                    <td><input type="text" name="format"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
-                    <td><input type="text" name="qte"       title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
-                    <td><input type="text" name="h.a_ml"    title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
-                    <td><input type="text" name="h.a_total" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
-                    <td><input type="text" name="surface"   title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
-                    <td><input type="text" name="coefMarge" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber"/></td>
-                    <td><input type="text" name="pxvente"   title="" readonly class="inputNumber"/></td>
+                    <td><input type="text" name="support"   data-indice="XXX" title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
+                    <td><input type="text" name="format"    data-indice="XXX" title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" /></td>
+                    <td><input type="text" name="qte"       data-indice="XXX" title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
+                    <td><input type="text" name="h.a_ml"    data-indice="XXX" title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" /></td>
+                    <td><input type="text" name="h.a_total" data-indice="XXX" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
+                    <td><input type="text" name="surface"   data-indice="XXX" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" /></td>
+                    <td><input type="text" name="coefMarge" data-indice="XXX" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber"/></td>
+                    <td><input type="text" name="pxvente"   data-indice="XXX" title="" readonly class="inputNumber"/></td>
                     <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneProduits(XXX);" title="Supprimer la ligne" ></span></td>
                 </tr>
             </table>
