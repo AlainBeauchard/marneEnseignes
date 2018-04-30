@@ -23,6 +23,12 @@ class Application_Form_Devis extends Zend_Form
         $refDossier->setRequired(true);
         $this->addElement($refDossier);
 
+        $numDevis = new Zend_Form_Element_Text('numDevis');
+        $numDevis->setAttribs(array('placeholder'=>'numéro de devis','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
+        $numDevis->setLabel('Numéro de devis');
+        $numDevis->setRequired(true);
+        $this->addElement($numDevis);
+
         $montantTotal = new Zend_Form_Element_Text('montantTotal');
         $montantTotal->setAttribs(array('placeholder'=>'Montant total','class'=>'form-control txtEntete', 'aria-describedby'=>'sizing-addon2', 'readonly'=>true));
         $montantTotal->setLabel('Montant Total');
@@ -48,7 +54,7 @@ class Application_Form_Devis extends Zend_Form
         $this->addElement($delaiLivraison);
 
         $modeDeReglement = new Zend_Form_Element_Text('reglement');
-        $modeDeReglement->setAttribs(array('placeholder'=>'Delai de livraison','class'=>'form-control', 'aria-describedby'=>'sizing-addon2', 'list' => 'listeReglement'));
+        $modeDeReglement->setAttribs(array('placeholder'=>'Mode de règlement','class'=>'form-control', 'aria-describedby'=>'sizing-addon2', 'list' => 'listeReglement'));
         $modeDeReglement->setLabel('Mode de règlement');
         $modeDeReglement->setRequired(true);
         $this->addElement($modeDeReglement);

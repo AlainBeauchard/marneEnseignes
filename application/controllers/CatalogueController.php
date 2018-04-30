@@ -62,6 +62,9 @@ class CatalogueController extends Zend_Controller_Action
         if(strlen(trim($session->filtres['produit']))){
             $select->where('designation like ?', '%' . $session->filtres['produit'] . '%');
         }
+        if(strlen(trim($session->filtres['format']))){
+            $select->where('format like ?', '%' . $session->filtres['format'] . '%');
+        }
         if(strlen(trim($session->filtres['fournisseur']))){
             $select->where('fournisseur like ?', '%' . $session->filtres['fournisseur'] . '%');
         }

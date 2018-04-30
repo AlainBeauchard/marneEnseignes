@@ -9,6 +9,7 @@
                     <table class="table table-hover table-condensed tablesorter" id="sorter">
                         <thead>
                         <tr>
+                            <th>Devis</th>
                             <th>Dossier</th>
                             <th>Cr&eacute;ation</th>
                             <th width="200px">Titre</th>
@@ -17,7 +18,10 @@
                         </tr>
                         <tr>
                             <td>
-                                <?= $this->filtre->getElement('id_client')?>
+                                <?= $this->filtre->getElement('num_devis')?>
+                            </td>
+                            <td>
+                                <?= $this->filtre->getElement('ref')?>
                                 <?= $this->filtre->getElement('id_projet')?>
                                 <?= $this->filtre->getElement('type_filtre')?>
                             </td>
@@ -33,7 +37,7 @@
 
                             </td>
                             <!-- 								<th></th> -->
-                            <td><?= $this->filtre->getElement('projet')?></td>
+                            <td><?= $this->filtre->getElement('titre')?></td>
                             <td><?= $this->filtre->getElement('client')?></td>
                             <td style="text-align: right;">
                                 <?= $this->filtre->getElement('rechercher')?><?= $this->filtre->getElement('resetClient')?>
@@ -43,6 +47,9 @@
                         <tbody id="listeFactures">
                         <?php foreach($this->paginator as $dev): ?>
                             <tr id="devis_<?= $dev->id ?>">
+                                <td>
+                                    <?= $dev->num_devis ?>
+                                </td>
                                 <td>
                                     <?= $dev->ref ?>
                                 </td>

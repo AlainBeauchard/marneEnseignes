@@ -12,3 +12,5 @@ ALTER TABLE itemsdevis ADD ( json VARCHAR(2000) );
 ALTER TABLE itemsdevis ADD ( typeligne VARCHAR(20) );
 
 ALTER TABLE devis ADD (jsonEntete VARCHAR(2000) );
+
+ALTER TABLE devis add (num_devis VARCHAR(10) );

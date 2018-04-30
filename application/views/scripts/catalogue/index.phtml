@@ -22,42 +22,42 @@
                 </tr>
                 <tr>
                     <td>
-                        <?php echo $this->filtreCatalogue->getElement('reference') ?>
+                        <?= $this->filtreCatalogue->getElement('reference') ?>
                     </td>
                     <td>
-                        <?php echo $this->filtreCatalogue->getElement('fournisseur') ?>
+                        <?= $this->filtreCatalogue->getElement('fournisseur') ?>
                     </td>
-                    <td><?php echo $this->filtreCatalogue->getElement('type') ?></td>
-                    <td><?php echo $this->filtreCatalogue->getElement('epaisseur') ?></td>
-                    <td></td>
+                    <td><?= $this->filtreCatalogue->getElement('type') ?></td>
+                    <td><?= $this->filtreCatalogue->getElement('epaisseur') ?></td>
+                    <td><?= $this->filtreCatalogue->getElement('format') ?></td>
                     <td>
-                        <?php echo $this->filtreCatalogue->getElement('produit') ?>
+                        <?= $this->filtreCatalogue->getElement('produit') ?>
                     </td>
                     <td colspan="4" style="text-align:right;">
                         <img src="/images/load.gif" alt="loader" id="loader"/>
-                        <?php echo $this->filtreCatalogue->getElement('rechercher') ?>
-                        <?php echo $this->filtreCatalogue->getElement('resetCatalogue') ?>
+                        <?= $this->filtreCatalogue->getElement('rechercher') ?>
+                        <?= $this->filtreCatalogue->getElement('resetCatalogue') ?>
                     </td>
                 </tr>
                 </thead>
                 <tbody id="liste_produits">
                 <?php foreach($this->catalogues as $catalogue):?>
                     <tr>
-                        <td><?php echo $catalogue->code_me?></td>
-                        <td><?php echo $catalogue->fournisseur?></td>
-                        <td><?php echo $catalogue->type?></td>
-                        <td><?php echo $catalogue->epaisseur?></td>
-                        <td><?php echo $catalogue->format?></td>
-                        <td><?php echo $catalogue->designation ?></td>
+                        <td><?= $catalogue->code_me?></td>
+                        <td><?= $catalogue->fournisseur?></td>
+                        <td><?= $catalogue->type?></td>
+                        <td><?= $catalogue->epaisseur?></td>
+                        <td><?= $catalogue->format?></td>
+                        <td><?= $catalogue->designation ?></td>
                         <td style="text-align:right;">
                             <?php if(!(int) $catalogue->unitaire):?>
                                 <?php if($catalogue->prixM2 == null):?>
-                                    <?php echo $catalogue->prixML ?>
+                                    <?= $catalogue->prixML ?>
                                 <?php else:?>
-                                    <?php echo $catalogue->prixM2 ?>
+                                    <?= $catalogue->prixM2 ?>
                                 <?php endif;?>
                             <?php else:?>
-                                <?php echo $catalogue->unitaire ?>
+                                <?= $catalogue->unitaire ?>
                             <?php endif;?>
                             &nbsp;&euro;
                         </td>
@@ -72,7 +72,7 @@
                                 Unitaire
                             <?php endif;?>
                         </td>
-                        <td style="text-align:right;"><?php echo $catalogue->coeff_marge?></td>
+                        <td style="text-align:right;"><?= $catalogue->coeff_marge?></td>
                         <td style="text-align: right;">
                             <button type="button" class="btn btn-primary" aria-label="Left Align" id="fiche_catalogue_<?= $catalogue->id_produit?>">
                                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>

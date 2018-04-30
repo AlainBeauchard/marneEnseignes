@@ -27,26 +27,47 @@ class DevisController extends Zend_Controller_Action
 
     /**
      * @throws Zend_Paginator_Exception
+     * @throws Zend_Session_Exception
      */
     public function indexAction()
     {
         $db_devis = new Application_Model_Devis();
         $select = $db_devis->select()->where('facture = 0 ')->where('valide = 0')->order('date DESC');
-        $devis = $db_devis->fetchAll($select);
 
+        $params = $this->_getAllParams();
+        if(strlen(trim($params['ref']))){
+            $select->where('ref = ?', $params['ref']);
+        }
+        if(strlen(trim($params['num_devis']))){
+            $select->where('num_devis like ?', '%' . $params['num_devis'] . '%');
+        }
+        if(strlen(trim($params['titre']))){
+            $select->where('titre like ?', '%' . $params['titre'] . '%');
+        }
+        if((int) $params[annee] && (int) $params[mois]){
+            $select->where('date like ?', $params[annee] . '-' . $params[mois] . '-%');
+        }
+
+        $devis = $db_devis->fetchAll($select);
         $this->indexPrivateAction($devis);
     }
 
     /**
+     * @param $devis
      * @throws Zend_Paginator_Exception
+     * @throws Zend_Session_Exception
      */
     private function indexPrivateAction($devis)
     {
-        $filtre = new Application_Form_FiltreClient();
+        $session = new Zend_Session_Namespace('filtreDevis');
+
+        $filtre = new Application_Form_FiltreDevis();
         $filtre->getElement('type_filtre')->setValue('factures');
         $filtre->getElement('valide')->setValue('0');
         $this->view->filtre = $filtre;
-
+        if($session->filtres != null){
+            $filtre->populate($session->filtres);
+        }
         $paginator = Zend_Paginator::factory($devis);
         $paginator->setItemCountPerPage(50);
         $paginator->setCurrentPageNumber($this->_getParam('page'));
@@ -72,7 +93,8 @@ class DevisController extends Zend_Controller_Action
         }
 
         $form->getElement('dateCreation')->setValue(date('d/m/Y'));
-        $form->getElement('refDossier')->setValue($this->getRefDossierMax());
+        //$form->getElement('refDossier')->setValue($this->getRefDossierMax());
+        $form->getElement('numDevis')->setValue($this->getRefDossierMax());
         $this->view->form = $form;
 
         $tab = ['Adhesif', 'Deplacement', 'Faconnage', 'ForfaitPrestation', 'Fourniture',
@@ -146,6 +168,7 @@ class DevisController extends Zend_Controller_Action
         $form->getElement('codeClient')->setValue($client->ref);
         $form->getElement('nomClient')->setValue($client->societe);
         $form->getElement('refDossier')->setValue($devis->ref);
+        $form->getElement('numDevis')->setValue($devis->num_devis);
         $form->getElement('delai')->setValue($devis->delai);
         $form->getElement('reglement')->setValue($devis->reglement);
         $form->getElement('intitule')->setValue($devis->titre);
@@ -257,7 +280,8 @@ class DevisController extends Zend_Controller_Action
         $data['acompte'] = $datas['acompte'];
         $data['remise'] = $datas['remise'];
         $data['ref'] = $datas['refDossier'];
-        $data['reglement'] = $datas['reglement'];
+        $data['num_devis']  = $datas['numDevis'];
+        $data['reglement']  = $datas['reglement'];
         $data['jsonEntete'] = $datas['jsonEntete'];
 
         if ($bAjout) {
@@ -299,11 +323,26 @@ class DevisController extends Zend_Controller_Action
 
     public function getRefDossierMax()
     {
-        // TODO aller chercher le max du num dossier pour l'année !
-        $max = 1;
-        $retour = date('y') . '-'.str_pad ((string)$max,4, "0", STR_PAD_LEFT);
+        $year = date('y');
 
-        return $retour;
+        $db_projet = new Application_Model_Devis();
+        $select = $db_projet->select()
+            ->from('devis', array('max(num_devis) as max'))
+            ->where('num_devis like ?', $year . "-%");
+        $row = $db_projet->fetchRow($select);
+
+        //$newNumProject = '';
+        if(isset($row) && strpos($row->max, '-')>0) {
+            list($y, $inc) = explode('-', $row->max);
+            $inc++;
+
+            $newNumProject = $y . '-' . str_pad ((string)$inc,4, "0", STR_PAD_LEFT);
+        } else {
+            $newNumProject = $year . '-'.str_pad ("1",4, "0", STR_PAD_LEFT) ;
+        }
+
+        return $newNumProject;
+
     }
 
     public function histoAction()

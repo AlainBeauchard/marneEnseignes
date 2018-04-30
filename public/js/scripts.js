@@ -137,6 +137,22 @@ $(document).ready(function(){
 		$(this).css('border', '3px solid orange');
 	});
 
+	$('#listeFactures > tr').click(function(){
+		var currentLine = $(this).attr('id');
+		localStorage.setItem('currentLine', currentLine);
+
+		$('#listeFactures > tr').css('border', 'none');
+		$(this).css('border', '3px solid orange');
+	});
+
+	$('#liste_produits > tr').click(function(){
+		var currentLine = $(this).attr('id');
+		localStorage.setItem('currentLine', currentLine);
+
+		$('#liste_produits > tr').css('border', 'none');
+		$(this).css('border', '3px solid orange');
+	});
+
 	$('#newMessageAlert').css('display','none');
 
 	$.post('/ajax/getnewmessage',{},
@@ -2149,6 +2165,14 @@ function fctOuvreCatalogue(indice, action) {
 	indiceLigneGlobal = indice;
 
     $('#liste_produits').empty();
+
+    $('#liste_produits > tr').click(function(){
+        var currentLine = $(this).attr('id');
+        localStorage.setItem('currentLine', currentLine);
+
+        $('#liste_produits > tr').css('border', 'none');
+        $(this).css('border', '3px solid orange');
+    });
 
     $('#liste_catalogue').dialog({
         title: 'Catalogue produits',

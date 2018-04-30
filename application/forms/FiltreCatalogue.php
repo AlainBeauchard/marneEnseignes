@@ -29,6 +29,11 @@ class Application_Form_FiltreCatalogue extends Zend_Form
         $type->setAttribs(array('placeholder'=>'Type','class'=>'form-control autocomplete', 'aria-describedby'=>'sizing-addon2'))
         		->removeDecorator('label');
         $this->addElement($type);
+
+        $format = new Zend_Form_Element_Text('format');
+        $format->setAttribs(array('placeholder'=>'Format','class'=>'form-control autocomplete', 'aria-describedby'=>'sizing-addon2'))
+        		->removeDecorator('label');
+        $this->addElement($format);
         
         $epaisseur = new Zend_Form_Element_Text('epaisseur');
         $epaisseur->setAttribs(array('placeholder'=>'Epaisseur','class'=>'form-control autocomplete', 'aria-describedby'=>'sizing-addon2'))

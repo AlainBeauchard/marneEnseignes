@@ -14,6 +14,11 @@
             <div class="entete-devis entete-devis-left">
                 <table >
                     <tr>
+                        <td colspan="2">
+                            <?= $this->form->numDevis ?>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
                             <?= $this->form->codeClient ?>
                             <datalist id="listeClientsDevis">
@@ -207,42 +212,42 @@
                 </tr>
                 <tr>
                     <td>
-                        <?php echo $this->filtreForm->getElement('reference') ?>
+                        <?= $this->filtreForm->getElement('reference') ?>
                     </td>
                     <td>
-                        <?php echo $this->filtreForm->getElement('fournisseur') ?>
+                        <?= $this->filtreForm->getElement('fournisseur') ?>
                     </td>
-                    <td><?php echo $this->filtreForm->getElement('type') ?></td>
-                    <td><?php echo $this->filtreForm->getElement('epaisseur') ?></td>
-                    <td></td>
+                    <td><?= $this->filtreForm->getElement('type') ?></td>
+                    <td><?= $this->filtreForm->getElement('epaisseur') ?></td>
+                    <td><?= $this->filtreForm->getElement('format') ?></td>
                     <td>
-                        <?php echo $this->filtreForm->getElement('produit') ?>
+                        <?= $this->filtreForm->getElement('produit') ?>
                     </td>
                     <td colspan="4" style="text-align:right;">
                         <img src="/images/load.gif" alt="loader" id="loader"/>
-                        <?php echo $this->filtreForm->getElement('rechercher') ?>
-                        <?php echo $this->filtreForm->getElement('resetCatalogue') ?>
+                        <?= $this->filtreForm->getElement('rechercher') ?>
+                        <?= $this->filtreForm->getElement('resetCatalogue') ?>
                     </td>
                 </tr>
                 </thead>
                 <tbody id="liste_produits">
                 <?php foreach($this->catalogues as $catalogue):?>
                     <tr>
-                        <td><?php echo $catalogue->code_me?></td>
-                        <td><?php echo $catalogue->fournisseur?></td>
-                        <td><?php echo $catalogue->type?></td>
-                        <td><?php echo $catalogue->epaisseur?></td>
-                        <td><?php echo $catalogue->format?></td>
-                        <td><?php echo $catalogue->designation ?></td>
+                        <td><?= $catalogue->code_me?></td>
+                        <td><?= $catalogue->fournisseur?></td>
+                        <td><?= $catalogue->type?></td>
+                        <td><?= $catalogue->epaisseur?></td>
+                        <td><?= $catalogue->format?></td>
+                        <td><?= $catalogue->designation ?></td>
                         <td style="text-align:right;">
                             <?php if(!(int) $catalogue->unitaire):?>
                                 <?php if($catalogue->prixM2 == null):?>
-                                    <?php echo $catalogue->prixML ?>
+                                    <?= $catalogue->prixML ?>
                                 <?php else:?>
-                                    <?php echo $catalogue->prixM2 ?>
+                                    <?= $catalogue->prixM2 ?>
                                 <?php endif;?>
                             <?php else:?>
-                                <?php echo $catalogue->unitaire ?>
+                                <?= $catalogue->unitaire ?>
                             <?php endif;?>
                             &nbsp;&euro;
                         </td>
@@ -257,9 +262,9 @@
                                 Unitaire
                             <?php endif;?>
                         </td>
-                        <td style="text-align:right;"><?php echo $catalogue->coeff_marge?></td>
+                        <td style="text-align:right;"><?= $catalogue->coeff_marge?></td>
                         <td style="text-align:right;">
-                            <button type="button" class="btn btn-warning" aria-label="Left Align" id="fill_form_<?php echo $catalogue->id_produit ?>">
+                            <button type="button" class="btn btn-warning" aria-label="Left Align" id="fill_form_<?= $catalogue->id_produit ?>">
                                 <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
                             </button>
                         </td>
