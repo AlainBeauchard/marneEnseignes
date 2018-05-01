@@ -57,6 +57,8 @@ $(document).ready(function(){
 
 	$("#codeClient").unbind('keyup').bind('keyup', fctRemplitListeClient);
 
+	$("#refDossier").unbind('keyup').bind('keyup', fctRemplitRefDossier);
+
 	$(".changeColor").click(function()
 		{
 			var classToAdd = getClassToAdd( $(this) );
@@ -1331,6 +1333,29 @@ function fctRemplitListeClient()
                     $("#idClient").val(option.attr("data-id"));
                     $("#codeClient").val(option.attr("data-ref"));
 					$("#nomClient").val(val.trim());
+				}
+			});
+
+        }
+    );
+
+}
+
+function fctRemplitRefDossier()
+{
+    $.post("/ajax/listedossier",
+        {
+            code: $("#refDossier").val()
+        },
+        function (result) {
+            $("#refDossierListe").html(result);
+
+			$("#refDossier").off('input').on('input', function () {
+				var option = $("#refDossierListe").find("[value='" + $("#refDossier").val() + "']");
+
+				if (option.length > 0) {
+					var value = (option.attr("data-titre"));
+                    $("#intitule").val(value);
 				}
 			});
 

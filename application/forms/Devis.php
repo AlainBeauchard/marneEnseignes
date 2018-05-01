@@ -18,7 +18,7 @@ class Application_Form_Devis extends Zend_Form
         $this->addElement($codeClient);
 
         $refDossier = new Zend_Form_Element_Text('refDossier');
-        $refDossier->setAttribs(array('placeholder'=>'ref dossier','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
+        $refDossier->setAttribs(array('placeholder'=>'ref dossier','class'=>'form-control', 'aria-describedby'=>'sizing-addon2', 'list' => 'refDossierListe'));
         $refDossier->setLabel('Ref dossier');
         $refDossier->setRequired(true);
         $this->addElement($refDossier);

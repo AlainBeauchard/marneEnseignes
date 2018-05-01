@@ -35,17 +35,17 @@ class DevisController extends Zend_Controller_Action
         $select = $db_devis->select()->where('facture = 0 ')->where('valide = 0')->order('date DESC');
 
         $params = $this->_getAllParams();
-        if(strlen(trim($params['ref']))){
+        if(isset($params['ref']) && strlen(trim($params['ref']))){
             $select->where('ref = ?', $params['ref']);
         }
-        if(strlen(trim($params['num_devis']))){
+        if(isset($params['num_devis']) && strlen(trim($params['num_devis']))){
             $select->where('num_devis like ?', '%' . $params['num_devis'] . '%');
         }
-        if(strlen(trim($params['titre']))){
+        if(isset($params['titre']) && strlen(trim($params['titre']))){
             $select->where('titre like ?', '%' . $params['titre'] . '%');
         }
-        if((int) $params[annee] && (int) $params[mois]){
-            $select->where('date like ?', $params[annee] . '-' . $params[mois] . '-%');
+        if(isset($params['annee']) && isset($params['mois']) && (int) $params['annee'] && (int) $params['mois']){
+            $select->where('date like ?', $params['annee'] . '-' . $params['mois'] . '-%');
         }
 
         $devis = $db_devis->fetchAll($select);

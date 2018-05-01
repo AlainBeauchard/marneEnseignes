@@ -887,9 +887,35 @@ class AjaxController extends Zend_Controller_Action
         $ind = 0;
         foreach ($clients as $client)
         {
-            //if ($ind<20) {
+            if ($ind<50) {
                 $str .= '<option value="' . $client->societe .' '.$client->ref. '" data-ref="' . $client->ref . '" data-id="' . $client->id_client . '" />' . $client->societe . '</option>';
-            //}
+            }
+            $ind++;
+        }
+
+        echo($str);
+    }
+
+    public function listedossierAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $codeSearch = $this->_getParam('code');
+
+        $db_projet = new Application_Model_Projets();
+        $select = $db_projet->select();
+        $select->where('dossier like ?', $codeSearch.'%');
+        $select->order('dossier');
+
+        $projets = $db_projet->fetchAll($select);
+
+        $str = '';
+        $ind = 0;
+        foreach ($projets as $projet)
+        {
+            if ($ind<50) {
+                $str .= '<option value="' . $projet->dossier.'" data-titre="' . $projet->titre .'" />' . $projet->dossier . '</option>';
+            }
             $ind++;
         }
 

@@ -26,6 +26,8 @@
                         </td>
                         <td>
                             <?= $this->form->refDossier ?>
+                            <datalist id="refDossierListe">
+                            </datalist>
                         </td>
                     </tr>
                     <tr>
@@ -147,40 +149,40 @@
                     <?= $this->render('/ajax/panelproduits.phtml'); ?>
                 <?php endif ?>
 
-                <?php if (count($this->itemsDeplacement) >0) : ?>
-                    <?= $this->render('/ajax/paneldeplacement.phtml'); ?>
-                <?php endif ?>
-
-                <?php if (count($this->itemsFaconnage) >0) : ?>
-                    <?= $this->render('/ajax/panelfaconnage.phtml'); ?>
-                <?php endif ?>
-
-                <?php if (count($this->itemsForfaitPrestation) >0) : ?>
-                    <?= $this->render('/ajax/panelforfaitprestation.phtml'); ?>
-                <?php endif ?>
-
-                <?php if (count($this->itemsFourniture) >0) : ?>
-                    <?= $this->render('/ajax/panelfourniture.phtml'); ?>
-                <?php endif ?>
-
-                <?php if (count($this->itemsFraisTechnique) >0) : ?>
-                    <?= $this->render('/ajax/panelfraistechniques.phtml'); ?>
-                <?php endif ?>
-
-                <?php if (count($this->itemsPose) >0) : ?>
-                    <?= $this->render('/ajax/panelpose.phtml'); ?>
+                <?php if (count($this->itemsSousTraitance) >0) : ?>
+                    <?= $this->render('/ajax/panelsoustraitance.phtml'); ?>
                 <?php endif ?>
 
                 <?php if (count($this->itemsPrestation) >0) : ?>
                     <?= $this->render('/ajax/panelprestation.phtml'); ?>
                 <?php endif ?>
 
-                <?php if (count($this->itemsSousTraitance) >0) : ?>
-                    <?= $this->render('/ajax/panelsoustraitance.phtml'); ?>
+                <?php if (count($this->itemsFaconnage) >0) : ?>
+                    <?= $this->render('/ajax/panelfaconnage.phtml'); ?>
                 <?php endif ?>
 
                 <?php if (count($this->itemsAdhesif) >0) : ?>
                     <?= $this->render('/ajax/paneladhesif.phtml'); ?>
+                <?php endif ?>
+
+                <?php if (count($this->itemsFraisTechnique) >0) : ?>
+                    <?= $this->render('/ajax/panelfraistechniques.phtml'); ?>
+                <?php endif ?>
+
+                <?php if (count($this->itemsForfaitPrestation) >0) : ?>
+                    <?= $this->render('/ajax/panelforfaitprestation.phtml'); ?>
+                <?php endif ?>
+
+                <?php if (count($this->itemsDeplacement) >0) : ?>
+                    <?= $this->render('/ajax/paneldeplacement.phtml'); ?>
+                <?php endif ?>
+
+                <?php if (count($this->itemsFourniture) >0) : ?>
+                    <?= $this->render('/ajax/panelfourniture.phtml'); ?>
+                <?php endif ?>
+
+                <?php if (count($this->itemsPose) >0) : ?>
+                    <?= $this->render('/ajax/panelpose.phtml'); ?>
                 <?php endif ?>
 
             </div>
