@@ -39,11 +39,11 @@ class Application_Form_FiltreDevis extends Zend_Form
         $this->addElement($num_client);
 
         $num_devis = new Zend_Form_Element_Text('num_devis');
-		$num_devis->setAttribs(array('placeholder'=>'Num devis','class'=>'form-control autocomplete input-sm', 'aria-describedby'=>'sizing-addon2'))->removeDecorator('label');
+		$num_devis->setAttribs(array('placeholder'=>'Num devis','class'=>'form-control autocomplete input-sm', 'aria-describedby'=>'sizing-addon2', 'data-filtre' => 1))->removeDecorator('label');
         $this->addElement($num_devis);
 
         $client = new ZendX_JQuery_Form_Element_AutoComplete('client');
-        $client->setAttribs(array('placeholder'=>'Société','class'=>'form-control autocomplete input-sm', 'aria-describedby'=>'sizing-addon2'))->removeDecorator('label');
+        $client->setAttribs(array('placeholder'=>'Société','class'=>'form-control autocomplete input-sm', 'aria-describedby'=>'sizing-addon2', 'data-filtre' => 1))->removeDecorator('label');
         $client->setJQueryParams(array('source' => '/ajax/clients', 'select' => new Zend_Json_Expr('function(event,ui){$("#id_client").val(ui.item.id)}')));
         $this->addElement($client);
         
@@ -52,7 +52,7 @@ class Application_Form_FiltreDevis extends Zend_Form
         $this->addElement($sem);
         
         $dossier = new Zend_Form_Element_Text('ref');
-        $dossier->setAttribs(array('placeholder'=>'Dossier','class'=>'form-control autocomplete input-sm', 'aria-describedby'=>'sizing-addon2'))->removeDecorator('label');
+        $dossier->setAttribs(array('placeholder'=>'Dossier','class'=>'form-control autocomplete input-sm', 'aria-describedby'=>'sizing-addon2', 'data-filtre' => 1))->removeDecorator('label');
         $this->addElement($dossier);
         
         $contact = new Zend_Form_Element_Text('contact');
@@ -80,7 +80,7 @@ class Application_Form_FiltreDevis extends Zend_Form
         $this->addElement($users);
         
         $titre = new Zend_Form_Element_Text('titre');
-        $titre->setAttribs(array('placeholder'=>'Titre','class'=>'form-control input-sm autocomplete', 'aria-describedby'=>'sizing-addon2'))->removeDecorator('label');
+        $titre->setAttribs(array('placeholder'=>'Titre','class'=>'form-control input-sm autocomplete', 'aria-describedby'=>'sizing-addon2', 'data-filtre' => 1))->removeDecorator('label');
         $this->addElement($titre);
         
         $rechercher = new Zend_Form_Element_Button('rechercher');
@@ -95,11 +95,11 @@ class Application_Form_FiltreDevis extends Zend_Form
         $rechercherCloture->removeDecorator('DtDdWrapper');
         $this->addElement($rechercherCloture);
         
-        $resetClient = new Zend_Form_Element_Reset('resetClient');
-        $resetClient->setLabel('Reset');
-        $resetClient->setAttribs(array('class'=>'btn btn-primary btn-sm', 'type'=>'button', 'id'=>'resetFiltreClient'));
-        $resetClient->removeDecorator('DtDdWrapper');
-        $this->addElement($resetClient);
+        $resetDevis = new Zend_Form_Element_Reset('resetFiltreDevis');
+        $resetDevis->setLabel('Reset');
+        $resetDevis->setAttribs(array('class'=>'btn btn-primary btn-sm', 'type'=>'button', 'id'=>'resetFiltreDevis'));
+        $resetDevis->removeDecorator('DtDdWrapper');
+        $this->addElement($resetDevis);
         
         $resetProjet = new Zend_Form_Element_Reset('resetProjet');
         $resetProjet->setLabel('Reset');

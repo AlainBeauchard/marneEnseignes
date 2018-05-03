@@ -44,6 +44,12 @@ class DevisController extends Zend_Controller_Action
         if(isset($params['titre']) && strlen(trim($params['titre']))){
             $select->where('titre like ?', '%' . $params['titre'] . '%');
         }
+        /*
+        La recherche se fait sur le nom du client alors que dans la base on a id_client !
+        if(isset($params['id_client']) && strlen(trim($params['id_client']))){
+            $select->where('id_client like ?', '%' . $params['id_client'] . '%');
+        }
+        */
         if(isset($params['annee']) && isset($params['mois']) && (int) $params['annee'] && (int) $params['mois']){
             $select->where('date like ?', $params['annee'] . '-' . $params['mois'] . '-%');
         }
@@ -59,15 +65,21 @@ class DevisController extends Zend_Controller_Action
      */
     private function indexPrivateAction($devis)
     {
-        $session = new Zend_Session_Namespace('filtreDevis');
-
         $filtre = new Application_Form_FiltreDevis();
-        $filtre->getElement('type_filtre')->setValue('factures');
-        $filtre->getElement('valide')->setValue('0');
-        $this->view->filtre = $filtre;
+
+        $params = $this->_getAllParams();
+        $session = new Zend_Session_Namespace('filtreDevis');
+        $session->filtres = $params;
+
         if($session->filtres != null){
             $filtre->populate($session->filtres);
         }
+
+        $filtre->getElement('type_filtre')->setValue('factures');
+        $filtre->getElement('valide')->setValue('0');
+
+        $this->view->filtre = $filtre;
+
         $paginator = Zend_Paginator::factory($devis);
         $paginator->setItemCountPerPage(50);
         $paginator->setCurrentPageNumber($this->_getParam('page'));
@@ -345,6 +357,10 @@ class DevisController extends Zend_Controller_Action
 
     }
 
+    /**
+     * @throws Zend_Paginator_Exception
+     * @throws Zend_Session_Exception
+     */
     public function histoAction()
     {
         $db_devis = new Application_Model_Devis();
@@ -358,6 +374,7 @@ class DevisController extends Zend_Controller_Action
 
     /**
      * @throws Zend_Paginator_Exception
+     * @throws Zend_Session_Exception
      */
     public function acceptAction()
     {

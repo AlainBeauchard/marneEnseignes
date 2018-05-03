@@ -859,8 +859,7 @@ rendTacheInvisible(1);
 			$('#listeProjets').append(r);
 		});
 	});
-	
-	
+
 	$('#filtreRechercheCatalogue').click(function(){
 		var ref = $('#reference').val();
 		var fournisseur = $('#fournisseur').val();
@@ -884,7 +883,8 @@ rendTacheInvisible(1);
 			$('#loader').css('display', 'none');
 		});
 	});
-	
+
+
 	$('#resetFiltreCatalogue').click(function(){
 
 		if ($('#codeMe').length) {
@@ -908,7 +908,20 @@ rendTacheInvisible(1);
 				$('#liste_produits').append(r);
 		});
 	});
-	
+
+	$('#resetFiltreDevis').click(function(){
+		$('#ref').val('');
+        $('#num_devis').val('');
+		$('#mois').val('');
+		$('#annee').val('');
+		$('#titre').val('');
+		$('#client').val('');
+
+		document.forms['formFiltre'].submit();
+	});
+
+
+
 /*
 	$('#filtreRechercheClotures').click(function(){
 			$.post('/ajax/filtreclotures',{
@@ -2204,6 +2217,14 @@ function fctOuvreCatalogue(indice, action) {
         width: 1200,
         height: 600
     });
+
+
+    $("[data-filtre='1']").keypress(function (event) {
+		if (event.keyCode === 13) {
+			$("#filtreRechercheCatalogue").click();
+		}
+	});
+
 };
 
 

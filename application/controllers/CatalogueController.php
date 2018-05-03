@@ -38,39 +38,30 @@ class CatalogueController extends Zend_Controller_Action
 
         $filtreCatalogue = new Application_Form_FiltreCatalogue();
 
-        if($this->_request->isPost() && $filtreCatalogue->isValid($this->_request->getPost())){
-            
-            //$formDatas = $this->_request->getPost();
-            $params = $this->_request->getPost();
-            $session->filtres = $params;
-        }
+        $params = $this->_getAllParams();
+        $session->filtres = $params;
 
         if($session->filtres != null){
             $filtreCatalogue->populate($session->filtres);
         }
-
-        //$filtreCatalogue->getElement('type_filtre')->setValue('catalogue');
-        
-        $this->view->filtreCatalogue = $filtreCatalogue;
-
-        if(strlen(trim($session->filtres['codeMe']))){
-            $select->where('code_me like ?', '%'.$session->filtres['codeMe'].'%');
+        if(isset($params['reference']) && strlen(trim($params['reference']))){
+            $select->where('code_me like ?', '%' . $params['reference']. '%');
         }
-        if(strlen(trim($session->filtres['reference']))){
-            $select->where('reference like ?', '%' . $session->filtres['reference'] . '%');
+        if(isset($params['produit']) && strlen(trim($params['produit']))){
+            $select->where('designation like ?', '%' . $params['produit'] . '%');
         }
-        if(strlen(trim($session->filtres['produit']))){
-            $select->where('designation like ?', '%' . $session->filtres['produit'] . '%');
+        if(isset($params['type']) && strlen(trim($params['type']))){
+            $select->where('type like ?', '%' . $params['type'] . '%');
         }
-        if(strlen(trim($session->filtres['format']))){
-            $select->where('format like ?', '%' . $session->filtres['format'] . '%');
+        if(isset($params['format']) && strlen(trim($params['format']))){
+            $select->where('format like ?', '%' . $params['format'] . '%');
         }
-        if(strlen(trim($session->filtres['fournisseur']))){
-            $select->where('fournisseur like ?', '%' . $session->filtres['fournisseur'] . '%');
+        if(isset($params['fournisseur']) && strlen(trim($params['fournisseur']))){
+            $select->where('fournisseur like ?', '%' . $params['fournisseur'] . '%');
         }
-
         $select->order('code_me');
 
+        $this->view->filtreCatalogue = $filtreCatalogue;
         $produits = $db_produit->fetchAll($select);
 
         $paginator = Zend_Paginator::factory($produits);
