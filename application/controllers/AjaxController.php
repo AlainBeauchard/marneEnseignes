@@ -24,6 +24,72 @@ class AjaxController extends Zend_Controller_Action
 		echo '[' . $r . ']';
     }
 
+    public function cataloguefournisseurAction()
+    {
+		$this->_helper->viewRenderer->setNoRender();
+
+		$db_catalogue = new Application_Model_Catalogue();
+
+		$r = $db_catalogue->searchFournisseur($this->_getParam('term'));
+
+		echo '[' . $r . ']';
+    }
+
+    public function cataloguereferenceAction()
+    {
+		$this->_helper->viewRenderer->setNoRender();
+
+		$db_catalogue = new Application_Model_Catalogue();
+
+		$r = $db_catalogue->searchReference($this->_getParam('term'));
+
+		echo '[' . $r . ']';
+    }
+
+    public function cataloguetypeAction()
+    {
+		$this->_helper->viewRenderer->setNoRender();
+
+		$db_catalogue = new Application_Model_Catalogue();
+
+		$r = $db_catalogue->searchType($this->_getParam('term'));
+
+		echo '[' . $r . ']';
+    }
+
+    public function catalogueepaisseurAction()
+    {
+		$this->_helper->viewRenderer->setNoRender();
+
+		$db_catalogue = new Application_Model_Catalogue();
+
+		$r = $db_catalogue->searchEpaisseur($this->_getParam('term'));
+
+		echo '[' . $r . ']';
+    }
+
+    public function catalogueformatAction()
+    {
+		$this->_helper->viewRenderer->setNoRender();
+
+		$db_catalogue = new Application_Model_Catalogue();
+
+		$r = $db_catalogue->searchFormat($this->_getParam('term'));
+
+		echo '[' . $r . ']';
+    }
+
+    public function cataloguedesignationAction()
+    {
+		$this->_helper->viewRenderer->setNoRender();
+
+		$db_catalogue = new Application_Model_Catalogue();
+
+		$r = $db_catalogue->searchDesignation($this->_getParam('term'));
+
+		echo '[' . $r . ']';
+    }
+
     public function additemAction()
     {
 
