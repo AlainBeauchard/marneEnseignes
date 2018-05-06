@@ -2223,6 +2223,7 @@ function fctOuvreCatalogue(indice, action) {
 		if (event.keyCode === 13) {
 			$("#filtreRechercheCatalogue").click();
 		}
+        $(".ui-dialog").css("z-index", "1050");
 	});
 
 };

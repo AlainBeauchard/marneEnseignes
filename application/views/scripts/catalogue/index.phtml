@@ -87,7 +87,7 @@
                     </thead>
                     <tbody id="liste_produits">
                     <?php foreach($this->catalogues as $catalogue):?>
-                        <tr>
+                        <tr id="catalogue_<?= $catalogue->id_produit ?>">
                             <td width="10%"><?= $catalogue->code_me?></td>
                             <td width="10%"><?= $catalogue->fournisseur?></td>
                             <td width="5%"><?= $catalogue->type?></td>
