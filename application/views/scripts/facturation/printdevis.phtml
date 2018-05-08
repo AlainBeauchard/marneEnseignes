@@ -26,7 +26,7 @@
 					<div class="panel panel-default">
 <!-- 						<div class="panel-body" style="height:60px;"> -->
 							<p style="text-align: center;">
-								Devis numéro <span style="font-weight: bold;"><?php echo date('y', strtotime($this->devis->date)) . '/' . sprintf('%04d', $this->devis->id) ?></span>
+								Devis numéro <span style="font-weight: bold;"><?= $this->devis->num_devis ?></span>
 							</p>
 							<p style="text-align: center;">Reims le <span style="font-weight: bold;"><?php echo date('d/m/Y', strtotime($this->devis->date))?></span></p>
 <!-- 						</div> -->
@@ -99,7 +99,7 @@
 					<div class="panel panel-default">
 						<p style="font-size: 10px; line-height: 40px; margin: 0px; padding-left: 10px;">
 							DELAI DE REALISATION&nbsp;&nbsp;&nbsp;&nbsp;
-							<span style="font-weight:bold;"><?php echo $this->devis->delai ?> semaine<?php echo $this->devis->delai > 1?'s':'' ?></span>
+							<span style="font-weight:bold;"><?php echo $this->devis->delai ?></span>
 						</p>
 					</div>
 				</div>

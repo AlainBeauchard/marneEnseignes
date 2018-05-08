@@ -189,14 +189,20 @@
             <?= $this->render('/ajax/panelredaction.phtml'); ?>
         </div>
     </div>
-    <div id="liste_catalogue">
-        <div style="float: right; margin-bottom: 15px;">
-            <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" id="close_catalogue">
-                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-            </button>
-        </div>
-        <div class="table-responvive">
-            <form name="formFiltre" method="post">
+
+    <input type="submit" class="btn btn-primary" value="Enregistrer" >
+
+    <input type="hidden" name="fromDevis" id="fromDevis" value="1">
+</form>
+
+<div id="liste_catalogue">
+    <div style="float: right; margin-bottom: 15px;">
+        <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" id="close_catalogue">
+            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+        </button>
+    </div>
+    <div class="table-responvive">
+        <form name="formFiltre" method="post">
             <table class="table table-hover table-condensed tablesorter" id="sorter">
                 <thead>
                 <tr>
@@ -228,7 +234,7 @@
                     </td>
                     <td colspan="4" style="text-align:right;">
                         <img src="/images/load.gif" alt="loader" id="loader"/>
-                        <?= $this->filtreForm->getElement('rechercher') ?>
+                        <input type="button" name="rechercher" id="filtreRechercheCatalogue" value="Rechercher" class="btn btn-primary btn-sm">
                         <?= $this->filtreForm->getElement('resetCatalogue') ?>
                     </td>
                 </tr>
@@ -275,10 +281,6 @@
                 <?php endforeach; ?>
                 </tbody>
             </table>
-            </form>
-        </div>
+        </form>
     </div>
-    <input type="submit" class="btn btn-primary" value="Enregistrer" >
-
-    <input type="hidden" name="fromDevis" id="fromDevis" value="1">
-</form>
+</div>

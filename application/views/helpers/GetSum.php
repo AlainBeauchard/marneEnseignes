@@ -23,6 +23,7 @@ class Zend_View_Helper_GetSum extends Zend_View_Helper_Abstract{
             }
 		}
 
+		/*
 		// On doit ajouter le montant entete
         $db_devis = new Application_Model_Devis();
         $select = $db_devis->select()
@@ -39,8 +40,7 @@ class Zend_View_Helper_GetSum extends Zend_View_Helper_Abstract{
                 }
             }
         }
-
-
+		*/
 
         return sprintf('%0.2f', $total);
 	}
