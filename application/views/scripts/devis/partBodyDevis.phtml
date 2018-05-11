@@ -209,15 +209,16 @@
                     <th style="width:10%">
                         Référence ME
                     </th>
-                    <th>Fournisseur</th>
-                    <th>Type</th>
+                    <th style="width:15%">Fournisseur</th>
+                    <th style="width:5%">Type</th>
                     <th style="width:8%">Epaisseur</th>
                     <th style="width:10%">Format</th>
-                    <th style="width:35%">D&eacute;signation</th>
+                    <th style="width:10%">Surface T.</th>
+                    <th style="width:15%">D&eacute;signation</th>
                     <th style="width:6%">P.U.</th>
-                    <th>Unité</th>
-                    <th>Coef</th>
-                    <th></th>
+                    <th style="width:7%">Unité</th>
+                    <th style="width:7%">Coef</th>
+                    <th style="width:7%"></th>
                 </tr>
                 <tr>
                     <td>
@@ -229,6 +230,7 @@
                     <td><?= $this->filtreForm->getElement('type') ?></td>
                     <td><?= $this->filtreForm->getElement('epaisseur') ?></td>
                     <td><?= $this->filtreForm->getElement('format') ?></td>
+                    <td><?= $this->filtreForm->getElement('surface_totale') ?></td>
                     <td>
                         <?= $this->filtreForm->getElement('produit') ?>
                     </td>
@@ -242,13 +244,14 @@
                 <tbody id="liste_produits">
                 <?php foreach($this->catalogues as $catalogue):?>
                     <tr>
-                        <td><?= $catalogue->code_me?></td>
-                        <td><?= $catalogue->fournisseur?></td>
-                        <td><?= $catalogue->type?></td>
-                        <td><?= $catalogue->epaisseur?></td>
-                        <td><?= $catalogue->format?></td>
-                        <td><?= $catalogue->designation ?></td>
-                        <td style="text-align:right;">
+                        <td style="width:10%"><?= $catalogue->code_me?></td>
+                        <td style="width:15%"><?= $catalogue->fournisseur?></td>
+                        <td style="width:5%"><?= $catalogue->type?></td>
+                        <td style="width:8%"><?= $catalogue->epaisseur?></td>
+                        <td style="width:10%"><?= $catalogue->format?></td>
+                        <td style="width:10%"><?= $catalogue->surface_totale?></td>
+                        <td style="width:15%"><?= $catalogue->designation ?></td>
+                        <td style="width:6%;text-align:right;">
                             <?php if(!(int) $catalogue->unitaire):?>
                                 <?php if($catalogue->prixM2 == null):?>
                                     <?= $catalogue->prixML ?>
@@ -260,7 +263,7 @@
                             <?php endif;?>
                             &nbsp;&euro;
                         </td>
-                        <td style="text-align:center;">
+                        <td style="width:7%;text-align:center;">
                             <?php if(!(int) $catalogue->unitaire):?>
                                 <?php if($catalogue->prixM2 == null):?>
                                     Ml
@@ -271,8 +274,8 @@
                                 Unitaire
                             <?php endif;?>
                         </td>
-                        <td style="text-align:right;"><?= $catalogue->coeff_marge?></td>
-                        <td style="text-align:right;">
+                        <td style="width:7%;text-align:right;"><?= $catalogue->coeff_marge?></td>
+                        <td style="width:7%;text-align:right;">
                             <button type="button" class="btn btn-warning" aria-label="Left Align" id="fill_form_<?= $catalogue->id_produit ?>">
                                 <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
                             </button>

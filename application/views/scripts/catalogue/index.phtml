@@ -59,10 +59,11 @@
                         <th width="5%">Type</th>
                         <th width="5%" >Epaisseur</th>
                         <th width="10%">Format</th>
+                        <th width="10%">Surface T.</th>
                         <th width="20%">D&eacute;signation</th>
                         <th width="5%">P.U.</th>
                         <th width="10%">Unité</th>
-                        <th width="10%">Coef</th>
+                        <th width="5%">Coef</th>
                         <th width="10%"></th>
                     </tr>
                     <tr>
@@ -75,6 +76,7 @@
                         <td><?= $this->filtreCatalogue->getElement('type') ?></td>
                         <td><?= $this->filtreCatalogue->getElement('epaisseur') ?></td>
                         <td><?= $this->filtreCatalogue->getElement('format') ?></td>
+                        <td><?= $this->filtreCatalogue->getElement('surface_totale') ?></td>
                         <td>
                             <?= $this->filtreCatalogue->getElement('produit') ?>
                         </td>
@@ -93,6 +95,7 @@
                             <td width="5%"><?= $catalogue->type?></td>
                             <td width="5%"><?= $catalogue->epaisseur?></td>
                             <td width="10%"><?= $catalogue->format?></td>
+                            <td width="10%"><?= $catalogue->surface_totale?></td>
                             <td width="20%"><?= $catalogue->designation ?></td>
                             <td width="5%" style="text-align:right;">
                                 <?php if(!(int) $catalogue->unitaire):?>
@@ -117,7 +120,7 @@
                                     Unitaire
                                 <?php endif;?>
                             </td>
-                            <td width="10%" style="text-align:right;"><?= $catalogue->coeff_marge?></td>
+                            <td width="5%" style="text-align:right;"><?= $catalogue->coeff_marge?></td>
                             <td width="10%" style="text-align: right;">
                                 <button type="button" class="btn btn-primary" aria-label="Left Align" id="fiche_catalogue_<?= $catalogue->id_produit?>">
                                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>

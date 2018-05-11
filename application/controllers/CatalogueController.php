@@ -56,6 +56,9 @@ class CatalogueController extends Zend_Controller_Action
         if(isset($params['format']) && strlen(trim($params['format']))){
             $select->where('format like ?', '%' . $params['format'] . '%');
         }
+        if(isset($params['surface_totale']) && strlen(trim($params['surface_totale']))){
+            $select->where('surface_totale like ?', '%' . $params['surface_totale'] . '%');
+        }
         if(isset($params['fournisseur']) && strlen(trim($params['fournisseur']))){
             $select->where('fournisseur like ?', '%' . $params['fournisseur'] . '%');
         }

@@ -34,6 +34,12 @@ class Application_Form_FiltreCatalogue extends Zend_Form
         $type->setJQueryParams(array('source' => '/ajax/cataloguetype', 'select' => new Zend_Json_Expr('function(event,ui){$("#type").val(ui.item.id)}')));
         $this->addElement($type);
 
+        $surfaceTotal = new ZendX_JQuery_Form_Element_AutoComplete('surface_totale');
+        $surfaceTotal->setAttribs(array('placeholder'=>'Surface Totale','class'=>'form-control autocomplete', 'aria-describedby'=>'sizing-addon2', 'data-filtre' => 1))
+        		->removeDecorator('label');
+        $surfaceTotal->setJQueryParams(array('source' => '/ajax/cataloguest', 'select' => new Zend_Json_Expr('function(event,ui){$("#surface_totale").val(ui.item.id)}')));
+        $this->addElement($surfaceTotal);
+
         $format = new ZendX_JQuery_Form_Element_AutoComplete('format');
         $format->setAttribs(array('placeholder'=>'Format','class'=>'form-control autocomplete', 'aria-describedby'=>'sizing-addon2', 'data-filtre' => 1))
         		->removeDecorator('label');

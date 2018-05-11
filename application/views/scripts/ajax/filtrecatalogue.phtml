@@ -1,13 +1,14 @@
 <?php if(count($this->catalogues->toArray())):?>
 	<?php foreach($this->catalogues as $catalogue):?>
 		<tr>
-			<td><?php echo $catalogue->code_me?></td>
-			<td><?php echo $catalogue->fournisseur?></td>
-			<td><?php echo $catalogue->type?></td>
-			<td><?php echo $catalogue->epaisseur?></td>
-			<td><?php echo $catalogue->format?></td>
-			<td><?php echo $catalogue->designation ?></td>
-			<td style="text-align:right;">
+			<td style="width:10%"><?php echo $catalogue->code_me?></td>
+			<td style="width:15%"><?php echo $catalogue->fournisseur?></td>
+			<td style="width:5%"><?php echo $catalogue->type?></td>
+			<td style="width:8%"><?php echo $catalogue->epaisseur?></td>
+			<td style="width:10%"><?php echo $catalogue->format?></td>
+			<td style="width:10%"><?php echo $catalogue->surface_totale?></td>
+			<td style="width:15%"><?php echo $catalogue->designation ?></td>
+			<td style="width:6%;text-align:right;">
 				<?php if(!(int) $catalogue->unitaire):?>
 					<?php if($catalogue->prixM2 == null):?>
 						<?php echo $catalogue->prixML ?>
@@ -19,7 +20,7 @@
 				<?php endif;?>
 				&nbsp;&euro;
 			</td>
-			<td style="text-align:center;">
+			<td style="width:7%;text-align:center;">
 				<?php if(!(int) $catalogue->unitaire):?>
 					<?php if($catalogue->prixM2 == null):?>
 						Ml
@@ -30,8 +31,8 @@
 					Unitaire
 				<?php endif;?>
 			</td>
-			<td style="text-align:right;"><?php echo $catalogue->coeff_marge?></td>
-			<td style="text-align:right;">
+			<td style="width:7%;text-align:right;"><?php echo $catalogue->coeff_marge?></td>
+			<td style="width:7%;text-align:right;">
                 <?php if($this->fromDevis != 0):?>
                     <button type="button" class="btn btn-warning" aria-label="Left Align" id="fill_form_<?php echo $catalogue->id_produit ?>">
                       <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>

@@ -866,7 +866,8 @@ rendTacheInvisible(1);
 		var des = $('#produit').val();
 		var type = $('#type').val();
 		var epaisseur = $('#epaisseur').val();
-		
+		var surface_totale = $('#surface_totale').val();
+
 		$('#loader').css('display', 'inline-block');
 		
 		$.post('/ajax/filtrecatalogue',{
@@ -874,8 +875,9 @@ rendTacheInvisible(1);
 			fournisseur: fournisseur,
 			designation: des,
 			epaisseur: epaisseur,
+			surface_totale: surface_totale,
 			type: type,
-			fromDevis: $('#fromDevis').length,
+			fromDevis: $('#fromDevis').length
 		}, function(r){
 			$('#liste_produits').empty();
 			$('#liste_produits').append(r);
@@ -1248,6 +1250,8 @@ function fctBtAjoutSuppLigne(action) {
         var $table = $("#table"+action);
         var html = ligne.html().replace(new RegExp('XXX', 'g'), numLigne);
         $table.append('<tr data-key="ligneRef'+action+'_'+numLigne+'">'+html+'</tr>');
+
+        $($nbLigne).val(numLigne+1);
     });
     $("#BtSuprimeligne"+action).unbind('click').bind('click',function () {
     	if (confirm("Etes-vous sûr de vouloir supprimer cet élément ?")) {
@@ -1413,7 +1417,11 @@ function fillProduit(result, nomTable, indice) {
     $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
     $($("#"+nomTable+" input[name='support'][data-indice='"+indice+"']")).attr('value',  result.designation);
     $($("#"+nomTable+" input[name='format'][data-indice='"+indice+"']")).attr('value', result.format);
-    $($("#"+nomTable+" input[name='surface'][data-indice='"+indice+"']")).attr('value', result.surface_totale);
+    if (parseInt(result.surface_totale, 10) >0) {
+        $($("#" + nomTable + " input[name='surface'][data-indice='" + indice + "']")).attr('value', result.surface_totale);
+    } else {
+        $($("#" + nomTable + " input[name='surface'][data-indice='" + indice + "']")).attr('value', 1);
+	}
     var prix = result.prixM2;
     if (!prix || prix === '')
         prix = result.prixML;

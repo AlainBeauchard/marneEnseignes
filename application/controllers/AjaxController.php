@@ -35,6 +35,17 @@ class AjaxController extends Zend_Controller_Action
 		echo '[' . $r . ']';
     }
 
+    public function cataloguestAction()
+    {
+		$this->_helper->viewRenderer->setNoRender();
+
+		$db_catalogue = new Application_Model_Catalogue();
+
+		$r = $db_catalogue->searchSurfaceTotale($this->_getParam('term'));
+
+		echo '[' . $r . ']';
+    }
+
     public function cataloguereferenceAction()
     {
 		$this->_helper->viewRenderer->setNoRender();
@@ -621,6 +632,7 @@ class AjaxController extends Zend_Controller_Action
         $fournisseur = $this->_getParam('fournisseur');
         $designation = $this->_getParam('designation');
         $type = $this->_getParam('type');
+        $surfaceTotale = $this->_getParam('surface_totale');
         $epaisseur = $this->_getParam('epaisseur');
 
         $fromDevis = $this->_getParam('fromDevis');
@@ -643,7 +655,11 @@ class AjaxController extends Zend_Controller_Action
         if(strlen(trim($fournisseur))){
 	        $select->where('fournisseur like ?', $fournisseur . '%');
         }
-        
+
+        if(strlen(trim($surfaceTotale))){
+	        $select->where('surface_totale like ?', $surfaceTotale . '%');
+        }
+
         if(strlen(trim($designation))){
 	        $select->where('designation like ?', '%' . $designation . '%');
         }

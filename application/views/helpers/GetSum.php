@@ -3,8 +3,8 @@
 
 class Zend_View_Helper_GetSum extends Zend_View_Helper_Abstract{
 
-	public function GetSum($devis){
-		
+	public function GetSum($devis)
+    {
 		$db_items_devis = new Application_Model_ItemDevis();
 		$select = $db_items_devis->select()
 								->where('id_devis = ?', $devis);
