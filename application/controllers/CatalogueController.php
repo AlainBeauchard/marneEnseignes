@@ -45,7 +45,10 @@ class CatalogueController extends Zend_Controller_Action
             $filtreCatalogue->populate($session->filtres);
         }
         if(isset($params['reference']) && strlen(trim($params['reference']))){
-            $select->where('code_me like ?', '%' . $params['reference']. '%');
+            $select->where('reference like ?', '%' . $params['reference']. '%');
+        }
+        if(isset($params['codeMe']) && strlen(trim($params['codeMe']))){
+            $select->where('code_me like ?', '%' . $params['codeMe']. '%');
         }
         if(isset($params['produit']) && strlen(trim($params['produit']))){
             $select->where('designation like ?', '%' . $params['produit'] . '%');

@@ -1,7 +1,8 @@
 <?php if(count($this->catalogues->toArray())):?>
 	<?php foreach($this->catalogues as $catalogue):?>
 		<tr>
-			<td style="width:10%"><?php echo $catalogue->code_me?></td>
+			<td style="width:5%"><?php echo $catalogue->code_me?></td>
+			<td style="width:5%"><?php echo $catalogue->reference?></td>
 			<td style="width:15%"><?php echo $catalogue->fournisseur?></td>
 			<td style="width:5%"><?php echo $catalogue->type?></td>
 			<td style="width:8%"><?php echo $catalogue->epaisseur?></td>

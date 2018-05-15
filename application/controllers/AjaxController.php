@@ -57,6 +57,17 @@ class AjaxController extends Zend_Controller_Action
 		echo '[' . $r . ']';
     }
 
+    public function cataloguecodemeAction()
+    {
+		$this->_helper->viewRenderer->setNoRender();
+
+		$db_catalogue = new Application_Model_Catalogue();
+
+		$r = $db_catalogue->searchCodeMe($this->_getParam('term'));
+
+		echo '[' . $r . ']';
+    }
+
     public function cataloguetypeAction()
     {
 		$this->_helper->viewRenderer->setNoRender();
@@ -629,6 +640,7 @@ class AjaxController extends Zend_Controller_Action
 // 	    var_dump($this->_getAllParams());
 	    
         $ref = $this->_getParam('ref');
+        $code_me = $this->_getParam('codeMe');
         $fournisseur = $this->_getParam('fournisseur');
         $designation = $this->_getParam('designation');
         $type = $this->_getParam('type');
@@ -641,9 +653,13 @@ class AjaxController extends Zend_Controller_Action
         $select = $db_catalogue->select();
         
         if(strlen(trim($ref))){
-	        $select->where('code_me like ?', $ref . '%');
+	        $select->where('reference like ?', $ref . '%');
         }
-        
+
+        if(strlen(trim($code_me))){
+	        $select->where('code_me like ?', $code_me . '%');
+        }
+
         if(strlen(trim($epaisseur))){
 	        $select->where('epaisseur = ?', $epaisseur);
         }

@@ -5,9 +5,10 @@ class Application_Form_FiltreCatalogue extends Zend_Form
 
     public function init()
     {
-        $codeMe = new Zend_Form_Element_Text('codeMe');
+        $codeMe = new ZendX_JQuery_Form_Element_AutoComplete('codeMe');
         $codeMe->setAttribs(array('placeholder'=>'Code Marne enseignes','class'=>'form-control autocomplete', 'aria-describedby'=>'sizing-addon2', 'data-filtre' => 1))
                     ->removeDecorator('label');
+        $codeMe->setJQueryParams(array('source' => '/ajax/cataloguecodeme', 'select' => new Zend_Json_Expr('function(event,ui){$("#reference").val(ui.item.id)}')));
         $this->addElement($codeMe);
 
         $reference = new ZendX_JQuery_Form_Element_AutoComplete('reference');

@@ -38,6 +38,21 @@ class Application_Model_Catalogue extends Zend_Db_Table_Abstract
 
     public function searchReference($str){
         $str = ltrim($str,'0');
+        $select = $this->select()->distinct()->from('catalogue', 'reference')
+            ->where('reference like ?', $str . '%');
+
+        $clients = $this->fetchAll($select);
+
+        $tmp = [];
+        foreach($clients as $row){
+            $tmp[] = '{"value":"' . $row->reference . '"}';
+        }
+
+        return new Zend_Json_Expr(implode(',', $tmp));
+    }
+
+    public function searchCodeMe($str){
+        $str = ltrim($str,'0');
         $select = $this->select()->distinct()->from('catalogue', 'code_me')
             ->where('code_me like ?', $str . '%');
 

@@ -206,8 +206,11 @@
             <table class="table table-hover table-condensed tablesorter" id="sorter">
                 <thead>
                 <tr>
-                    <th style="width:10%">
+                    <th style="width:5%">
                         Référence ME
+                    </th>
+                    <th style="width:5%">
+                        Code
                     </th>
                     <th style="width:15%">Fournisseur</th>
                     <th style="width:5%">Type</th>
@@ -221,6 +224,9 @@
                     <th style="width:7%"></th>
                 </tr>
                 <tr>
+                    <td>
+                        <?= $this->filtreForm->getElement('codeMe') ?>
+                    </td>
                     <td>
                         <?= $this->filtreForm->getElement('reference') ?>
                     </td>
@@ -244,7 +250,8 @@
                 <tbody id="liste_produits">
                 <?php foreach($this->catalogues as $catalogue):?>
                     <tr>
-                        <td style="width:10%"><?= $catalogue->code_me?></td>
+                        <td style="width:5%"><?= $catalogue->code_me?></td>
+                        <td style="width:5%"><?= $catalogue->reference?></td>
                         <td style="width:15%"><?= $catalogue->fournisseur?></td>
                         <td style="width:5%"><?= $catalogue->type?></td>
                         <td style="width:8%"><?= $catalogue->epaisseur?></td>

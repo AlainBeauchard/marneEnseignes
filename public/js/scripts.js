@@ -862,6 +862,7 @@ rendTacheInvisible(1);
 
 	$('#filtreRechercheCatalogue').click(function(){
 		var ref = $('#reference').val();
+		var codeMe = $('#codeMe').val();
 		var fournisseur = $('#fournisseur').val();
 		var des = $('#produit').val();
 		var type = $('#type').val();
@@ -872,6 +873,7 @@ rendTacheInvisible(1);
 		
 		$.post('/ajax/filtrecatalogue',{
 			ref: ref,
+			codeMe: codeMe,
 			fournisseur: fournisseur,
 			designation: des,
 			epaisseur: epaisseur,
