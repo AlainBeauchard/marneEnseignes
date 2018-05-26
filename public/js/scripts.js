@@ -1373,14 +1373,22 @@ function fctRemplitRefDossier()
 				var option = $("#refDossierListe").find("[value='" + $("#refDossier").val() + "']");
 
 				if (option.length > 0) {
-					var value = (option.attr("data-titre"));
-                    $("#intitule").val(value);
+					fctRemplitDossier(option);
 				}
 			});
-
         }
     );
 
+}
+
+function fctRemplitDossier(option)
+{
+    var value = (option.attr("data-titre"));
+    $("#intitule").val(value);
+
+    $("#idClient").val(option.attr("data-idClient"));
+    $("#codeClient").val(option.attr("data-refClient"));
+    $("#nomClient").val(option.attr("data-societeClient").trim());
 }
 
 function  fctRemplitListePrivate(nomTable, nomListe, indice, fctFinale)
@@ -2175,11 +2183,11 @@ function fctChangeTableEntete()
     var sommePerimetre = 0;
 
     for(var i=0;i<largeur.length;i++) {
-        $(surface[i]).attr('value', (largeur[i].value * hauteur[i].value));
-        $(surfaceTotal[i]).attr('value', (surface[i].value * qte[i].value));
+        $(surface[i]).attr('value', (largeur[i].value * hauteur[i].value).toFixed(2));
+        $(surfaceTotal[i]).attr('value', (surface[i].value * qte[i].value).toFixed(2));
 
-        $(surfacePub[i]).attr('value', (coefPub[i].value * surfaceTotal[i].value));
-        $(perimetre[i]).attr('value', ((parseFloat(largeur[i].value) + parseFloat(hauteur[i].value)) * 2 * qte[i].value));
+        $(surfacePub[i]).attr('value', (coefPub[i].value * surfaceTotal[i].value).toFixed(2));
+        $(perimetre[i]).attr('value', ((parseFloat(largeur[i].value) + parseFloat(hauteur[i].value)) * 2 * qte[i].value).toFixed(2));
 
         sommeSurfTotale += parseFloat(surfaceTotal[i].value);
         sommeSurfPub += parseFloat(surfacePub[i].value);
@@ -2224,8 +2232,8 @@ function fctOuvreCatalogue(indice, action) {
 
     $('#liste_catalogue').dialog({
         title: 'Catalogue produits',
-        width: 1200,
-        height: 600
+        width: '95%',
+        height: 800
     });
 
 

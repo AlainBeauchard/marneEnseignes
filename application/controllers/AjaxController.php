@@ -1012,7 +1012,19 @@ class AjaxController extends Zend_Controller_Action
         foreach ($projets as $projet)
         {
             if ($ind<50) {
-                $str .= '<option value="' . $projet->dossier.'" data-titre="' . $projet->titre .'" />' . $projet->dossier . '</option>';
+                $db_client = new Application_Model_Clients();
+                $selectClient = $db_client->select();
+                $selectClient->where('id_client = ?', $projet->id_client);
+
+                $clients = $db_client->fetchAll($selectClient);
+
+                foreach($clients as $client) {
+                    $str .= '<option value="' . $projet->dossier . '" 
+                        data-idClient="' . $projet->id_client . '" 
+                        data-refClient="' . $client->ref . '" 
+                        data-societeClient="' . $client->societe . '" 
+                        data-titre="' . $projet->titre . '" />' . $projet->dossier . '</option>';
+                }
             }
             $ind++;
         }
