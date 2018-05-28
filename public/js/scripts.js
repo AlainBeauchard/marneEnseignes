@@ -885,6 +885,14 @@ rendTacheInvisible(1);
 			$('#liste_produits').append(r);
 			
 			$('#loader').css('display', 'none');
+
+            $('#liste_produits > tr').click(function(){
+                var currentLine = $(this).attr('id');
+                localStorage.setItem('currentLine', currentLine);
+
+                $('#liste_produits > tr').css('border', 'none');
+                $(this).css('border', '3px solid orange');
+            });
 		});
 	});
 

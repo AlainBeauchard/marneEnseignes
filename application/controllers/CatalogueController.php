@@ -39,36 +39,54 @@ class CatalogueController extends Zend_Controller_Action
         $filtreCatalogue = new Application_Form_FiltreCatalogue();
 
         $params = $this->_getAllParams();
-        $session->filtres = $params;
+
+        if ( isset($params['reference']) ) {
+            $_SESSION['paramsCalalogue'] = $this->_getAllParams();
+        }
+
+        $session->filtres = $_SESSION['paramsCalalogue'];
 
         if($session->filtres != null){
             $filtreCatalogue->populate($session->filtres);
         }
-        if(isset($params['reference']) && strlen(trim($params['reference']))){
-            $select->where('reference like ?', '%' . $params['reference']. '%');
+        $bfiltre = false;
+        if(isset($session->filtres['reference']) && strlen(trim($session->filtres['reference']))){
+            $bfiltre = true;
+            $select->where('reference like ?', '%' . $session->filtres['reference']. '%');
         }
-        if(isset($params['codeMe']) && strlen(trim($params['codeMe']))){
-            $select->where('code_me like ?', '%' . $params['codeMe']. '%');
+        if(isset($session->filtres['codeMe']) && strlen(trim($session->filtres['codeMe']))){
+            $bfiltre = true;
+            $select->where('code_me like ?', '%' . $session->filtres['codeMe']. '%');
         }
-        if(isset($params['produit']) && strlen(trim($params['produit']))){
-            $select->where('designation like ?', '%' . $params['produit'] . '%');
+        if(isset($session->filtresms['produit']) && strlen(trim($session->filtres['produit']))){
+            $bfiltre = true;
+            $select->where('designation like ?', '%' . $session->filtres['produit'] . '%');
         }
-        if(isset($params['type']) && strlen(trim($params['type']))){
-            $select->where('type like ?', '%' . $params['type'] . '%');
+        if(isset($session->filtres['type']) && strlen(trim($session->filtres['type']))){
+            $bfiltre = true;
+            $select->where('type like ?', '%' . $session->filtres['type'] . '%');
         }
-        if(isset($params['format']) && strlen(trim($params['format']))){
-            $select->where('format like ?', '%' . $params['format'] . '%');
+        if(isset($session->filtres['format']) && strlen(trim($session->filtres['format']))){
+            $bfiltre = true;
+            $select->where('format like ?', '%' . $session->filtres['format'] . '%');
         }
-        if(isset($params['surface_totale']) && strlen(trim($params['surface_totale']))){
-            $select->where('surface_totale like ?', '%' . $params['surface_totale'] . '%');
+        if(isset($session->filtres['surface_totale']) && strlen(trim($session->filtres['surface_totale']))){
+            $bfiltre = true;
+            $select->where('surface_totale like ?', '%' . $session->filtres['surface_totale'] . '%');
         }
-        if(isset($params['fournisseur']) && strlen(trim($params['fournisseur']))){
-            $select->where('fournisseur like ?', '%' . $params['fournisseur'] . '%');
+        if(isset($session->filtres['fournisseur']) && strlen(trim($session->filtres['fournisseur']))){
+            $bfiltre = true;
+            $select->where('fournisseur like ?', '%' . $session->filtres['fournisseur'] . '%');
         }
         $select->order('code_me');
 
         $this->view->filtreCatalogue = $filtreCatalogue;
-        $produits = $db_produit->fetchAll($select);
+        if ( $bfiltre ) {
+            $produits = $db_produit->fetchAll($select);
+        } else {
+            $produits = [];
+        }
+
 
         $paginator = Zend_Paginator::factory($produits);
         $paginator->setItemCountPerPage(200);

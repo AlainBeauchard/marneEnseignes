@@ -48,7 +48,7 @@ class Application_Form_Devis extends Zend_Form
         $this->addElement($nomClient);
 
         $delaiLivraison = new Zend_Form_Element_Text('delai');
-        $delaiLivraison->setAttribs(array('placeholder'=>'Delai de livraison','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
+        $delaiLivraison->setAttribs(array('placeholder'=>'Delai de livraison','class'=>'form-control', 'aria-describedby'=>'sizing-addon2', 'list' => 'listDelai'));
         $delaiLivraison->setLabel('Délai de livraison');
         $delaiLivraison->setRequired(true);
         $this->addElement($delaiLivraison);
