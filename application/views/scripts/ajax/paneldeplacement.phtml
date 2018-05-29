@@ -25,7 +25,7 @@
             </div>
         </div>
     </div>
-    <div id="collapsedeplacement" class="panel-body panel-collapse in">
+    <div id="collapsedeplacement" class="panel-body panel-collapse  <?php if(strrpos($this->fieldsCollapse, 'collapsedeplacement') !== false) : ?> collapse <?php else: ?> in <?php endif;  ?>">
        <table class="table-produits-devis" id="tableDeplacement">
             <tr>
                 <th width="3%">Code</th>

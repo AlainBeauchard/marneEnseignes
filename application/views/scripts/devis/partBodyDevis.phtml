@@ -198,7 +198,9 @@
         </div>
     </div>
 
-    <input type="submit" class="btn btn-primary" value="Enregistrer" >
+    <input type="hidden" name="fieldsCollapse" id="fieldsCollapse" value="" >
+
+    <input type="submit" class="btn btn-primary" value="Enregistrer" id="btDevisRecord" name="btDevisRecord" >
 
     <input type="hidden" name="fromDevis" id="fromDevis" value="1">
 </form>
@@ -255,7 +257,7 @@
                     </td>
                 </tr>
                 </thead>
-                <tbody id="liste_produits">
+                <tbody id="liste_produits" style="height:150px !important; overflow-y: scroll !important;">
                 <?php foreach($this->catalogues as $catalogue):?>
                     <tr>
                         <td style="width:5%"><?= $catalogue->code_me?></td>

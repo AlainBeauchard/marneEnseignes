@@ -210,6 +210,7 @@ class DevisController extends Zend_Controller_Action
         $db_modeles = new Application_Model_Modeles();
         $this->view->modeles = $db_modeles->fetchAll();
         $this->view->id_devis = $id_devis;
+        $this->view->fieldsCollapse = $this->getParam('fieldsCollapse');
     }
 
     /**
@@ -330,7 +331,7 @@ class DevisController extends Zend_Controller_Action
             }
         }
 
-        $this->_redirect('/devis/editer/id/' . $idDevis);
+        $this->_redirect('/devis/editer/id/' . $idDevis."?fieldsCollapse=".$this->getParam('fieldsCollapse'));
     }
 
     public function getRefDossierMax()

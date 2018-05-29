@@ -59,6 +59,8 @@ $(document).ready(function(){
 
 	$("#refDossier").unbind('keyup').bind('keyup', fctRemplitRefDossier);
 
+	$("#btDevisRecord").unbind('click').bind('click', fctFillFieldsCollapse);
+
 	$(".changeColor").click(function()
 		{
 			var classToAdd = getClassToAdd( $(this) );
@@ -1218,6 +1220,14 @@ rendTacheInvisible(1);
     fctRecalculTout();
 
 });
+
+function fctFillFieldsCollapse()
+{
+	var fields = "";
+    $(".collapse").each(function (ind, elem){ fields += elem.id+";" })
+
+	$("#fieldsCollapse").val(fields);
+}
 
 function fctAjaxAddBloc(url, action)
 {
