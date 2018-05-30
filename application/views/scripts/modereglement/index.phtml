@@ -1,0 +1,101 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (localStorage.getItem('currentLine')){
+            $('#' + localStorage.getItem('currentLine')).css('border', '3px solid orange');
+            $('#' + localStorage.getItem('currentLine'))[0].scrollIntoView(true);
+        }
+
+    }, false);
+
+    document.onkeydown = checkKey;
+
+    function checkKey(e) {
+
+        e = e || window.event;
+
+        if (e.keyCode == '38') {
+            var current = $('#' + localStorage.getItem('currentLine'));
+            $('#' + localStorage.getItem('currentLine')).css('border', 'none');
+
+            localStorage.setItem('currentLine', '');
+            current.prev().css('border', '3px solid orange');
+            localStorage.setItem('currentLine', current.prev().attr('id'));
+        }
+
+        if (e.keyCode == '40') {
+            var current = $('#' + localStorage.getItem('currentLine'));
+            $('#' + localStorage.getItem('currentLine')).css('border', 'none');
+
+            localStorage.setItem('currentLine', '');
+            current.next().css('border', '3px solid orange');
+            localStorage.setItem('currentLine', current.next().attr('id'));
+        }
+    }
+</script>
+<style>
+    thead, tbody { display: block; }
+
+    tbody {
+        height: calc(100vh - 450px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+</style>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Liste des règlements</h3>
+    </div>
+    <div class="panel-body">
+        <div class="table-responvive">
+            <form name="formFiltre" method="post">
+                <table class="table table-hover table-condensed tablesorter" id="sorter" style="display: grid">
+                    <thead>
+                    <tr>
+                        <th width="5%">
+                            Id
+                        </th>
+                        <th width="85%">
+                            Libellé
+                        </th>
+                        <th width="10%">
+                        </th>
+                    </tr>
+                    <tr>
+                        <td width="5%">
+                            <?= $this->filtreMr->getElement('id') ?>
+                        </td>
+                        <td width="85%">
+                            <?= $this->filtreMr->getElement('libelle_reglement') ?>
+                        </td>
+                        <td width="10%">
+                            <img src="/images/load.gif" alt="loader" id="loader"/>
+                            <?= $this->filtreMr->getElement('rechercher') ?>
+                            <?= $this->filtreMr->getElement('resetMr') ?>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody id="liste_mr">
+                    <?php foreach($this->mr as $mr):?>
+                        <tr id="catalogue_<?= $mr->id ?>">
+                            <td width="5%"><?= $mr->id?></td>
+                            <td width="85%"><?= $mr->libelle_reglement?></td>
+                            <td width="10%" style="text-align: right;">
+                                <button type="button" class="btn btn-primary" aria-label="Left Align" id="fiche_modereglement_<?= $mr->id?>">
+                                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                </button>
+                                <button type="button" class="btn btn-warning" aria-label="Left Align" id="edit_modereglement_<?= $mr->id?>">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                </button>
+                                <button type="button" class="btn btn-danger" aria-label="Left Align" id="delete_modereglement_<?= $mr->id?>">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

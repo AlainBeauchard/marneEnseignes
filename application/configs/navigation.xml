@@ -57,9 +57,14 @@
 			<resource>admin</resource>
 		</m10>
 		<m11>
+			<label>Règlements</label>
+			<controller>modereglement</controller>
+			<resource>admin</resource>
+		</m11>
+		<m12>
 			<label>Déconnexion</label>
 			<controller>login</controller>
 			<action>deco</action>
-		</m11>
+		</m12>
 	</frontend>
 </root>

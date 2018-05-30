@@ -213,7 +213,7 @@
     </div>
     <div class="table-responvive">
         <form name="formFiltre" method="post">
-            <table class="table table-hover table-condensed tablesorter" id="sorter">
+            <table class="table table-hover table-condensed tablesorter" id="sorter" style="display: grid">
                 <thead>
                 <tr>
                     <th style="width:5%">
@@ -257,7 +257,7 @@
                     </td>
                 </tr>
                 </thead>
-                <tbody id="liste_produits" style="height:150px !important; overflow-y: scroll !important;">
+                <tbody id="liste_produits" style="height:580px !important; overflow-y: scroll !important;">
                 <?php foreach($this->catalogues as $catalogue):?>
                     <tr>
                         <td style="width:5%"><?= $catalogue->code_me?></td>
