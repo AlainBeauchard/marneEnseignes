@@ -6,6 +6,12 @@
  */
 class App_Plugins_Navigation extends Zend_Controller_Plugin_Abstract {
 
+    /**
+     * @param Zend_Controller_Request_Abstract $request
+     * @throws Zend_Config_Exception
+     * @throws Zend_Exception
+     * @throws Zend_Navigation_Exception
+     */
     public function preDispatch(Zend_Controller_Request_Abstract $request) {
         parent::preDispatch($request);
 
@@ -17,7 +23,7 @@ class App_Plugins_Navigation extends Zend_Controller_Plugin_Abstract {
         
         $auth = Zend_Auth::getInstance();
         
-        $acl = Zend_Registry::get('acl')
+        $acl = Zend_Registry::get('acl');
 
         $view->controller = $request->getControllerName();
 

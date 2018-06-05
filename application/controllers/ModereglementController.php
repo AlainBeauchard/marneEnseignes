@@ -1,6 +1,6 @@
 <?php
 
-class ModeReglementController extends Zend_Controller_Action
+class ModereglementController extends Zend_Controller_Action
 {
     /**
      * @throws Zend_Config_Exception

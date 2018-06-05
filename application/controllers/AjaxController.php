@@ -1000,35 +1000,35 @@ class AjaxController extends Zend_Controller_Action
 
         $codeSearch = $this->_getParam('code');
 
-        $db_projet = new Application_Model_Projets();
-        $select = $db_projet->select();
-        $select->where('dossier like ?', $codeSearch.'%');
-        $select->order('dossier');
-
-        $projets = $db_projet->fetchAll($select);
-
         $str = '';
-        $ind = 0;
-        foreach ($projets as $projet)
-        {
-            if ($ind<50) {
-                $db_client = new Application_Model_Clients();
-                $selectClient = $db_client->select();
-                $selectClient->where('id_client = ?', $projet->id_client);
+        if (strlen($codeSearch)> 1) {
+            $db_projet = new Application_Model_Projets();
+            $select = $db_projet->select();
+            $select->where('dossier like ?', $codeSearch . '%');
+            $select->order('dossier');
 
-                $clients = $db_client->fetchAll($selectClient);
+            $projets = $db_projet->fetchAll($select);
 
-                foreach($clients as $client) {
-                    $str .= '<option value="' . $projet->dossier . '" 
-                        data-idClient="' . $projet->id_client . '" 
-                        data-refClient="' . $client->ref . '" 
-                        data-societeClient="' . $client->societe . '" 
-                        data-titre="' . $projet->titre . '" />' . $projet->dossier . '</option>';
+            $ind = 0;
+            foreach ($projets as $projet) {
+                if ($ind < 50) {
+                    $db_client = new Application_Model_Clients();
+                    $selectClient = $db_client->select();
+                    $selectClient->where('id_client = ?', $projet->id_client);
+
+                    $clients = $db_client->fetchAll($selectClient);
+
+                    foreach ($clients as $client) {
+                        $str .= '<option value="' . $projet->dossier . '" 
+                            data-idClient="' . $projet->id_client . '" 
+                            data-refClient="' . $client->ref . '" 
+                            data-societeClient="' . $client->societe . '" 
+                            data-titre="' . $projet->titre . '" />' . $projet->dossier . '</option>';
+                    }
                 }
+                $ind++;
             }
-            $ind++;
         }
-
         echo($str);
     }
 
