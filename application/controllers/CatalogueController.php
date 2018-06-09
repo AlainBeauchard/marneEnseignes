@@ -49,6 +49,7 @@ class CatalogueController extends Zend_Controller_Action
         if($session->filtres != null){
             $filtreCatalogue->populate($session->filtres);
         }
+
         $bfiltre = false;
         if(isset($session->filtres['reference']) && strlen(trim($session->filtres['reference']))){
             $bfiltre = true;
@@ -58,7 +59,7 @@ class CatalogueController extends Zend_Controller_Action
             $bfiltre = true;
             $select->where('code_me like ?', '%' . $session->filtres['codeMe']. '%');
         }
-        if(isset($session->filtresms['produit']) && strlen(trim($session->filtres['produit']))){
+        if(isset($session->filtres['produit']) && strlen(trim($session->filtres['produit']))){
             $bfiltre = true;
             $select->where('designation like ?', '%' . $session->filtres['produit'] . '%');
         }
