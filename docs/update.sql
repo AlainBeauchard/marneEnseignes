@@ -14,3 +14,6 @@ ALTER TABLE itemsdevis ADD ( typeligne VARCHAR(20) );
 ALTER TABLE devis ADD (jsonEntete VARCHAR(2000) );
 
 ALTER TABLE devis add (num_devis VARCHAR(10) );
+
+ALTER TABLE catalogue ADD (colorclass varchar(10));
+

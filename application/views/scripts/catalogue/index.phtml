@@ -138,6 +138,9 @@
                                 <button type="button" class="btn btn-danger" aria-label="Left Align" id="delete_catalogue_<?= $catalogue->id_produit?>">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                 </button>
+                                <button type="button" class="btn btn-info" aria-label="Left Align" id="changeColor_catalogue_<?= $catalogue->id_produit ?>">
+                                    <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
+                                </button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -147,3 +150,6 @@
         </div>
     </div>
 </div>
+
+
+<?= $this->render('/config/paletteColor.phtml') ?>

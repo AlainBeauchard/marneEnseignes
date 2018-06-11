@@ -64,28 +64,52 @@ $(document).ready(function(){
 	$(".changeColor").click(function()
 		{
 			var classToAdd = getClassToAdd( $(this) );
-			console.log(classToAdd);
-			if( classToAdd === "none" ) {
-                $.post('/ajax/changeColorProjet',
-                    {
-                        id_projet  : $("#id_projet_pc").val(),
-                        colorclass : ''
-                    },
-                    function(){
-                        suppAllClassColorElem($("#projet_" + $('#id_projet_pc').val()));
-                    }
-                )
+			if ($(this).attr('data-origin') === 'projet') {
+                if (classToAdd === "none") {
+                    $.post('/ajax/changeColorProjet',
+                        {
+                            id_projet: $("#id_projet_pc").val(),
+                            colorclass: ''
+                        },
+                        function () {
+                            suppAllClassColorElem($("#projet_" + $('#id_projet_pc').val()));
+                        }
+                    )
+                } else {
+                    $.post('/ajax/changeColorProjet',
+                        {
+                            id_projet: $("#id_projet_pc").val(),
+                            colorclass: classToAdd
+                        },
+                        function () {
+                            suppAllClassColorElem($("#projet_" + $('#id_projet_pc').val()));
+                            $("#projet_" + $("#id_projet_pc").val()).addClass(classToAdd);
+                        }
+                    )
+                }
             } else {
-				$.post('/ajax/changeColorProjet',
-					{
-						id_projet  : $("#id_projet_pc").val() ,
-						colorclass : classToAdd
-					},
-					function(){
-						suppAllClassColorElem( $("#projet_"+$('#id_projet_pc').val()) );
-						$("#projet_"+$("#id_projet_pc").val()).addClass(classToAdd);
-					}
-				)
+                if (classToAdd === "none") {
+                    $.post('/ajax/changeColorCatalogue',
+                        {
+                            id_produit: $("#id_produit_pc").val(),
+                            colorclass: ''
+                        },
+                        function () {
+                            suppAllClassColorElem($("#catalogue_" + $('#id_produit_pc').val()));
+                        }
+                    )
+                } else {
+                    $.post('/ajax/changeColorCatalogue',
+                        {
+                            id_produit: $("#id_produit_pc").val(),
+                            colorclass: classToAdd
+                        },
+                        function () {
+                            suppAllClassColorElem($("#catalogue_" + $('#id_produit_pc').val()));
+                            $("#catalogue_" + $("#id_produit_pc").val()).addClass(classToAdd);
+                        }
+                    )
+                }
 			}
 		});
 
@@ -351,6 +375,22 @@ $(document).ready(function(){
 		{
 			masckPickColor = false;
 			$("#id_projet_pc").val( $(this).attr('id').split('_')[2] );
+
+			var $elem = $("#plaletteCouleur");
+			$elem.css('position','absolute');
+			$elem.css('z-index',100);
+			$elem.css('top',$(this).offset().top - 185 );
+			$elem.css('left',$(this).offset().left - 50 );
+			$elem.removeClass('noDisplay');
+
+			setTimeout( function(){masckPickColor = true;}, 500  );
+
+		});
+
+	$('button[id^="changeColor_catalogue_"]').click(function()
+		{
+			masckPickColor = false;
+			$("#id_produit_pc").val( $(this).attr('id').split('_')[2] );
 
 			var $elem = $("#plaletteCouleur");
 			$elem.css('position','absolute');

@@ -145,6 +145,9 @@ class ProjetsController extends Zend_Controller_Action
        Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination.phtml');
 
        $this->view->paginator = $paginator;
+       $this->view->origin = 'projet';
+       $this->view->nom_id_pc = 'id_projet_pc';
+       $this->view->nom_name_pc = 'id_projet';
     }
 
     public function ajoutAction()

@@ -98,6 +98,10 @@ class CatalogueController extends Zend_Controller_Action
         $this->view->paginator = $paginator;
 
         $this->view->catalogues = $produits;
+
+        $this->view->origin = 'catalogue';
+        $this->view->nom_id_pc = 'id_produit_pc';
+        $this->view->nom_name_pc = 'id_produit';
     }
 
     /**

@@ -874,6 +874,20 @@ class AjaxController extends Zend_Controller_Action
         $projet->save();
     }
 
+    public function changecolorcatalogueAction()
+    {
+    	$this->_helper->viewRenderer->setNoRender();
+
+	    $id_produit = $this->_getParam('id_produit');
+	    $nomColor = $this->_getParam('colorclass');
+
+	    $db_produit = new Application_Model_Catalogue();
+        $produit = $db_produit->find($id_produit)->current();
+
+        $produit->colorclass = $nomColor;
+        $produit->save();
+    }
+
     public function switchtodevisarelancerAction()
     {
     	$this->_helper->viewRenderer->setNoRender();
