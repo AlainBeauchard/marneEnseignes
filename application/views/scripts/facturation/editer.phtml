@@ -213,7 +213,7 @@
 			</thead>
 			<tbody id="liste_produits">
 				<?php foreach($this->catalogues as $catalogue):?>
-					<tr>
+					<tr class="<?= $catalogue->colorclass ?>">
 						<td><?php echo $catalogue->code_me?></td>
 						<td><?php echo $catalogue->fournisseur?></td>
 						<td><?php echo $catalogue->type?></td>

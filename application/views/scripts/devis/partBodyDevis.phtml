@@ -259,7 +259,7 @@
                 </thead>
                 <tbody id="liste_produits" style="height:580px !important; overflow-y: scroll !important;">
                 <?php foreach($this->catalogues as $catalogue):?>
-                    <tr>
+                    <tr class="<?= $catalogue->colorclass ?>">
                         <td style="width:5%"><?= $catalogue->code_me?></td>
                         <td style="width:5%"><?= $catalogue->reference?></td>
                         <td style="width:15%"><?= $catalogue->fournisseur?></td>
