@@ -1,15 +1,15 @@
 <?php if(count($this->catalogues->toArray())):?>
 	<?php foreach($this->catalogues as $catalogue):?>
-		<tr class="<?= $catalogue->colorclass ?>">
-			<td style="width:5%"><?php echo $catalogue->code_me?></td>
-			<td style="width:5%"><?php echo $catalogue->reference?></td>
-			<td style="width:15%"><?php echo $catalogue->fournisseur?></td>
-			<td style="width:5%"><?php echo $catalogue->type?></td>
-			<td style="width:8%"><?php echo $catalogue->epaisseur?></td>
-			<td style="width:10%"><?php echo $catalogue->format?></td>
-			<td style="width:10%"><?php echo $catalogue->surface_totale?></td>
-			<td style="width:15%"><?php echo $catalogue->designation ?></td>
-			<td style="width:6%;text-align:right;">
+		<tr class="<?= $catalogue->colorclass ?>" style="display: table;width: 100%;">
+			<td width="5%"><?php echo $catalogue->code_me?></td>
+			<td width="5%"><?php echo $catalogue->reference?></td>
+			<td width="15%"><?php echo $catalogue->fournisseur?></td>
+			<td width="5%"><?php echo $catalogue->type?></td>
+			<td width="8%"><?php echo $catalogue->epaisseur?></td>
+			<td width="10%"><?php echo $catalogue->format?></td>
+			<td width="10%"><?php echo $catalogue->surface_totale?></td>
+			<td width="15%"><?php echo $catalogue->designation ?></td>
+			<td width="6%" style="text-align:right;">
 				<?php if(!(int) $catalogue->unitaire):?>
 					<?php if($catalogue->prixM2 == null):?>
 						<?php echo $catalogue->prixML ?>
@@ -21,7 +21,7 @@
 				<?php endif;?>
 				&nbsp;&euro;
 			</td>
-			<td style="width:7%;text-align:center;">
+			<td width="7%" style="text-align:center;">
 				<?php if(!(int) $catalogue->unitaire):?>
 					<?php if($catalogue->prixM2 == null):?>
 						Ml
@@ -32,8 +32,8 @@
 					Unitaire
 				<?php endif;?>
 			</td>
-			<td style="width:7%;text-align:right;"><?php echo $catalogue->coeff_marge?></td>
-			<td style="width:7%;text-align:right;">
+			<td width="7%" style="text-align:right;"><?php echo $catalogue->coeff_marge?></td>
+			<td width="7%" style="text-align:right;">
                 <?php if($this->fromDevis != 0):?>
                     <button type="button" class="btn btn-warning" aria-label="Left Align" id="fill_form_<?php echo $catalogue->id_produit ?>">
                       <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>

@@ -49,9 +49,9 @@
     <div class="panel-body">
         <div class="table-responvive">
             <form name="formFiltre" method="post" >
-                <table class="table table-hover table-condensed tablesorter" id="sorter" style="display: grid">
+                <table class="table table-hover table-condensed tablesorter" id="sorter">
                     <thead>
-                    <tr>
+                    <tr style="display: table;width: 100%;">
                         <th width="5%">
                             Référence ME
                         </th>
@@ -69,24 +69,24 @@
                         <th width="5%">Coef</th>
                         <th width="10%"></th>
                     </tr>
-                    <tr>
-                        <td>
+                    <tr style="display: table;width: 100%;">
+                        <td width="5%">
                             <?= $this->filtreCatalogue->getElement('codeMe') ?>
                         </td>
-                        <td>
+                        <td width="5%">
                             <?= $this->filtreCatalogue->getElement('reference') ?>
                         </td>
-                        <td>
+                        <td width="10%">
                             <?= $this->filtreCatalogue->getElement('fournisseur') ?>
                         </td>
-                        <td><?= $this->filtreCatalogue->getElement('type') ?></td>
-                        <td><?= $this->filtreCatalogue->getElement('epaisseur') ?></td>
-                        <td><?= $this->filtreCatalogue->getElement('format') ?></td>
-                        <td><?= $this->filtreCatalogue->getElement('surface_totale') ?></td>
-                        <td>
+                        <td width="5%"><?= $this->filtreCatalogue->getElement('type') ?></td>
+                        <td width="5%"><?= $this->filtreCatalogue->getElement('epaisseur') ?></td>
+                        <td width="10%"><?= $this->filtreCatalogue->getElement('format') ?></td>
+                        <td width="10%"><?= $this->filtreCatalogue->getElement('surface_totale') ?></td>
+                        <td width="20%">
                             <?= $this->filtreCatalogue->getElement('produit') ?>
                         </td>
-                        <td colspan="4" style="text-align:right;">
+                        <td width="30%" colspan="4" style="text-align:right;">
                             <img src="/images/load.gif" alt="loader" id="loader"/>
                             <?= $this->filtreCatalogue->getElement('rechercher') ?>
                             <?= $this->filtreCatalogue->getElement('resetCatalogue') ?>
@@ -95,7 +95,7 @@
                     </thead>
                     <tbody id="liste_produits">
                     <?php foreach($this->catalogues as $catalogue):?>
-                        <tr id="catalogue_<?= $catalogue->id_produit ?>" class="<?= $catalogue->colorclass ?>">
+                        <tr id="catalogue_<?= $catalogue->id_produit ?>" class="<?= $catalogue->colorclass ?>" style="display: table;width: 100%;">
                             <td width="5%"><?= $catalogue->code_me?></td>
                             <td width="5%"><?= $catalogue->reference?></td>
                             <td width="10%"><?= $catalogue->fournisseur?></td>

@@ -8,7 +8,7 @@
                 <div class="table-responvive">
                     <table class="table table-hover table-condensed tablesorter" id="sorter">
                         <thead>
-                        <tr>
+                        <tr style="display: table;width: 100%;">
                             <th>Dossier</th>
                             <th>Cr&eacute;ation</th>
                             <th>Validit&eacute;</th>
@@ -16,7 +16,7 @@
                             <th>Client</th>
                             <th></th>
                         </tr>
-                        <tr>
+                        <tr style="display: table;width: 100%;">
                             <td>
                                 <?= $this->filtre->getElement('id_client')?>
                                 <?= $this->filtre->getElement('id_projet')?>
@@ -44,7 +44,7 @@
                         </thead>
                         <tbody id="listeFactures">
                         <?php foreach($this->paginator as $dev): ?>
-                            <tr id="devis_<?= $dev->id ?>">
+                            <tr id="devis_<?= $dev->id ?>" style="display: table;width: 100%;">
                                 <td>
                                     <?= $dev->ref ?>
                                 </td>

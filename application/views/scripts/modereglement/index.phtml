@@ -49,9 +49,9 @@
     <div class="panel-body">
         <div class="table-responvive">
             <form name="formFiltre" method="post">
-                <table class="table table-hover table-condensed tablesorter" id="sorter" style="display: grid">
+                <table class="table table-hover table-condensed tablesorter" id="sorter">
                     <thead>
-                    <tr>
+                    <tr style="display: table; width:100%;">
                         <th width="5%">
                             Id
                         </th>
@@ -61,7 +61,7 @@
                         <th width="10%">
                         </th>
                     </tr>
-                    <tr>
+                    <tr style="display: table; width:100%;">
                         <td width="5%">
                             <?= $this->filtreMr->getElement('id') ?>
                         </td>
@@ -77,7 +77,7 @@
                     </thead>
                     <tbody id="liste_mr">
                     <?php foreach($this->mr as $mr):?>
-                        <tr id="catalogue_<?= $mr->id ?>">
+                        <tr id="catalogue_<?= $mr->id ?>" style="display: table; width:100%;">
                             <td width="5%"><?= $mr->id?></td>
                             <td width="85%"><?= $mr->libelle_reglement?></td>
                             <td width="10%" style="text-align: right;">

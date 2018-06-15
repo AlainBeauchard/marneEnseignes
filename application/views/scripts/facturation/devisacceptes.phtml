@@ -44,7 +44,7 @@
 						</thead>
 						<tbody id="listeFactures">
 							<?php foreach($this->paginator as $dev): ?>
-								<tr id="devis_<?php echo $dev->id ?>">
+								<tr id="devis_<?php echo $dev->id ?>" style="display: table; width:100%;">
 									<td><?php echo $dev->ref ?></td>
 									<td><?php echo date('d/m/Y', strtotime($dev->date)) ?></td>
 									<td>

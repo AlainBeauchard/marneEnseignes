@@ -51,7 +51,7 @@
             <form name="formFiltre" method="post">
                 <table class="table table-hover table-condensed tablesorter" id="sorter">
                     <thead>
-                    <tr>
+                    <tr style="display: table;width: 100%;">
                         <th width="10%">Devis</th>
                         <th width="10%">Dossier</th>
                         <th width="15%">Cr&eacute;ation</th>
@@ -59,16 +59,16 @@
                         <th width="25%">Client</th>
                         <th width="10%"></th>
                     </tr>
-                    <tr>
-                        <td>
+                    <tr style="display: table;width: 100%;">
+                        <td width="10%">
                             <?= $this->filtre->getElement('num_devis')?>
                         </td>
-                        <td>
+                        <td width="10%">
                             <?= $this->filtre->getElement('ref')?>
                             <?= $this->filtre->getElement('id_projet')?>
                             <?= $this->filtre->getElement('type_filtre')?>
                         </td>
-                        <td>
+                        <td width="15%">
                             <div class="row">
                                 <div class="col-xs-6">
                                     <?= $this->filtre->getElement('mois')?>
@@ -79,16 +79,16 @@
                             </div>
 
                         </td>
-                        <td><?= $this->filtre->getElement('titre')?></td>
-                        <td><?= $this->filtre->getElement('client')?></td>
-                        <td style="text-align: right;">
+                        <td width="30%"><?= $this->filtre->getElement('titre')?></td>
+                        <td width="25%"><?= $this->filtre->getElement('client')?></td>
+                        <td width="10%" style="text-align: right;">
                             <?= $this->filtre->getElement('rechercher')?><?= $this->filtre->getElement('resetFiltreDevis')?>
                         </td>
                     </tr>
                     </thead>
                     <tbody id="listeFactures">
                     <?php foreach($this->paginator as $dev): ?>
-                        <tr id="devis_<?= $dev->id ?>">
+                        <tr id="devis_<?= $dev->id ?>" style="display: table;width: 100%;">
                             <td width="10%">
                                 <?= $dev->num_devis ?>
                             </td>
