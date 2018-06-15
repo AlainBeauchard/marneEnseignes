@@ -1491,9 +1491,9 @@ function fillProduit(result, nomTable, indice) {
         $($("#" + nomTable + " input[name='surface'][data-indice='" + indice + "']")).attr('value', 1);
 	}
     var prix = result.prixM2;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.prixML;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.unitaire;
     $($("#"+nomTable+" input[name='h.a_ml'][data-indice='"+indice+"']")).attr('value', prix);
     $($("#"+nomTable+" input[name='coefMarge'][data-indice='"+indice+"']")).attr('value', result.coeff_marge);
@@ -1505,9 +1505,9 @@ function fillAdhesif(result, nomTable, indice) {
     $($("#"+nomTable+" input[name='adhesif'][data-indice='"+indice+"']")).attr('value',result.designation);
     $($("#"+nomTable+" input[name='surface'][data-indice='"+indice+"']")).attr('value',result.surface_totale);
     var prix = result.prixM2;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.prixML;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.unitaire;
     $($("#"+nomTable+" input[name='h.a_ml'][data-indice='"+indice+"']")).attr('value',prix);
     $($("#"+nomTable+" input[name='coefMarge'][data-indice='"+indice+"']")).attr('value',result.coeff_marge);
@@ -1518,9 +1518,9 @@ function fillDeplacement(result, nomTable, indice) {
     $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
     $($("#"+nomTable+" input[name='deplacement'][data-indice='"+indice+"']")).attr('value',result.designation);
     var prix = result.prixM2;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.prixML;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.unitaire;
     $($("#"+nomTable+" input[name='tarifUnique'][data-indice='"+indice+"']")).attr('value',prix);
     fctChangeValeurDevisDeplacement();
@@ -1530,9 +1530,9 @@ function fillFaconnage(result, nomTable, indice) {
     $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
     $($("#"+nomTable+" input[name='faconnage'][data-indice='"+indice+"']")).attr('value', result.designation);
     var prix = result.prixM2;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.prixML;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.unitaire;
     $($("#"+nomTable+" input[name='h.a_ml'][data-indice='"+indice+"']")).attr('value', prix);
     fctChangeValeurDevisFaconnage();
@@ -1542,9 +1542,9 @@ function fillForfaitPrestation(result, nomTable, indice) {
     $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
     $($("#"+nomTable+" input[name='prestation'][data-indice='"+indice+"']")).attr('value', result.designation);
     var prix = result.prixM2;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.prixML;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.unitaire;
     $($("#"+nomTable+" input[name='tarif'][data-indice='"+indice+"']")).attr('value', prix);
     fctChangeValeurDevisForfaitPrestation();
@@ -1554,9 +1554,9 @@ function fillFourniture(result, nomTable, indice) {
     $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
     $($("#"+nomTable+" input[name='fourniture'][data-indice='"+indice+"']")).attr('value', result.designation);
     var prix = result.prixM2;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.prixML;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.unitaire;
     $($("#"+nomTable+" input[name='h.a_ml'][data-indice='"+indice+"']")).attr('value', prix);
     $($("#"+nomTable+" input[name='coefMarge'][data-indice='"+indice+"']")).attr('value', result.coeff_marge);
@@ -1582,9 +1582,9 @@ function fillPose(result, nomTable, indice) {
     $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
     $($("#"+nomTable+" input[name='pose'][data-indice='"+indice+"']")).attr('value', result.designation);
     var prix = result.prixM2;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.prixML;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.unitaire;
     $($("#"+nomTable+" input[name='h.a_ml'][data-indice='"+indice+"']")).attr('value', prix);
     $($("#"+nomTable+" input[name='coefMarge'][data-indice='"+indice+"']")).attr('value', result.coeff_marge);
@@ -1595,9 +1595,9 @@ function fillPrestation(result, nomTable, indice) {
     $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
     $($("#"+nomTable+" input[name='prestation'][data-indice='"+indice+"']")).attr('value', result.designation);
     var prix = result.prixM2;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.prixML;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.unitaire;
     $($("#"+nomTable+" input[name='tarif'][data-indice='"+indice+"']")).attr('value', prix);
     fctChangeValeurDevisPrestation();
@@ -1607,9 +1607,9 @@ function fillSousTraitance(result, nomTable, indice) {
     $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
     $$($("#"+nomTable+" input[name='support'][data-indice='"+indice+"']")).attr('value', result.designation);
     var prix = result.prixM2;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.prixML;
-    if (!prix || prix === '')
+    if (!prix || prix === '' || prix === "0" )
         prix = result.unitaire;
     $($("#"+nomTable+" input[name='h.a_ml'][data-indice='"+indice+"']")).attr('value', prix);
     $($("#"+nomTable+" input[name='coefMarge'][data-indice='"+indice+"']")).attr('value', result.coeff_marge);

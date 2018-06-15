@@ -79,9 +79,9 @@ class Application_Form_Catalogue extends Zend_Form
         $fournisseur->setLabel("Fournisseur");
         $this->addElement($fournisseur);
 
-        $codeMarge = new Zend_Form_Element_Text('code_marge');
-        $codeMarge->setAttribs(array('placeholder'=>'Code marge','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
-        $codeMarge->setLabel("Code Marge");
+        $codeMarge = new Zend_Form_Element_Text('coeff_marge');
+        $codeMarge->setAttribs(array('placeholder'=>'Coeff marge','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
+        $codeMarge->setLabel("Coeff Marge");
         $codeMarge->setRequired(false);
         $this->addElement($codeMarge);
 
