@@ -1,4 +1,4 @@
-<form action="" method="POST" name="formDevis">
+<form action="<?php if($this->duplicate == true) { echo("/devis/ajouter"); } ?>" method="POST" name="formDevis">
 
         <input type="hidden" name="idClient"        id="idClient"       value="<?= (isset($this->devis->id_client))? $this->devis->id_client : -1 ?>">
         <input type="hidden" name="valide"          id="valide"         value="<?= (isset($this->devis->valide))? $this->devis->valide : 0 ?>">

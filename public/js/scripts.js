@@ -513,7 +513,13 @@ $(document).ready(function(){
 	$('button[id^="edit_"]').click(function(){
 		var id = $(this).attr('id').split('_')[2];
 		var ctrl = $(this).attr('id').split('_')[1];
-		window.location.href = "/" + ctrl + "/editer/id/" + id;
+		var param = $(this).attr('data-duplicate');
+		if (!param) {
+			param = '';
+		} else {
+			param = '?duplicate=1';
+		}
+		window.location.href = "/" + ctrl + "/editer/id/" + id + param;
 	});
 	
 	$('button[id^="switch_"]').click(function(){
@@ -2573,7 +2579,14 @@ $(document).on('click', 'button[id^="fiche_"]', function(){
 $(document).on('click', 'button[id^="edit_"]', function(){
 		var id = $(this).attr('id').split('_')[2];
 		var ctrl = $(this).attr('id').split('_')[1];
-		window.location.href = "/" + ctrl + "/editer/id/" + id;
+		var param = $(this).attr('data-duplicate');
+		if (!param) {
+			param = '';
+		} else {
+			param = '?duplicate=1';
+		}
+
+    	window.location.href = "/" + ctrl + "/editer/id/" + id + param;
 });
 
 $(document).on('click', 'button[id^="edititemprojet_"]', function(){

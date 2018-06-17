@@ -158,6 +158,8 @@ class DevisController extends Zend_Controller_Action
             $this->sauveFormDevis($db_devis, $db_items, false);
         }
 
+        $this->view->duplicate = ($this->_getParam('duplicate') == "1");
+
         $devis = $db_devis->find($id_devis)->current();
         $this->view->devis = $devis;
 
@@ -277,7 +279,6 @@ class DevisController extends Zend_Controller_Action
         }
 
         $data = [];
-        $data['id'] = $idDevis;
         $data['id_client'] = $datas['idClient'];
         $data['date_validite'] = $datas[''];
         $data['delai'] = $datas['delai'];
@@ -302,6 +303,7 @@ class DevisController extends Zend_Controller_Action
             $row = $db_devis->createRow($data);
             $idDevis = $row->save();
         } else {
+            $data['id'] = $idDevis;
             $db_devis->update($data, array('id = ?' => $idDevis));
         }
 
