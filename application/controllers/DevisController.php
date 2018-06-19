@@ -333,7 +333,7 @@ class DevisController extends Zend_Controller_Action
             }
         }
 
-        $this->_redirect('/devis/editer/id/' . $idDevis."?fieldsCollapse=".$this->getParam('fieldsCollapse'));
+        $this->_redirect('/devis/editer/id/' . $idDevis."?fieldsCollapse=".$datas['fieldsCollapse']);
     }
 
     public function getRefDossierMax()

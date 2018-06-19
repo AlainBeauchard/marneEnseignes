@@ -1270,7 +1270,11 @@ rendTacheInvisible(1);
 function fctFillFieldsCollapse()
 {
 	var fields = "";
-    $(".collapse").each(function (ind, elem){ fields += elem.id+";" })
+    $(".collapse").each(function (ind, elem){
+    	if ($(this).hasClass("in") === false) {
+    		fields += elem.id+";"
+        }
+    })
 
 	$("#fieldsCollapse").val(fields);
 }

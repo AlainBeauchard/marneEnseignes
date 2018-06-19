@@ -43,7 +43,7 @@ class Application_Form_Catalogue extends Zend_Form
         $epaisseur->setRequired(false);
         $this->addElement($epaisseur);
 
-        $surfaceTotale = new Zend_Form_Element_Text('surface_total');
+        $surfaceTotale = new Zend_Form_Element_Text('surface_totale');
         $surfaceTotale->setAttribs(array('placeholder'=>'Surface totale','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
         $surfaceTotale->setLabel("Surface Totale");
         $surfaceTotale->setRequired(false);
