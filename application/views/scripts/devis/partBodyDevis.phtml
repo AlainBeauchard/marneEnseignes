@@ -80,7 +80,7 @@
                                             <div id="montantTotal" style="text-align: right; font-weight: bolder"></div>
                                         </td>
                                         <td colspan="3">
-                                            <Label>Montant Remise(%)</Label><br/>
+                                            <Label for="remise">Montant Remise(%)</Label><br/>
                                             <input type="text" name="remise" id="remise" value="<?= $this->montantRemise ?>" onchange="fctChangeValeurRemise();">
                                         </td>
                                         <td colspan="3">
@@ -150,7 +150,7 @@
             </div>
         </div>
 
-        <div class="corps-devis" style="height: calc(100vh - 650px); overflow-y: scroll;">
+        <div class="corps-devis">
             <div id="corps-devis-custom" >
 
                 <?php if (count($this->itemsProduit) >0) : ?>
@@ -193,8 +193,7 @@
                     <?= $this->render('/ajax/panelpose.phtml'); ?>
                 <?php endif ?>
 
-            </div>
-            <?= $this->render('/ajax/panelredaction.phtml'); ?>
+                <?= $this->render('/ajax/panelredaction.phtml'); ?>
         </div>
     </div>
 

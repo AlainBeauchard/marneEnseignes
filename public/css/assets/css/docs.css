@@ -1068,7 +1068,7 @@ ul#icons span.ui-icon {
 /* Font Awesome*/
 #split-button-fa .ui-button .ui-button-text{
     display: inline-block;
-    padding: 0px;
+    padding: 0;
 }
 
 #split-button-fa .ui-button-text-icon-primary .ui-button-icon-primary{
@@ -1123,6 +1123,8 @@ ul#icons span.ui-icon {
 .corps-devis
 {
   display: block;
+  overflow-y: scroll;
+  height: calc(100vh - 650px);
 }
 
 .corps-devis .panel-body
@@ -1217,4 +1219,12 @@ ul#icons span.ui-icon {
 
 .ui-autocomplete {
   z-index: 1051 !important;
+}
+
+@media print {
+  .corps-devis
+  {
+    overflow-y: visible;
+    height: auto;
+  }
 }
