@@ -179,10 +179,14 @@ class DevisController extends Zend_Controller_Action
         $db_client = new Application_Model_Clients();
         $client = $db_client->find($devis->id_client)->current();
 
+        if ($this->view->duplicate) {
+            $form->getElement('numDevis')->setValue($this->getRefDossierMax());
+        } else {
+            $form->getElement('numDevis')->setValue($devis->num_devis);
+        }
         $form->getElement('codeClient')->setValue($client->ref);
         $form->getElement('nomClient')->setValue($client->societe);
         $form->getElement('refDossier')->setValue($devis->ref);
-        $form->getElement('numDevis')->setValue($devis->num_devis);
         $form->getElement('delai')->setValue($devis->delai);
         $form->getElement('reglement')->setValue($devis->reglement);
         $form->getElement('intitule')->setValue($devis->titre);

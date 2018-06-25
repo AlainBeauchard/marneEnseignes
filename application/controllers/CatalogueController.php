@@ -67,6 +67,10 @@ class CatalogueController extends Zend_Controller_Action
             $bfiltre = true;
             $select->where('type like ?', '%' . $session->filtres['type'] . '%');
         }
+        if(isset($session->filtres['epaisseur']) && strlen(trim($session->filtres['epaisseur']))){
+            $bfiltre = true;
+            $select->where('epaisseur like ?', '%' . $session->filtres['epaisseur'] . '%');
+        }
         if(isset($session->filtres['format']) && strlen(trim($session->filtres['format']))){
             $bfiltre = true;
             $select->where('format like ?', '%' . $session->filtres['format'] . '%');
