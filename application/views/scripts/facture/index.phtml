@@ -7,8 +7,8 @@
             <div class="panel-body">
                 <div class="table-responvive">
                     <table class="table table-hover table-condensed tablesorter" id="sorter">
-                        <thead>
-                        <tr>
+                        <thead style="display: contents; width:100%;">
+                        <tr style="display: table-row;width: 100%;">
                             <th>Dossier</th>
                             <th>Date facture</th>
                             <th>Echéance</th>
@@ -19,7 +19,7 @@
                         </thead>
                         <tbody id="listeFactures">
                         <?php foreach($this->paginator as $dev): ?>
-                            <tr id="devis_<?= $dev->id ?>" style="display: table; width:100%;">
+                            <tr id="devis_<?= $dev->id ?>" style="display: table-row;width: 100%;">
                                 <td>
                                     <?= $dev->ref ?>
                                 </td>
@@ -39,7 +39,7 @@
                         <?php endforeach; ?>
                         </tbody>
                         <tfoot>
-                        <tr>
+                        <tr style="display: table-row;width: 100%;">
                             <td colspan="6">
                                 <?= $this->paginationControl($this->paginator); ?>
                             </td>

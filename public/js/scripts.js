@@ -2261,9 +2261,9 @@ function fctChangeTableEntete()
         sommeSurfPub += parseFloat(surfacePub[i].value);
         sommePerimetre += parseFloat(perimetre[i].value);
     }
-    $("#sommeSurfTotale").html(sommeSurfTotale);
-    $("#sommeSurfPub").html(sommeSurfPub);
-    $("#sommePerimetre").html(sommePerimetre);
+    $("#sommeSurfTotale").html(sommeSurfTotale.toFixed(2));
+    $("#sommeSurfPub").html(sommeSurfPub.toFixed(2));
+    $("#sommePerimetre").html(sommePerimetre.toFixed(2));
 
     var jsonLigne  = $("#tableEntete tr");
 

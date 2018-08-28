@@ -44,15 +44,26 @@ class DevisController extends Zend_Controller_Action
         if(isset($params['titre']) && strlen(trim($params['titre']))){
             $select->where('titre like ?', '%' . $params['titre'] . '%');
         }
-        /*
-        La recherche se fait sur le nom du client alors que dans la base on a id_client !
-        if(isset($params['id_client']) && strlen(trim($params['id_client']))){
-            $select->where('id_client like ?', '%' . $params['id_client'] . '%');
+
+        // La recherche se fait sur le nom du client alors que dans la base on a id_client !
+        if(isset($params['client']) && strlen(trim($params['client']))){
+            $db_client = new Application_Model_Clients();
+            $subSelect = $db_client->select()->where('societe like ?',$params['client'].'%' );
+
+            $listeClient = $db_client->fetchAll($subSelect);
+            $str = '-1';
+            foreach($listeClient as $client) {
+                $str .= ','.$client->id_client;
+            }
+
+            $select->where('id_client in ( '.$str.' ) ' , '');
         }
-        */
+
         if(isset($params['annee']) && isset($params['mois']) && (int) $params['annee'] && (int) $params['mois']){
             $select->where('date like ?', $params['annee'] . '-' . $params['mois'] . '-%');
         }
+
+        $select->order('id desc');
 
         $devis = $db_devis->fetchAll($select);
         $this->indexPrivateAction($devis);
