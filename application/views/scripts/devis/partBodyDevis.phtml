@@ -75,13 +75,17 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3">
+                                        <td colspan="2">
                                             <Label>Montant Total avant remise</Label>
                                             <div id="montantTotal" style="text-align: right; font-weight: bolder"></div>
                                         </td>
-                                        <td colspan="3">
+                                        <td colspan="2">
                                             <Label for="remise">Montant Remise(%)</Label><br/>
                                             <input type="text" name="remise" id="remise" value="<?= $this->montantRemise ?>" onchange="fctChangeValeurRemise();">
+                                        </td>
+                                        <td colspan="2">
+                                            <Label for="remise">Montant Remise(euros)</Label><br/>
+                                            <span id="montantRemiseEuro" style="text-align: right; font-weight: bolder"></span>
                                         </td>
                                         <td colspan="3">
                                             <Label>Montant Total</Label>

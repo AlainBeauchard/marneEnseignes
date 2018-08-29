@@ -1340,6 +1340,7 @@ function fctChangeValeurRemise()
         var montant = parseFloat((montantTotalInit * pourcentageRemise) / 100).toFixed(2);
 
         $("#montantTotalRemise").html(parseFloat(montantTotalInit - montant).toFixed(2) + " euros");
+        $("#montantRemiseEuro").html(montant);
     }
 }
 
