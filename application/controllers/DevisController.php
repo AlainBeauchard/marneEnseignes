@@ -121,7 +121,7 @@ class DevisController extends Zend_Controller_Action
         $this->view->form = $form;
 
         $tab = ['Adhesif', 'Deplacement', 'Faconnage', 'ForfaitPrestation', 'Fourniture',
-            'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique'
+            'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique', 'Itemredaction'
         ];
 
         foreach($tab as $item) {
@@ -177,7 +177,7 @@ class DevisController extends Zend_Controller_Action
         $this->view->montantRemise = $devis->remise;
 
         $tab = ['Adhesif', 'Deplacement', 'Faconnage', 'ForfaitPrestation', 'Fourniture',
-                'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique'
+                'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique', 'Itemredaction'
                ];
 
         foreach($tab as $item) {
@@ -244,7 +244,7 @@ class DevisController extends Zend_Controller_Action
         $this->view->devis = $devis;
 
         $tab = ['Adhesif', 'Deplacement', 'Faconnage', 'ForfaitPrestation', 'Fourniture',
-            'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique'
+            'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique', 'Itemredaction'
         ];
 
         foreach($tab as $item) {
@@ -288,7 +288,7 @@ class DevisController extends Zend_Controller_Action
     {
         $idDevis = $this->_getParam('id');
         foreach($this->_request->getPost() as $key => $value){
-            if(strlen($value)){
+            if(is_string($value) && strlen($value)){
                 $datas[$key] = $value;
             }
         }
@@ -300,12 +300,9 @@ class DevisController extends Zend_Controller_Action
         $data['titre'] = $datas['intitule'];
         $data['redaction'] = $datas['redactionDevis'];
         $data['valide'] = $datas['valide'];
-        $data['date_validation'] = $datas['date_validation'];
         $data['facture'] = $datas['facture'];
-        $data['date_facture'] = $datas['date_facture'];
         $data['paye'] = $datas['paye'];
         $data['redaction_facture'] = $datas['redaction_facture'];
-        $data['date_paiement'] = $datas['date_paiement'];
         $data['acompte'] = $datas['acompte'];
         $data['remise'] = $datas['remise'];
         $data['ref'] = $datas['refDossier'];
@@ -313,20 +310,36 @@ class DevisController extends Zend_Controller_Action
         $data['reglement']  = $datas['reglement'];
         $data['jsonEntete'] = $datas['jsonEntete'];
 
+        if (strrpos($datas['date_validation'], '0000') === false) {
+            $data['date_validation'] = $datas['date_validation'];
+        }
+        if (strrpos($datas['date_paiement'], '0000') === false) {
+            $data['date_paiement'] = $datas['date_paiement'];
+        }
+        if (strrpos($datas['date_facture'], '0000') === false) {
+            $data['date_facture'] = $datas['date_facture'];
+        }
+
         if ($bAjout) {
             $data['date'] = date('Y-m-d');
             $row = $db_devis->createRow($data);
             $idDevis = $row->save();
         } else {
             $data['id'] = $idDevis;
-            $db_devis->update($data, array('id = ?' => $idDevis));
+
+            try {
+                $db_devis->update($data, array('id = ?' => $idDevis));
+            } catch(Exception $e) {
+                echo ($e->getMessage());
+            }
+
         }
 
         //on supprime les items avec le devis
         $db_items->delete("id_devis = ".$idDevis);
 
         $tab = ['Adhesif', 'Deplacement', 'Faconnage', 'ForfaitPrestation', 'Fourniture',
-            'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique'
+            'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique', 'Itemredaction'
         ];
 
         foreach ($tab as $item) {

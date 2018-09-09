@@ -153,6 +153,9 @@
                     <?= $this->render('/ajax/paneladhesif.phtml'); ?>
                 <?php endif ?>
 
+                <?php if (count($this->itemsItemredaction) >0) : ?>
+                    <?= $this->render('/ajax/panelitemredaction.phtml'); ?>
+                <?php endif ?>
             </div>
             <?= $this->render('/ajax/panelredaction.phtml'); ?>
         </div>

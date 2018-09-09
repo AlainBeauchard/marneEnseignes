@@ -1,0 +1,98 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: alain
+ * Date: 29/12/2017
+ * Time: 11:12
+ */
+?>
+
+<div id="panelItemredaction" class="panel panel-primary">
+    <div class="panel-heading nav navbar-default">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="panel-title" data-toggle="collapse" href="#collapseitemredaction">Item Rédaction</h3>
+            </div>
+            <div class="col-md-6">
+                <ul class="nav navbar-nav navbar-right navbarPanel">
+                    <li id="BtAjoutligneItemredaction" title="Ajouter une ligne">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </li>
+                    <li id="BtSuprimeligneItemredaction" title="Supprimer le bloc">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="collapseitemredaction" class="panel-body panel-collapse  <?php if(strrpos($this->fieldsCollapse, 'collapseitemredaction') !== false) : ?> collapse <?php else: ?> in <?php endif;  ?>">
+        <table class="table-produits-devis" id="tableItemredaction">
+            <tr>
+                <th width="3%">Code</th>
+                <th>Itemredaction</th>
+                <th width="3%">Quantité</th>
+                <th width="7%">Px vente</th>
+                <th width="2%"></th>
+            </tr>
+            <?php if( count($this->itemsItemredaction) == 0): ?>
+            <tr id="ligneRefItemredaction"  data-key="ligneRefItemredaction_0">
+                <td>
+                    <input type="text" name="code"      data-indice="0" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeItemredaction(0);" onChange="fctChangeValeurDevisItemredaction();" class="tableCode dropdown-toggle" list="listeItemredaction_0"/>
+                    <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreArticle(0, 'Itemredaction');">
+                        <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                    </button>
+                    <datalist id="listeItemredaction_0">
+                    </datalist>
+                    <input type="hidden" name="json_Itemredaction[]">
+                </td>
+                <td><textarea name="itemredaction"      data-indice="0" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisItemredaction();" style="width:100%;"></textarea></td>
+                <td><input type="text" name="qte"       data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();"/></td>
+                <td><input type="text" name="pxvente"   data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();"/></td>
+                <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneItemredaction(0);" title="Supprimer la ligne" ></span></td>
+            </tr>
+            <?php endif; ?>
+            <?php if (isset($this->itemsItemredaction)) : ?>
+                <?php foreach($this->itemsItemredaction as $key => $itemredaction): ?>
+                    <?php $json = json_decode($itemredaction->json, true) ?>
+                <tr id="ligneRefItemredaction"  data-key="ligneRefItemredaction_<?= $key ?>">
+                    <td>
+                        <input type="text" name="code"      data-indice="<?= $key ?>" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeItemredaction(<?=$key ?>);" onChange="fctChangeValeurDevisItemredaction();" class="tableCode dropdown-toggle" list="listeItemredaction_<?=$key ?>" value="<?= $json['code'] ?>"/>
+                        <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreArticle(<?= $key ?>, 'Itemredaction');">
+                            <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                        </button>
+                        <datalist id="listeItemredaction_<?=$key ?>">
+                        </datalist>
+                        <input type="hidden" name="json_Itemredaction[]" value="<?= json_decode($json) ?>">
+                    </td>
+                    <td><textarea name="itemredaction"      data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisItemredaction();"  style="width:100%;"><?= $json['itemredaction'] ?></textarea></td>
+                    <td><input type="text" name="qte"       data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();" value="<?= $json['qte'] ?>"/></td>
+                    <td><input type="text" name="pxvente"   data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();" value="<?= $json['pxvente'] ?>"/></td>
+                    <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneItemredaction(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
+                </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </table>
+
+    </div>
+
+    <div class="elemCache">
+        <table>
+            <tr id="elemCacheItemredaction">
+                <td>
+                    <input type="text" name="code"      data-indice="XXX" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeItemredaction(XXX);" onChange="fctChangeValeurDevisItemredaction();" class="tableCode dropdown-toggle" list="listeItemredaction_XXX"/>
+                    <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreArticle(XXX, 'Itemredaction');">
+                        <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+                    </button>
+                    <datalist id="listeItemredaction_XXX">
+                    </datalist>
+                    <input type="hidden" name="json_Itemredaction[]">
+                </td>
+                <td><textarea name="itemredaction"      data-indice="XXX" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisItemredaction();" style="width:100%;" ></textarea></td>
+                <td><input type="text" name="qte"       data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();"/></td>
+                <td><input type="text" name="pxvente"   data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();" /></td>
+                <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneItemredaction(XXX);" title="Supprimer la ligne" ></span></td>
+            </tr>
+        </table>
+    </div>
+    <input type="hidden" name="nbLigneItemredaction" id="nbLigneItemredaction" value="<?= count($this->itemsItemredaction) ?>">
+</div>

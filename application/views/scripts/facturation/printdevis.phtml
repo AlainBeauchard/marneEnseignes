@@ -1,3 +1,4 @@
+<?php $nbArtices = count($this->articles) + 1; ?>
 <div class="container">
 	<div class="row">
 		<div class="col-xs-5">
@@ -74,7 +75,7 @@
 					<?php $totalHt = $this->GetSum($this->devis->id) ?>
 					<tbody>
 						<tr>
-							<td style="height:435px;">
+							<td style="height:<?= 435 / ($nbArtices) ?> px;">
 								<?php echo $this->devis->redaction ?>
 							</td>
 							<td style="text-align:center; vertical-align: bottom;">
@@ -87,6 +88,23 @@
 								<?php echo  $totalHt ?>
 							</td>
 						</tr>
+                        <?php foreach($this->articles as $article):?>
+                            <?php $json = json_decode($article->json, true) ?>
+                            <tr>
+                                <td style="height:<?= 435 / ($nbArtices) ?>px;">
+                                    <?php echo $json['itemredaction'] ?>
+                                </td>
+                                <td style="text-align:center; vertical-align: bottom;">
+                                    <?php echo $json['qte'] ?>
+                                </td>
+                                <td style="text-align:right; vertical-align: bottom;">
+                                    <?php echo $json['pxvente'] ?>
+                                </td>
+                                <td style="text-align:right; vertical-align: bottom;">
+                                    <?php echo $json['pxvente'] ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>

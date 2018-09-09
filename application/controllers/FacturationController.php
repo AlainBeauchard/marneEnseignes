@@ -306,8 +306,13 @@ class FacturationController extends Zend_Controller_Action
 
 		$this->view->client = $client;
 
-		if($modele == 'devis'){
+        $db_itemsDevis = new Application_Model_ItemDevis();
+        $select = $db_itemsDevis->select()->where('id_devis = ?', $id)->where('typeligne = ?', 'itemredaction');
+        $articles = $db_itemsDevis->fetchAll($select);
+
+        if($modele == 'devis'){
 			$this->view->devis = $rows;
+			$this->view->articles = $articles;
 			$this->_helper->viewRenderer('printdevis');
 		}else{
 			$this->view->facture = $rows;

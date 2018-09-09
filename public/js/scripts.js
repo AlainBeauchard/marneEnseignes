@@ -1258,6 +1258,8 @@ rendTacheInvisible(1);
 				break;
 			case 'pose':
 				fctAddBlocPose();
+			case 'itemredaction':
+				fctAddBlocItemRedaction();
 				break;
 
 		}
@@ -1287,7 +1289,6 @@ function fctAjaxAddBloc(url, action)
         function($result){
             var $corps = $("#corps-devis-custom");
             $corps.html($corps.html() + $result);
-
             var $nbLigne = $("#nbLigne"+action)[0];
             var numLigne = parseInt($nbLigne.value, 10);
 
@@ -1392,6 +1393,11 @@ function fctAddBlocFourniture()
 function fctAddBlocPose()
 {
     fctAjaxAddBloc('/ajax/panelpose', 'Pose');
+}
+
+function fctAddBlocItemRedaction()
+{
+    fctAjaxAddBloc('/ajax/panelitemredaction', 'Itemredaction');
 }
 
 function fctSetFocus()
@@ -1615,8 +1621,9 @@ function fillPrestation(result, nomTable, indice) {
 }
 
 function fillSousTraitance(result, nomTable, indice) {
+	//console.log(result);
     $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
-    $$($("#"+nomTable+" input[name='support'][data-indice='"+indice+"']")).attr('value', result.designation);
+    $($("#"+nomTable+" input[name='support'][data-indice='"+indice+"']")).attr('value', result.designation);
     var prix = result.prixM2;
     if (!prix || prix === '' || prix === "0" )
         prix = result.prixML;
@@ -1747,6 +1754,21 @@ function fctRemplitListePose(indice)
     );
 }
 
+function fctRemplitListeItemredaction(indice)
+{
+    var nomTable = "tableItemredaction";
+    var nomListe = "listeItemredaction";
+    fctRemplitListePrivate(
+        nomTable,
+        nomListe,
+        indice,
+        function (result) {
+            result = JSON.parse(result);
+            fillPose(result, nomTable, indice);
+        }
+    );
+}
+
 function fctRemplitListePrestation(indice)
 {
     var nomTable = "tablePrestation";
@@ -1788,6 +1810,7 @@ function fctRecalculTout()
     fctBtAjoutSuppLigne("Fourniture");
     fctBtAjoutSuppLigne("FraisTechnique");
     fctBtAjoutSuppLigne("Pose");
+    fctBtAjoutSuppLigne("Itemredaction");
     fctBtAjoutSuppLigne("Prestation");
     fctBtAjoutSuppLigne("SousTraitance");
     fctBtAjoutSuppLigne("Adhesif");
@@ -2191,6 +2214,32 @@ function fctChangeValeurDevisFourniture()
     fctCalculMontantTotal();
 }
 
+
+function fctChangeValeurDevisItemredaction()
+{
+    var qte 	= $("#tableItemredaction input[name='qte']");
+    var pxvente = $("#tableItemredaction input[name='pxvente']");
+
+    var code 	   = $("#tableItemredaction input[name='code']");
+    var itemredaction = $("#tableItemredaction textarea[name='itemredaction']");
+
+    var jsonLigne  = $("#tableItemredaction input[name='json_Itemredaction[]']");
+
+    for(var i=0;i<qte.length;i++) {
+
+        var strJsonLigne = "";
+        if (qte[i].value !== "") {
+            strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '",';
+            strJsonLigne += '"' + itemredaction[i].name + '": "' + $(itemredaction[i]).val() + '",';
+            strJsonLigne += '"' + qte[i].name + '": "' + $(qte[i]).val() + '",';
+            strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '"';
+        }
+
+        console.log(strJsonLigne);
+        $(jsonLigne[i]).attr('value',  '{'+strJsonLigne+'}');
+    }
+}
+
 function fctChangeValeurDevisPose()
 {
     var qte 	= $("#tablePose input[name='qte']");
@@ -2315,6 +2364,16 @@ function fctOuvreCatalogue(indice, action) {
 
 };
 
+function fctOuvreArticle(indice, action) {
+
+    nomTableGlobal = "table"+action;
+    indiceLigneGlobal = indice;
+
+    $('#liste_produits').empty();
+
+    alert("A FAIRE !");
+
+};
 
 function fctSupprimeLigneTableEntete() {
 	$("#tableEntete .focus").remove();
@@ -2353,6 +2412,11 @@ function fctSupprimeLignePrestation(indice)
 function fctSupprimeLignePose(indice)
 {
     fctSupprimeLigneGlobal(indice, 'Pose');
+}
+
+function fctSupprimeLigneItemredaction(indice)
+{
+    fctSupprimeLigneGlobal(indice, 'Itemredaction');
 }
 
 function fctSupprimeLigneFraisTechnique(indice)

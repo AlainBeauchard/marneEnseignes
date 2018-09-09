@@ -960,6 +960,10 @@ class AjaxController extends Zend_Controller_Action
     {
 
     }
+    public function panelitemredactionAction()
+    {
+
+    }
 
     public function detailproduitAction()
     {
