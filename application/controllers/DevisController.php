@@ -418,4 +418,101 @@ class DevisController extends Zend_Controller_Action
 
         $this->indexPrivateAction($devis);
     }
+
+    public function articlesindexAction() {
+        $db_articles = new Application_Model_Articles();
+        $select = $db_articles->select();
+
+        $filtre = new Application_Form_FiltreArticles();
+
+        $params = $this->_getAllParams();
+        $session = new Zend_Session_Namespace('filtreArticles');
+        $session->filtres = $params;
+
+        if($session->filtres != null){
+            $filtre->populate($session->filtres);
+        }
+
+        $params = $this->_getAllParams();
+        if(isset($params['code']) && strlen(trim($params['code']))){
+            $select->where('code like ?', $params['code'].'%');
+        }
+        if(isset($params['libelle']) && strlen(trim($params['libelle']))){
+            $select->where('libelle like ?', $params['libelle'].'%');
+        }
+        $select->order('libelle desc');
+
+        $this->view->filtre = $filtre;
+
+        $articles = $db_articles->fetchAll($select);
+        $paginator = Zend_Paginator::factory($articles);
+        $paginator->setItemCountPerPage(50);
+        $paginator->setCurrentPageNumber($this->_getParam('page'));
+        Zend_Paginator::setDefaultScrollingStyle('Sliding');
+        Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination.phtml');
+
+        $this->view->paginator = $paginator;
+    }
+
+    public function articlesajouterAction() {
+        $form = new Application_Form_Articles();
+
+        $db_articles = new Application_Model_Articles();
+
+        if($this->_request->isPost() && $form->isValid($this->_request->getPost())){
+            $this->sauveArticle($db_articles, true);
+        }
+
+        $this->view->form = $form;
+    }
+
+    public function articlesediterAction() {
+        $form = new Application_Form_Articles();
+
+        $db_articles = new Application_Model_Articles();
+
+        if($this->_request->isPost() && $form->isValid($this->_request->getPost())){
+            $this->sauveArticle($db_articles, false);
+        }
+
+        $db_article = new Application_Model_Articles();
+        $id_article = $this->_getParam('id');
+        $article = $db_article->find($id_article)->current();
+
+        $form->getElement('id')->setValue($article->id);
+        $form->getElement('code')->setValue($article->code);
+        $form->getElement('libelle')->setValue($article->libelle);
+
+        $this->view->form = $form;
+    }
+
+    public function articlesdeleteAction() {
+        $db_article = new Application_Model_Articles();
+        $id_article = $this->_getParam('id');
+        $article = $db_article->find($id_article)->current();
+
+        $article->delete();
+
+        $this->_redirect('/devis/articlesindex/');
+    }
+
+    private function sauveArticle($db_articles, $bAjout) {
+        $idArticle = $this->_getParam('id');
+        $data = $this->_request->getPost();
+
+        try {
+            if ($bAjout) {
+                $row = $db_articles->createRow($data);
+                $row->save();
+            } else {
+                $data['id'] = $idArticle;
+                unset($data['Enregistrer']);
+                $db_articles->update($data, array('id = ?' => $idArticle));
+            }
+
+            $this->_redirect('/devis/articlesindex/');
+        } catch(Exception $e) {
+            echo ($e->getMessage());
+        }
+    }
 }

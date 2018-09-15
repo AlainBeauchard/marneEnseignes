@@ -2628,7 +2628,11 @@ $(document).on('click', 'button[id^="delete_"]', function(){
 	if(confirm('Etes vous sur ?')){
 		var id = $(this).attr('id').split('_')[2];
 		var ctrl = $(this).attr('id').split('_')[1];
-		window.location.href = "/" + ctrl + "/delete/id/" + id;
+        if (ctrl === 'article') {
+            window.location.href = "/devis/" + ctrl + "sdelete/id/" + id;
+        } else {
+            window.location.href = "/" + ctrl + "/delete/id/" + id;
+        }
 	}
 });
 
@@ -2648,14 +2652,20 @@ $(document).on('click', 'button[id^="fiche_"]', function(){
 $(document).on('click', 'button[id^="edit_"]', function(){
 		var id = $(this).attr('id').split('_')[2];
 		var ctrl = $(this).attr('id').split('_')[1];
-		var param = $(this).attr('data-duplicate');
-		if (!param) {
-			param = '';
-		} else {
-			param = '?duplicate=1';
+
+		if (ctrl === 'article') {
+            window.location.href = "/devis/" + ctrl + "sediter/id/" + id;
+        } else {
+            var param = $(this).attr('data-duplicate');
+            if (!param) {
+                param = '';
+            } else {
+                param = '?duplicate=1';
+            }
+
+            window.location.href = "/" + ctrl + "/editer/id/" + id + param;
 		}
 
-    	window.location.href = "/" + ctrl + "/editer/id/" + id + param;
 });
 
 $(document).on('click', 'button[id^="edititemprojet_"]', function(){
