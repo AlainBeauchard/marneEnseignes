@@ -1595,6 +1595,11 @@ function fillFraisTechnique(result, nomTable, indice) {
     fctChangeValeurDevisFraisTechnique();
 }
 
+function fillArticle(result, nomTable, indice) {
+    $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code);
+    $($("#"+nomTable+" textarea[name='itemredaction'][data-indice='"+indice+"']")).html(result.libelle);
+}
+
 function fillPose(result, nomTable, indice) {
     $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code_me);
     $($("#"+nomTable+" input[name='pose'][data-indice='"+indice+"']")).attr('value', result.designation);
@@ -1758,13 +1763,45 @@ function fctRemplitListeItemredaction(indice)
 {
     var nomTable = "tableItemredaction";
     var nomListe = "listeItemredaction";
-    fctRemplitListePrivate(
+    fctRemplitListeArticlePrivate(
         nomTable,
         nomListe,
         indice,
         function (result) {
             result = JSON.parse(result);
-            fillPose(result, nomTable, indice);
+            fillArticle(result, nomTable, indice);
+        }
+    );
+}
+
+function  fctRemplitListeArticlePrivate(nomTable, nomListe, indice, fctFinale)
+{
+    $.post("/ajax/listearticles",
+        {
+            code: $("#"+nomTable+" input[name='code'][data-indice='"+indice+"']").val()
+        },
+        function (result) {
+            $("#"+nomListe+"_"+indice).html(result);
+            $("#"+nomTable+" input[name='code']").each(
+                function () {
+                    $(this).on('input', function () {
+                        var value = $("#"+nomTable+" input[name='code'][data-indice='"+indice+"']").val();
+                        var option = $("#"+nomListe+"_"+indice).find("[value='" + value + "']");
+
+                        if (option.length > 0) {
+                            var id = option.data("id");
+                            $.post("/ajax/detailarticle",
+                                {
+                                    id: id
+                                },
+                                function (result2) {
+                                    fctFinale(result2)
+                                }
+                            )
+                        }
+                    });
+                }
+            );
         }
     );
 }

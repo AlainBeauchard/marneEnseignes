@@ -1076,6 +1076,50 @@ class AjaxController extends Zend_Controller_Action
 
     }
 
+    public function listearticlesAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $codeSearch = $this->_getParam('code');
+
+        $intMax = 20;
+
+        $db_articles = new Application_Model_Articles();
+        $select = $db_articles->select();
+        $select->where('upper(code) like upper(?)', $codeSearch.'%');
+        $select->order('code')->limit($intMax, 0);
+
+        $articles = $db_articles->fetchAll($select);
+
+        $str = '';
+        foreach ($articles as $article)
+        {
+            $str .= '<option value="'.$article->code.'" data-id="'.$article->id.'" />'.$article->code.'</option>';
+        }
+
+        echo($str);
+    }
+
+    public function detailarticleAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $idSearch = $this->_getParam('id');
+
+        $db_article = new Application_Model_Articles();
+        $select = $db_article->select();
+        $select->where('id = ?', $idSearch);
+        $articles = $db_article->fetchAll($select);
+
+        $str = '';
+        foreach ($articles as $article)
+        {
+            $str .= Zend_Json::encode($article);
+        }
+
+        echo($str);
+    }
+
     public function detailadhesifAction()
     {
         $this->detailproduitAction();
