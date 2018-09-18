@@ -52,7 +52,8 @@
                 <table class="table table-hover table-condensed tablesorter" id="sorter">
                     <thead style="display: table; width:100%;">
                     <tr style="display: table-row;width: 100%;">
-                        <th width="10%">Devis</th>
+                        <th width="3%">Type</th>
+                        <th width="7%">Devis</th>
                         <th width="10%">Dossier</th>
                         <th width="15%">Cr&eacute;ation</th>
                         <th width="30%">Titre</th>
@@ -60,7 +61,10 @@
                         <th width="10%"></th>
                     </tr>
                     <tr style="display: table-row;width: 100%;">
-                        <td width="10%">
+                        <td width="3%" style="text-align: center; vertical-align: middle;">
+                            <?= $this->filtre->getElement('devis_type')?>
+                        </td>
+                        <td width="7%">
                             <?= $this->filtre->getElement('num_devis')?>
                         </td>
                         <td width="10%">
@@ -89,7 +93,8 @@
                     <tbody id="listeFactures">
                     <?php foreach($this->paginator as $dev): ?>
                         <tr id="devis_<?= $dev->id ?>" style="display: table-row;width: 100%;">
-                            <td width="10%">
+                            <td width="3%"></td>
+                            <td width="7%">
                                 <?= $dev->num_devis ?>
                             </td>
                             <td width="10%">
@@ -120,7 +125,7 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="6">
+                        <td colspan="7">
                             <?= $this->paginationControl($this->paginator); ?>
                         </td>
                     </tr>

@@ -21,8 +21,13 @@ class Application_Form_FiltreDevis extends Zend_Form
 	   	for($i = $y1; $i <= $y2; $i++){
 		   	$years[$i] = $i;
 	   	}
-	   	
-	   	$typeFiltre = new Zend_Form_Element_Hidden('type_filtre');
+
+        $devisType = new Zend_Form_Element_Checkbox('devis_type');
+        $devisType->removeDecorator('DtDdWrapper')->removeDecorator('label')->removeDecorator('HtmlTag');
+        $this->addElement($devisType);
+
+
+        $typeFiltre = new Zend_Form_Element_Hidden('type_filtre');
 	    $typeFiltre->removeDecorator('DtDdWrapper')->removeDecorator('label')->removeDecorator('HtmlTag');
         $this->addElement($typeFiltre);
         

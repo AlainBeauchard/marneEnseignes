@@ -63,6 +63,11 @@ class DevisController extends Zend_Controller_Action
             $select->where('date like ?', $params['annee'] . '-' . $params['mois'] . '-%');
         }
 
+        // recherche dans les types de devis
+        if (isset($params['devis_type']) && $params['devis_type'] == 1) {
+            $select->where('titre like ?', 'DT_%');
+        }
+
         $select->order('id desc');
 
         $devis = $db_devis->fetchAll($select);

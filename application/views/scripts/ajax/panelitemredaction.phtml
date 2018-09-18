@@ -38,9 +38,11 @@
             <tr id="ligneRefItemredaction"  data-key="ligneRefItemredaction_0">
                 <td>
                     <input type="text" name="code"      data-indice="0" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeItemredaction(0);" onChange="fctChangeValeurDevisItemredaction();" class="tableCode dropdown-toggle" list="listeItemredaction_0"/>
+                    <!--
                     <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreArticle(0, 'Itemredaction');">
                         <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
                     </button>
+                    -->
                     <datalist id="listeItemredaction_0">
                     </datalist>
                     <input type="hidden" name="json_Itemredaction[]">
@@ -57,9 +59,11 @@
                 <tr id="ligneRefItemredaction"  data-key="ligneRefItemredaction_<?= $key ?>">
                     <td>
                         <input type="text" name="code"      data-indice="<?= $key ?>" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeItemredaction(<?=$key ?>);" onChange="fctChangeValeurDevisItemredaction();" class="tableCode dropdown-toggle" list="listeItemredaction_<?=$key ?>" value="<?= $json['code'] ?>"/>
+                        <!--
                         <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreArticle(<?= $key ?>, 'Itemredaction');">
                             <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
                         </button>
+                        -->
                         <datalist id="listeItemredaction_<?=$key ?>">
                         </datalist>
                         <input type="hidden" name="json_Itemredaction[]" value="<?= json_decode($json) ?>">
@@ -80,9 +84,11 @@
             <tr id="elemCacheItemredaction">
                 <td>
                     <input type="text" name="code"      data-indice="XXX" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeItemredaction(XXX);" onChange="fctChangeValeurDevisItemredaction();" class="tableCode dropdown-toggle" list="listeItemredaction_XXX"/>
+                    <!--
                     <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="fctOuvreArticle(XXX, 'Itemredaction');">
                         <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
                     </button>
+                    -->
                     <datalist id="listeItemredaction_XXX">
                     </datalist>
                     <input type="hidden" name="json_Itemredaction[]">
