@@ -16,7 +16,7 @@ class Application_Form_Catalogue extends Zend_Form
         $ref = new Zend_Form_Element_Text('reference');
         $ref->setAttribs(array('placeholder'=>'Référence','class'=>'form-control', 'aria-describedby'=>'sizing-addon2'));
         $ref->setLabel('Références');
-        $ref->setRequired(true);
+        $ref->setRequired(false);
         $this->addElement($ref);
 
         $designation = new Zend_Form_Element_Text('designation');

@@ -1598,6 +1598,8 @@ function fillFraisTechnique(result, nomTable, indice) {
 function fillArticle(result, nomTable, indice) {
     $($("#"+nomTable+" input[name='code'][data-indice='"+indice+"']")).attr('value',  result.code);
     $($("#"+nomTable+" textarea[name='itemredaction'][data-indice='"+indice+"']")).html(result.libelle);
+    $($("#"+nomTable+" input[name='qte'][data-indice='"+indice+"']")).attr('value', result.qte);
+    $($("#"+nomTable+" input[name='pu'][data-indice='"+indice+"']")).attr('value', result.pu);
 }
 
 function fillPose(result, nomTable, indice) {

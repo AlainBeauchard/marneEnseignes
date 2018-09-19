@@ -487,6 +487,8 @@ class DevisController extends Zend_Controller_Action
         $form->getElement('id')->setValue($article->id);
         $form->getElement('code')->setValue($article->code);
         $form->getElement('libelle')->setValue($article->libelle);
+        $form->getElement('pu')->setValue($article->pu);
+        $form->getElement('qte')->setValue($article->qte);
 
         $this->view->form = $form;
     }

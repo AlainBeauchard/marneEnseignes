@@ -127,13 +127,22 @@ class CatalogueController extends Zend_Controller_Action
         $form->populate($catalogue->toArray());
 
         if($this->_request->isPost() && $form->isValid($this->_request->getPost())){
-            foreach($this->_request->getPost() as $key => $value){
-                if(strlen($value)){
-                    $datas[$key] = $value;
+            try {
+                foreach($this->_request->getPost() as $key => $value){
+                    if($key != 'Ajouter') {
+                        if(strlen($value)){
+                            $datas[$key] = $value;
+                        } else {
+                            $datas[$key] = null;
+                        }
+                    }
                 }
-            }
-            if($db_catalogue->update($datas, array('id_produit = ?' => $this->_getParam('id')))){
-                $this->_redirect('/catalogue/editer/id/' . $this->_getParam('id'));
+
+                if($db_catalogue->update($datas, array('id_produit = ?' => $this->_getParam('id')))){
+                    $this->_redirect('/catalogue/editer/id/' . $this->_getParam('id'));
+                }
+            } catch(\Exception $e) {
+                echo ($e->getMessage());
             }
 
         }
@@ -149,7 +158,18 @@ class CatalogueController extends Zend_Controller_Action
         
         if($this->_request->isPost() && $form->isValid($this->_request->getPost())){
             $db_catalogue = new Application_Model_Catalogue();
-            $row = $db_catalogue->createRow($this->_request->getPost());
+            $datas = [];
+            foreach($this->_request->getPost() as $key => $value){
+                if($key != 'Ajouter') {
+                    if(strlen($value)){
+                        $datas[$key] = $value;
+                    } else {
+                        $datas[$key] = null;
+                    }
+                }
+            }
+
+            $row = $db_catalogue->createRow($datas);
             if($id = $row->save()){
                 $this->_redirect('/catalogue/editer/id/' . $id);
             }
