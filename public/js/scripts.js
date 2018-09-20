@@ -1600,6 +1600,8 @@ function fillArticle(result, nomTable, indice) {
     $($("#"+nomTable+" textarea[name='itemredaction'][data-indice='"+indice+"']")).html(result.libelle);
     $($("#"+nomTable+" input[name='qte'][data-indice='"+indice+"']")).attr('value', result.qte);
     $($("#"+nomTable+" input[name='pu'][data-indice='"+indice+"']")).attr('value', result.pu);
+
+    fctChangeValeurDevisItemredaction();
 }
 
 function fillPose(result, nomTable, indice) {
@@ -2257,6 +2259,7 @@ function fctChangeValeurDevisFourniture()
 function fctChangeValeurDevisItemredaction()
 {
     var qte 	= $("#tableItemredaction input[name='qte']");
+    var pu 		= $("#tableItemredaction input[name='pu']");
     var pxvente = $("#tableItemredaction input[name='pxvente']");
 
     var code 	   = $("#tableItemredaction input[name='code']");
@@ -2271,12 +2274,17 @@ function fctChangeValeurDevisItemredaction()
             strJsonLigne += '"' + code[i].name + '": "' + $(code[i]).val() + '",';
             strJsonLigne += '"' + itemredaction[i].name + '": "' + $(itemredaction[i]).val() + '",';
             strJsonLigne += '"' + qte[i].name + '": "' + $(qte[i]).val() + '",';
+            strJsonLigne += '"' + pu[i].name + '": "' + $(pu[i]).val() + '",';
             strJsonLigne += '"' + pxvente[i].name + '": "' + $(pxvente[i]).val() + '"';
         }
 
         console.log(strJsonLigne);
         $(jsonLigne[i]).attr('value',  '{'+strJsonLigne+'}');
+
+        $(pxvente[i]).attr('value',parseFloat(($(qte[i]).val()*$(pu[i]).val()).toFixed(2)));
     }
+
+    fctCalculMontantTotal();
 }
 
 function fctChangeValeurDevisPose()

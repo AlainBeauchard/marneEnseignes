@@ -51,7 +51,7 @@
                 <td><textarea name="itemredaction"      data-indice="0" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisItemredaction();" style="width:100%;"></textarea></td>
                 <td><input type="text" name="qte"       data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();"/></td>
                 <td><input type="text" name="pu"        data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();"/></td>
-                <td><input type="text" name="pxvente"   data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();"/></td>
+                <td><input type="text" name="pxvente"   data-indice="0" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();" readonly /></td>
                 <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneItemredaction(0);" title="Supprimer la ligne" ></span></td>
             </tr>
             <?php endif; ?>
@@ -72,8 +72,8 @@
                     </td>
                     <td><textarea name="itemredaction"      data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisItemredaction();"  style="width:100%;"><?= $json['itemredaction'] ?></textarea></td>
                     <td><input type="text" name="qte"       data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();" value="<?= $json['qte'] ?>"/></td>
-                    <td><input type="text" name="pu"        data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();" value="<?= $json['pxvente'] ?>"/></td>
-                    <td><input type="text" name="pxvente"   data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();" value="<?= $json['pxvente'] ?>"/></td>
+                    <td><input type="text" name="pu"        data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();" value="<?= $json['pu'] ?>"/></td>
+                    <td><input type="text" name="pxvente"   data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();" value="<?= $json['pxvente'] ?>"  readonly /></td>
                     <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneItemredaction(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
                 </tr>
                 <?php endforeach; ?>
@@ -99,7 +99,7 @@
                 <td><textarea name="itemredaction"      data-indice="XXX" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisItemredaction();" style="width:100%;" ></textarea></td>
                 <td><input type="text" name="qte"       data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();"/></td>
                 <td><input type="text" name="pu"        data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();" /></td>
-                <td><input type="text" name="pxvente"   data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();" /></td>
+                <td><input type="text" name="pxvente"   data-indice="XXX" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();" readonly /></td>
                 <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneItemredaction(XXX);" title="Supprimer la ligne" ></span></td>
             </tr>
         </table>
