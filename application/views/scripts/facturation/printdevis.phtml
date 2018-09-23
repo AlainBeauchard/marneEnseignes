@@ -89,9 +89,9 @@
 							</td>
 						</tr>
                         <?php foreach($this->articles as $article):?>
-                            <?php $json = json_decode($article->json, true) ?>
+                            <?php $json = json_decode(preg_replace("/\r\n|\r|\n/",'<br/>',$article->json), true) ?>
                             <tr>
-                                <td style="height:<?= 435 / ($nbArtices) ?>px;">
+                                <td>
                                     <?php echo $json['itemredaction'] ?>
                                 </td>
                                 <td style="text-align:center; vertical-align: bottom;">

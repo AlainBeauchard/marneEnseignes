@@ -231,13 +231,13 @@
                     </th>
                     <th width="15%">Fournisseur</th>
                     <th width="5%">Type</th>
-                    <th width="8%">Epaisseur</th>
+                    <th width="3%">Epaisseur</th>
                     <th width="10%">Format</th>
                     <th width="10%">Surface T.</th>
-                    <th width="15%">D&eacute;signation</th>
+                    <th width="28%">D&eacute;signation</th>
                     <th width="6%">P.U.</th>
-                    <th width="7%">Unité</th>
-                    <th width="7%">Coef</th>
+                    <th width="3%">Unité</th>
+                    <th width="3%">Coef</th>
                     <th width="7%"></th>
                 </tr>
                 <tr style="display: table;width: 100%;">
@@ -251,30 +251,30 @@
                         <?= $this->filtreForm->getElement('fournisseur') ?>
                     </td>
                     <td width="5%"><?= $this->filtreForm->getElement('type') ?></td>
-                    <td width="8%"><?= $this->filtreForm->getElement('epaisseur') ?></td>
+                    <td width="3%"><?= $this->filtreForm->getElement('epaisseur') ?></td>
                     <td width="10%"><?= $this->filtreForm->getElement('format') ?></td>
                     <td width="10%"><?= $this->filtreForm->getElement('surface_totale') ?></td>
-                    <td width="15%">
+                    <td width="28%">
                         <?= $this->filtreForm->getElement('produit') ?>
                     </td>
-                    <td width="27%" colspan="4" style="text-align:right;">
+                    <td width="19%" colspan="4" style="text-align:right;">
                         <img src="/images/load.gif" alt="loader" id="loader"/>
                         <input type="button" name="rechercher" id="filtreRechercheCatalogue" value="Rechercher" class="btn btn-primary btn-sm">
                         <?= $this->filtreForm->getElement('resetCatalogue') ?>
                     </td>
                 </tr>
                 </thead>
-                <tbody id="liste_produits" style="height:580px !important; overflow-y: scroll !important;">
+                <tbody id="liste_produits" style="height:580px !important; overflow-y: scroll !important; display: block;">
                 <?php foreach($this->catalogues as $catalogue):?>
                     <tr class="<?= $catalogue->colorclass ?>" style="display: table;width: 100%;">
                         <td width="5%"><?= $catalogue->code_me?></td>
                         <td width="5%"><?= $catalogue->reference?></td>
                         <td width="15%"><?= $catalogue->fournisseur?></td>
                         <td width="5%"><?= $catalogue->type?></td>
-                        <td width="8%"><?= $catalogue->epaisseur?></td>
+                        <td width="3%"><?= $catalogue->epaisseur?></td>
                         <td width="10%"><?= $catalogue->format?></td>
                         <td width="10%"><?= $catalogue->surface_totale?></td>
-                        <td width="15%"><?= $catalogue->designation ?></td>
+                        <td width="28%"><?= $catalogue->designation ?></td>
                         <td width="6%" style="text-align:right;">
                             <?php if(!(int) $catalogue->unitaire):?>
                                 <?php if($catalogue->prixM2 == null):?>
@@ -287,7 +287,7 @@
                             <?php endif;?>
                             &nbsp;&euro;
                         </td>
-                        <td width="7%" style="text-align:center;">
+                        <td width="3%" style="text-align:center;">
                             <?php if(!(int) $catalogue->unitaire):?>
                                 <?php if($catalogue->prixM2 == null):?>
                                     Ml
@@ -298,7 +298,7 @@
                                 Unitaire
                             <?php endif;?>
                         </td>
-                        <td width="7%" style="text-align:right;"><?= $catalogue->coeff_marge?></td>
+                        <td width="3%" style="text-align:right;"><?= $catalogue->coeff_marge?></td>
                         <td width="7%" style="text-align:right;">
                             <button type="button" class="btn btn-warning" aria-label="Left Align" id="fill_form_<?= $catalogue->id_produit ?>">
                                 <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>

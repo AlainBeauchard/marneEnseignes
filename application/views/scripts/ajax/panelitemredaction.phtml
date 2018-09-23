@@ -57,7 +57,7 @@
             <?php endif; ?>
             <?php if (isset($this->itemsItemredaction)) : ?>
                 <?php foreach($this->itemsItemredaction as $key => $itemredaction): ?>
-                    <?php $json = json_decode($itemredaction->json, true) ?>
+                    <?php $json = json_decode(preg_replace("/\r\n|\r|\n/",'<br/>',$itemredaction->json), true) ?>
                 <tr id="ligneRefItemredaction"  data-key="ligneRefItemredaction_<?= $key ?>">
                     <td>
                         <input type="text" name="code"      data-indice="<?= $key ?>" title="" onFocus="fctSetFocus();" onkeyup="fctRemplitListeItemredaction(<?=$key ?>);" onChange="fctChangeValeurDevisItemredaction();" class="tableCode dropdown-toggle" list="listeItemredaction_<?=$key ?>" value="<?= $json['code'] ?>"/>
@@ -70,7 +70,7 @@
                         </datalist>
                         <input type="hidden" name="json_Itemredaction[]" value="<?= json_decode($json) ?>">
                     </td>
-                    <td><textarea name="itemredaction"      data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisItemredaction();"  style="width:100%;"><?= $json['itemredaction'] ?></textarea></td>
+                    <td><textarea name="itemredaction"      data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisItemredaction();"  style="width:100%;"><?= str_ireplace(['<br/>'],"\r\n",$json['itemredaction']) ?></textarea></td>
                     <td><input type="text" name="qte"       data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();" value="<?= $json['qte'] ?>"/></td>
                     <td><input type="text" name="pu"        data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();" value="<?= $json['pu'] ?>"/></td>
                     <td><input type="text" name="pxvente"   data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisItemredaction();" value="<?= $json['pxvente'] ?>"  readonly /></td>
