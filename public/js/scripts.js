@@ -61,6 +61,8 @@ $(document).ready(function(){
 
 	$("#btDevisRecord").unbind('click').bind('click', fctFillFieldsCollapse);
 
+	$("#btEditDevis").unbind('click').bind('click', fctEditDevis);
+
 	$(".changeColor").click(function()
 		{
 			var classToAdd = getClassToAdd( $(this) );
@@ -1268,6 +1270,21 @@ rendTacheInvisible(1);
     fctRecalculTout();
 
 });
+
+function fctEditDevis() {
+	var elemHead = $(".panel-devis-head");
+	var elemBody = $(".corps-devis");
+
+	var height = elemHead.height();
+
+	if (elemHead.hasClass('noDisplay')) {
+		elemHead.removeClass('noDisplay');
+		elemBody.height( elemBody.height() - height );
+	} else {
+        elemHead.addClass('noDisplay');
+        elemBody.height( elemBody.height() + height );
+	}
+}
 
 function fctFillFieldsCollapse()
 {

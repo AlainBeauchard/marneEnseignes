@@ -98,10 +98,10 @@
                                     <?php echo $json['qte'] ?>
                                 </td>
                                 <td style="text-align:right; vertical-align: bottom;">
-                                    <?php echo $json['pxvente'] ?>
+                                    <?php echo number_format(floatval($json['pxvente']), 2, ',', ' ') ?>
                                 </td>
                                 <td style="text-align:right; vertical-align: bottom;">
-                                    <?php echo $json['pxvente'] ?>
+                                    <?php echo number_format($json['qte'] * $json['pxvente'], 2, ',', ' ') ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
