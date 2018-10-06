@@ -358,7 +358,7 @@ class DevisController extends Zend_Controller_Action
                         $row->remise = 0;
                         $row->pht = 0;
                         $row->typeligne = strtolower($item);
-                        $row->json = strtolower($ligne);
+                        $row->json = $ligne;
 
                         $row->save();
                     }

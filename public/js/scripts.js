@@ -1905,7 +1905,7 @@ function fctChangeValeurDevisProduit()
 	var sommeVenteTotale = 0;
 
 	for(var i=0;i<qte.length;i++) {
-		$(haTotal[i]).attr('value', parseFloat((qte[i].value * ha[i].value).toFixed(2)));
+		$(haTotal[i]).attr('value', parseFloat((qte[i].value * ha[i].value * surface[i].value).toFixed(2)));
         $(pxvente[i]).attr('value', parseFloat((haTotal[i].value * coefMarge[i].value * surface[i].value).toFixed(2)));
         // $(surface[i]).attr('value', parseFloat((qte[i].value * ha[i].value * haTotal[i].value).toFixed(2)));
 		sommeVenteTotale += parseFloat(pxvente[i].value);
@@ -2284,7 +2284,11 @@ function fctChangeValeurDevisItemredaction()
 
     var jsonLigne  = $("#tableItemredaction input[name='json_Itemredaction[]']");
 
+    console.log(pxvente[0]);
+
     for(var i=0;i<qte.length;i++) {
+
+        $(pxvente[i]).attr('value',parseFloat(($(qte[i]).val()*$(pu[i]).val()).toFixed(2)));
 
         var strJsonLigne = "";
         if (qte[i].value !== "") {
@@ -2297,8 +2301,6 @@ function fctChangeValeurDevisItemredaction()
 
         console.log(strJsonLigne);
         $(jsonLigne[i]).attr('value',  '{'+strJsonLigne+'}');
-
-        $(pxvente[i]).attr('value',parseFloat(($(qte[i]).val()*$(pu[i]).val()).toFixed(2)));
     }
 
     fctCalculMontantTotal();

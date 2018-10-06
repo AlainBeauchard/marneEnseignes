@@ -76,7 +76,9 @@
                                 <?= $article->code ?>
                             </td>
                             <td width="80%">
-                                <?= $article->libelle ?>
+                                <?=
+                                    preg_replace("/\r\n|\r|\n/",'<br/>',$article->libelle)
+                                ?>
                             </td>
                             <td width="10%">
                                 <button type="button" class="btn btn-warning" aria-label="Left Align" id="edit_article_<?= $article->id ?>">
