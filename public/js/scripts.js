@@ -1906,7 +1906,7 @@ function fctChangeValeurDevisProduit()
 
 	for(var i=0;i<qte.length;i++) {
 		$(haTotal[i]).attr('value', parseFloat((qte[i].value * ha[i].value * surface[i].value).toFixed(2)));
-        $(pxvente[i]).attr('value', parseFloat((haTotal[i].value * coefMarge[i].value * surface[i].value).toFixed(2)));
+        $(pxvente[i]).attr('value', parseFloat((haTotal[i].value * coefMarge[i].value).toFixed(2)));
         // $(surface[i]).attr('value', parseFloat((qte[i].value * ha[i].value * haTotal[i].value).toFixed(2)));
 		sommeVenteTotale += parseFloat(pxvente[i].value);
 		sommeTotale += parseFloat(haTotal[i].value);
@@ -2203,7 +2203,7 @@ function fctChangeValeurDevisDeplacement()
 
     for(var i=0;i<qte.length;i++) {
     	$(coutJour[i]).attr('value', parseFloat((tarifUnique[i].value * qte[i].value).toFixed(2)));
-        $(pxvente[i]).attr('value', (parseFloat(nbjours[i].value) * parseFloat(coutJour[i].value)));
+        $(pxvente[i]).attr('value', (parseFloat(nbjours[i].value) * parseFloat(coutJour[i].value)).toFixed(2));
         sommeTotale += parseFloat(coutJour[i].value);
         sommeTotalePxVente += parseFloat(pxvente[i].value);
         $(qte[i]).attr('value', qte[i].value);

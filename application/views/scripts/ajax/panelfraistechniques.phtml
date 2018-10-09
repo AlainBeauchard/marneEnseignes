@@ -72,12 +72,12 @@
                         </datalist>
                         <input type="hidden" name="json_FraisTechnique[]" value="<?= json_encode($json) ?>">
                     </td>
-                    <td><input type="text" name="fraisTechnique"    data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['fraistechnique'] ?>"/></td>
+                    <td><input type="text" name="fraisTechnique"    data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['fraisTechnique'] ?>"/></td>
                     <td><input type="text" name="taux"              data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['taux'] ?>"/></td>
                     <td><input type="text" name="heures"            data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['heures'] ?>"/></td>
                     <td><input type="text" name="minutes"           data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" onChange="fctChangeValeurDevisFraisTechnique();" value="<?= $json['minutes'] ?>"/></td>
-                    <td><input type="text" name="tarifHoraire"      data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['tarifhoraire'] ?>"/></td>
-                    <td><input type="text" name="tarifMinute"       data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['tarifminute'] ?>"/></td>
+                    <td><input type="text" name="tarifHoraire"      data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['tarifHoraire'] ?>"/></td>
+                    <td><input type="text" name="tarifMinute"       data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['tarifMinute'] ?>"/></td>
                     <td><input type="text" name="pxvente"           data-indice="<?= $key ?>" title="" onFocus="fctSetFocus()" class="inputNumber" readonly value="<?= $json['pxvente'] ?>"/></td>
                     <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneFraisTechnique(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
                 </tr>

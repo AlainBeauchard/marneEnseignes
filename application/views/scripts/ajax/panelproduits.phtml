@@ -83,7 +83,7 @@
                         <td><input type="text" name="surface"   data-indice="<?= $key ?>" title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();"  class="inputNumber" value="<?php if(isset($json['surface'])) { echo($json['surface']); } else { echo(''); } ?>"/></td>
                         <td><input type="text" name="h.a_ml"    data-indice="<?= $key ?>" title="" onFocus="fctSetFocus();" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $json['h.a_ml'] ?>" /></td>
                         <td><input type="text" name="h.a_total" data-indice="<?= $key ?>" title="" onFocus="fctSetFocus();" readonly  class="inputNumber" value="<?= $json['h.a_total'] ?>" /></td>
-                        <td><input type="text" name="coefMarge" data-indice="<?= $key ?>" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $json['coefmarge'] ?>" /></td>
+                        <td><input type="text" name="coefMarge" data-indice="<?= $key ?>" title="" onChange="fctChangeValeurDevisProduit();" class="inputNumber" value="<?= $json['coefMarge'] ?>" /></td>
                         <td><input type="text" name="pxvente"   data-indice="<?= $key ?>" title="" readonly class="inputNumber" value="<?= $json['pxvente'] ?>"/></td>
                         <td><span class="glyphicon glyphicon-trash" aria-hidden="true" onClick="fctSupprimeLigneProduits(<?= $key ?>);" title="Supprimer la ligne" ></span></td>
                     </tr>
