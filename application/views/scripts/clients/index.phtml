@@ -12,23 +12,25 @@
 						<th>Adresse</th>
 						<th>T&eacute;l&eacute;phone</th>
 						<th>Email</th>
+                        <th>Contact</th>
 						<th></th>
 					</tr>
 					<form method="post">
 						<tr>
 							<td>
-								<?php echo $this->filtreClient->getElement('num_client')?>
+								<?= $this->filtreClient->getElement('num_client')?>
 							</td>
 							<td>
-								<?php echo $this->filtreClient->getElement('id_client')?>
-								<?php echo $this->filtreClient->getElement('type_filtre')?>
-								<?php echo $this->filtreClient->getElement('client')?>
+								<?= $this->filtreClient->getElement('id_client')?>
+								<?= $this->filtreClient->getElement('type_filtre')?>
+								<?= $this->filtreClient->getElement('client')?>
 							</td>
-							<td><?php echo $this->filtreClient->getElement('adresse')?></td>
+							<td><?= $this->filtreClient->getElement('adresse')?></td>
 							<td></td>
 							<td></td>
+                            <td><?= $this->filtreClient->getElement('contact')?></td>
 							<td style="text-align: right;">
-								<?php echo $this->filtreClient->getElement('rechercher')?><?php echo $this->filtreClient->getElement('resetClient')?>
+								<?= $this->filtreClient->getElement('rechercher')?><?php echo $this->filtreClient->getElement('resetClient')?>
 							</td>
 						</tr>
 					</form>
@@ -53,6 +55,9 @@
 									<p><a href="mailto:<?php echo $mail?>"><?php echo $mail?></a></p>
 								<?php endforeach; ?>
 							</td>
+                            <td>
+                                <?= $client->contact_nom ?>
+                            </td>
 							<td style="text-align: right;">
 								<button type="button" class="btn btn-primary" aria-label="Left Align" id="fiche_clients_<?php echo $client->id_client?>">
 								  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>

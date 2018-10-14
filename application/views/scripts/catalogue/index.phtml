@@ -105,7 +105,7 @@
                             <td width="5%"><?= $catalogue->surface_totale?></td>
                             <td width="36%"><?= $catalogue->designation ?></td>
                             <td width="5%" style="text-align:right;">
-                                <?php if(!(int) $catalogue->unitaire):?>
+                                <?php if(!(float) $catalogue->unitaire):?>
                                     <?php if($catalogue->prixM2 == null):?>
                                         <?= $catalogue->prixML ?>
                                     <?php else:?>
@@ -117,7 +117,7 @@
                                 &nbsp;&euro;
                             </td>
                             <td width="3%" style="text-align:center;">
-                                <?php if(!(int) $catalogue->unitaire):?>
+                                <?php if(!(float) $catalogue->unitaire):?>
                                     <?php if($catalogue->prixM2 == null):?>
                                         Ml
                                     <?php else:?>

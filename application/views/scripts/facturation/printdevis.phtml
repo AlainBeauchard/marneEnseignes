@@ -74,6 +74,7 @@
 					</thead>
 					<?php $totalHt = $this->GetSum($this->devis->id) ?>
 					<tbody>
+                        <!--
 						<tr>
 							<td style="height:<?= 435 / ($nbArtices) ?> px;">
 								<?php echo $this->devis->redaction ?>
@@ -88,6 +89,7 @@
 								<?php echo  $totalHt ?>
 							</td>
 						</tr>
+                        -->
                         <?php foreach($this->articles as $article):?>
                             <?php $json = json_decode(preg_replace("/\r\n|\r|\n/",'<br/>',$article->json), true) ?>
                             <tr>

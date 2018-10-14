@@ -51,7 +51,10 @@ class ClientsController extends Zend_Controller_Action
 		if(strlen(trim($session->filtres[adresse]))){
 			$select->where('(adresse like "%' . $session->filtres[adresse] . '%" OR codepostal like "%' . $session->filtres[adresse] . '%" OR ville like "%' . $session->filtres[adresse] . '%")');
 		}
-		
+		if(strlen(trim($session->filtres[contact]))){
+			$select->where('(contact_nom like "%' . $session->filtres[contact] . '%")');
+		}
+
 		$select->order('societe');
         $clients = $db_client->fetchAll($select);
                 

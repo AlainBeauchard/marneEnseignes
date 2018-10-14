@@ -10,15 +10,17 @@ class Zend_View_Helper_GetSum extends Zend_View_Helper_Abstract{
 								->where('id_devis = ?', $devis);
 								
 		$rows = $db_items_devis->fetchAll($select);
-		
+
 		$total = 0;
 		foreach($rows as $row){
 		    if (is_null($row->json)) {
 				$total += $row->pht;
             } else {
-		        $json = json_decode($row->json, true);
-		        if ($json['pxvente']) {
-		            $total += $json['pxvente'] ;
+		        if ($row->typeligne !== 'itemredaction') {
+                    $json = json_decode($row->json, true);
+                    if ($json['pxvente']) {
+                        $total += $json['pxvente'];
+                    }
                 }
             }
 		}
