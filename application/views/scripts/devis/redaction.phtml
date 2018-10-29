@@ -1,0 +1,25 @@
+
+<form action="" method="POST" name="formItemDevis">
+    <h2>
+        Nom du devis : <?= $this->devis->titre ?> (<b><?= $this->totalHt ?> euros</b>)
+    </h2>
+
+    <div class="corps-devisRedaction">
+        <div id="corps-devis-custom" >
+
+            <?= $this->render('/ajax/panelitemredaction.phtml'); ?>
+
+
+            <!--
+            <?= $this->render('/ajax/panelredaction.phtml'); ?>
+            -->
+        </div>
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Enregistrer" id="btDevisItemRecord" name="btDevisItemRecord">
+
+    <button type="button" class="btn btn-success" id="preview_devis_<?= $this->id_devis?>">
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="false">&nbsp;Aperçu avant impression</span>
+    </button>
+
+</form>

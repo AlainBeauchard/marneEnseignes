@@ -1097,6 +1097,18 @@ class AjaxController extends Zend_Controller_Action
             $str .= '<option value="'.$article->code.'" data-id="'.$article->id.'" />'.$article->code.'</option>';
         }
 
+        $db_devis = new Application_Model_Devis();
+        $selectDevis = $db_devis->select();
+        $selectDevis->where('upper(num_devis) like upper(?)', $codeSearch.'%');
+        $selectDevis->order('num_devis')->limit($intMax, 0);
+
+        $deviss = $db_devis->fetchAll($selectDevis);
+
+        foreach ($deviss as $devis)
+        {
+            $str .= '<option value="'.$devis->num_devis.'" data-id="'.$devis->id.'" data-devis="1" />'.$devis->num_devis.'</option>';
+        }
+
         echo($str);
     }
 
@@ -1119,6 +1131,53 @@ class AjaxController extends Zend_Controller_Action
 
         echo($str);
     }
+
+    public function detaildevisAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+
+        $idSearch = $this->_getParam('id');
+
+        $db_devis = new Application_Model_Devis();
+        $select = $db_devis->select();
+        $select->where('id = ?', $idSearch);
+        $deviss = $db_devis->fetchAll($select);
+
+        $str = '';
+        foreach ($deviss as $devis)
+        {
+            $montant = $this->getSum($devis);
+            $str .= json_encode([ 'code' => $devis->num_devis, 'libelle' => $devis->titre, 'qte' => 1, 'pu' => $montant ]);
+        }
+
+        echo($str);
+    }
+
+    private function getSum($devis)
+    {
+        $db_items_devis = new Application_Model_ItemDevis();
+        $select = $db_items_devis->select()
+            ->where('id_devis = ?', $devis->id);
+
+        $rows = $db_items_devis->fetchAll($select);
+
+        $total = 0;
+        foreach($rows as $row){
+            if (is_null($row->json)) {
+                $total += $row->pht;
+            } else {
+                if ($row->typeligne !== 'itemredaction') {
+                    $json = json_decode($row->json, true);
+                    if ($json['pxvente']) {
+                        $total += $json['pxvente'];
+                    }
+                }
+            }
+        }
+
+        return sprintf('%0.2f', $total);
+    }
+
 
     public function detailadhesifAction()
     {

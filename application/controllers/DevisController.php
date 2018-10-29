@@ -237,6 +237,103 @@ class DevisController extends Zend_Controller_Action
 
     /**
      * @throws Zend_Db_Table_Exception
+     * @throws Zend_Form_Exception
+     * @throws \Exception
+     */
+    public function redactionAction()
+    {
+        $form = new Application_Form_Devis();
+
+        $id_devis = $this->_getParam('id');
+
+        $db_devis = new Application_Model_Devis();
+        $db_items = new Application_Model_ItemDevis();
+
+        if($this->_request->isPost()){
+            $this->sauveFormDevisRedaction($db_devis, $db_items, false);
+        }
+
+        $this->view->duplicate = ($this->_getParam('duplicate') == "1");
+
+        $devis = $db_devis->find($id_devis)->current();
+        $this->view->devis = $devis;
+
+        $this->view->montantRemise = $devis->remise;
+
+        $this->view->totalHt = $this->GetSum($devis);
+
+        $tab = [ 'Itemredaction' ];
+
+        foreach($tab as $item) {
+            $valItem = 'items'.$item;
+            $select = $db_items->select()->where('id_devis = ?', $devis->id)
+                ->where(' typeligne = ? ', strtolower($item));
+            $this->view->$valItem = $db_items->fetchAll($select);
+            if (!isset($this->view->$valItem)) {
+                $this->view->$valItem = [];
+            }
+        }
+
+        $db_client = new Application_Model_Clients();
+        $client = $db_client->find($devis->id_client)->current();
+
+        $form->getElement('numDevis')->setValue($devis->num_devis);
+        $form->getElement('codeClient')->setValue($client->ref);
+        $form->getElement('nomClient')->setValue($client->societe);
+        $form->getElement('refDossier')->setValue($devis->ref);
+        $form->getElement('delai')->setValue($devis->delai);
+        $form->getElement('reglement')->setValue($devis->reglement);
+        $form->getElement('intitule')->setValue($devis->titre);
+        $form->getElement('dateCreation')->setValue(date('d/m/Y', strtotime($devis->date)));
+
+        $this->view->form = $form;
+
+        //$db_catalogue = new Application_Model_Produits();
+        //$select = $db_catalogue->select()->order('designation');
+        //$catalogues = $db_catalogue->fetchAll($select);
+        $this->view->catalogues = [];//$catalogues;
+
+        $filtreForm = new Application_Form_FiltreCatalogue();
+        $this->view->filtreForm = $filtreForm;
+
+        $formRedaction = new Application_Form_WriteDevis();
+        $formRedaction->getElement('redactionDevis')->setValue($devis->redaction);
+        $this->view->formRedaction = $formRedaction;
+
+        $db_modeles = new Application_Model_Modeles();
+        $this->view->modeles = $db_modeles->fetchAll();
+        $this->view->id_devis = $id_devis;
+        $this->view->fieldsCollapse = $this->getParam('fieldsCollapse');
+    }
+
+    private function getSum($devis)
+    {
+        $db_items_devis = new Application_Model_ItemDevis();
+        $select = $db_items_devis->select()
+            ->where('id_devis = ?', $devis->id);
+
+        $rows = $db_items_devis->fetchAll($select);
+
+        $total = 0;
+        foreach($rows as $row){
+            if (is_null($row->json)) {
+                $total += $row->pht;
+            } else {
+                if ($row->typeligne !== 'itemredaction') {
+                    $json = json_decode($row->json, true);
+                    if ($json['pxvente']) {
+                        $total += $json['pxvente'];
+                    }
+                }
+            }
+        }
+
+        return sprintf('%0.2f', $total);
+    }
+
+
+    /**
+     * @throws Zend_Db_Table_Exception
      */
     public function ficheAction()
     {
@@ -341,7 +438,7 @@ class DevisController extends Zend_Controller_Action
         }
 
         //on supprime les items avec le devis
-        $db_items->delete("id_devis = ".$idDevis);
+        $db_items->delete("id_devis = ".$idDevis." and typeligne != 'Itemredaction' ");
 
         $tab = ['Adhesif', 'Deplacement', 'Faconnage', 'ForfaitPrestation', 'Fourniture',
             'Prestation', 'Produit', 'SousTraitance', 'Pose', 'FraisTechnique', 'Itemredaction'
@@ -366,7 +463,48 @@ class DevisController extends Zend_Controller_Action
             }
         }
 
-        $this->_redirect('/devis/editer/id/' . $idDevis."?fieldsCollapse=".$datas['fieldsCollapse']);
+        if (isset($datas['redacDevis']) && $datas['redacDevis'] == 1) {
+            $this->_redirect('/devis/redaction/id/' . $idDevis . "?fieldsCollapse=" . $datas['fieldsCollapse']);
+        } else {
+            $this->_redirect('/devis/editer/id/' . $idDevis . "?fieldsCollapse=" . $datas['fieldsCollapse']);
+        }
+    }
+
+    /**
+     * @param Application_Model_Devis $db_devis
+     * @param Application_Model_ItemDevis $db_items
+     * @param bool $bAjout
+     * @throws \Exception
+     */
+    public function sauveFormDevisRedaction($db_devis, $db_items, $bAjout)
+    {
+        $idDevis = $this->_getParam('id');
+
+        //on supprime les items avec le devis
+        $db_items->delete("id_devis = ".$idDevis." and typeligne = 'Itemredaction' ");
+
+        $tab = [ 'Itemredaction' ];
+
+        foreach ($tab as $item) {
+            if (isset($_REQUEST['json_' . $item])) {
+                foreach ($_REQUEST['json_' . $item] as $ligne) {
+
+                    if( $ligne != '' ) {
+                        $row = $db_items->createRow(['id_devis' => $idDevis]);
+
+                        $row->id_item = 0;
+                        $row->remise = 0;
+                        $row->pht = 0;
+                        $row->typeligne = strtolower($item);
+                        $row->json = $ligne;
+
+                        $row->save();
+                    }
+                }
+            }
+        }
+
+        $this->_redirect('/devis/redaction/id/' . $idDevis);
     }
 
     public function getRefDossierMax()

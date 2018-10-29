@@ -24,7 +24,7 @@ class Application_Form_Articles extends Zend_Form
 
         $libelle = new Zend_Form_Element_Textarea('libelle');
         // $libelle->setAttribs(array('placeholder'=>'Libellé','class'=>'form-control rte', 'aria-describedby'=>'sizing-addon2', 'list' => 'listeClientsDevis'));
-        $libelle->setAttribs(array('placeholder'=>'Libellé','class'=>'form-control', 'aria-describedby'=>'sizing-addon2', 'list' => 'listeClientsDevis'));
+        $libelle->setAttribs(array('placeholder'=>'Libellé','class'=>'form-control rte', 'aria-describedby'=>'sizing-addon2', 'list' => 'listeClientsDevis'));
         $libelle->setLabel('Libellé');
         $libelle->setRequired(true);
         $this->addElement($libelle);

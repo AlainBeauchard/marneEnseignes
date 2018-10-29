@@ -63,7 +63,7 @@
 	<div class="row"> <!-- style="page-break-after: always;" -->
 		<div class="col-xs-12">
 			<div class="panel panel-default">
-				<table class="table table-bordered" style="font-size:11px;">
+				<table class="table table-bordered" id="tablePrintDevis" style="font-size:11px;max-height: 12cm;">
 					<thead>
 						<tr>
 							<th style="width:63%;">DESIGNATION</th>
@@ -91,7 +91,8 @@
 						</tr>
                         -->
                         <?php foreach($this->articles as $article):?>
-                            <?php $json = json_decode(preg_replace("/\r\n|\r|\n/",'<br/>',$article->json), true) ?>
+                            <?php /* $json = json_decode(preg_replace("/\r\n|\r|\n/",'<br/>',$article->json), true) */ ?>
+                            <?php $json = json_decode(preg_replace("/\r\n|\r|\n/",'',$article->json), true) ?>
                             <tr>
                                 <td>
                                     <?php echo $json['itemredaction'] ?>
@@ -100,13 +101,16 @@
                                     <?php echo $json['qte'] ?>
                                 </td>
                                 <td style="text-align:right; vertical-align: bottom;">
-                                    <?php echo number_format(floatval($json['pxvente']), 2, ',', ' ') ?>
+                                    <?php echo number_format(floatval($json['pu']), 2, ',', ' ') ?>
                                 </td>
                                 <td style="text-align:right; vertical-align: bottom;">
-                                    <?php echo number_format($json['qte'] * $json['pxvente'], 2, ',', ' ') ?>
+                                    <?php echo number_format( $json['pxvente'], 2, ',', ' ') ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
+                            <tr id="ligneCalage">
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
 					</tbody>
 				</table>
 			</div>
@@ -186,3 +190,10 @@
 		Clauses de propriété : La marchandise reste notre propriété jusqu'au paiement intégral de la facture correspondante - Loi du 12/05/1980
 	</p>
 </div>
+
+<script>
+    //$("#ligneCalage").css('height', (445 - parseInt($("#tablePrintDevis").css('height'),10) )+"px" );
+    if ( (445 - parseInt($("#tablePrintDevis").css('height'),10) ) >0 ) {
+        $("#ligneCalage").css('height', (445 - parseInt($("#tablePrintDevis").css('height'), 10)) + "px");
+    }
+</script>

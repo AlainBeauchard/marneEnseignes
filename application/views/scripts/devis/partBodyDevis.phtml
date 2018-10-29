@@ -1,5 +1,6 @@
 <form action="<?php if($this->duplicate == true) { echo("/devis/ajouter"); } ?>" method="POST" name="formDevis">
 
+        <input type="hidden" name="idDevis"         id="idDevis"        value="<?= (isset($this->devis->id))? $this->devis->id : -1 ?>">
         <input type="hidden" name="idClient"        id="idClient"       value="<?= (isset($this->devis->id_client))? $this->devis->id_client : -1 ?>">
         <input type="hidden" name="valide"          id="valide"         value="<?= (isset($this->devis->valide))? $this->devis->valide : 0 ?>">
         <input type="hidden" name="date_validation" id="date_validation" value="<?= (isset($this->devis->date_validation))? $this->devis->date_validation : -1 ?>">
@@ -9,6 +10,7 @@
         <input type="hidden" name="redaction_facture" id="redaction_facture" value="<?= (isset($this->devis->redaction_facture))? $this->devis->redaction_facture : 0 ?>">
         <input type="hidden" name="date_paiement"   id="date_paiement"  value="<?= (isset($this->devis->date_paiement))? $this->devis->date_paiement : -1 ?>">
         <input type="hidden" name="acompte"         id="acompte"        value="<?= (isset($this->devis->acompte))? $this->devis->acompte : 0 ?>">
+        <input type="hidden" name="redacDevis"      id="redacDevis"     value="0    ">
 
         <div class="panel-devis-head">
             <div class="entete-devis entete-devis-left">
@@ -196,14 +198,10 @@
                 <?php if (count($this->itemsPose) >0) : ?>
                     <?= $this->render('/ajax/panelpose.phtml'); ?>
                 <?php endif ?>
-
-                <?php if (count($this->itemsItemredaction) >0) : ?>
-                    <?= $this->render('/ajax/panelitemredaction.phtml'); ?>
-                <?php endif ?>
-
-                <?= $this->render('/ajax/panelredaction.phtml'); ?>
         </div>
     </div>
+
+    <input type="submit" class="btn btn-primary" name="btRedacDevis" id="btRedacDevis" value="Rédaction du devis" >
 
     <input type="hidden" name="fieldsCollapse" id="fieldsCollapse" value="" >
 

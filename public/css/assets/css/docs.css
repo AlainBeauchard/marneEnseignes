@@ -1127,6 +1127,13 @@ ul#icons span.ui-icon {
   height: calc(100vh - 650px);
 }
 
+.corps-devisRedaction
+{
+  display: block;
+  overflow-y: scroll;
+  height: calc(100vh - 250px);
+}
+
 .corps-devis .panel-body
 {
   padding : 5px
